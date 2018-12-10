@@ -1,0 +1,137 @@
+﻿grammar Lopla
+{
+  options
+  {
+    Axiom = "lopla"; 
+    Separator = "SEPARATOR"; 
+  }
+  terminals
+  {
+    NEW_LINE		-> U+000D /* CR */
+                |  U+000A /* LF */
+                |  U+000D U+000A /* CR LF */
+                |  U+000A U+000D /* CR LF */
+                ; 
+    TAB				-> U+0009;
+
+    WHITE_SPACE		-> ' ' | U+000B | U+000C | U+20;
+    COMMENT			-> '/*' ( .* - (.* '*/' .*) ) '*/' ;
+    SEPARATOR		-> (WHITE_SPACE | COMMENT | TAB)+;
+
+    CHAR        ->  // complete unicode
+                    //uc{L};
+                    [a-zA-Z] | '_' ;
+
+    DIGIT             -> [0-9];
+    DECIMAL           -> [0-9]+;
+
+    INTEGER -> [1-9][0-9]* | '0' ;
+    REAL    -> INTEGER ('.' [0-9]*)? ;
+    NUMBER  -> INTEGER | REAL;
+
+    STRING            -> '"' ([^"] | '""')* '"' ;
+
+  	IF                -> 'if';
+    FI                -> 'fi';
+    THEN              -> 'then';
+    TO                -> 'to';
+    FROM              -> 'from';
+    STEP              -> 'step';
+    WHILE	            -> 'while';
+
+    LITERAL           -> (CHAR(CHAR|DIGIT)*) - (IF | FI | THEN | WHILE);
+
+    OPERATOR_TERM -> '+' | '-';
+  }
+  rules
+  {    
+    value                 ->  NUMBER^ | STRING^;
+
+    emptyLine             -> NEW_LINE!;
+    type_name             -> LITERAL;
+    variable_name         -> LITERAL;
+    method_name           -> LITERAL;
+    namespace             -> LITERAL;
+
+
+    /// ------------------------- VALUES ----------------------------------
+
+    /// expressions
+    expression_arg   ->    method_call^
+                          | value^
+                          | var_value^
+                          | declare_table^
+                        ;
+
+    expression_prefix   ->  expression_arg^
+                            | ('-' expression_arg)  ;
+
+    expression_bracket -> expression_prefix^
+                          | '('! expression ')'!;
+
+    expression_mult      -> expression_bracket^
+                        | expression_mult '*' expression_bracket
+                        | expression_mult '/' expression_bracket;
+
+    expression_sum      -> expression_mult^
+                        | expression_sum '+' expression_mult
+                        | expression_sum '-' expression_mult;
+
+    expression_bool   -> expression_sum^
+                        | expression_bool '&&' expression_sum
+                        | expression_bool '||' expression_sum;
+
+    expression_cmp   -> expression_bool^
+                        | expression_cmp '!=' expression_bool
+                        | expression_cmp '==' expression_bool
+                        | expression_cmp '<' expression_bool
+                        | expression_cmp '<=' expression_bool
+                        | expression_cmp '>' expression_bool
+                        | expression_cmp '>=' expression_bool;
+
+    expression          -> expression_cmp ;
+
+    //// declaration for table   
+    declare_table_values  -> (expression (','! expression)* )? ;
+    declare_table		  -> '['! declare_table_values ']'!;
+
+    /// value from variable
+    var_value_table   -> variable_name '['! expression ']'! ;
+    var_value         -> variable_name^ | var_value_table^ ;
+
+    /// call method
+    method_arguments      ->  expression (',' expression)*;
+    method_call           ->  namespace '.' method_name '(' method_arguments? ')';
+    
+    /// assigment
+    assigment             -> var_value '=' expression;
+
+    /// ------------------------- DECLARATIONS ----------------------------------
+
+    /// block '{' '}'
+    block_of_lopla        ->  '{'! NEW_LINE!
+                              lopla_line*  
+                              '}'! NEW_LINE!;
+
+    /// if
+    if_lines              ->  lopla_line* ;
+    if                    ->  IF '('! expression ')'! block_of_lopla;
+
+    /// while
+    while                 ->  WHILE '('! expression ')'! block_of_lopla;
+
+    /// method definition
+    method_parameters     ->  variable_name (','! variable_name)*;
+    method                ->  'function'! namespace '.' method_name '(' method_parameters? ')'
+                              block_of_lopla;
+
+    return                -> 'return' expression;
+
+    ///// --------------------------- FILE -----------------------------------
+    lopla_oneliners-> (method_call^ | assigment^ | return^) NEW_LINE;
+    lopla_blocks   -> if^ | method^ | while^;
+    lopla_line     -> lopla_oneliners^  | lopla_blocks^ | emptyLine^;
+    lopla_root_line-> lopla_line^;
+    lopla          -> lopla_root_line* @OnLopla;    
+  }
+}
