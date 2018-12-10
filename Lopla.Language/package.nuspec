@@ -5,19 +5,5 @@
     <version>0.0.9-alpha</version>
     <authors>Paweł Gałęzowski</authors>
     <description>Lopla language package</description>
-    <!--<title>Galcorp.Auth.UWP</title>
-    <owners>Paweł Gałęzowski</owners>
-    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/lagcorp/auth</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>Added logging with google</releaseNotes>
-    <copyright>Copyright 2018</copyright>
-    <tags>Google UWP OAuth Mobile Desktop</tags>
-    <dependencies>
-      <dependency id="Galcorp.Auth" version="0.1.6-alpha" />
-    </dependencies>-->
-    <files>
-      <file src="bin\Release\netstandard2.0\Lopla.Language.dll" />
-    </files>
   </metadata>
 </package>
