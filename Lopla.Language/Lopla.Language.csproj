@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.9-alpha</Version>
+    <PackageProjectUrl>https://github.com/Lopla/Language</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Lopla/Language</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
