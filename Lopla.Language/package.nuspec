@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Lopla.Language</id>
-    <version>0.0.9-alpha</version>
+    <version>0.0.9.1-alpha</version>
     <authors>Paweł Gałęzowski</authors>
     <description>Lopla language package</description>
   </metadata>
