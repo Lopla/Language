@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lopla.Language", "Lopla.Language\Lopla.Language.csproj", "{8CDACB72-B741-4D78-9236-C44351C41CF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lopla.Draw", "Lopla.Draw\Lopla.Draw.csproj", "{73062ADC-B413-4AA8-86FB-E80F9002E17B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lopla.Libs", "Lopla.Libs\Lopla.Libs.csproj", "{4A156E9C-F40B-49C4-A4C2-EF62459C788F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CDACB72-B741-4D78-9236-C44351C41CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDACB72-B741-4D78-9236-C44351C41CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDACB72-B741-4D78-9236-C44351C41CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDACB72-B741-4D78-9236-C44351C41CF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73062ADC-B413-4AA8-86FB-E80F9002E17B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73062ADC-B413-4AA8-86FB-E80F9002E17B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73062ADC-B413-4AA8-86FB-E80F9002E17B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73062ADC-B413-4AA8-86FB-E80F9002E17B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A156E9C-F40B-49C4-A4C2-EF62459C788F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A156E9C-F40B-49C4-A4C2-EF62459C788F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A156E9C-F40B-49C4-A4C2-EF62459C788F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A156E9C-F40B-49C4-A4C2-EF62459C788F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F0FC0A2-DAC7-4A8E-ABDD-5D865875ED9E}
+	EndGlobalSection
+EndGlobal

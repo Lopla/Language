@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\FiraMono-Bold.otf" />
+    <None Remove="Fonts\FiraMono-Medium.otf" />
+    <None Remove="Fonts\FiraMono-Regular.otf" />
+    <None Remove="Fonts\SIL Open Font License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\FiraMono-Bold.otf" />
+    <EmbeddedResource Include="Fonts\FiraMono-Medium.otf" />
+    <EmbeddedResource Include="Fonts\FiraMono-Regular.otf" />
+    <EmbeddedResource Include="Fonts\SIL Open Font License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="1.60.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lopla.Language\Lopla.Language.csproj" />
+    <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj" />
+  </ItemGroup>
+
+</Project>
