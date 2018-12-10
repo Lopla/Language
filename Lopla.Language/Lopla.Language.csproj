@@ -12,7 +12,11 @@
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-
+  
+  <PropertyGroup>
+      <NuspecFile>package.nuspec</NuspecFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <None Remove="Grammar\LoplaLexer.bin" />
     <None Remove="Grammar\LoplaParser.bin" />

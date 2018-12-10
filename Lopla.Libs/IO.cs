@@ -1,14 +1,17 @@
-﻿using Lopla.Language.Binary;
-using Lopla.Language.Errors;
-using Lopla.Language.Libraries;
-using Lopla.Language.Processing;
-using String = Lopla.Language.Binary.String;
-
-namespace Lopla.Libs
+﻿namespace Lopla.Libs
 {
+    using System;
+    using Language.Binary;
+    using Language.Errors;
+    using Language.Libraries;
+    using Language.Processing;
+    using String = Language.Binary.String;
+
+    // ReSharper disable once InconsistentNaming
     public class IO : BaseLoplaLibrary
     {
-        private readonly string _prefix ="";
+        private readonly string _prefix = "";
+
         public IO()
         {
             Add("Write", Write, "text");
@@ -19,9 +22,9 @@ namespace Lopla.Libs
         private Result WriteLine(Mnemonic expression, Runtime runtime)
         {
             var arg = runtime.GetVariable("text");
-            if (arg.Get(runtime) is String line) System.Console.WriteLine(_prefix + line.Value);
+            if (arg.Get(runtime) is String line) Console.WriteLine(_prefix + line.Value);
             else if (arg.Get(runtime) is Number i)
-                System.Console.WriteLine(_prefix + i.Value );
+                Console.WriteLine(_prefix + i.Value);
             else
                 runtime.AddError(new RuntimeError($"Type not supported {arg.Get(runtime).GetType().Name}"));
             return new Result();
@@ -30,9 +33,9 @@ namespace Lopla.Libs
         private Result Write(Mnemonic expression, Runtime runtime)
         {
             var arg = runtime.GetVariable("text");
-            if (arg.Get(runtime) is String line) System.Console.Write(_prefix + line.Value);
+            if (arg.Get(runtime) is String line) Console.Write(_prefix + line.Value);
             else if (arg.Get(runtime) is Number i)
-                System.Console.Write(_prefix + i.Value);
+                Console.Write(_prefix + i.Value);
             else
                 runtime.AddError(new RuntimeError($"Type not supported {arg.Get(runtime).GetType().Name}"));
             return new Result();
@@ -40,8 +43,8 @@ namespace Lopla.Libs
 
         private Result Read(Mnemonic expression, Runtime runtime)
         {
-            System.Console.Write(_prefix);
-            var data = System.Console.ReadLine();
+            Console.Write(_prefix);
+            var data = Console.ReadLine();
 
             return new Result(new String
             {
