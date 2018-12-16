@@ -5,6 +5,6 @@
 
     public class Key : ILoplaMessage
     {
-        public String Char;
+        public Number Char;
     }
 }
