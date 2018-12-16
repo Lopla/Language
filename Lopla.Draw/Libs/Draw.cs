@@ -59,6 +59,11 @@
                         new Result(new Number(c.Pos.X)),
                         new Result(new Number(c.Pos.Y))
                     ));
+                case Key k:
+                    return new Result(new LoplaList(
+                        new Result(new String(name)),
+                        new Result(k.Char))
+                    );
                 default:
                     return new Result(new LoplaList(
                         new Result(new String(name))
