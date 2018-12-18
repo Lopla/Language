@@ -25,17 +25,20 @@
                 new Assigment(null,
                     new ValueTable(null,
                         new VariablePointer("testString"),
-                        new ValueInteger(new Number(0))),
-                    new ValueInteger(new Number(1)));
+                        new ValueInteger(new Number(32))),
+                    new ValueInteger(new Number('X')));
 
             assignEmptyTable.Execute(runtime);
             Assert.Empty(runtime.Errors);
 
             sut.Execute(runtime);
 
+            var value = runtime.GetVariable("testString").Get(runtime) as String;
+
             runtime.EndRootScope();
 
             Assert.Empty(runtime.Errors);
+            Assert.Equal("some long string                X", value?.Value);
         }
 
         [Fact]
