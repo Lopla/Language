@@ -52,7 +52,14 @@ Any list of characters
 ``` 
 b="a" 
 ```
+### Indexing operator and strings
+It is possible to modify strings by indexing operator: `[]`. Empty `' '` characters will be added if you will add your value at some nonexisitient index.
+```
+b="a" 
+b[0]=1
+b[2]=34
 
+```
 ## LoplaList
 
 list of any types.
