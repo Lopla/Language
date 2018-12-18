@@ -1,12 +1,11 @@
-﻿using Hime.Redist;
-using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
-using Lopla.Language.Errors;
-using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
-
-namespace Lopla.Language.Compiler.Mnemonics
+﻿namespace Lopla.Language.Compiler.Mnemonics
 {
+    using Binary;
+    using Errors;
+    using Hime.Redist;
+    using Interfaces;
+    using Processing;
+
     public class ValueTable : Mnemonic
     {
         public ValueTable(ASTNode? node, IMnemonicsCompiler runtime) : base(node)
@@ -18,6 +17,12 @@ namespace Lopla.Language.Compiler.Mnemonics
                     .GetChildAndAddError(0, "LITERAL", runtime)?.Value
             };
             ElementPositionInTable = runtime.Get(node.Value.Children[1]);
+        }
+
+        public ValueTable(ASTNode? node, VariablePointer tablePointer, Mnemonic positionInTable) : base(node)
+        {
+            this.TablePointer = tablePointer;
+            this.ElementPositionInTable = positionInTable;
         }
 
         public VariablePointer TablePointer { get; set; }
@@ -32,11 +37,9 @@ namespace Lopla.Language.Compiler.Mnemonics
                 var variable = value.Get(runtime);
                 var idx = runtime.EvaluateCodeBlock(ElementPositionInTable).Get(runtime) as Number;
 
-                if (variable is LoplaList tableInstance)
-                {
-                    return tableInstance.Get(idx);
-                }
-                else if (variable is String variableString)
+                if (variable is LoplaList tableInstance) return tableInstance.Get(idx);
+
+                if (variable is String variableString)
                 {
                     var c = (int) variableString.Value[idx.ValueAsInt];
                     return new Result(new Number(c));

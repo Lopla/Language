@@ -7,36 +7,39 @@ using Xunit;
 
 namespace Lopla.Tests
 {
+    using Language.Interfaces;
+
     public class AssignSpecs
     {
         [Fact]
         public void AllowsToAssignValueWhenTableIsEmpty()
         {
-            var sut = new Runtime(new Processors());
+            var runtime = new Runtime(new Processors());
 
-            sut.StartRootScope(new Compilation("a"));
+            runtime.StartRootScope(new Compilation("testScope"));
 
-            var variablePointer = new VariableName(null, "testArray");
+            //// set 1 on position 0
+            var assignEmptyTable =
+                new Assigment(null,
+                    new VariableName(null, "testArray"),
+                    new DeclareTable(null));
 
-            sut.Register(new MethodPointer
-            {
-                Name = "Method1",
-                NameSpace = "Unittest"
-            }, new Method
-            {
-                ArgumentList = new List<string>(),
-                Code = new List<Mnemonic>()
-                {
-                    new Return(null, variablePointer)
-                }
-            });
+            //// set 1 on position 0
+            var sut =
+                new Assigment(null,
+                    new ValueTable(null, 
+                        new VariablePointer("testArray"), 
+                        new ValueInteger(new Number(0))),
+                    new ValueInteger(new Number(1)));
 
-            sut.EndRootScope();
+            assignEmptyTable.Execute(runtime);
+            Assert.Empty(runtime.Errors);
 
-            var assigment = new Assigment(null,
-                variablePointer,
-                new ValueTable());
-                new ValueInteger(new Number(1)));
+            sut.Execute(runtime);
+
+            runtime.EndRootScope();
+
+            Assert.Empty(runtime.Errors);
         }
     }
 }

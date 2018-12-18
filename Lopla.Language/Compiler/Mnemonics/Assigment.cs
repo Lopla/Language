@@ -28,7 +28,13 @@
                 expression;
         }
 
-        public Assigment(ASTNode? node, VariableName leftSide, Mnemonic rightSide) : base(node)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="leftSide">can be one of <see cref="VariableName"/> or <see cref="ValueTable"/></param>
+        /// <param name="rightSide">usually some <see cref="Mnemonic"/></param>
+        public Assigment(ASTNode? node, IArgument leftSide, Mnemonic rightSide) : base(node)
         {
             LeftSide = leftSide;
             RightSide = rightSide;

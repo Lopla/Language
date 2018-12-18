@@ -66,5 +66,17 @@ Test.Write(a)
         {
             EvaluateCode(script, args);
         }
+
+        [Theory]
+        [InlineData(@"a = []
+a[0]=1
+a[10]=2
+Test.Write(a[0])
+Test.Write(a[10])
+", "1", "2")]
+        public void AssignsValueToATable(string script, params string[] args)
+        {
+            EvaluateCode(script, args);
+        }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Serialization;
     using Language.Binary;
     using Language.Compiler.Mnemonics;
     using Language.Enviorment;
@@ -230,8 +231,8 @@
             Assert.Equal(variableValue_I_inMethodScope, value?.Value);
         }
 
-        [Fact]
-        public void AllowsToCallReturnWhileInWHileLoop()
+        [Fact(Skip = "To be implemented")]
+        public void AllowsToCallReturnWhileInWhileLoop()
         {
             Assert.False(true);
         }
