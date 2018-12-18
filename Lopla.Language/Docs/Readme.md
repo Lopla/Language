@@ -1,9 +1,9 @@
 # Lopla language
 
-[[_TOC_]]
-
 # Syntax
 Lines of code are sperated by new line.
+
+<a name="Keywords"/>
 # Keywords
 
 ## conditional execution
@@ -22,16 +22,19 @@ while(a>0){
 ```
 
 ## function declaration
+There is a required convention on how to specify a function name. Each function name should have `namespace` part (which is the filename) `.` and  `name`. In the same line as the declaraion we should provide arguments and starting bracket `{` for method body.
+
+`File.lpc`
 ```
 a=2
 b="test"
-function namespace.name(a,b){
+function File.FunctionName(a,b){
     return a
 }
 ```
 ## function call
 ```
-namespace.name()
+Namespce.Name()
 ```
 
 # Types and variables
