@@ -1,31 +1,52 @@
 ﻿namespace Lopla.Language.Binary
 {
+    using System;
+    using System.Linq;
     using System.Text;
+    using Interfaces;
 
-    public class String : IArgument, IValue<string>
+    public class String : IArgument, IValue<string>, ILoplaIndexedValue
     {
-        public string Value { get; set; }
-
         public String()
         {
-
         }
+
         public String(string val)
         {
-            this.Value = val;
+            Value = val;
+        }
+
+        public string Value { get; set; }
+
+        public IValue Clone()
+        {
+            return new String
+            {
+                Value = new StringBuilder(Value).ToString()
+            };
+        }
+
+        public void Set(int idx, Result newValue)
+        {
+            var stringAsList = Value.ToList();
+            while (stringAsList.Count < idx + 1)
+                stringAsList.Add(' ');
+
+            var incomingValue = newValue.Get(null);
+            if (incomingValue is Number)
+            {
+                stringAsList[idx] = (char)(incomingValue as Number).Value;
+                this.Value = new string(stringAsList.ToArray());
+            }
+            else
+            {
+                throw new Exception("Failed to set indexed value in string.");
+            }
         }
 
         public override string ToString()
         {
             return Value;
-        }
-
-        public IValue Clone()
-        {
-            return new String()
-            {
-                Value = new StringBuilder(this.Value).ToString()
-            };
         }
     }
 }

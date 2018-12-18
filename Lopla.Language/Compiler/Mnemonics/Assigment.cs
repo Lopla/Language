@@ -53,13 +53,22 @@
             }
             else if (LeftSide is ValueTable vt)
             {
-                var table = runtime.GetVariable(vt.TablePointer.Name);
-                if (table != null)
+                var leftSideIndexedType = runtime.GetVariable(vt.TablePointer.Name);
+                if (leftSideIndexedType != null)
                 {
-                    var r = table.Get(runtime) as LoplaList;
-                    var idx = runtime.EvaluateCodeBlock(vt.ElementPositionInTable).Get(runtime) as Number;
-                    r.Set(idx.ValueAsInt, rightResult);
-                    runtime.SetVariable(vt.TablePointer.Name, new Result(r));
+                    var value = leftSideIndexedType.Get(runtime);
+                    if (value is ILoplaIndexedValue)
+                    {
+                        var loplaList = value as ILoplaIndexedValue;
+                        var idx = runtime.EvaluateCodeBlock(vt.ElementPositionInTable).Get(runtime) as Number;
+                        loplaList.Set(idx.ValueAsInt, rightResult);
+                        runtime.SetVariable(vt.TablePointer.Name, new Result(loplaList));
+                    }
+                    else
+                    {
+                        runtime.AddError(new RuntimeError($"Cannot handle {vt.TablePointer.Name} like an array.",
+                            this));
+                    }
                 }
                 else
                 {

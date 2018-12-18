@@ -1,11 +1,10 @@
-﻿using Hime.Redist;
-using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
-using Lopla.Language.Processing;
-
-namespace Lopla.Language.Compiler.Mnemonics
+﻿namespace Lopla.Language.Compiler.Mnemonics
 {
-    internal class ValueString : Mnemonic
+    using Binary;
+    using Hime.Redist;
+    using Processing;
+
+    public class ValueString : Mnemonic
     {
         public String Value;
 
@@ -15,6 +14,11 @@ namespace Lopla.Language.Compiler.Mnemonics
             {
                 Value = node.Value.Value?.Trim('\"')
             };
+        }
+
+        public ValueString(ASTNode? node, String value) : base(node)
+        {
+            Value = value;
         }
 
         public override Result Execute(Runtime runtime)
