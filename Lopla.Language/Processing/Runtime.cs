@@ -24,6 +24,11 @@
 
         public IEnumerable<Error> Errors => _errors;
 
+        public bool ProcessingStpped()
+        {
+            return _processors.Get().IsStpped();
+        }
+
         public Result EvaluateCodeBlock(IArgument argument)
         {
             if (argument is Mnemonic exp)

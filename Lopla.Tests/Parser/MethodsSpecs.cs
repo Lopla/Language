@@ -90,5 +90,38 @@ Test.Write(a[1])
         {
             EvaluateCode(script, args);
         }
+
+        [Theory]
+        [InlineData(@"
+function TestScript.Show(num){
+    return num + 1 
+}
+
+Test.Write(TestScript.Show(455))
+", "456")]
+        public void ReturnFromMethodIsPossible(string script, params string[] args)
+        {
+            EvaluateCode(script, args);
+        }
+
+        [Theory]
+        [InlineData(@"
+function TestScript.Show(num){
+    i=0
+    while(i < 10){
+        if(i==3){
+            return i
+        }
+        i=i+1
+    }
+    return num + 1 
+}
+
+Test.Write(TestScript.Show(3))
+", "3")]
+        public void ReturnFromWhileIsPossible(string script, params string[] args)
+        {
+            EvaluateCode(script, args);
+        }
     }
 }

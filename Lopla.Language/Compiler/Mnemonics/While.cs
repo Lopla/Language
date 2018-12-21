@@ -1,6 +1,5 @@
 ﻿using Hime.Redist;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
@@ -24,12 +23,18 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public override Result Execute(Runtime runtime)
         {
+            Result result = null;
+
             while (WhileCondition(runtime.EvaluateCodeBlock(LogicalExpression), runtime))
             {
-                runtime.EvaluateCodeBlock(CodeBlock);
+                result = runtime.EvaluateCodeBlock(CodeBlock);
+                if (runtime.ProcessingStpped())
+                {
+                    break;
+                }
             }
 
-            return new Result();
+            return result;
         }
 
         private bool WhileCondition(Result result, Runtime runtime)
@@ -39,11 +44,9 @@ namespace Lopla.Language.Compiler.Mnemonics
             {
                 return resultInt.Value == 1;
             }
-            else
-            {
-                runtime.AddError(new RuntimeError($"Invalid data after evaulation of expression.", this));
-                return false;
-            }
+            runtime.AddError(
+                new RuntimeError($"Invalid data after evaulation of expression to use as a while condition.", this));
+            return false;
         }
     }
 }

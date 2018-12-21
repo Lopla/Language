@@ -107,5 +107,10 @@ namespace Lopla.Language.Processing
         {
             return _stack.GetBoottomScope().Name;
         }
+
+        public bool IsStpped()
+        {
+            return _requestForStop;
+        }
     }
 }
