@@ -198,11 +198,12 @@ namespace Lopla.Language.Grammar
 			new Symbol(0x0038, "lopla"), 
 			new Symbol(0x0048, "__V72"), 
 			new Symbol(0x004B, "__V75"), 
-			new Symbol(0x004F, "__V79"), 
-			new Symbol(0x0051, "__V81"), 
+			new Symbol(0x004E, "__V78"), 
+			new Symbol(0x0050, "__V80"), 
 			new Symbol(0x0052, "__V82"), 
-			new Symbol(0x0055, "__V85"), 
-			new Symbol(0x0057, "__VAxiom") };
+			new Symbol(0x0053, "__V83"), 
+			new Symbol(0x0056, "__V86"), 
+			new Symbol(0x0058, "__VAxiom") };
 		/// <summary>
 		/// The collection of virtuals matched by this parser
 		/// </summary>

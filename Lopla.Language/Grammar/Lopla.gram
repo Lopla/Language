@@ -109,7 +109,7 @@
     /// ------------------------- DECLARATIONS ----------------------------------
 
     /// block '{' '}'
-    block_of_lopla        ->  '{'! NEW_LINE!
+    block_of_lopla        ->  (NEW_LINE)!* '{'! NEW_LINE!
                               lopla_line*  
                               '}'! NEW_LINE!;
 

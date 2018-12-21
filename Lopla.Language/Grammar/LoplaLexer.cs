@@ -168,10 +168,10 @@ namespace Lopla.Language.Grammar
 			new Symbol(0x004A, "]"),
 			new Symbol(0x004C, "."),
 			new Symbol(0x004D, "="),
-			new Symbol(0x004E, "{"),
-			new Symbol(0x0050, "}"),
-			new Symbol(0x0053, "function"),
-			new Symbol(0x0054, "return") };
+			new Symbol(0x004F, "{"),
+			new Symbol(0x0051, "}"),
+			new Symbol(0x0054, "function"),
+			new Symbol(0x0055, "return") };
 		/// <summary>
 		/// Initializes a new instance of the lexer
 		/// </summary>
