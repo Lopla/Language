@@ -39,7 +39,7 @@ Namespce.Name()
 ```
 
 # Types and variables
-There are tree types in Lopla:
+
 ## Number 
 Used to store any real number 
 ```
