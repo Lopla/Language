@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Lopla.Draw.Messages;
-using Lopla.Libs.Interfaces;
-using SkiaSharp;
-
-namespace Lopla.Draw
+﻿namespace Lopla.Draw
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Lopla.Libs.Interfaces;
+    using Messages;
+    using SkiaSharp;
+
     public class SkiaDrawLopla
     {
         private readonly List<ILoplaMessage> _drawStack = new List<ILoplaMessage>();
@@ -96,7 +95,7 @@ namespace Lopla.Draw
 
         private void Text(SKCanvas canvas, Text text)
         {
-            canvas.DrawText(text.Label, (float)text.Position.X, (float)text.Position.Y, _paintDevice);
+            canvas.DrawText(text.Label, (float) text.Position.X, (float) text.Position.Y, _paintDevice);
         }
 
         private void TextReset()
@@ -111,7 +110,7 @@ namespace Lopla.Draw
             paint.TextAlign = (SKTextAlign) text.Align;
             _writeTextPosition += (int) paint.TextSize;
 
-            float x = (float)text.Offset;
+            var x = (float) text.Offset;
             if (text.Align == Aligmnent.Right)
                 x = canvas.LocalClipBounds.Width;
             else if (text.Align == Aligmnent.Center)
@@ -128,12 +127,12 @@ namespace Lopla.Draw
                 var sprite = new SKBitmap();
                 resourceBitmap.ExtractSubset(sprite,
                     new SKRectI(
-                        (int)img.Rectangle.Position.X, (int)img.Rectangle.Position.Y,
-                        (int)img.Rectangle.Position.X +(int)img.Rectangle.Size.X,
-                        (int)img.Rectangle.Position.Y +(int)img.Rectangle.Size.Y
+                        (int) img.Rectangle.Position.X, (int) img.Rectangle.Position.Y,
+                        (int) img.Rectangle.Position.X + (int) img.Rectangle.Size.X,
+                        (int) img.Rectangle.Position.Y + (int) img.Rectangle.Size.Y
                     ));
 
-                canvas.DrawBitmap(sprite, (float)img.Position.X, (float)img.Position.Y);
+                canvas.DrawBitmap(sprite, (float) img.Position.X, (float) img.Position.Y);
             }
         }
 
@@ -144,22 +143,22 @@ namespace Lopla.Draw
             {
                 var resourceBitmap = SKBitmap.Decode(skStream);
 
-                canvas.DrawBitmap(resourceBitmap, (float)img.Position.X, (float)img.Position.Y);
+                canvas.DrawBitmap(resourceBitmap, (float) img.Position.X, (float) img.Position.Y);
             }
         }
 
         private void Box(SKCanvas canvas, Box line)
         {
             var region = new SKRegion();
-            region.SetRect(new SKRectI((int)line.Start.X, (int)line.Start.Y, (int)line.End.X, (int)line.End.Y));
+            region.SetRect(new SKRectI((int) line.Start.X, (int) line.Start.Y, (int) line.End.X, (int) line.End.Y));
             canvas.DrawRegion(region, _paintDevice);
         }
 
         private void Line(SKCanvas canvas, Line line)
         {
             canvas.DrawLine(
-                (float)line.Start.X, (float)line.Start.Y,
-                (float)line.End.X, (float)line.End.Y,
+                (float) line.Start.X, (float) line.Start.Y,
+                (float) line.End.X, (float) line.End.Y,
                 _paintDevice
             );
         }
@@ -176,6 +175,7 @@ namespace Lopla.Draw
             {
                 _drawStack.Clear();
             }
+
             _paintDevice = _paintProvider.GetPaintDevice();
 
             TextReset();

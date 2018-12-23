@@ -64,6 +64,11 @@
                         new Result(new String(name)),
                         new Result(k.Char))
                     );
+                case SetCanvas sc:
+                    return new Result(new LoplaList(
+                            new Result(new Number(sc.Size.X)),
+                            new Result(new Number(sc.Size.Y))
+                        ));
                 default:
                     return new Result(new LoplaList(
                         new Result(new String(name))
