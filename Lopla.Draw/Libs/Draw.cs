@@ -38,11 +38,11 @@
 
             Add("GetTextSize", GetTextSize, "text");
             Add("GetTextInfo", GetTextInfo);
-
             Add("SetCanvas", SetCanvas, "a", "b");
 
             Add("WaitForEvent", WaitForEvent);
         }
+        
 
         private Result WaitForEvent(Mnemonic expression, Runtime runtime)
         {
@@ -66,9 +66,10 @@
                     );
                 case SetCanvas sc:
                     return new Result(new LoplaList(
-                            new Result(new Number(sc.Size.X)),
-                            new Result(new Number(sc.Size.Y))
-                        ));
+                        new Result(new String(name)),
+                        new Result(new Number(sc.Size.X)),
+                        new Result(new Number(sc.Size.Y))
+                    ));
                 default:
                     return new Result(new LoplaList(
                         new Result(new String(name))

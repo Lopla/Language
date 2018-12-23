@@ -16,7 +16,8 @@ namespace Lopla.Draw
             paintDevice.TextSize = 16;
             paintDevice.IsAntialias = true;
             paintDevice.IsStroke = false;
-            paintDevice.Typeface = GetTypeface();
+            paintDevice.Typeface = 
+                GetTypeface();
                 //SKTypeface.FromFamilyName("Courier New", typeFaceStyle);
 
             return paintDevice;
