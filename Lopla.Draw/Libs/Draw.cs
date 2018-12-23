@@ -14,9 +14,11 @@
     {
         private readonly ISender _notificationStack;
         private readonly ISender _uiEventsProvider;
+        private readonly IDrawContext _context;
 
-        public Draw(ISender notificationStack, ISender uiEventsProvider = null)
+        public Draw(ISender notificationStack, IDrawContext context, ISender uiEventsProvider = null)
         {
+            _context = context;
             _notificationStack = notificationStack;
             _uiEventsProvider = uiEventsProvider;
 
@@ -47,9 +49,10 @@
 
         private Result GetCanvasSize(Mnemonic expression, Runtime runtime)
         {
+            var c = this._context.CanvasSize();
             return new Result(new LoplaList(
-                    new Result(new Number(0)),
-                    new Result(new Number(0))
+                    new Result(new Number(c.X)),
+                    new Result(new Number(c.Y))
                 ));
         }
         

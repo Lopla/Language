@@ -10,12 +10,12 @@
     {
         private readonly List<ILoplaMessage> _drawStack = new List<ILoplaMessage>();
         private readonly PaintProvider _paintProvider;
-        private readonly IStreamFromResource _provider;
+        private readonly IDrawContext _provider;
         private int _logTextPosition;
         private SKPaint _paintDevice;
         private int _writeTextPosition;
 
-        public SkiaDrawLopla(ISubscribe subscirber, IStreamFromResource provider)
+        public SkiaDrawLopla(ISubscribe subscirber, IDrawContext provider)
         {
             _paintProvider = new PaintProvider();
 
