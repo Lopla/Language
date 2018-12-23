@@ -8,7 +8,7 @@
     <PackageProjectUrl>https://github.com/Lopla/Language</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Lopla/Language</RepositoryUrl>
     <AssemblyVersion>0.0.12.0</AssemblyVersion>
-    <FileVersion>0.0.112.0</FileVersion>
+    <FileVersion>0.0.12.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

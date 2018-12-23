@@ -38,12 +38,21 @@
 
             Add("GetTextSize", GetTextSize, "text");
             Add("GetTextInfo", GetTextInfo);
+            Add("GetCanvasSize", GetCanvasSize);
+
             Add("SetCanvas", SetCanvas, "a", "b");
 
             Add("WaitForEvent", WaitForEvent);
         }
-        
 
+        private Result GetCanvasSize(Mnemonic expression, Runtime runtime)
+        {
+            return new Result(new LoplaList(
+                    new Result(new Number(0)),
+                    new Result(new Number(0))
+                ));
+        }
+        
         private Result WaitForEvent(Mnemonic expression, Runtime runtime)
         {
             var m = _uiEventsProvider.WaitForMessage();
