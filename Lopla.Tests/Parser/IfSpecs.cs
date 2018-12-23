@@ -111,5 +111,19 @@ Test.Write(a)
         {
             EvaluateCode(script, args);
         }
+
+
+        [Theory]
+        [InlineData(@"a=3
+if (a==3)
+{
+    Test.Write(""one"")
+}
+",
+            "one")]
+        public void MultiLineIfDeclarationIsOk(string script, params string[] args)
+        {
+            EvaluateCode(script, args);
+        }
     }
 }

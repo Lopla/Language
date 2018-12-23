@@ -230,11 +230,5 @@
             var value = r.Get(sut) as Number;
             Assert.Equal(variableValue_I_inMethodScope, value?.Value);
         }
-
-        [Fact(Skip = "To be implemented")]
-        public void AllowsToCallReturnWhileInWhileLoop()
-        {
-            Assert.False(true);
-        }
     }
 }
