@@ -114,7 +114,6 @@
                               '}'! NEW_LINE!;
 
     /// if
-    if_lines              ->  lopla_line* ;
     if                    ->  IF '('! expression ')'! block_of_lopla;
 
     /// while

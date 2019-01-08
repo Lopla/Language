@@ -124,6 +124,20 @@ if (a==3)
         public void MultiLineIfDeclarationIsOk(string script, params string[] args)
         {
             EvaluateCode(script, args);
+        } 
+        
+        [Theory]
+        [InlineData(@"a=3
+b=-1
+if ((a==3) && (b == -1) )
+{
+    Test.Write(""one"")
+}
+",
+            "one")]
+        public void AllowsToSpecifyAndExpression(string script, params string[] args)
+        {
+            EvaluateCode(script, args);
         }
     }
 }
