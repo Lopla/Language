@@ -1,5 +1,6 @@
 ﻿namespace Lopla.Language.Processing
 {
+    using System;
     using System.Collections.Generic;
     using Binary;
     using Enviorment;
@@ -135,7 +136,13 @@
         public void Run(Compilation binary)
         {
             StartRootScope(binary);
-            _processors.Get().Evaluate(binary.Mnemonics);
+            try
+            {
+                _processors.Get().Evaluate(binary.Mnemonics);
+            }catch(Exception exception)
+            {
+                AddError(new RuntimeError(exception.Message));
+            }
             EndRootScope();
         }
 

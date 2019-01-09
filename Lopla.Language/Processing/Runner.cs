@@ -1,5 +1,6 @@
 ﻿namespace Lopla.Language.Processing
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Compiler;
@@ -38,10 +39,13 @@
 
             //// link
             foreach (var library in libs) _runtime.Link(library);
-
-            //// run
-            foreach (var binary in compileResult) _runtime.Run(binary.Compilation);
-
+            foreach (var binary in compileResult) 
+            {
+                _runtime.Run(binary.Compilation);
+                if(_runtime.Errors.Count()> 0){
+                    break;
+                }
+            }
             foreach (var runtimeError in _runtime.Errors) result.Errors.Add(runtimeError);
 
             return result;
