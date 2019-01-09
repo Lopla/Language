@@ -1,13 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.12-alpha</Version>
+    <Version>0.0.13-alpha</Version>
     <PackageProjectUrl>https://github.com/Lopla/Language</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Lopla/Language</RepositoryUrl>
-    <AssemblyVersion>0.0.12.0</AssemblyVersion>
-    <FileVersion>0.0.12.0</FileVersion>
+    <AssemblyVersion>0.0.13.0</AssemblyVersion>
+    <FileVersion>0.0.13.0</FileVersion>
     <Description>Simple language build for portable scripting platform: Lopla.</Description>
   </PropertyGroup>
 
