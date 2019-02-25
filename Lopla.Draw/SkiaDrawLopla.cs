@@ -138,7 +138,7 @@
 
         private void Image(SKCanvas canvas, Image img)
         {
-            using (var stream = _provider.GetResourceStream(img.AssemblyName, img.ResourceName))
+            using (var stream = _provider.GetStream(img.File))
             using (var skStream = new SKManagedStream(stream))
             {
                 var resourceBitmap = SKBitmap.Decode(skStream);

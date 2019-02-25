@@ -4,8 +4,10 @@ namespace Lopla.Draw.Messages
 {
     public class Image : ILoplaMessage
     {
-        public string ResourceName;
-        public string AssemblyName;
+        /// <summary>
+        /// File with path
+        /// </summary>
+        public string File { get; set; }
         public Point Position { get; set; }
     }
 }

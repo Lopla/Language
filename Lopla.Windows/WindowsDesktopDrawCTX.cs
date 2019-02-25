@@ -19,15 +19,6 @@
         public Stream GetResourceStream(
             string folder, string file)
         {
-            //foreach (var media in _project.Media())
-            //{
-            //    if (media.Match(folder, file))
-            //    {
-            //        return media.GetData();
-            //    }
-            //}
-            //return null;
-
             throw new NotImplementedException();
         }
 
@@ -38,6 +29,20 @@
                 X = (decimal) _skiaControl.CanvasSize.Width,
                 Y = (decimal) _skiaControl.CanvasSize.Height
             };
+        }
+
+        public Stream GetStream(string imgFile)
+        {
+            //foreach (var media in _project.Media())
+            //{
+            //    if (media.Match(folder, file))
+            //    {
+            //        return media.GetData();
+            //    }
+            //}
+            //return null;
+            StreamReader sr = new StreamReader(imgFile);
+            return sr.BaseStream;
         }
     }
 }

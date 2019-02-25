@@ -207,12 +207,9 @@
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
                 runtime.GetVariable("filename").Get(runtime) is String name)
             {
-                var assembly = GetType().GetTypeInfo().Assembly;
-
                 _notificationStack.Send(new Image
                 {
-                    AssemblyName = assembly.GetName().Name,
-                    ResourceName = assembly.GetName().Name + ".Media." + name.Value,
+                    File = name.Value,
                     Position = new Point
                     {
                         X = x1.Value,
