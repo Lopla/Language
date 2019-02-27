@@ -234,7 +234,6 @@ namespace Lopla.Tests
         [Fact]
         public void ResultsWithProperListOfLibs()
         {
-            var testValue = 1;
             var compilation = new Compilation("libsUnitTest");
             var sut = new Runtime(new Processors());
             sut.Link(new Lp());
