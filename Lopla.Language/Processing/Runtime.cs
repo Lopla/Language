@@ -1,9 +1,10 @@
-﻿namespace Lopla.Language.Processing
+﻿using Lopla.Language.Environment;
+
+namespace Lopla.Language.Processing
 {
     using System;
     using System.Collections.Generic;
     using Binary;
-    using Enviorment;
     using Errors;
     using Interfaces;
 
@@ -155,6 +156,11 @@
         public void EndRootScope()
         {
             _processors.End();
+        }
+
+        public IEnumerable<KeyValuePair<string, List<string>>> GetRegisteredMethods()
+        {
+            return _pro.GetMethods();
         }
     }
 }

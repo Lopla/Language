@@ -1,12 +1,12 @@
-﻿namespace Lopla.Language.Enviorment
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Lopla.Language.Binary;
-    using Lopla.Language.Errors;
-    using Lopla.Language.Processing;
-    using Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
+using Lopla.Language.Processing;
 
+namespace Lopla.Language.Environment
+{
     public class GlobalScope
     {
         private readonly IErrorHandler _errorHandler;

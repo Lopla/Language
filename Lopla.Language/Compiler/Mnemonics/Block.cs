@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Hime.Redist;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 

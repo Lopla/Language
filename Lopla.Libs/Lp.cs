@@ -16,6 +16,24 @@
             Add("Len", Len, "array");
             Add("Floor", Floor, "number");
             Add("Args", Args);
+            Add("Functions", Functions);
+        }
+
+        private Result Functions(Mnemonic expression, Runtime runtime)
+        {
+            var listOfLibs = new LoplaList();
+            foreach (var registeredMethod in runtime.GetRegisteredMethods())
+            {
+                var methodLine = new LoplaList();
+                methodLine.Add(new Result(new String(registeredMethod.Key)));
+                foreach (var argument in registeredMethod.Value)
+                {
+                    methodLine.Add(new Result(new String(argument)));
+                }
+                listOfLibs.Add(new Result(methodLine));
+            }
+
+            return new Result(listOfLibs);
         }
 
         private Result Args(Mnemonic expression, Runtime runtime)

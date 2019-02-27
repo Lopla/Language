@@ -1,8 +1,8 @@
-﻿namespace Lopla.Language.Enviorment
-{
-    using System.Collections.Generic;
-    using Binary;
+﻿using System.Collections.Generic;
+using Lopla.Language.Binary;
 
+namespace Lopla.Language.Environment
+{
     public class Method : IArgument
     {
         public Method()

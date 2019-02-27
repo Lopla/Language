@@ -1,6 +1,5 @@
 ﻿using System;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;

@@ -4,7 +4,6 @@ using Lopla.Language.Processing;
 namespace Lopla.Language.Compiler.Mnemonics
 {
     using Binary;
-    using Enviorment;
     using Hime.Redist;
 
     public class ExpressionBracket : Mnemonic

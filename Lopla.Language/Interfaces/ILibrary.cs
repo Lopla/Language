@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
+using Lopla.Language.Environment;
 
 namespace Lopla.Language.Interfaces
 {

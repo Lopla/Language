@@ -2,7 +2,7 @@
 using System.Linq;
 using Lopla.Language.Binary;
 using Lopla.Language.Compiler.Mnemonics;
-using Lopla.Language.Enviorment;
+using Lopla.Language.Environment;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;

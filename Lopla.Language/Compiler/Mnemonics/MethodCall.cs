@@ -6,7 +6,6 @@ namespace Lopla.Language.Compiler.Mnemonics
     using System.Collections.Generic;
     using System.Linq;
     using Binary;
-    using Enviorment;
     using Errors;
     using Hime.Redist;
 

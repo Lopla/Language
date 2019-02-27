@@ -1,6 +1,4 @@
-﻿using Lopla.Language.Enviorment;
-
-namespace Lopla.Language.Errors
+﻿namespace Lopla.Language.Errors
 {
     public class CompilationError : Error
     {

@@ -1,9 +1,9 @@
-﻿namespace Lopla.Language.Enviorment
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lopla.Language.Interfaces;
 
+namespace Lopla.Language.Environment
+{
     public class GlobalScopes
     {
         private readonly IErrorHandler _errorHandler;

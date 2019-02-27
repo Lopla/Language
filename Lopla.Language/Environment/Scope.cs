@@ -1,4 +1,4 @@
-﻿namespace Lopla.Language.Enviorment
+﻿namespace Lopla.Language.Environment
 {
     public class Scope
     {

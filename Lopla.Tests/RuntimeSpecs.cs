@@ -1,14 +1,14 @@
-﻿namespace Lopla.Tests
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Runtime.Serialization;
-    using Language.Binary;
-    using Language.Compiler.Mnemonics;
-    using Language.Enviorment;
-    using Language.Processing;
-    using Xunit;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lopla.Language.Binary;
+using Lopla.Language.Compiler.Mnemonics;
+using Lopla.Language.Environment;
+using Lopla.Language.Processing;
+using Lopla.Libs;
+using Xunit;
 
+namespace Lopla.Tests
+{
     public class RuntimeSpecs
     {
         [Fact]
@@ -88,6 +88,110 @@
         }
 
         [Fact]
+        public void MethodsDeclaresNewVariablesAndTheyAreNotAcceisbleByOtherMethods()
+        {
+            var variableValue_I_inMethodScope = 10;
+            var variableName_I_inMethodScope = "globalvariable";
+
+            var sut = new Runtime(new Processors());
+            sut.StartRootScope(new Compilation("a"));
+
+            var variablePointer = new VariableName(null, variableName_I_inMethodScope);
+
+            var methodCall1 =
+                new MethodCall(
+                    new MethodPointer("Method1", "Unittest")
+                );
+            var methodCall2 =
+                new MethodCall(
+                    new MethodPointer("Method2", "Unittest")
+                );
+
+            sut.Register(new MethodPointer
+            {
+                Name = "Method1",
+                NameSpace = "Unittest"
+            }, new Method
+            {
+                ArgumentList = new List<string>(),
+                Code = new List<Mnemonic>
+                {
+                    new Assigment(null,
+                        variablePointer,
+                        new ValueInteger(new Number(variableValue_I_inMethodScope + 1)))
+                }
+            });
+
+            sut.Register(new MethodPointer
+            {
+                Name = "Method2",
+                NameSpace = "Unittest"
+            }, new Method
+            {
+                ArgumentList = new List<string>(),
+                Code = new List<Mnemonic>
+                {
+                    new Assigment(null,
+                        variablePointer,
+                        new ValueInteger(new Number(variableValue_I_inMethodScope))),
+                    methodCall1,
+                    new Return(null, variablePointer)
+                }
+            });
+
+            var r = sut.EvaluateCodeBlock(methodCall2);
+
+            sut.EndRootScope();
+
+            var value = r.Get(sut) as Number;
+            Assert.Equal(variableValue_I_inMethodScope, value?.Value);
+        }
+
+        [Fact]
+        public void MethodsHasValuesFromItsRootScopeWithoutAccessToVaraiblesFromOtherRootScopes()
+        {
+            var variableValue_I_inRootScope = 10;
+            var variableName_I_inRootScope = "globalvariable";
+
+            var sut = new Runtime(new Processors());
+
+            //// setup method in scope b
+            sut.StartRootScope(new Compilation("b"));
+
+            var variablePointer = new VariableName(null, variableName_I_inRootScope);
+
+            sut.Register(new MethodPointer
+            {
+                Name = "Method1",
+                NameSpace = "Unittest"
+            }, new Method
+            {
+                ArgumentList = new List<string>(),
+                Code = new List<Mnemonic>
+                {
+                    new Return(null, variablePointer)
+                }
+            });
+
+            sut.EndRootScope();
+
+            //// set variable in scope a
+            sut.StartRootScope(new Compilation("a"));
+            sut.SetVariable(variableName_I_inRootScope, new Result(new Number(variableValue_I_inRootScope)));
+            var methodCall =
+                new MethodCall(
+                    new MethodPointer("Method1", "Unittest")
+                );
+
+            //// we call method
+            var result = sut.EvaluateCodeBlock(methodCall);
+
+            sut.EndRootScope();
+
+            Assert.Single(sut.Errors);
+        }
+
+        [Fact]
         public void ProtectsValuesInSubForMethodScopeBeforeRead()
         {
             var testValue = 1;
@@ -128,107 +232,16 @@
         }
 
         [Fact]
-        public void MethodsHasValuesFromItsRootScopeWithoutAccessToVaraiblesFromOtherRootScopes()
+        public void ResultsWithProperListOfLibs()
         {
-            var variableValue_I_inRootScope = 10;
-            var variableName_I_inRootScope = "globalvariable";
-
+            var testValue = 1;
+            var compilation = new Compilation("libsUnitTest");
             var sut = new Runtime(new Processors());
-            
-            //// setup method in scope b
-            sut.StartRootScope(new Compilation("b"));
+            sut.Link(new Lp());
 
-            var variablePointer = new VariableName(null, variableName_I_inRootScope);
-
-            sut.Register(new MethodPointer
-            {
-                Name = "Method1",
-                NameSpace = "Unittest"
-            }, new Method
-            {
-                ArgumentList = new List<string>(),
-                Code = new List<Mnemonic>()
-                {
-                    new Return(null, variablePointer)
-                }
-            });
-            
-            sut.EndRootScope();
-
-            //// set variable in scope a
-            sut.StartRootScope(new Compilation("a"));
-            sut.SetVariable(variableName_I_inRootScope, new Result(new Number(variableValue_I_inRootScope)));
-            var methodCall =
-                new MethodCall(
-                    new MethodPointer("Method1", "Unittest")
-                );
-
-            //// we call method
-            var result = sut.EvaluateCodeBlock(methodCall);
-
-            sut.EndRootScope();
-
-            Assert.Single(sut.Errors);
-        }
-
-        [Fact]
-        public void MethodsDeclaresNewVariablesAndTheyAreNotAcceisbleByOtherMethods()
-        {
-            var variableValue_I_inMethodScope = 10;
-            var variableName_I_inMethodScope = "globalvariable";
-
-            var sut = new Runtime(new Processors());
-            sut.StartRootScope(new Compilation("a"));
-
-            var variablePointer = new VariableName(null, variableName_I_inMethodScope);
-
-            var methodCall1 =
-                new MethodCall(
-                    new MethodPointer("Method1", "Unittest")
-                );
-            var methodCall2 =
-                new MethodCall(
-                    new MethodPointer("Method2", "Unittest")
-                );
-
-            sut.Register(new MethodPointer
-            {
-                Name = "Method1",
-                NameSpace = "Unittest"
-            }, new Method
-            {
-                ArgumentList = new List<string>(),
-                Code = new List<Mnemonic>()
-                {
-                    new Assigment(null,
-                        variablePointer, 
-                        new ValueInteger(new Number(variableValue_I_inMethodScope+1))),
-                }
-            });
-
-            sut.Register(new MethodPointer
-            {
-                Name = "Method2",
-                NameSpace = "Unittest"
-            }, new Method
-            {
-                ArgumentList = new List<string>(),
-                Code = new List<Mnemonic>()
-                {
-                    new Assigment(null,
-                        variablePointer,
-                        new ValueInteger(new Number(variableValue_I_inMethodScope))),
-                    methodCall1,
-                    new Return(null, variablePointer)
-                }
-            });
-
-            var r = sut.EvaluateCodeBlock(methodCall2);
-
-            sut.EndRootScope();
-
-            var value = r.Get(sut) as Number;
-            Assert.Equal(variableValue_I_inMethodScope, value?.Value);
+            var methods = sut.GetRegisteredMethods();
+            Assert.NotEmpty(methods.ToList());
+            sut.StartRootScope(compilation);
         }
     }
 }

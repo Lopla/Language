@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using String = Lopla.Language.Binary.String;

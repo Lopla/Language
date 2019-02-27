@@ -5,7 +5,6 @@ using Lopla.Language.Processing;
 namespace Lopla.Language.Compiler
 {
     using System.Linq;
-    using Enviorment;
     using Hime.Redist;
 
     internal static class NodesHelpers

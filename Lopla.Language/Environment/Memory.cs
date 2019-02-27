@@ -1,9 +1,9 @@
-﻿namespace Lopla.Language.Enviorment
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Binary;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lopla.Language.Binary;
 
+namespace Lopla.Language.Environment
+{
     public class Memory
     {
         private readonly Dictionary<MemoryPointer, Result> _data = new Dictionary<MemoryPointer, Result>();

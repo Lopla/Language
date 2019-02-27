@@ -1,7 +1,6 @@
 ﻿using System;
 using Hime.Redist;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
 using Lopla.Language.Processing;
 
 namespace Lopla.Language.Compiler.Mnemonics

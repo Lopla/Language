@@ -1,10 +1,11 @@
-﻿namespace Lopla.Language.Enviorment
-{
-    using System.Collections.Generic;
-    using Binary;
-    using Errors;
-    using Processing;
+﻿using System;
+using System.Collections.Generic;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Processing;
 
+namespace Lopla.Language.Environment
+{
     public class Declarations
     {
         private readonly Dictionary<string, Method> _procedures = new Dictionary<string, Method>();
@@ -81,6 +82,14 @@
             runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}", null));
 
             return null;
+        }
+
+        public IEnumerable<KeyValuePair<string, List<string>>> GetMethods()
+        {
+            foreach (var procedure in _procedures)
+            {
+                yield return new KeyValuePair<string, List<string>>($"{procedure.Key}", procedure.Value.ArgumentList);
+            }
         }
     }
 }

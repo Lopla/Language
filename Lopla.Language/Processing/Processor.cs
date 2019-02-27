@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lopla.Language.Binary;
-using Lopla.Language.Enviorment;
+using Lopla.Language.Environment;
 using Lopla.Language.Errors;
 
 namespace Lopla.Language.Processing

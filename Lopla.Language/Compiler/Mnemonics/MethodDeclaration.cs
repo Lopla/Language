@@ -1,9 +1,10 @@
-﻿namespace Lopla.Language.Compiler.Mnemonics
+﻿using Lopla.Language.Environment;
+
+namespace Lopla.Language.Compiler.Mnemonics
 {
     using System.Collections.Generic;
     using System.Linq;
     using Binary;
-    using Enviorment;
     using Hime.Redist;
     using Interfaces;
     using Processing;

@@ -1,7 +1,8 @@
-﻿namespace Lopla.Language.Processing
+﻿using Lopla.Language.Environment;
+
+namespace Lopla.Language.Processing
 {
     using System.Collections.Generic;
-    using Enviorment;
 
     public class Processors
     {
