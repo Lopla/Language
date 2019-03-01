@@ -14,7 +14,6 @@ namespace Lopla.Windows
 {
     public partial class Lopla : Form
     {
-        private readonly Bus _messaging = new Bus();
         private readonly LockingBus _uiEvents;
         private SkiaDrawLoplaEngine engine;
 
@@ -23,7 +22,7 @@ namespace Lopla.Windows
             InitializeComponent();
             _uiEvents = new LockingBus();
 
-            var userInterface = new UserInterface(_uiEvents, skControl, _messaging);
+            var userInterface = new UserInterfaceEventsWrapper(_uiEvents, skControl);
 
             var drawCtx = new WindowsDesktopDrawCTX(skControl);
 

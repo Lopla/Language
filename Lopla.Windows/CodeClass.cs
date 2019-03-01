@@ -71,6 +71,9 @@ function Draw.Test(){
 
 while (1)
 {
+    Draw.Log(""Hi"")
+    Draw.Flush()
+    
     Draw.WaitForEvent()
     Draw.Test()
 }

@@ -1,16 +1,18 @@
-﻿namespace Lopla.Draw
-{
-    using System.IO;
-    using Messages;
+﻿using System.IO;
+using Lopla.Draw.Messages;
 
+namespace Lopla.Draw
+{
     public interface IDrawContext
     {
         Stream GetResourceStream(string folder, string name);
 
-        Point CanvasSize();
+        Point GetCanvasSize();
 
-        Stream GetStream(string imgFile);
+        Stream GetStream(string fileName);
 
         void Invalidate();
+
+        void SetCanvasSize(int sizeX, int sizeY);
     }
 }

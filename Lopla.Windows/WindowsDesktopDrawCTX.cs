@@ -22,7 +22,7 @@
             throw new NotImplementedException();
         }
 
-        public Point CanvasSize()
+        public Point GetCanvasSize()
         {
             return new Point
             {
@@ -33,14 +33,6 @@
 
         public Stream GetStream(string imgFile)
         {
-            //foreach (var media in _project.Media())
-            //{
-            //    if (media.Match(folder, file))
-            //    {
-            //        return media.GetData();
-            //    }
-            //}
-            //return null;
             StreamReader sr = new StreamReader(imgFile);
             return sr.BaseStream;
         }
@@ -48,6 +40,11 @@
         public void Invalidate()
         {
             _skiaControl.Invalidate();
+        }
+
+        public void SetCanvasSize(int sizeX, int sizeY)
+        {
+            throw new NotSupportedException();
         }
     }
 }

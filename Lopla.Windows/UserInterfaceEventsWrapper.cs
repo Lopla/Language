@@ -1,45 +1,23 @@
-﻿using Lopla.Libs.Messaging;
+﻿using System;
+using System.Windows.Forms;
+using Lopla.Draw.Messages;
+using Lopla.Language.Binary;
+using Lopla.Libs.Interfaces;
+using SkiaSharp.Views.Desktop;
 
 namespace Lopla.Windows
 {
-    using System;
-    using System.Windows.Forms;
-    using Draw.Messages;
-    using Language.Binary;
-    using Libs.Interfaces;
-    using SkiaSharp.Views.Desktop;
-
-    public class UserInterface
+    public class UserInterfaceEventsWrapper
     {
         private readonly ISender _sender;
-        private readonly SKControl _skiaControl;
 
-        public UserInterface(ISender sender, SKControl skiaControl, Bus messaging)
+        public UserInterfaceEventsWrapper(ISender sender, SKControl skiaControl)
         {
             _sender = sender;
-            _skiaControl = skiaControl;
-            this.Setup(skiaControl);
-
-
-            messaging.Subscribe<Flush>(Flush);
-            messaging.Subscribe<SetCanvas>(SetCanvas);
+            Setup(skiaControl);
         }
 
-        void Flush(Flush flush)
-        {
-            _skiaControl.Invalidate();
-        }
-
-        private void SetCanvas(SetCanvas setCanvas)
-        {
-            _skiaControl.Invoke((MethodInvoker)delegate
-            {
-                int newSizeX = (int)setCanvas.Size.X;
-                int newSizeY = (int)setCanvas.Size.Y;
-            });
-        }
-
-        public void Setup(SKControl c)
+        private void Setup(SKControl c)
         {
             c.Click += C_Click;
             c.KeyUp += C_KeyUp;
@@ -49,16 +27,14 @@ namespace Lopla.Windows
         private void C_SizeChanged(object sender, EventArgs e)
         {
             if (sender is SKControl skc)
-            {
-                _sender.Send(new SetCanvas()
+                _sender.Send(new SetCanvas
                 {
-                    Size = new Point()
+                    Size = new Point
                     {
                         X = skc.Width,
                         Y = skc.Height
                     }
                 });
-            }
         }
 
         private void C_KeyUp(object sender, KeyEventArgs e)

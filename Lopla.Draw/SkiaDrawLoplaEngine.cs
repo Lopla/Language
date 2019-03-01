@@ -27,6 +27,10 @@ namespace Lopla.Draw
             {
                 DrawContext.Invalidate();
             }
+            else if (instruction is SetCanvas sc)
+            {
+                DrawContext.SetCanvasSize((int)sc.Size.X, (int)sc.Size.Y);
+            }
             else
             {
                 _renderer.LoplaPainter(_canvas, instruction);
