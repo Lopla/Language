@@ -1,4 +1,6 @@
-﻿namespace Lopla.Windows
+﻿using Lopla.Libs.Messaging;
+
+namespace Lopla.Windows
 {
     using System;
     using System.Windows.Forms;
@@ -10,11 +12,27 @@
     public class UserInterface
     {
         private readonly ISender _sender;
+        private readonly SKControl _skiaControl;
 
-        public UserInterface(ISender sender, SKControl skiaControl)
+        public UserInterface(ISender sender, SKControl skiaControl, Bus messaging)
         {
             _sender = sender;
+            _skiaControl = skiaControl;
             this.Setup(skiaControl);
+
+
+
+            messaging.Subscribe<Flush>(flush => { skiaControl.Invalidate(); });
+            messaging.Subscribe<SetCanvas>(SetCanvas);
+        }
+
+        private void SetCanvas(SetCanvas setCanvas)
+        {
+            _skiaControl.Invoke((MethodInvoker)delegate
+            {
+                int newSizeX = (int)setCanvas.Size.X;
+                int newSizeY = (int)setCanvas.Size.Y;
+            });
         }
 
         public void Setup(SKControl c)

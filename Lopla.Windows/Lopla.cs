@@ -17,20 +17,26 @@
     {
         private readonly SkiaDrawLopla _loplaRenderer;
         private readonly WindowsDesktopDrawCTX _drawCtx;
-        private readonly Bus _messaging;
+        private readonly Bus _messaging = new Bus();
         private readonly LockingBus _uiEvents;
+        private readonly CodeClass Script;
 
         public Lopla()
         {
             InitializeComponent();
             _uiEvents = new LockingBus();
 
-            var userInterface = new UserInterface(_uiEvents, skControl);
-
-            _messaging = new Bus();
+            var userInterface = new UserInterface(_uiEvents, skControl, _messaging);
+            
             _drawCtx = new WindowsDesktopDrawCTX(skControl);
 
             _loplaRenderer = new SkiaDrawLopla(_messaging, _drawCtx);
+            Script = new CodeClass();
+        }
+
+        public CodeClass Script1
+        {
+            get { return Script; }
         }
 
         private void skControl_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -47,24 +53,13 @@
         {
             var p = new Runner();
 
+            
             var result = p.Run(new MemoryScripts("Test", new List<ILibrary>
                 {
                     new Draw(_messaging, _drawCtx, _uiEvents),
                     new Lp(),
                     new IO()
-                },
-                @"
-            Draw.Clear(1,1,1)
-            Draw.SetColor(255,255,255)
-            Draw.Log(""HI"")
-            Draw.Flush()
-            
-            Draw.
-            while (1)
-            {
-                Draw.WaitForEvent()
-            }
-"
+                }, Script1.DrawLines 
             ));
             
             if (result.HasErrors)

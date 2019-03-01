@@ -13,10 +13,29 @@
         public Lp(params string []args)
         {
             this.args = args;
+            //// math
             Add("Len", Len, "array");
             Add("Floor", Floor, "number");
+            Add("Ticks", Ticks);
+
+            //// os
             Add("Args", Args);
+
+            //// diagnostics / debug
             Add("Functions", Functions);
+        }
+
+        /// <summary>
+        /// A single tick represents one hundred nanoseconds or one ten-millionth of a second.
+        /// There are 10,000 ticks in a millisecond, or 10 million ticks in a second.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="runtime"></param>
+        /// <returns></returns>
+        private Result Ticks(Mnemonic expression, Runtime runtime)
+        {
+            var now = DateTime.Now.Ticks;
+            return new Result(new Number(now));
         }
 
         private Result Functions(Mnemonic expression, Runtime runtime)
