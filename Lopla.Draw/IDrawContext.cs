@@ -10,5 +10,7 @@
         Point CanvasSize();
 
         Stream GetStream(string imgFile);
+
+        void Invalidate();
     }
 }

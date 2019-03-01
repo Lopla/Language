@@ -21,9 +21,13 @@ namespace Lopla.Windows
             this.Setup(skiaControl);
 
 
-
-            messaging.Subscribe<Flush>(flush => { skiaControl.Invalidate(); });
+            messaging.Subscribe<Flush>(Flush);
             messaging.Subscribe<SetCanvas>(SetCanvas);
+        }
+
+        void Flush(Flush flush)
+        {
+            _skiaControl.Invalidate();
         }
 
         private void SetCanvas(SetCanvas setCanvas)

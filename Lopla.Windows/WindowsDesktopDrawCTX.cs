@@ -44,5 +44,10 @@
             StreamReader sr = new StreamReader(imgFile);
             return sr.BaseStream;
         }
+
+        public void Invalidate()
+        {
+            _skiaControl.Invalidate();
+        }
     }
 }
