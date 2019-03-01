@@ -1,22 +1,24 @@
-﻿using Lopla.Draw.Messages;
+﻿using System;
+using Lopla.Draw.Messages;
 using Lopla.Libs.Interfaces;
 using SkiaSharp;
 
 namespace Lopla.Draw
 {
-    public class SkiaDrawLoplaEngine
+    public class SkiaDrawLoplaEngine : IDisposable
     {
         public IDrawContext DrawContext { get; }
-        private readonly SKImageInfo _info;
         private readonly SkiaRenderer _renderer;
-        private readonly SKSurface _surface;
+        private readonly SKBitmap _bitMap;
+        private readonly SKCanvas _canvas;
 
         public SkiaDrawLoplaEngine(IDrawContext drawContext)
         {
             DrawContext = drawContext;
             _renderer = new SkiaRenderer(drawContext);
-            _info = new SKImageInfo(256, 256);
-            _surface = SKSurface.Create(_info);
+
+            _bitMap = new SKBitmap(1024,1024,  SKImageInfo.PlatformColorType, SKAlphaType.Premul);
+            _canvas=new SKCanvas(_bitMap);
         }
 
         public void Send(ILoplaMessage instruction)
@@ -27,13 +29,19 @@ namespace Lopla.Draw
             }
             else
             {
-                _renderer.LoplaPainter(_surface.Canvas, instruction);
+                _renderer.LoplaPainter(_canvas, instruction);
             }
         }
 
         public void Render(SKCanvas canvas)
         {
-            canvas.DrawImage(_surface.Snapshot(), 0, 0, null);
+            canvas.DrawBitmap(_bitMap, 0, 0);
+        }
+
+        public void Dispose()
+        {
+            _bitMap?.Dispose();
+            _canvas?.Dispose();
         }
     }
 }
