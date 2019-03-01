@@ -14,7 +14,6 @@ namespace Lopla.Windows
 {
     public partial class Lopla : Form
     {
-        private readonly WindowsDesktopDrawCTX _drawCtx;
         private readonly Bus _messaging = new Bus();
         private readonly LockingBus _uiEvents;
         private SkiaDrawLoplaEngine engine;
@@ -26,11 +25,11 @@ namespace Lopla.Windows
 
             var userInterface = new UserInterface(_uiEvents, skControl, _messaging);
 
-            _drawCtx = new WindowsDesktopDrawCTX(skControl);
+            var drawCtx = new WindowsDesktopDrawCTX(skControl);
 
             Script1 = new CodeClass();
 
-            engine = new SkiaDrawLoplaEngine(_drawCtx);
+            engine = new SkiaDrawLoplaEngine(drawCtx);
         }
 
         public CodeClass Script1 { get; }
@@ -51,7 +50,7 @@ namespace Lopla.Windows
 
             var result = p.Run(new MemoryScripts("Test", new List<ILibrary>
                 {
-                    new Draw.Libs.Draw(engine, _drawCtx, _uiEvents),
+                    new Draw.Libs.Draw(engine, _uiEvents),
                     new Lp(),
                     new IO()
                 }, Script1.DrawLines

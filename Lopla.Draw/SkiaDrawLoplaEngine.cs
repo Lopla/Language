@@ -5,12 +5,14 @@ namespace Lopla.Draw
 {
     public class SkiaDrawLoplaEngine
     {
+        public IDrawContext DrawContext { get; }
         private readonly SKImageInfo _info;
         private readonly SkiaRenderer _renderer;
         private readonly SKSurface _surface;
 
         public SkiaDrawLoplaEngine(IDrawContext drawContext)
         {
+            DrawContext = drawContext;
             _renderer = new SkiaRenderer(drawContext);
 
             _info = new SKImageInfo(1024, 1024);
@@ -20,6 +22,8 @@ namespace Lopla.Draw
         public void Send(ILoplaMessage instruction)
         {
             _renderer.LoplaPainter(_surface.Canvas, instruction);
+
+            
         }
 
         public void Render(SKCanvas canvas)

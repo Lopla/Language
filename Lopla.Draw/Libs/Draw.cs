@@ -1,28 +1,29 @@
-﻿namespace Lopla.Draw.Libs
-{
-    using System;
-    using System.Reflection;
-    using Lopla.Draw.Messages;
-    using Lopla.Language.Binary;
-    using Lopla.Language.Errors;
-    using Lopla.Language.Libraries;
-    using Lopla.Language.Processing;
-    using Lopla.Libs.Interfaces;
-    using String = Lopla.Language.Binary.String;
+﻿using System;
+using Lopla.Draw.Messages;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Libraries;
+using Lopla.Language.Processing;
+using Lopla.Libs.Interfaces;
+using String = Lopla.Language.Binary.String;
 
+namespace Lopla.Draw.Libs
+{
     public class Draw : BaseLoplaLibrary
     {
-        private readonly SkiaDrawLoplaEngine _notificationStack;
+        private readonly SkiaDrawLoplaEngine _renderingEngine;
         private readonly ISender _uiEventsProvider;
-        private readonly IDrawContext _context;
 
+        /// <summary>
+        /// Draw library for lopla
+        /// </summary>
+        /// <param name="drawEngine">target draw engine</param>
+        /// <param name="uiEventsProvider">ui events for the system incl: click, SetCanvas, keypress</param>
         public Draw(
-            SkiaDrawLoplaEngine drawEngine, 
-            IDrawContext context, 
+            SkiaDrawLoplaEngine drawEngine,
             ISender uiEventsProvider = null)
         {
-            _context = context;
-            _notificationStack = drawEngine;
+            _renderingEngine = drawEngine;
             _uiEventsProvider = uiEventsProvider;
 
             Add("Clear", Clear, "r", "g", "b");
@@ -52,13 +53,13 @@
 
         private Result GetCanvasSize(Mnemonic expression, Runtime runtime)
         {
-            var c = this._context.CanvasSize();
+            var c = _renderingEngine.DrawContext.CanvasSize();
             return new Result(new LoplaList(
-                    new Result(new Number(c.X)),
-                    new Result(new Number(c.Y))
-                ));
+                new Result(new Number(c.X)),
+                new Result(new Number(c.Y))
+            ));
         }
-        
+
         private Result WaitForEvent(Mnemonic expression, Runtime runtime)
         {
             var m = _uiEventsProvider.WaitForMessage();
@@ -122,14 +123,21 @@
         {
             var text = "";
             var textArgument = runtime.GetVariable("text").Get(runtime);
-            if (textArgument is String s) text = s.Value;
-            else if (textArgument is Number i) text = i.Value.ToString();
+            if (textArgument is String s)
+            {
+                text = s.Value;
+            }
+            else if (textArgument is Number i)
+            {
+                text = i.Value.ToString();
+            }
             else
             {
                 runtime.AddError(new RuntimeError("Type not supported", expression));
                 return new Result();
             }
-            _notificationStack.Send(new Text
+
+            _renderingEngine.Send(new Text
             {
                 Label = text,
                 Position = new Point
@@ -146,7 +154,7 @@
         {
             if (runtime.GetVariable("a").Get(runtime) is Number x1 &&
                 runtime.GetVariable("b").Get(runtime) is Number y1)
-                _notificationStack.Send(new SetCanvas
+                _renderingEngine.Send(new SetCanvas
                 {
                     Size = new Point
                     {
@@ -160,7 +168,7 @@
 
         private Result Flush(Mnemonic expression, Runtime runtime)
         {
-            _notificationStack.Send(new Flush());
+            _renderingEngine.Send(new Flush());
 
             return new Result();
         }
@@ -175,7 +183,7 @@
                 runtime.GetVariable("h").Get(runtime) is Number h &&
                 runtime.GetVariable("filename").Get(runtime) is String name &&
                 runtime.GetVariable("assembly").Get(runtime) is String assembly)
-                _notificationStack.Send(new Sprite
+                _renderingEngine.Send(new Sprite
                     {
                         AssemblyName = assembly.Value,
                         ResourceName = name.Value,
@@ -209,8 +217,7 @@
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
                 runtime.GetVariable("filename").Get(runtime) is String name)
-            {
-                _notificationStack.Send(new Image
+                _renderingEngine.Send(new Image
                 {
                     File = name.Value,
                     Position = new Point
@@ -219,11 +226,8 @@
                         Y = y1.Value
                     }
                 });
-            }
             else
-            {
                 runtime.AddError(new RuntimeError("Incorrect paramters provided."));
-            }
 
             return new Result();
         }
@@ -234,7 +238,7 @@
                 runtime.GetVariable("b").Get(runtime) is Number y1 &&
                 runtime.GetVariable("c").Get(runtime) is Number x2 &&
                 runtime.GetVariable("d").Get(runtime) is Number y2)
-                _notificationStack.Send(new Box
+                _renderingEngine.Send(new Box
                 {
                     Start = new Point
                     {
@@ -258,7 +262,7 @@
             if (runtime.GetVariable("r").Get(runtime) is Number r &&
                 runtime.GetVariable("g").Get(runtime) is Number g &&
                 runtime.GetVariable("b").Get(runtime) is Number b)
-                _notificationStack.Send(new SetColor
+                _renderingEngine.Send(new SetColor
                 {
                     Color =
                         new Color
@@ -280,7 +284,7 @@
                 runtime.GetVariable("b").Get(runtime) is Number y1 &&
                 runtime.GetVariable("c").Get(runtime) is Number x2 &&
                 runtime.GetVariable("d").Get(runtime) is Number y2)
-                _notificationStack.Send(new Line
+                _renderingEngine.Send(new Line
                 {
                     Start = new Point
                     {
@@ -313,7 +317,7 @@
             else
                 runtime.AddError(new RuntimeError($"Type {textArgument} not supproted.", expression));
 
-            _notificationStack.Send(new Write
+            _renderingEngine.Send(new Write
             {
                 Align = (Aligmnent) alingment.Value,
                 Text = text,
@@ -328,7 +332,7 @@
             if (runtime.GetVariable("s").Get(runtime) is String s) text = s.Value;
             if (runtime.GetVariable("s").Get(runtime) is Number i) text = i.Value.ToString();
             if (runtime.GetVariable("s").Get(runtime) is LoplaList l) text = $"array [{l.Length}]";
-            _notificationStack.Send(new Log
+            _renderingEngine.Send(new Log
             {
                 Text = text
             });
@@ -340,7 +344,7 @@
             if (runtime.GetVariable("r").Get(runtime) is Number r &&
                 runtime.GetVariable("g").Get(runtime) is Number g &&
                 runtime.GetVariable("b").Get(runtime) is Number b)
-                _notificationStack.Send(new Clear
+                _renderingEngine.Send(new Clear
                 {
                     Color = new Color
                     {
