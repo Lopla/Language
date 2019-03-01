@@ -12,14 +12,17 @@
 
     public class Draw : BaseLoplaLibrary
     {
-        private readonly ISender _notificationStack;
+        private readonly SkiaDrawLoplaEngine _notificationStack;
         private readonly ISender _uiEventsProvider;
         private readonly IDrawContext _context;
 
-        public Draw(ISender notificationStack, IDrawContext context, ISender uiEventsProvider = null)
+        public Draw(
+            SkiaDrawLoplaEngine drawEngine, 
+            IDrawContext context, 
+            ISender uiEventsProvider = null)
         {
             _context = context;
-            _notificationStack = notificationStack;
+            _notificationStack = drawEngine;
             _uiEventsProvider = uiEventsProvider;
 
             Add("Clear", Clear, "r", "g", "b");
