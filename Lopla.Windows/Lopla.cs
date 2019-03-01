@@ -20,31 +20,20 @@ namespace Lopla.Windows
         public Lopla()
         {
             InitializeComponent();
-            _uiEvents = new LockingBus();
 
-            var userInterface = new UserInterfaceEventsWrapper(_uiEvents, skControl);
+            _uiEvents = new LockingBus();
 
             var drawCtx = new WindowsDesktopDrawCTX(skControl);
 
-            Script1 = new CodeClass();
-
             engine = new SkiaDrawLoplaEngine(drawCtx);
+            new WindowsDesktopEvents(_uiEvents, skControl, engine);
+            
         }
-
-        public CodeClass Script1 { get; }
-
-        private void skControl_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
-        {
-            var surface = e.Surface;
-            var surfaceWidth = e.Info.Width;
-            var surfaceHeight = e.Info.Height;
-
-            var canvas = surface.Canvas;
-            engine.Render(canvas);
-        }
-
+        
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            var Script1 = new CodeClass();
+
             var p = new Runner();
 
             var result = p.Run(new MemoryScripts("Test", new List<ILibrary>

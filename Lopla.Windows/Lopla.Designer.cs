@@ -42,7 +42,6 @@
             this.skControl.Size = new System.Drawing.Size(541, 420);
             this.skControl.TabIndex = 0;
             this.skControl.Text = "skControl1";
-            this.skControl.PaintSurface += new System.EventHandler<SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs>(this.skControl_PaintSurface);
             // 
             // backgroundWorker1
             // 

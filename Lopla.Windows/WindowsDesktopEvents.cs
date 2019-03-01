@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Lopla.Draw;
 using Lopla.Draw.Messages;
 using Lopla.Language.Binary;
 using Lopla.Libs.Interfaces;
@@ -7,13 +8,17 @@ using SkiaSharp.Views.Desktop;
 
 namespace Lopla.Windows
 {
-    public class UserInterfaceEventsWrapper
+    public class WindowsDesktopEvents
     {
         private readonly ISender _sender;
+        private readonly SkiaDrawLoplaEngine _engine;
 
-        public UserInterfaceEventsWrapper(ISender sender, SKControl skiaControl)
+        public WindowsDesktopEvents(ISender sender, 
+            SKControl skiaControl,
+            SkiaDrawLoplaEngine engine)
         {
             _sender = sender;
+            _engine = engine;
             Setup(skiaControl);
         }
 
@@ -22,6 +27,12 @@ namespace Lopla.Windows
             c.Click += C_Click;
             c.KeyUp += C_KeyUp;
             c.SizeChanged += C_SizeChanged;
+            c.PaintSurface += C_PaintSurface;
+        }
+
+        private void C_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            _engine.Render(e.Surface.Canvas);
         }
 
         private void C_SizeChanged(object sender, EventArgs e)

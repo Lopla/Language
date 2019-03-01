@@ -72,7 +72,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInterfaceEventsWrapper.cs" />
+    <Compile Include="WindowsDesktopEvents.cs" />
     <Compile Include="WindowsDesktopDrawCTX.cs" />
     <EmbeddedResource Include="Lopla.resx">
       <DependentUpon>Lopla.cs</DependentUpon>
