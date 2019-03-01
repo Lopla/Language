@@ -18,10 +18,14 @@ namespace Lopla.Draw.Libs
         /// Draw library for lopla
         /// </summary>
         /// <param name="drawEngine">target draw engine</param>
-        /// <param name="uiEventsProvider">ui events for the system incl: click, SetCanvas, keypress</param>
+        /// <param name="uiEventsProvider">used by one function .: WaitForEvent
+        /// if something is send to that queue it will be passed to user
+        /// otherwise it's not used by any purpose
+        /// ui events for the system incl: click, SetCanvas, keypress</param>
         public Draw(
             SkiaDrawLoplaEngine drawEngine,
-            ISender uiEventsProvider = null)
+            ISender uiEventsProvider = null
+            )
         {
             _renderingEngine = drawEngine;
             _uiEventsProvider = uiEventsProvider;

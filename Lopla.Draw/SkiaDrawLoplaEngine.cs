@@ -1,4 +1,5 @@
-﻿using Lopla.Libs.Interfaces;
+﻿using Lopla.Draw.Messages;
+using Lopla.Libs.Interfaces;
 using SkiaSharp;
 
 namespace Lopla.Draw
@@ -14,16 +15,20 @@ namespace Lopla.Draw
         {
             DrawContext = drawContext;
             _renderer = new SkiaRenderer(drawContext);
-
             _info = new SKImageInfo(1024, 1024);
             _surface = SKSurface.Create(_info);
         }
 
         public void Send(ILoplaMessage instruction)
         {
-            _renderer.LoplaPainter(_surface.Canvas, instruction);
-
-            
+            if(instruction is Flush f)
+            {
+                DrawContext.Invalidate();
+            }
+            else
+            {
+                _renderer.LoplaPainter(_surface.Canvas, instruction);
+            }
         }
 
         public void Render(SKCanvas canvas)
