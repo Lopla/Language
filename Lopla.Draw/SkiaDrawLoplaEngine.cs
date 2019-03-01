@@ -15,7 +15,7 @@ namespace Lopla.Draw
         {
             DrawContext = drawContext;
             _renderer = new SkiaRenderer(drawContext);
-            _info = new SKImageInfo(1024, 1024);
+            _info = new SKImageInfo(256, 256);
             _surface = SKSurface.Create(_info);
         }
 
