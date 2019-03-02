@@ -76,7 +76,7 @@ namespace Lopla.Tests
 
             var methodCall = new MethodCall(
                 new MethodPointer("Method1", "Unittest"),
-                new ValueInteger(new Number(123)));
+                new ValueNumber(new Number(123)));
 
             //// we call method
             sut.EvaluateCodeBlock(methodCall);
@@ -118,7 +118,7 @@ namespace Lopla.Tests
                 {
                     new Assigment(null,
                         variablePointer,
-                        new ValueInteger(new Number(variableValue_I_inMethodScope + 1)))
+                        new ValueNumber(new Number(variableValue_I_inMethodScope + 1)))
                 }
             });
 
@@ -133,7 +133,7 @@ namespace Lopla.Tests
                 {
                     new Assigment(null,
                         variablePointer,
-                        new ValueInteger(new Number(variableValue_I_inMethodScope))),
+                        new ValueNumber(new Number(variableValue_I_inMethodScope))),
                     methodCall1,
                     new Return(null, variablePointer)
                 }
@@ -219,7 +219,7 @@ namespace Lopla.Tests
             var methodCall =
                 new MethodCall(
                     new MethodPointer("Method1", "Unittest"),
-                    new ValueInteger(new Number(testValue))
+                    new ValueNumber(new Number(testValue))
                 );
 
             //// we call method

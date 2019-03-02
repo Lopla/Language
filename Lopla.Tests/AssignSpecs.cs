@@ -25,8 +25,8 @@
                 new Assigment(null,
                     new ValueTable(null,
                         new VariablePointer("testString"),
-                        new ValueInteger(new Number(32))),
-                    new ValueInteger(new Number('X')));
+                        new ValueNumber(new Number(32))),
+                    new ValueNumber(new Number('X')));
 
             assignEmptyTable.Execute(runtime);
             Assert.Empty(runtime.Errors);
@@ -59,8 +59,8 @@
                 new Assigment(null,
                     new ValueTable(null,
                         new VariablePointer("testArray"),
-                        new ValueInteger(new Number(0))),
-                    new ValueInteger(new Number(1)));
+                        new ValueNumber(new Number(0))),
+                    new ValueNumber(new Number(1)));
 
             assignEmptyTable.Execute(runtime);
             Assert.Empty(runtime.Errors);

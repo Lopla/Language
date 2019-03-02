@@ -48,6 +48,14 @@ Test.Write(a)
         {
             EvaluateCode(script, args);
         }
+        [Theory]
+        [InlineData(@"a = 0.1234
+Test.Write(a)
+", "0.1234")]
+        public void AssignsRealValue(string script, params string[] args)
+        {
+            EvaluateCode(script, args);
+        }
 
         [Theory]
         [InlineData(@"a =  -1

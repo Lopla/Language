@@ -5,16 +5,16 @@ using Lopla.Language.Processing;
 
 namespace Lopla.Language.Compiler.Mnemonics
 {
-    public class ValueInteger : Mnemonic
+    public class ValueNumber : Mnemonic
     {
         public Number Value;
 
-        public ValueInteger(ASTNode? node) : base(node)
+        public ValueNumber(ASTNode? node) : base(node)
         {
-            Value = new Number(Convert.ToInt32(node.Value.Value));
+            Value = new Number(Convert.ToDecimal(node.Value.Value));
         }
 
-        public ValueInteger(Number val) : base(null)
+        public ValueNumber(Number val) : base(null)
         {
             Value = val;
         }

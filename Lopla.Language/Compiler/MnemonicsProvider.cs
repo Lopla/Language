@@ -41,7 +41,7 @@ namespace Lopla.Language.Compiler
                     result = new ExpressionPrefix(node, this);
                     break;
                 case "NUMBER":
-                    result = new ValueInteger(node);
+                    result = new ValueNumber(node);
                     break;
                 case "STRING":
                     result = new ValueString(node);
