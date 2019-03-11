@@ -23,11 +23,11 @@ namespace Lopla.Draw
             switch (m)
             {
                 case SetColor setColor:
-                    _paintDevice.Color = new SKColor(setColor.Color.R, setColor.Color.G, setColor.Color.B);
+                    _paintDevice.Color = new SKColor(setColor.Color.R, setColor.Color.G, setColor.Color.B, 255);
                     break;
                 case Clear clear:
                     if (clear.Color != null)
-                        canvas.Clear(new SKColor(clear.Color.R, clear.Color.G, clear.Color.B));
+                        canvas.Clear(new SKColor(clear.Color.R, clear.Color.G, clear.Color.B, 255));
                     else
                         canvas.Clear();
                     TextReset();
