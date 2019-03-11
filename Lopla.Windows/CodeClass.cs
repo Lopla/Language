@@ -44,7 +44,7 @@ function Perf.Show(){
 function Draw.Test(){
     Perf.Start()
 
-    Draw.Clear(0,0,0)
+    /*Draw.Clear(0,0,0)*/
     line = 0
     while(line < 1000){
         col = 0
