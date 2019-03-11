@@ -1,4 +1,5 @@
-﻿using Lopla.Draw.Messages;
+﻿using System.Linq;
+using Lopla.Draw.Messages;
 using Lopla.Libs.Interfaces;
 using SkiaSharp;
 
@@ -101,13 +102,11 @@ namespace Lopla.Draw
 
         private void Image(SKCanvas canvas, Image img)
         {
-            using (var stream = _provider.GetStream(img.File))
-            using (var skStream = new SKManagedStream(stream))
-            {
-                var resourceBitmap = SKBitmap.Decode(skStream);
 
-                canvas.DrawBitmap(resourceBitmap, (float) img.Position.X, (float) img.Position.Y);
-            }
+            var resourceBitmap = SKBitmap.Decode(img.BinaryImage);
+
+            canvas.DrawBitmap(resourceBitmap, (float) img.Position.X, (float) img.Position.Y);
+
         }
 
         private void Box(SKCanvas canvas, Box line)

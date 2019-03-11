@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Lopla.Draw.Messages;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
@@ -37,7 +38,7 @@ namespace Lopla.Draw.Libs
             Add("Box", Box, "a", "b", "c", "d");
             Add("Line", Line, "a", "b", "c", "d");
 
-            Add("Image", Image, "filename", "x", "y");
+            Add("Image", Image, "x", "y", "arrayOfBinaryData");
             Add("Sprite", Sprite, "assembly", "filename", "x", "y", "sx", "sy", "w", "h");
 
             Add("Flush", Flush);
@@ -220,19 +221,25 @@ namespace Lopla.Draw.Libs
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
-                runtime.GetVariable("filename").Get(runtime) is String name)
+                runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage)
+            {
+                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n=>n.ValueAsByte).ToArray();
+
                 _renderingEngine.Send(new Image
                 {
-                    File = name.Value,
+                    BinaryImage = binaryData,
                     Position = new Point
                     {
                         X = x1.Value,
                         Y = y1.Value
                     }
                 });
+            }
             else
-                runtime.AddError(new RuntimeError("Incorrect paramters provided."));
-
+            {
+                runtime.AddError(new RuntimeError("Incorrect parameters provided."));
+            }
+            
             return new Result();
         }
 

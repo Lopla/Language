@@ -15,6 +15,8 @@ namespace Lopla.Language.Binary
 
         public int ValueAsInt => Convert.ToInt32(Value);
 
+        public byte ValueAsByte => Convert.ToByte(Value);
+
         public bool ValueAsBool => Convert.ToInt32(Value) == 1;
 
         public decimal Value { get; set; }

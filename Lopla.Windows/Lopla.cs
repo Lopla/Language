@@ -8,14 +8,13 @@ using Lopla.Language.Processing;
 using Lopla.Language.Providers;
 using Lopla.Libs;
 using Lopla.Libs.Messaging;
-using SkiaSharp.Views.Desktop;
 
 namespace Lopla.Windows
 {
     public partial class Lopla : Form
     {
         private readonly LockingBus _uiEvents;
-        private SkiaDrawLoplaEngine engine;
+        private readonly SkiaDrawLoplaEngine engine;
 
         public Lopla()
         {
@@ -27,12 +26,11 @@ namespace Lopla.Windows
 
             engine = new SkiaDrawLoplaEngine(drawCtx);
             new WindowsDesktopEvents(_uiEvents, skControl, engine);
-            
         }
-        
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var Script1 = new CodeClass();
+            var performanceTestScripts = new CodeClass();
 
             var p = new Runner();
 
@@ -41,7 +39,7 @@ namespace Lopla.Windows
                     new Draw.Libs.Draw(engine, _uiEvents),
                     new Lp(),
                     new IO()
-                }, Script1.DrawLines
+                }, performanceTestScripts.DrawLines
             ));
 
             if (result.HasErrors)

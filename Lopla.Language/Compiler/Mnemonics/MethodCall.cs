@@ -1,20 +1,19 @@
-﻿using Lopla.Language.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Hime.Redist;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 
 namespace Lopla.Language.Compiler.Mnemonics
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Binary;
-    using Errors;
-    using Hime.Redist;
-
     public class MethodCall : Mnemonic
     {
         public MethodCall(MethodPointer pointer, params IArgument[] args) : base(null)
         {
-            this.Pointer = pointer;
-            this.Arguments = new Arguments(args);
+            Pointer = pointer;
+            Arguments = new Arguments(args);
         }
 
         public MethodCall(ASTNode? node, IMnemonicsCompiler runtime) : base(node)
@@ -61,7 +60,7 @@ namespace Lopla.Language.Compiler.Mnemonics
                 if (result.HasResult())
                     methodParamters.Add(result);
                 else
-                    runtime.AddError(new RuntimeError($"Too much results or incorrect result {Pointer.ToString()}", this));
+                    runtime.AddError(new RuntimeError($"Too much results or incorrect result {Pointer}", this));
             }
 
             return runtime.EvaluateFunction(Pointer, methodParamters);

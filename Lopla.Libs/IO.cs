@@ -1,4 +1,6 @@
-﻿namespace Lopla.Libs
+﻿using System.IO;
+
+namespace Lopla.Libs
 {
     using System;
     using Language.Binary;
@@ -17,6 +19,29 @@
             Add("Write", Write, "text");
             Add("WriteLine", WriteLine, "text");
             Add("Read", Read);
+            Add("LoadBinaryFile", LoadBinaryFile, "fileName");
+        }
+
+        private Result LoadBinaryFile(Mnemonic expression, Runtime runtime)
+        {
+            var fileName = runtime.GetVariable("fileName")?.Get(runtime) as String;
+
+            if (File.Exists(fileName.Value))
+            {
+                using (var stream = new BinaryReader(new FileStream(fileName.Value, FileMode.Open, FileAccess.Read)))
+                {
+                    LoplaList loplaList = new LoplaList();
+                    var data = stream.ReadBytes((int)stream.BaseStream.Length);
+                    foreach(var d in data)
+                    {
+                        loplaList.Add(new Result(new Number(d)));
+                    }
+
+                    return new Result(loplaList);
+                }
+            }
+
+            return new Result(new LoplaList());
         }
 
         private Result WriteLine(Mnemonic expression, Runtime runtime)
