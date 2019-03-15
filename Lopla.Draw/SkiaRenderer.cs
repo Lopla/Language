@@ -1,4 +1,7 @@
-﻿using Lopla.Draw.Messages;
+﻿using System;
+using System.IO;
+using Lopla.Draw.Messages;
+using Lopla.Language.Environment;
 using Lopla.Libs.Interfaces;
 using SkiaSharp;
 
@@ -40,6 +43,9 @@ namespace Lopla.Draw
                     break;
                 case Box box:
                     Box(canvas, box);
+                    break;
+                case Animation animation:
+                    Animation(canvas, animation);
                     break;
                 case Image img:
                     Image(canvas, img);
@@ -96,6 +102,31 @@ namespace Lopla.Draw
                     ));
 
                 canvas.DrawBitmap(sprite, (float) img.Position.X, (float) img.Position.Y);
+            }
+        }
+
+        private void Animation(SKCanvas canvas, Animation img)
+        {
+            using (SKStream stream = new SKMemoryStream(img.BinaryImage))
+            using (SKCodec codec = SKCodec.Create(stream))
+            {
+                //int frameCount = codec.FrameCount;
+
+                int frame = 0;
+                SKImageInfo imageInfo = new SKImageInfo(
+                    codec.Info.Width, 
+                    codec.Info.Height, 
+                    codec.Info.ColorType,
+                    SKAlphaType.Opaque);
+
+                var bmp = new SKBitmap(imageInfo);
+                IntPtr pointer = bmp.GetPixels();
+
+                SKCodecOptions codecOptions = new SKCodecOptions(frame, false);
+
+                codec.GetPixels(imageInfo, pointer, codecOptions);
+
+                canvas.DrawBitmap(bmp, (float)img.Position.X, (float)img.Position.Y);
             }
         }
 

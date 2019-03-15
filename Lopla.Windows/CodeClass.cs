@@ -75,8 +75,8 @@ while (1)
     Draw.Flush()
     
     Draw.WaitForEvent()
-    img = IO.LoadBinaryFile(""c:\\work\\icon.png"")
-    Draw.Image(20,20,img)
+    img = IO.LoadBinaryFile(""c:\\work\\kon.gif"")
+    Draw.Animation(20,20,img)
     Draw.Flush()
 
 
