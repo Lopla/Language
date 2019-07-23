@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
