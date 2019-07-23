@@ -6,7 +6,7 @@
 
         public CodeClass()
         {
-            this.Perf = @"
+            Perf = @"
 lastCall = 0
 function Perf.Start(){
     lastCall=Lp.Ticks()
@@ -38,7 +38,6 @@ function Perf.Show(){
 
             DrawLines =
                 Perf +
-
                 @"
 
 function Draw.Test(){
@@ -71,6 +70,8 @@ function Draw.Test(){
 
 while (1)
 {
+    Draw.Clear()
+
     Draw.Log(""Hi"")
     Draw.Flush()
     
@@ -80,9 +81,9 @@ while (1)
     Draw.Flush()
 
 
-    Draw.WaitForEvent()
+/*    Draw.WaitForEvent()
     Draw.Test()
-
+*/
 }
 
 ";

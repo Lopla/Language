@@ -107,26 +107,34 @@ namespace Lopla.Draw
 
         private void Animation(SKCanvas canvas, Animation img)
         {
-            using (SKStream stream = new SKMemoryStream(img.BinaryImage))
-            using (SKCodec codec = SKCodec.Create(stream))
+            if (img.BinaryImage != null && img.BinaryImage.Length > 0)
             {
-                //int frameCount = codec.FrameCount;
+                using (SKStream stream = new SKMemoryStream(img.BinaryImage))
+                using (SKCodec codec = SKCodec.Create(stream))
+                {
+                    int frameCount = codec.FrameCount;
 
-                int frame = 0;
-                SKImageInfo imageInfo = new SKImageInfo(
-                    codec.Info.Width, 
-                    codec.Info.Height, 
-                    codec.Info.ColorType,
-                    SKAlphaType.Opaque);
+                    int frame = 0;
+                    SKImageInfo imageInfo = new SKImageInfo(
+                        codec.Info.Width, 
+                        codec.Info.Height,
+                        codec.Info.ColorType,
+                        codec.Info.AlphaType,
+                        codec.Info.ColorSpace);
 
-                var bmp = new SKBitmap(imageInfo);
-                IntPtr pointer = bmp.GetPixels();
+                    var bmp = new SKBitmap(imageInfo);
+                    IntPtr pointer = bmp.GetPixels();
 
-                SKCodecOptions codecOptions = new SKCodecOptions(frame, false);
+                    SKCodecOptions codecOptions = new SKCodecOptions(frame);
 
-                codec.GetPixels(imageInfo, pointer, codecOptions);
+                    codec.GetPixels(imageInfo, pointer, codecOptions);
 
-                canvas.DrawBitmap(bmp, (float)img.Position.X, (float)img.Position.Y);
+                    canvas.DrawBitmap(bmp, (float) img.Position.X, (float) img.Position.Y);
+                }
+            }
+            else
+            {
+                throw new Exception("Bitmap not provided");
             }
         }
 
