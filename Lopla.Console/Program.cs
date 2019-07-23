@@ -10,7 +10,14 @@ namespace Lopla.Console
     {
         private static void Main(string[] args)
         {
-            RunProject();
+            if (args != null && args.Length > 0)
+            {
+                RunProject(args);
+            }
+            else
+            {
+                RunProject();
+            }
         }
 
         private static void RunProject()
@@ -19,6 +26,7 @@ namespace Lopla.Console
             //// only few dll's
             var p = new Runner();
             var runtime = p.Run(
+                
                 new MemoryScripts("Test",
                     new List<ILibrary>
                     {
@@ -34,8 +42,22 @@ while(k<Lp.Len(libs)) {
     IO.WriteLine(d[0])
     k=k+1
 }
-IO.WriteLine(""test"")
+
 "));
+            if (runtime.HasErrors)
+                System.Console.WriteLine(runtime.ToString());
+        }
+
+        private static void RunProject(string[] args)
+        {
+            var p = new Runner();
+            var runtime = p.Run(
+                new ProjectFromFolder(args[0],
+                    new List<ILibrary>
+                    {
+                        new IO(),
+                        new Lp()
+                    }));
             if (runtime.HasErrors)
                 System.Console.WriteLine(runtime.ToString());
         }
