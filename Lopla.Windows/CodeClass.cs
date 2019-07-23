@@ -2,11 +2,7 @@
 {
     public class CodeClass
     {
-        public string DrawLines;
-
-        public CodeClass()
-        {
-            Perf = @"
+        public static string Perf = @"
 lastCall = 0
 function Perf.Start(){
     lastCall=Lp.Ticks()
@@ -36,11 +32,9 @@ function Perf.Show(){
 ";
 
 
-            DrawLines =
-                Perf +
-                @"
+        public static string Anim = @"
 
-function Draw.Test(){
+function Anim.Test(){
     Perf.Start()
 
     /*Draw.Clear(0,0,0)*/
@@ -52,14 +46,10 @@ function Draw.Test(){
             Draw.SetColor(0,255,0)
             Draw.Line(line,col, line,col+1)
             col = col +1
-            
             Perf.Show()
-
-
         }
         Draw.Flush()
         line = line + 1
-        
     }
 
     Draw.SetColor(255,255,255)
@@ -68,27 +58,19 @@ function Draw.Test(){
     Draw.Flush()
 }
 
+Draw.Clear(1,1,1)
+Draw.Flush()
+img = IO.LoadBinaryFile(""c:\\work\\kon.gif"")
+
 while (1)
 {
-    Draw.Clear()
+    Anim.Test()
 
-    Draw.Log(""Hi"")
-    Draw.Flush()
-    
     Draw.WaitForEvent()
-    img = IO.LoadBinaryFile(""c:\\work\\kon.gif"")
     Draw.Animation(20,20,img)
     Draw.Flush()
-
-
-/*    Draw.WaitForEvent()
-    Draw.Test()
-*/
 }
 
 ";
-        }
-
-        public string Perf { get; set; }
     }
 }

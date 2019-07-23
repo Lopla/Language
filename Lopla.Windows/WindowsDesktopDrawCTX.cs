@@ -44,7 +44,7 @@
 
         public void SetCanvasSize(int sizeX, int sizeY)
         {
-            throw new NotSupportedException();
+            
         }
     }
 }
