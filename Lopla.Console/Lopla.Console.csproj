@@ -8,6 +8,13 @@
     <Description>Simple command line to start lopla</Description>
     <PackageProjectUrl>https://github.com/Lopla/Language</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Lopla/Language</RepositoryUrl>
+    <Configurations>Debug;win-x64</Configurations>
+    <AssemblyName>LoplaC</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='win-x64|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\Release\netcoreapp2.2\win-x64</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

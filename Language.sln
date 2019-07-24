@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lopla.Language", "Lopla.Language\Lopla.Language.csproj", "{8CDACB72-B741-4D78-9236-C44351C41CF8}"
 EndProject
@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{F5696179-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lopla.Windows", "Lopla.Windows\Lopla.Windows.csproj", "{74BE8B1F-DA6E-48E8-B8FF-9C94AB38B804}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lopla.Console", "Lopla.Console\Lopla.Console.csproj", "{054B2B06-AABC-4496-BC03-5ECB84C96CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lopla.Console", "Lopla.Console\Lopla.Console.csproj", "{054B2B06-AABC-4496-BC03-5ECB84C96CB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,8 +48,8 @@ Global
 		{74BE8B1F-DA6E-48E8-B8FF-9C94AB38B804}.Release|Any CPU.Build.0 = Release|Any CPU
 		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Release|Any CPU.ActiveCfg = win-x64|Any CPU
+		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Release|Any CPU.Build.0 = win-x64|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
