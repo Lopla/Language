@@ -71,10 +71,10 @@
     <Compile Include="Lopla.Designer.cs">
       <DependentUpon>Lopla.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoplaRequests.cs" />
+    <Compile Include="WinLopla\LoplaRequests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WindowsDesktopEvents.cs" />
+    <Compile Include="WinLopla\WindowsDesktopEvents.cs" />
     <EmbeddedResource Include="Lopla.resx">
       <DependentUpon>Lopla.cs</DependentUpon>
     </EmbeddedResource>

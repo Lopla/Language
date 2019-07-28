@@ -1,7 +1,7 @@
-﻿namespace Lopla.Windows
+﻿namespace Lopla.Windows.WinLopla
 {
-    using Draw;
-    using Draw.Messages;
+    using global::Lopla.Draw;
+    using global::Lopla.Draw.Messages;
     using SkiaSharp.Views.Desktop;
 
     public class LoplaRequests : ILoplaRequests

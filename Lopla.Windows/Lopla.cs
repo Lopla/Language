@@ -10,16 +10,22 @@
     using Language.Processing;
     using Language.Providers;
     using Libs;
+    using WinLopla;
 
     public partial class Lopla : Form
     {
-        private readonly SkiaDrawLoplaEngine _engine;
-        private readonly LoplaGuiEventProcessor _uiEventsProvider;
+        private SkiaDrawLoplaEngine _engine;
+        private LoplaGuiEventProcessor _uiEventsProvider;
 
         public Lopla()
         {
             InitializeComponent();
 
+            this.SetupLopla();
+        }
+
+        private void SetupLopla()
+        {
             var drawCtx = new LoplaRequests(skControl);
 
             _engine = new SkiaDrawLoplaEngine(drawCtx);
