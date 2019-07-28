@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows.Forms;
+    using Draw.SkiaLayer;
     using SkiaSharp.Views.Desktop;
 
     public class WindowsDesktopEvents
@@ -13,6 +14,7 @@
             LoplaGuiEventProcessor processor)
         {
             _processor = processor;
+
             skiaControl.Click += C_Click;
             skiaControl.KeyUp += C_KeyUp;
             skiaControl.SizeChanged += C_SizeChanged;

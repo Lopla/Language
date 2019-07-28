@@ -1,36 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Forms;
-using Lopla.Draw;
-using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
-using Lopla.Language.Providers;
-using Lopla.Libs;
-using Lopla.Libs.Messaging;
-
-namespace Lopla.Windows
+﻿namespace Lopla.Windows
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+    using Draw.Libs;
     using Draw.SkiaLayer;
+    using Language.Interfaces;
+    using Language.Processing;
+    using Language.Providers;
+    using Libs;
 
     public partial class Lopla : Form
     {
-        private readonly LockingBus _uiEvents;
         private readonly SkiaDrawLoplaEngine _engine;
+        private readonly LoplaGuiEventProcessor _uiEventsProvider;
 
         public Lopla()
         {
             InitializeComponent();
 
-            _uiEvents = new LockingBus();
-
             var drawCtx = new LoplaRequests(skControl);
 
             _engine = new SkiaDrawLoplaEngine(drawCtx);
+            _uiEventsProvider = new LoplaGuiEventProcessor(_engine);
 
-            var windowsDesktopEvents = 
-                new WindowsDesktopEvents(skControl, 
-                    new LoplaGuiEventProcessor(_uiEvents, _engine));
+            var windowsDesktopEvents =
+                new WindowsDesktopEvents(skControl, _uiEventsProvider);
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -41,7 +37,7 @@ namespace Lopla.Windows
 
             var result = p.Run(new MemoryScripts("Test", new List<ILibrary>
                 {
-                    new Draw.Libs.Draw(_engine, _uiEvents),
+                    new Draw(_engine, _uiEventsProvider.UiEvents),
                     new Lp(),
                     new IO()
                 }, script

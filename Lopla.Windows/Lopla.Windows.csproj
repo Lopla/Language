@@ -71,7 +71,6 @@
     <Compile Include="Lopla.Designer.cs">
       <DependentUpon>Lopla.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoplaGuiEventProcessor.cs" />
     <Compile Include="LoplaRequests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

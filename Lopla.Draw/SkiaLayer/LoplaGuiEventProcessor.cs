@@ -2,24 +2,25 @@
 {
     using Language.Binary;
     using Lopla.Libs.Interfaces;
+    using Lopla.Libs.Messaging;
     using Messages;
     using SkiaSharp;
 
     public class LoplaGuiEventProcessor
     {
         private readonly SkiaDrawLoplaEngine _engine;
-        private readonly ISender _sender;
-
-        public LoplaGuiEventProcessor(ISender sender,
-            SkiaDrawLoplaEngine engine)
+        
+        public LoplaGuiEventProcessor(SkiaDrawLoplaEngine engine)
         {
-            _sender = sender;
+            UiEvents = new LockingBus();
             _engine = engine;
         }
 
+        public LockingBus UiEvents { get; set; }
+
         public void Click(int x, int y)
         {
-            _sender.Send(new Click
+            UiEvents.Send(new Click
             {
                 Pos = new Point
                 {
@@ -31,7 +32,7 @@
 
         public void Keyboard(int eKeyValue)
         {
-            _sender.Send(new Key
+            UiEvents.Send(new Key
             {
                 Char = new Number(eKeyValue)
             });
@@ -39,7 +40,7 @@
 
         public void SizeChanged(int width, int height)
         {
-            _sender.Send(new SetCanvas
+            UiEvents.Send(new SetCanvas
             {
                 Size = new Point
                 {

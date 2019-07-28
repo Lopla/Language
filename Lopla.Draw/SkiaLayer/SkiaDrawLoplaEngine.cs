@@ -12,14 +12,14 @@
 
         public SkiaDrawLoplaEngine(ILoplaRequests loplaResRequestsHandler)
         {
-            LoplaResRequestsHandler = loplaResRequestsHandler;
+            LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
             _bitMap = new SKBitmap(512, 256, SKColorType.Argb4444, SKAlphaType.Opaque);
             _canvas = new SKCanvas(_bitMap);
         }
 
-        public ILoplaRequests LoplaResRequestsHandler { get; }
+        public ILoplaRequests LoplaRequestsHandler { get; }
 
         public void Dispose()
         {
