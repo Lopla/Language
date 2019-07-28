@@ -1,7 +1,7 @@
 ﻿namespace Lopla.Windows.WinLopla
 {
-    using global::Lopla.Draw;
-    using global::Lopla.Draw.Messages;
+    using Draw;
+    using Draw.Messages;
     using SkiaSharp.Views.Desktop;
 
     public class LoplaRequests : ILoplaRequests
@@ -15,11 +15,12 @@
 
         public Point GetCanvasSize()
         {
-            return new Point
+            var size = new Point
             {
                 X = (decimal) _skiaControl.CanvasSize.Width,
                 Y = (decimal) _skiaControl.CanvasSize.Height
             };
+            return size;
         }
 
         public void Invalidate()
