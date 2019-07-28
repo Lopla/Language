@@ -30,7 +30,7 @@ namespace Lopla.Windows
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var performanceTestScripts = new CodeClass();
+            var script = CodeClass.Perf + CodeClass.Anim;
 
             var p = new Runner();
 
@@ -39,7 +39,7 @@ namespace Lopla.Windows
                     new Draw.Libs.Draw(engine, _uiEvents),
                     new Lp(),
                     new IO()
-                }, performanceTestScripts.DrawLines
+                }, script
             ));
 
             if (result.HasErrors)

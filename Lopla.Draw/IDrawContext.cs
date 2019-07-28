@@ -9,8 +9,6 @@ namespace Lopla.Draw
 
         Point GetCanvasSize();
 
-        Stream GetStream(string fileName);
-
         void Invalidate();
 
         void SetCanvasSize(int sizeX, int sizeY);

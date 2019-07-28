@@ -6,6 +6,7 @@ using Lopla.Language.Errors;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using Lopla.Libs.Interfaces;
+using SkiaSharp;
 using String = Lopla.Language.Binary.String;
 
 namespace Lopla.Draw.Libs
@@ -41,6 +42,8 @@ namespace Lopla.Draw.Libs
             Add("Image", Image, "x", "y", "arrayOfBinaryData");
             Add("Sprite", Sprite, "assembly", "filename", "x", "y", "sx", "sy", "w", "h");
 
+            Add("Animation", Animation, "x", "y", "animatedGif");
+
             Add("Flush", Flush);
 
             Add("Write", Write, "text", "align", "offset");
@@ -54,6 +57,28 @@ namespace Lopla.Draw.Libs
             Add("SetCanvas", SetCanvas, "a", "b");
 
             Add("WaitForEvent", WaitForEvent);
+        }
+
+        private Result Animation(Mnemonic expression, Runtime runtime)
+        {
+            if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
+                runtime.GetVariable("y").Get(runtime) is Number y1 &&
+                runtime.GetVariable("animatedGif").Get(runtime) is LoplaList arrayImage)
+            {
+                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
+
+                _renderingEngine.Send(new Animation()
+                {
+                    BinaryImage = binaryData,
+                    Position = new Point
+                    {
+                        X = x1.Value,
+                        Y = y1.Value
+                    }
+                });
+            }
+
+            return new Result();
         }
 
         private Result GetCanvasSize(Mnemonic expression, Runtime runtime)

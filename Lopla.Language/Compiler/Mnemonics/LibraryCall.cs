@@ -1,9 +1,11 @@
-﻿namespace Lopla.Language.Compiler.Mnemonics
-{
-    using Binary;
-    using Libraries;
-    using Processing;
+﻿using System;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Libraries;
+using Lopla.Language.Processing;
 
+namespace Lopla.Language.Compiler.Mnemonics
+{
     public class LibraryCall : Mnemonic
     {
         private readonly DoHandler _action;
@@ -21,10 +23,20 @@
 
         public override Result Execute(Runtime runtime)
         {
-            if (_method != null)
-                return _method.Do(this, runtime);
+            Result result = null;
+            try
+            {
+                if (_method != null)
+                    result = _method.Do(this, runtime);
+                else
+                    result = _action(this, runtime);
+            }
+            catch (Exception e)
+            {
+                runtime.AddError(new RuntimeError(e.Message));
+            }
 
-            return _action(this, runtime);
+            return result;
         }
     }
 }

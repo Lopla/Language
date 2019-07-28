@@ -17,8 +17,8 @@ namespace Lopla.Draw
             DrawContext = drawContext;
             _renderer = new SkiaRenderer(drawContext);
 
-            _bitMap = new SKBitmap(1024,1024,  SKImageInfo.PlatformColorType, SKAlphaType.Premul);
-            _canvas=new SKCanvas(_bitMap);
+            _bitMap = new SKBitmap(256,256, SKColorType.Argb4444, SKAlphaType.Opaque);
+            _canvas = new SKCanvas(_bitMap);
         }
 
         public void Send(ILoplaMessage instruction)
