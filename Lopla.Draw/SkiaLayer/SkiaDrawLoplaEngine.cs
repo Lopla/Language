@@ -7,7 +7,7 @@
     public class SkiaDrawLoplaEngine : IDisposable
     {
         private SKBitmap _bitMap;
-        private SKCanvas _canvas;
+        private SKCanvas _canvas = new SKCanvas(new SKBitmap());
         private readonly SkiaRenderer _renderer;
 
         public SkiaDrawLoplaEngine(ILoplaRequests loplaResRequestsHandler)
@@ -20,37 +20,51 @@
 
         public void SetupCanvas(int x, int y)
         {
-            var newBitMap = new SKBitmap(x, y);
+            lock (_canvas)
+            {
+                var newBitMap = new SKBitmap(x, y);
 
-            if (_bitMap != null)
-                using (SKCanvas c = new SKCanvas(newBitMap))
-                {
-                    c.DrawBitmap(_bitMap, new SKRect(0,0,_bitMap.Width, _bitMap.Height));
-                }
+                if (_bitMap != null)
+                    using (SKCanvas c = new SKCanvas(newBitMap))
+                    {
+                        c.Clear();
+                        c.DrawBitmap(_bitMap, new SKRect(0, 0, _bitMap.Width, _bitMap.Height));
+                    }
 
-            _bitMap?.Dispose();
-            _canvas?.Dispose();
+                _bitMap?.Dispose();
+                _canvas?.Dispose();
 
-            _bitMap = newBitMap;
-            _canvas = new SKCanvas(_bitMap);
+                _bitMap = newBitMap;
+                _canvas = new SKCanvas(_bitMap);
+            }
         }
 
         public ILoplaRequests LoplaRequestsHandler { get; }
 
         public void Dispose()
         {
-            _bitMap?.Dispose();
-            _canvas?.Dispose();
+            lock (_canvas)
+            {
+
+                _bitMap?.Dispose();
+                _canvas?.Dispose();
+            }
         }
 
         public void Send(ILoplaMessage instruction)
         {
-            _renderer.LoplaPainter(_canvas, instruction);
+            lock (_canvas)
+            {
+                _renderer.LoplaPainter(_canvas, instruction);
+            }
         }
 
         public void Render(SKCanvas canvas)
         {
-            canvas.DrawBitmap(_bitMap, 0, 0);
+            lock (_canvas)
+            {
+                canvas.DrawBitmap(_bitMap, 0, 0);
+            }
         }
     }
 }

@@ -38,8 +38,8 @@
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var script =
-                Code.Events;
-                //CodeClass.Perf + CodeClass.Anim;
+                //Code.Events;
+                Code.Perf + Code.Anim;
 
             var p = new Runner();
 
