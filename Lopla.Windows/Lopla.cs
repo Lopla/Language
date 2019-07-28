@@ -11,10 +11,12 @@ using Lopla.Libs.Messaging;
 
 namespace Lopla.Windows
 {
+    using Draw.SkiaLayer;
+
     public partial class Lopla : Form
     {
         private readonly LockingBus _uiEvents;
-        private readonly SkiaDrawLoplaEngine engine;
+        private readonly SkiaDrawLoplaEngine _engine;
 
         public Lopla()
         {
@@ -22,10 +24,12 @@ namespace Lopla.Windows
 
             _uiEvents = new LockingBus();
 
-            var drawCtx = new WindowsDesktopDrawCTX(skControl);
+            var drawCtx = new LoplaRequests(skControl);
 
-            engine = new SkiaDrawLoplaEngine(drawCtx);
-            new WindowsDesktopEvents(_uiEvents, skControl, engine);
+            _engine = new SkiaDrawLoplaEngine(drawCtx);
+
+            var windowsDesktopEvents = 
+                new WindowsDesktopEvents(skControl, new LoplaGuiEventProcessor(_uiEvents, _engine));
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -36,7 +40,7 @@ namespace Lopla.Windows
 
             var result = p.Run(new MemoryScripts("Test", new List<ILibrary>
                 {
-                    new Draw.Libs.Draw(engine, _uiEvents),
+                    new Draw.Libs.Draw(_engine, _uiEvents),
                     new Lp(),
                     new IO()
                 }, script

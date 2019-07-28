@@ -1,72 +1,43 @@
-﻿using System;
-using System.Windows.Forms;
-using Lopla.Draw;
-using Lopla.Draw.Messages;
-using Lopla.Language.Binary;
-using Lopla.Libs.Interfaces;
-using SkiaSharp.Views.Desktop;
-
-namespace Lopla.Windows
+﻿namespace Lopla.Windows
 {
-    public class WindowsDesktopEvents 
+    using System;
+    using System.Windows.Forms;
+    using SkiaSharp.Views.Desktop;
+
+    public class WindowsDesktopEvents
     {
-        private readonly ISender _sender;
-        private readonly SkiaDrawLoplaEngine _engine;
+        private readonly LoplaGuiEventProcessor _processor;
 
-        public WindowsDesktopEvents(ISender sender, 
+        public WindowsDesktopEvents(
             SKControl skiaControl,
-            SkiaDrawLoplaEngine engine)
+            LoplaGuiEventProcessor processor)
         {
-            _sender = sender;
-            _engine = engine;
-            Setup(skiaControl);
-        }
-
-        private void Setup(SKControl c)
-        {
-            c.Click += C_Click;
-            c.KeyUp += C_KeyUp;
-            c.SizeChanged += C_SizeChanged;
-            c.PaintSurface += C_PaintSurface;
+            _processor = processor;
+            skiaControl.Click += C_Click;
+            skiaControl.KeyUp += C_KeyUp;
+            skiaControl.SizeChanged += C_SizeChanged;
+            skiaControl.PaintSurface += C_PaintSurface;
         }
 
         private void C_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            _engine.Render(e.Surface.Canvas);
+            _processor.Render(e.Surface.Canvas);
         }
 
         private void C_SizeChanged(object sender, EventArgs e)
         {
             if (sender is SKControl skc)
-                _sender.Send(new SetCanvas
-                {
-                    Size = new Point
-                    {
-                        X = skc.Width,
-                        Y = skc.Height
-                    }
-                });
+                _processor.SizeChanged(skc.Width, skc.Height);
         }
 
         private void C_KeyUp(object sender, KeyEventArgs e)
         {
-            _sender.Send(new Key
-            {
-                Char = new Number(e.KeyValue)
-            });
+            _processor.Keyboard(e.KeyValue);
         }
 
         private void C_Click(object sender, EventArgs e)
         {
-            if (e is MouseEventArgs mea)
-                _sender.Send(new Click
-                {
-                    Pos = new Point
-                    {
-                        Y = mea.Y,
-                        X = mea.X
-                    }
-                });
+            if (e is MouseEventArgs mea) _processor.Click(mea.X, mea.Y);
         }
     }
 }

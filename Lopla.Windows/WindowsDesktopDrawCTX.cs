@@ -2,15 +2,14 @@
 {
     using Draw;
     using Draw.Messages;
-    using SkiaSharp;
     using SkiaSharp.Views.Desktop;
 
     // ReSharper disable once InconsistentNaming
-    public class WindowsDesktopDrawCTX : IDrawContext
+    public class LoplaRequests : ILoplaRequests
     {
         private readonly SKControl _skiaControl;
 
-        public WindowsDesktopDrawCTX(SKControl skiaControl)
+        public LoplaRequests(SKControl skiaControl)
         {
             _skiaControl = skiaControl;
         }
@@ -31,8 +30,7 @@
 
         public void SetCanvasSize(int sizeX, int sizeY)
         {
-            _skiaControl.SetBounds(0,0,sizeX, sizeY);
-
+            _skiaControl.SetBounds(0, 0, sizeX, sizeY);
         }
     }
 }

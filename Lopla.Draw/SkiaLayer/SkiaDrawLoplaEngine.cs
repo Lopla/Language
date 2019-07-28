@@ -1,18 +1,18 @@
-﻿using System;
-using Lopla.Draw.Messages;
-using Lopla.Libs.Interfaces;
-using SkiaSharp;
-
-namespace Lopla.Draw
+﻿namespace Lopla.Draw.SkiaLayer
 {
+    using System;
+    using Lopla.Libs.Interfaces;
+    using Messages;
+    using SkiaSharp;
+
     public class SkiaDrawLoplaEngine : IDisposable
     {
-        public IDrawContext DrawContext { get; }
+        public ILoplaRequests DrawContext { get; }
         private readonly SkiaRenderer _renderer;
         private readonly SKBitmap _bitMap;
         private readonly SKCanvas _canvas;
 
-        public SkiaDrawLoplaEngine(IDrawContext drawContext)
+        public SkiaDrawLoplaEngine(ILoplaRequests drawContext)
         {
             DrawContext = drawContext;
             _renderer = new SkiaRenderer(drawContext);

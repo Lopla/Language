@@ -11,6 +11,8 @@ using String = Lopla.Language.Binary.String;
 
 namespace Lopla.Draw.Libs
 {
+    using SkiaLayer;
+
     public class Draw : BaseLoplaLibrary
     {
         private readonly SkiaDrawLoplaEngine _renderingEngine;

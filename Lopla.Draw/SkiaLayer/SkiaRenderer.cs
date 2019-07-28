@@ -1,23 +1,19 @@
-﻿using System;
-using System.IO;
-using Lopla.Draw.Messages;
-using Lopla.Language.Environment;
-using Lopla.Libs.Interfaces;
-using SkiaSharp;
-
-namespace Lopla.Draw
+﻿namespace Lopla.Draw.SkiaLayer
 {
+    using System;
+    using Lopla.Libs.Interfaces;
+    using Messages;
+    using SkiaSharp;
+
     public class SkiaRenderer
     {
         private readonly PaintProvider _paintProvider = new PaintProvider();
-        private readonly IDrawContext _provider;
         private int _logTextPosition;
         private SKPaint _paintDevice;
         private int _writeTextPosition;
 
-        public SkiaRenderer(IDrawContext provider)
+        public SkiaRenderer(ILoplaRequests provider)
         {
-            _provider = provider;
             _paintDevice = _paintProvider.GetPaintDevice();
         }
 
