@@ -20,7 +20,7 @@
 
         public void SetupCanvas(int x, int y)
         {
-            var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
+            var newBitMap = new SKBitmap(x, y);
 
             if (_bitMap != null)
                 using (SKCanvas c = new SKCanvas(newBitMap))
