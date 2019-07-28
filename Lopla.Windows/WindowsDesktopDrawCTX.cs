@@ -1,9 +1,8 @@
 ﻿namespace Lopla.Windows
 {
-    using System;
-    using System.IO;
     using Draw;
     using Draw.Messages;
+    using SkiaSharp;
     using SkiaSharp.Views.Desktop;
 
     // ReSharper disable once InconsistentNaming
@@ -16,12 +15,6 @@
             _skiaControl = skiaControl;
         }
 
-        public Stream GetResourceStream(
-            string folder, string file)
-        {
-            throw new NotImplementedException();
-        }
-
         public Point GetCanvasSize()
         {
             return new Point
@@ -31,12 +24,6 @@
             };
         }
 
-        public Stream GetStream(string imgFile)
-        {
-            StreamReader sr = new StreamReader(imgFile);
-            return sr.BaseStream;
-        }
-
         public void Invalidate()
         {
             _skiaControl.Invalidate();
@@ -44,7 +31,8 @@
 
         public void SetCanvasSize(int sizeX, int sizeY)
         {
-            
+            _skiaControl.SetBounds(0,0,sizeX, sizeY);
+
         }
     }
 }

@@ -40,8 +40,7 @@ namespace Lopla.Draw.Libs
             Add("Line", Line, "a", "b", "c", "d");
 
             Add("Image", Image, "x", "y", "arrayOfBinaryData");
-            Add("Sprite", Sprite, "assembly", "filename", "x", "y", "sx", "sy", "w", "h");
-
+            
             Add("Animation", Animation, "x", "y", "animatedGif");
 
             Add("Flush", Flush);
@@ -202,46 +201,7 @@ namespace Lopla.Draw.Libs
 
             return new Result();
         }
-
-        private Result Sprite(Mnemonic expression, Runtime runtime)
-        {
-            if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
-                runtime.GetVariable("y").Get(runtime) is Number y1 &&
-                runtime.GetVariable("sx").Get(runtime) is Number sx &&
-                runtime.GetVariable("sy").Get(runtime) is Number sy &&
-                runtime.GetVariable("w").Get(runtime) is Number w &&
-                runtime.GetVariable("h").Get(runtime) is Number h &&
-                runtime.GetVariable("filename").Get(runtime) is String name &&
-                runtime.GetVariable("assembly").Get(runtime) is String assembly)
-                _renderingEngine.Send(new Sprite
-                    {
-                        AssemblyName = assembly.Value,
-                        ResourceName = name.Value,
-                        Position = new Point
-                        {
-                            X = x1.Value,
-                            Y = y1.Value
-                        },
-                        Rectangle = new Rect
-                        {
-                            Position = new Point
-                            {
-                                X = sx.Value,
-                                Y = sy.Value
-                            },
-                            Size = new Point
-                            {
-                                X = w.Value,
-                                Y = h.Value
-                            }
-                        }
-                    }
-                );
-            else
-                runtime.AddError(new RuntimeError("Incorrect paramters provided."));
-            return new Result();
-        }
-
+        
         private Result Image(Mnemonic expression, Runtime runtime)
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&

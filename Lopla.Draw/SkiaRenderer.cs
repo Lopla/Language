@@ -50,9 +50,6 @@ namespace Lopla.Draw
                 case Image img:
                     Image(canvas, img);
                     break;
-                case Sprite sprite:
-                    Sprite(canvas, sprite);
-                    break;
                 case Write text:
                     Write(canvas, text);
                     break;
@@ -86,25 +83,7 @@ namespace Lopla.Draw
                 x = canvas.LocalClipBounds.Width / 2;
             canvas.DrawText(text.Text, x, _writeTextPosition, paint);
         }
-
-        private void Sprite(SKCanvas canvas, Sprite img)
-        {
-            using (var stream = _provider.GetResourceStream(img.AssemblyName, img.ResourceName))
-            using (var skStream = new SKManagedStream(stream))
-            {
-                var resourceBitmap = SKBitmap.Decode(skStream);
-                var sprite = new SKBitmap();
-                resourceBitmap.ExtractSubset(sprite,
-                    new SKRectI(
-                        (int) img.Rectangle.Position.X, (int) img.Rectangle.Position.Y,
-                        (int) img.Rectangle.Position.X + (int) img.Rectangle.Size.X,
-                        (int) img.Rectangle.Position.Y + (int) img.Rectangle.Size.Y
-                    ));
-
-                canvas.DrawBitmap(sprite, (float) img.Position.X, (float) img.Position.Y);
-            }
-        }
-
+        
         private void Animation(SKCanvas canvas, Animation img)
         {
             if (img.BinaryImage != null && img.BinaryImage.Length > 0)

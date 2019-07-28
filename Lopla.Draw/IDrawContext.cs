@@ -5,8 +5,6 @@ namespace Lopla.Draw
 {
     public interface IDrawContext
     {
-        Stream GetResourceStream(string folder, string name);
-
         Point GetCanvasSize();
 
         void Invalidate();

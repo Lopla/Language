@@ -8,7 +8,7 @@ using SkiaSharp.Views.Desktop;
 
 namespace Lopla.Windows
 {
-    public class WindowsDesktopEvents
+    public class WindowsDesktopEvents 
     {
         private readonly ISender _sender;
         private readonly SkiaDrawLoplaEngine _engine;
