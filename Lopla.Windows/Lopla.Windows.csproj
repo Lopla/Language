@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeClass.cs" />
+    <Compile Include="Code.cs" />
     <Compile Include="Lopla.cs">
       <SubType>Form</SubType>
     </Compile>

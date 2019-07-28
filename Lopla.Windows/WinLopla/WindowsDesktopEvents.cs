@@ -29,7 +29,9 @@
         private void C_SizeChanged(object sender, EventArgs e)
         {
             if (sender is SKControl skc)
+            {
                 _processor.SizeChanged(skc.Width, skc.Height);
+            }
         }
 
         private void C_KeyUp(object sender, KeyEventArgs e)

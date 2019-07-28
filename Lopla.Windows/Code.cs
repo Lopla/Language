@@ -1,7 +1,28 @@
 ﻿namespace Lopla.Windows
 {
-    public class CodeClass
+    public class Code
     {
+        public static string Events = @"
+function Events.showAll(a){
+    i = Lp.Len(a)
+    s=""""
+    while(i > 0){
+        s = s + a[i]
+        i=i-1
+    }
+    return s
+}
+Draw.Clear(150,150,150)
+Draw.Flush()
+
+while (1)
+{
+    e = Draw.WaitForEvent()
+    Draw.Log(e[0])
+    Draw.Flush()
+}
+";
+
         public static string Perf = @"
 lastCall = 0
 function Perf.Start(){
@@ -23,15 +44,13 @@ function Perf.Show(){
     duration = ticksElapsed - lastCall 
     seconds = (duration) /   10000000 
     
-    
     Draw.SetColor(0,0,0)
     Draw.Box(0,0, 100, 30)
     Draw.SetColor(255,255,255)
     Draw.Text(10,10, seconds)
 }
 ";
-
-
+        
         public static string Anim = @"
 
 function Anim.Test(){

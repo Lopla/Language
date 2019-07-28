@@ -9,14 +9,14 @@
     public class LoplaGuiEventProcessor
     {
         private readonly SkiaDrawLoplaEngine _engine;
-        
+
         public LoplaGuiEventProcessor(SkiaDrawLoplaEngine engine)
         {
             UiEvents = new LockingBus();
             _engine = engine;
         }
 
-        public LockingBus UiEvents { get; set; }
+        public ISender UiEvents { get; set; }
 
         public void Click(int x, int y)
         {
@@ -40,6 +40,8 @@
 
         public void SizeChanged(int width, int height)
         {
+            _engine.SetupCanvas(width, height);
+
             UiEvents.Send(new SetCanvas
             {
                 Size = new Point

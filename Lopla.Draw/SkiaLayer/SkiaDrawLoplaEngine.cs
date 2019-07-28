@@ -6,8 +6,8 @@
 
     public class SkiaDrawLoplaEngine : IDisposable
     {
-        private readonly SKBitmap _bitMap;
-        private readonly SKCanvas _canvas;
+        private SKBitmap _bitMap;
+        private SKCanvas _canvas;
         private readonly SkiaRenderer _renderer;
 
         public SkiaDrawLoplaEngine(ILoplaRequests loplaResRequestsHandler)
@@ -15,7 +15,23 @@
             LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
-            _bitMap = new SKBitmap(512, 256, SKColorType.Argb4444, SKAlphaType.Opaque);
+            this.SetupCanvas(256, 256);
+        }
+
+        public void SetupCanvas(int x, int y)
+        {
+            var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
+
+            if (_bitMap != null)
+                using (SKCanvas c = new SKCanvas(newBitMap))
+                {
+                    c.DrawBitmap(_bitMap, new SKRect(0,0,_bitMap.Width, _bitMap.Height));
+                }
+
+            _bitMap?.Dispose();
+            _canvas?.Dispose();
+
+            _bitMap = newBitMap;
             _canvas = new SKCanvas(_bitMap);
         }
 
