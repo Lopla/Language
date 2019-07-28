@@ -8,6 +8,6 @@
 
         void Invalidate();
 
-        void SetCanvasSize(int sizeX, int sizeY);
+        void SetCanvasSize(decimal sizeX, decimal sizeY);
     }
 }

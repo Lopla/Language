@@ -4,7 +4,6 @@
     using Draw.Messages;
     using SkiaSharp.Views.Desktop;
 
-    // ReSharper disable once InconsistentNaming
     public class LoplaRequests : ILoplaRequests
     {
         private readonly SKControl _skiaControl;
@@ -28,9 +27,9 @@
             _skiaControl.Invalidate();
         }
 
-        public void SetCanvasSize(int sizeX, int sizeY)
+        public void SetCanvasSize(decimal sizeX, decimal sizeY)
         {
-            _skiaControl.SetBounds(0, 0, sizeX, sizeY);
+            _skiaControl.SetBounds(0, 0, (int)sizeX, (int)sizeY);
         }
     }
 }

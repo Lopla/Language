@@ -84,7 +84,7 @@ namespace Lopla.Draw.Libs
 
         private Result GetCanvasSize(Mnemonic expression, Runtime runtime)
         {
-            var c = _renderingEngine.DrawContext.GetCanvasSize();
+            var c = _renderingEngine.LoplaResRequestsHandler.GetCanvasSize();
             return new Result(new LoplaList(
                 new Result(new Number(c.X)),
                 new Result(new Number(c.Y))

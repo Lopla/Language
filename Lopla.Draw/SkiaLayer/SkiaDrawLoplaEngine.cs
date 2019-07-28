@@ -2,50 +2,39 @@
 {
     using System;
     using Lopla.Libs.Interfaces;
-    using Messages;
     using SkiaSharp;
 
     public class SkiaDrawLoplaEngine : IDisposable
     {
-        public ILoplaRequests DrawContext { get; }
-        private readonly SkiaRenderer _renderer;
         private readonly SKBitmap _bitMap;
         private readonly SKCanvas _canvas;
+        private readonly SkiaRenderer _renderer;
 
-        public SkiaDrawLoplaEngine(ILoplaRequests drawContext)
+        public SkiaDrawLoplaEngine(ILoplaRequests loplaResRequestsHandler)
         {
-            DrawContext = drawContext;
-            _renderer = new SkiaRenderer(drawContext);
+            LoplaResRequestsHandler = loplaResRequestsHandler;
+            _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
-            _bitMap = new SKBitmap(256,256, SKColorType.Argb4444, SKAlphaType.Opaque);
+            _bitMap = new SKBitmap(512, 256, SKColorType.Argb4444, SKAlphaType.Opaque);
             _canvas = new SKCanvas(_bitMap);
         }
 
-        public void Send(ILoplaMessage instruction)
-        {
-            if(instruction is Flush f)
-            {
-                DrawContext.Invalidate();
-            }
-            else if (instruction is SetCanvas sc)
-            {
-                DrawContext.SetCanvasSize((int)sc.Size.X, (int)sc.Size.Y);
-            }
-            else
-            {
-                _renderer.LoplaPainter(_canvas, instruction);
-            }
-        }
-
-        public void Render(SKCanvas canvas)
-        {
-            canvas.DrawBitmap(_bitMap, 0, 0);
-        }
+        public ILoplaRequests LoplaResRequestsHandler { get; }
 
         public void Dispose()
         {
             _bitMap?.Dispose();
             _canvas?.Dispose();
+        }
+
+        public void Send(ILoplaMessage instruction)
+        {
+            _renderer.LoplaPainter(_canvas, instruction);
+        }
+
+        public void Render(SKCanvas canvas)
+        {
+            canvas.DrawBitmap(_bitMap, 0, 0);
         }
     }
 }

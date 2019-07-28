@@ -29,7 +29,8 @@ namespace Lopla.Windows
             _engine = new SkiaDrawLoplaEngine(drawCtx);
 
             var windowsDesktopEvents = 
-                new WindowsDesktopEvents(skControl, new LoplaGuiEventProcessor(_uiEvents, _engine));
+                new WindowsDesktopEvents(skControl, 
+                    new LoplaGuiEventProcessor(_uiEvents, _engine));
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

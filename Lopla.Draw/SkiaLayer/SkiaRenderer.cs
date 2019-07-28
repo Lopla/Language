@@ -7,6 +7,7 @@
 
     public class SkiaRenderer
     {
+        private readonly ILoplaRequests _provider;
         private readonly PaintProvider _paintProvider = new PaintProvider();
         private int _logTextPosition;
         private SKPaint _paintDevice;
@@ -14,6 +15,7 @@
 
         public SkiaRenderer(ILoplaRequests provider)
         {
+            _provider = provider;
             _paintDevice = _paintProvider.GetPaintDevice();
         }
 
@@ -52,7 +54,23 @@
                 case Text text:
                     Text(canvas, text);
                     break;
+                case Flush f:
+                    Flush(canvas, f);
+                    break;
+                case SetCanvas c:
+                    SetCanvas(canvas, c);
+                    break;
             }
+        }
+
+        private void SetCanvas(SKCanvas canvas, SetCanvas c)
+        {
+            this._provider.SetCanvasSize(c.Size.X, c.Size.Y);
+        }
+
+        private void Flush(SKCanvas canvas, Flush f)
+        {
+            this._provider.Invalidate();
         }
 
         private void Text(SKCanvas canvas, Text text)
