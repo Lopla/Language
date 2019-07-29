@@ -40,7 +40,7 @@ namespace Lopla.Console
             var p = new Runner();
             var runtime = p.Run(
                 
-                new MemoryScripts("Test",
+                new MemoryScripts("Stdin",
                     new List<ILibrary>
                     {
                         new IO(),
