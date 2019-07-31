@@ -13,7 +13,7 @@ namespace Lopla.Windows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Lopla());
+            Application.Run(new LoplaForm());
         }
     }
 }

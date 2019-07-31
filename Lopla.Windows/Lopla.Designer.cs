@@ -1,6 +1,6 @@
 ﻿namespace Lopla.Windows
 {
-    partial class Lopla
+    partial class LoplaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.skControl = new SkiaSharp.Views.Desktop.SKControl();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.lopla1 = new Lopla.Draw.Windows.Controls.LoplaControl();
             this.SuspendLayout();
-            // 
-            // skControl
-            // 
-            this.skControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.skControl.Location = new System.Drawing.Point(12, 12);
-            this.skControl.Name = "skControl";
-            this.skControl.Size = new System.Drawing.Size(541, 420);
-            this.skControl.TabIndex = 0;
-            this.skControl.Text = "skControl1";
             // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // Lopla
+            // lopla1
+            // 
+            this.lopla1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lopla1.Location = new System.Drawing.Point(38, 31);
+            this.lopla1.Name = "lopla1";
+            this.lopla1.Size = new System.Drawing.Size(1124, 376);
+            this.lopla1.TabIndex = 1;
+            // 
+            // LoplaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(565, 444);
-            this.Controls.Add(this.skControl);
-            this.Name = "Lopla";
+            this.ClientSize = new System.Drawing.Size(1196, 444);
+            this.Controls.Add(this.lopla1);
+            this.Name = "LoplaForm";
             this.Text = "Lopla";
             this.Load += new System.EventHandler(this.Lopla_Load);
             this.ResumeLayout(false);
@@ -62,9 +61,8 @@
         }
 
         #endregion
-
-        private SkiaSharp.Views.Desktop.SKControl skControl;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Lopla.Draw.Windows.Controls.LoplaControl lopla1;
     }
 }
 

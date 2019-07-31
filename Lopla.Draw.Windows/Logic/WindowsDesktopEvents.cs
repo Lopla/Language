@@ -1,8 +1,8 @@
-﻿namespace Lopla.Windows.WinLopla
+﻿namespace Lopla.Draw.Windows.Logic
 {
     using System;
     using System.Windows.Forms;
-    using global::Lopla.Draw.SkiaLayer;
+    using SkiaLayer;
     using SkiaSharp.Views.Desktop;
 
     public class WindowsDesktopEvents

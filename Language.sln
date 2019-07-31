@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lopla.Windows", "Lopla.Wind
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lopla.Console", "Lopla.Console\Lopla.Console.csproj", "{054B2B06-AABC-4496-BC03-5ECB84C96CB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lopla.Draw.Windows", "Lopla.Draw.Windows\Lopla.Draw.Windows.csproj", "{36D9A8AF-40A1-48F5-9B67-C67A99B7FBD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Release|Any CPU.ActiveCfg = win-x64|Any CPU
 		{054B2B06-AABC-4496-BC03-5ECB84C96CB8}.Release|Any CPU.Build.0 = win-x64|Any CPU
+		{36D9A8AF-40A1-48F5-9B67-C67A99B7FBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D9A8AF-40A1-48F5-9B67-C67A99B7FBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D9A8AF-40A1-48F5-9B67-C67A99B7FBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D9A8AF-40A1-48F5-9B67-C67A99B7FBD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

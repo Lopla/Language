@@ -6,62 +6,41 @@
     using System.Windows.Forms;
     using Draw.Libs;
     using Draw.SkiaLayer;
+    using Draw.Windows.Logic;
     using Language.Interfaces;
     using Language.Processing;
     using Language.Providers;
     using Libs;
-    using WinLopla;
 
-    public partial class Lopla : Form
+    public partial class LoplaForm : Form
     {
-        private SkiaDrawLoplaEngine _engine;
-        private LoplaGuiEventProcessor _uiEventsProvider;
-
-        public Lopla()
+        public LoplaForm()
         {
             InitializeComponent();
 
-            this.SetupLopla();
-        }
-
-        private void SetupLopla()
-        {
-            var drawCtx = new LoplaRequests(skControl);
-
-            _engine = new SkiaDrawLoplaEngine(drawCtx);
-            _uiEventsProvider = new LoplaGuiEventProcessor(_engine);
-
-            var windowsDesktopEvents =
-                new WindowsDesktopEvents(skControl, _uiEventsProvider);
+            
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            var script =
-                //Code.Events;
-                Code.Perf + Code.Anim;
-
-            var p = new Runner();
-
-            var result = p.Run(new MemoryScripts("Test", new List<ILibrary>
-                {
-                    new Draw(_engine, _uiEventsProvider.UiEvents),
-                    new Lp(),
-                    new IO()
-                }, script
-            ));
-
-            if (result.HasErrors)
-                MessageBox.Show(
-                    result.ToString(), "Lopla", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+            
+            
 
             Invoke((MethodInvoker) Close);
         }
 
         private void Lopla_Load(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
+            //// load project and set it up
+            /// start
+            
+            var script =
+                //Code.Events;
+                Code.Perf + Code.Anim;
+
+            lopla1.Project(script);
+
+            lopla1.Run();
         }
     }
 }
