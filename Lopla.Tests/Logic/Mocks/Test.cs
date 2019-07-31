@@ -8,6 +8,8 @@ using String = Lopla.Language.Binary.String;
 
 namespace Lopla.Tests.Logic.Mocks
 {
+    using System.Globalization;
+
     public class Test : BaseLoplaLibrary
     {
         private readonly List<string> _console;
@@ -33,7 +35,7 @@ namespace Lopla.Tests.Logic.Mocks
             {
                 Debug.WriteLine("TEST:WRITE: " + data.Value);
                 Console.WriteLine("TEST:WRITE: " + data.Value);
-                _console.Add(data.Value.ToString());
+                _console.Add(data.Value.ToString(CultureInfo.InvariantCulture));
             }
 
             return new Result();

@@ -30,6 +30,10 @@
                         c.Clear();
                         c.DrawBitmap(_bitMap, new SKRect(0, 0, _bitMap.Width, _bitMap.Height));
                     }
+                else
+                {
+                    
+                }
 
                 _bitMap?.Dispose();
                 _canvas?.Dispose();

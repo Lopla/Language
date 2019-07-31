@@ -26,7 +26,7 @@ namespace Lopla.Language.Compiler
                     }
                     catch (Exception e)
                     {
-                        result.Errors.Add(new CompilationError($"Critical compiler error {e.Message}"));
+                        result.Errors.Add(new CompilationError($"Critical compiler error {e.Message} File: {name} "));
                     }
             else
                 result.Errors.Add(new CompilationError($"Found unexpected node - {symbol} was expecting lopla."));

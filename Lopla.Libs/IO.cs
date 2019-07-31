@@ -3,6 +3,7 @@
 namespace Lopla.Libs
 {
     using System;
+    using System.Globalization;
     using Language.Binary;
     using Language.Errors;
     using Language.Libraries;
@@ -44,18 +45,18 @@ namespace Lopla.Libs
             return new Result(new LoplaList());
         }
 
-        private Result WriteLine(Mnemonic expression, Runtime runtime)
+        public Result WriteLine(Mnemonic expression, Runtime runtime)
         {
             var arg = runtime.GetVariable("text");
             if (arg.Get(runtime) is String line) Console.WriteLine(_prefix + line.Value);
             else if (arg.Get(runtime) is Number i)
-                Console.WriteLine(_prefix + i.Value);
+                Console.WriteLine(_prefix + i.Value.ToString(CultureInfo.InvariantCulture));
             else
                 runtime.AddError(new RuntimeError($"Type not supported {arg.Get(runtime).GetType().Name}"));
             return new Result();
         }
 
-        private Result Write(Mnemonic expression, Runtime runtime)
+        public Result Write(Mnemonic expression, Runtime runtime)
         {
             var arg = runtime.GetVariable("text");
             if (arg.Get(runtime) is String line) Console.Write(_prefix + line.Value);
