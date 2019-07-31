@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 using Lopla.Language.Providers;
@@ -12,38 +13,39 @@ namespace Lopla.Console
         {
             if (args != null && args.Length > 0)
             {
-                RunProject(args);
+                RunProject(args);                
             }
             else
             {
-                RunProject();
+                /*
+                    https://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/redirection.mspx
+                    cat .\test.lp  | dotnet run --project Lopla.Console
+                 */
+                string stdin = null;
+                if (System.Console.IsInputRedirected)
+                {
+                    using (StreamReader reader = new StreamReader(System.Console.OpenStandardInput(), System.Console.InputEncoding))
+                    {
+                        stdin = reader.ReadToEnd();
+                        RunProject(stdin);
+                    }
+                }
             }
         }
 
-        private static void RunProject()
+        private static void RunProject(string text)
         {
             //// project is poor 
             //// only few dll's
             var p = new Runner();
             var runtime = p.Run(
                 
-                new MemoryScripts("Test",
+                new MemoryScripts("Stdin",
                     new List<ILibrary>
                     {
                         new IO(),
                         new Lp()
-                    },
-                    @"
-libs = Lp.Functions()
-k =0
-
-while(k<Lp.Len(libs)) {
-    d = libs[k]
-    IO.WriteLine(d[0])
-    k=k+1
-}
-
-"));
+                    },text));
             if (runtime.HasErrors)
                 System.Console.WriteLine(runtime.ToString());
         }
