@@ -1,16 +1,19 @@
-﻿using Lopla.Draw.SkiaLayer;
+﻿using System.Windows.Forms;
+using Lopla.Draw.SkiaLayer;
 using Lopla.Language.Binary;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using Lopla.Libs.Interfaces;
 
-namespace Lopla.Windows
+namespace Lopla.Draw.Windows
 {
     public class WinFormsDraw : Draw.Libs.Draw
     {
-        private readonly LoplaForm _form;
-        private static bool Visible = false;
-        public WinFormsDraw(LoplaForm form, SkiaDrawLoplaEngine drawEngine, ISender uiEventsProvider = null) : base(drawEngine,
+        private static bool _visible;
+        private readonly Form _form;
+
+        public WinFormsDraw(Form form, SkiaDrawLoplaEngine drawEngine, ISender uiEventsProvider = null) : base(
+            drawEngine,
             uiEventsProvider)
         {
             _form = form;
@@ -18,10 +21,10 @@ namespace Lopla.Windows
 
         public override Result Call(DoHandler action, Mnemonic context, Runtime runtime)
         {
-            if (!Visible)
+            if (!_visible)
             {
-                this._form.Visible = true;
-                Visible = true;
+                _form.Invoke((MethodInvoker)(() => { _form.Visible = true; }) );
+                _visible = true;
             }
 
             return base.Call(action, context, runtime);

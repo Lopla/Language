@@ -16,16 +16,16 @@ namespace Lopla.Windows
             InitializeComponent();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Invoke((MethodInvoker) Close);
-        }
-
-        private void Lopla_Load(object sender, EventArgs e)
+        public void Run()
         {
             lopla1.Project(_args);
 
             lopla1.Run();
+        }
+
+        private void Lopla1_OnLoplaDone(object sender, EventArgs args)
+        {
+            this.Close();
         }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\LoplaRequests.cs" />
     <Compile Include="Logic\WindowsDesktopEvents.cs" />
+    <Compile Include="WinFormsDraw.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj">

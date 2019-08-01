@@ -28,13 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.lopla1 = new Lopla.Draw.Windows.Controls.LoplaControl();
             this.SuspendLayout();
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // lopla1
             // 
@@ -45,6 +40,7 @@
             this.lopla1.Name = "lopla1";
             this.lopla1.Size = new System.Drawing.Size(1124, 376);
             this.lopla1.TabIndex = 1;
+            this.lopla1.OnLoplaDone += new Lopla.Draw.Windows.Controls.LoplaDoneHandler(this.Lopla1_OnLoplaDone);
             // 
             // LoplaForm
             // 
@@ -55,14 +51,11 @@
             this.Controls.Add(this.lopla1);
             this.Name = "LoplaForm";
             this.Text = "Lopla";
-            this.Load += new System.EventHandler(this.Lopla_Load);
-            this.Visible = false;
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Lopla.Draw.Windows.Controls.LoplaControl lopla1;
     }
 }
