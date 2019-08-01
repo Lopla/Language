@@ -25,7 +25,7 @@ namespace Lopla.Windows
 
         private void Lopla1_OnLoplaDone(object sender, EventArgs args)
         {
-            this.Close();
+            Application.Exit();
         }
     }
 }
