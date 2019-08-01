@@ -1,4 +1,6 @@
-﻿namespace Lopla.Draw.Windows.Controls
+﻿using Lopla.Starting;
+
+namespace Lopla.Draw.Windows.Controls
 {
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -15,7 +17,7 @@
     {
         private SkiaDrawLoplaEngine _engine;
         private LoplaGuiEventProcessor _uiEventsProvider;
-        private MemoryScripts project;
+        private IProject _project;
 
         public LoplaControl()
         {
@@ -42,27 +44,28 @@
             this.backgroundWorker1.RunWorkerAsync();
         }
 
-        public void Project(string code)
+        public void Project(string[] code)
         {
-            this.project = new MemoryScripts("Test", new List<ILibrary>
-                {
-                    new Draw(_engine, _uiEventsProvider.UiEvents),
-                    new Lp(),
-                    new IO()
-                }, code
-            );
+            this._project = new MainHandler(new List<ILibrary>
+            {
+                new Draw(_engine, _uiEventsProvider.UiEvents),
+                new Lp(),
+                new IO()
+            }).GetProject(code);
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             var p = new Runner();
 
-            var result = p.Run(project);
+            var result = p.Run(_project);
 
             if (result.HasErrors)
                 MessageBox.Show(
                     result.ToString(), "Lopla", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            
+            this.ParentForm?.Close();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Lopla.Windows
+﻿using Lopla.Starting;
+
+namespace Lopla.Windows
 {
     using System;
     using System.ComponentModel;
@@ -6,8 +8,11 @@
 
     public partial class LoplaForm : Form
     {
-        public LoplaForm()
+        private readonly string[] _args;
+
+        public LoplaForm(string[] args)
         {
+            _args = args;
             InitializeComponent();
         }
 
@@ -18,14 +23,7 @@
 
         private void Lopla_Load(object sender, EventArgs e)
         {
-            //// load project and set it up
-            /// start
-
-            var script =
-                //Code.Events;
-                Code.Perf + Code.Anim;
-
-            lopla1.Project(script);
+            lopla1.Project(_args);
 
             lopla1.Run();
         }

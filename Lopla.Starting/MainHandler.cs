@@ -9,6 +9,7 @@ namespace Lopla.Starting
 {
     public class MainHandler
     {
+
         public MainHandler(List<ILibrary> list)
         {
             Libs = list;
@@ -16,6 +17,11 @@ namespace Lopla.Starting
 
         private List<ILibrary> Libs { get; }
 
+        /// <summary>
+        /// expect folder where lopla project is stored (args[0], if not provided then searches for data in stdin
+        /// if that fails just quits
+        /// </summary>
+        /// <param name="args"></param>
         public void Main(string[] args)
         {
             var project = GetProject(args);

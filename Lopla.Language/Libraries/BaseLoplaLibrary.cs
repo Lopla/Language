@@ -43,26 +43,6 @@ namespace Lopla.Language.Libraries
             }, m));
         }
 
-        protected void Add(string methodName, LibraryMethod action, params string[] arguments)
-        {
-            var m = new Method
-            {
-                Code = new List<Mnemonic>
-                {
-                    new LibraryCall(action)
-                },
-                ArgumentList = new List<string>()
-            };
-            if (arguments != null && arguments.Any())
-                m.ArgumentList.AddRange(arguments.ToList());
-
-            _methods.Add(new KeyValuePair<MethodPointer, Method>(new MethodPointer
-            {
-                Name = methodName,
-                NameSpace = GetType().Name
-            }, m));
-        }
-
         protected Result CallFunction(string nameSpace, string function, Runtime runtime, params IValue[] arguments)
         {
             return runtime.EvaluateFunction(new MethodPointer
@@ -89,7 +69,6 @@ namespace Lopla.Language.Libraries
 
     public class LibraryMethod
     {
-
         public virtual Result Do(Mnemonic expression, Runtime runtime)
         {
             return new Result();
