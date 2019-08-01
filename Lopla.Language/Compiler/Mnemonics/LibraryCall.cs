@@ -1,6 +1,7 @@
 ﻿using System;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 
@@ -8,17 +9,13 @@ namespace Lopla.Language.Compiler.Mnemonics
 {
     public class LibraryCall : Mnemonic
     {
+        private readonly ILibrary _library;
         private readonly DoHandler _action;
-        private readonly LibraryMethod _method;
 
-        public LibraryCall(DoHandler action) : base(null)
+        public LibraryCall(ILibrary library, DoHandler action) : base(null)
         {
+            _library = library;
             _action = action;
-        }
-
-        public LibraryCall(LibraryMethod action) : base(null)
-        {
-            _method = action;
         }
 
         public override Result Execute(Runtime runtime)
@@ -26,10 +23,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             Result result = null;
             try
             {
-                if (_method != null)
-                    result = _method.Do(this, runtime);
-                else
-                    result = _action(this, runtime);
+                result = _library.Call(_action, this, runtime);
             }
             catch (Exception e)
             {

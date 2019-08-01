@@ -7,7 +7,7 @@
     <ProjectGuid>{74BE8B1F-DA6E-48E8-B8FF-9C94AB38B804}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Lopla.Windows</RootNamespace>
-    <AssemblyName>Lopla.Windows</AssemblyName>
+    <AssemblyName>LoplaD</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

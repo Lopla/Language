@@ -21,7 +21,12 @@ namespace Lopla.Language.Libraries
             return _methods;
         }
 
-        public string Name => this.GetType().FullName;
+        public string Name => GetType().FullName;
+
+        public virtual Result Call(DoHandler action, Mnemonic context, Runtime runtime)
+        {
+            return action(context, runtime);
+        }
 
         protected void Add(string methodName, DoHandler action, params string[] arguments)
         {
@@ -29,7 +34,7 @@ namespace Lopla.Language.Libraries
             {
                 Code = new List<Mnemonic>
                 {
-                    new LibraryCall(action)
+                    new LibraryCall(this, action)
                 },
                 ArgumentList = new List<string>()
             };
@@ -42,36 +47,15 @@ namespace Lopla.Language.Libraries
                 NameSpace = GetType().Name
             }, m));
         }
-
-        protected Result CallFunction(string nameSpace, string function, Runtime runtime, params IValue[] arguments)
-        {
-            return runtime.EvaluateFunction(new MethodPointer
-            {
-                NameSpace = nameSpace,
-                Name = function,
-            }, new List<Result>(arguments.Select(d => new Result(d))));
-        }
-
+        
         protected T GetArgument<T>(string label, Runtime runtime)
             where T : class, IValue
         {
             if (runtime.GetVariable(label).Get(runtime) is T result)
-            {
                 return result;
-            }
-            else
-            {
-                runtime.AddError(new RuntimeError($"Argument {label} not provided or invalid type. Was expecting {typeof(T).Name}."));
-            }
+            runtime.AddError(
+                new RuntimeError($"Argument {label} not provided or invalid type. Was expecting {typeof(T).Name}."));
             return null;
-        }
-    }
-
-    public class LibraryMethod
-    {
-        public virtual Result Do(Mnemonic expression, Runtime runtime)
-        {
-            return new Result();
         }
     }
 }

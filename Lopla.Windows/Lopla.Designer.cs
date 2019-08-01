@@ -56,6 +56,7 @@
             this.Name = "LoplaForm";
             this.Text = "Lopla";
             this.Load += new System.EventHandler(this.Lopla_Load);
+            this.Visible = false;
             this.ResumeLayout(false);
 
         }
