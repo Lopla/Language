@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lopla.Language\Lopla.Language.csproj" />
     <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj" />
+    <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
