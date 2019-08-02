@@ -77,16 +77,19 @@ Test.Write(b)
                 @"
 /* recurrent method*/
 
-function tt.ok(counter){
-    k=counter
-    while(k > 0){
-        k=k-1
-        tt.ok(k)
+function tt.ok(k){
+    Test.Write(""OK START"")
+    Test.Write(k)
+    Test.Write(""-------"")
+    while(k > 1){
+        k= k - 1
         Test.Write(k)
+        tt.ok(k)
     }
+    Test.Write(""OK END"")
 }
 
-tt.ok(3)
+tt.ok(5)
 
 ",
                 "1",
@@ -106,6 +109,7 @@ tt.ok(3)
 
         public ScopeSpecs(ITestOutputHelper logger) : base(logger)
         {
+
         }
     }
 }

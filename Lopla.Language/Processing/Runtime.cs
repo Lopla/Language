@@ -7,7 +7,7 @@ using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Processing
 {
-    internal class Runtime : IRuntime
+    public class Runtime : IRuntime
     {
         private readonly Declarations _declarations = new Declarations();
         private readonly List<Error> _errors;

@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using Lopla.Language.Binary;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Libraries;
-using Lopla.Language.Processing;
 using Xunit.Abstractions;
 using String = Lopla.Language.Binary.String;
 
 namespace Lopla.Tests.Logic.Mocks
 {
-    using System.Globalization;
-
     public class Test : BaseLoplaLibrary
     {
         private readonly List<string> _console;
-        private ITestOutputHelper logger;
+        private readonly ITestOutputHelper logger;
 
         public Test(List<string> console, ITestOutputHelper logger)
         {
@@ -24,7 +23,7 @@ namespace Lopla.Tests.Logic.Mocks
             Add("Write", Write, "text");
         }
 
-        private Result Write(Mnemonic expression, Runtime runtime)
+        private Result Write(Mnemonic expression, IRuntime runtime)
         {
             var arg = runtime.GetVariable("text");
 
@@ -37,7 +36,7 @@ namespace Lopla.Tests.Logic.Mocks
             }
             else if (arg.Get(runtime) is Number data)
             {
-                string r = data.Value.ToString(CultureInfo.InvariantCulture);
+                var r = data.Value.ToString(CultureInfo.InvariantCulture);
                 Debug.WriteLine("TEST:WRITE: " + r);
                 Console.WriteLine("TEST:WRITE: " + r);
                 logger.WriteLine("TEST:WRITE: " + r);

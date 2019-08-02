@@ -1,0 +1,23 @@
+function Stack.New(){
+    return []
+}
+
+function Stack.Push(stack, val){
+    stack[Lp.Len(stack)] = val
+    return stack
+}
+
+function Stack.Get(stack){
+    return stack[Lp.Len(stack)-1] 
+}
+
+function Stack.Pop(stack){
+    result = []
+    i=0
+    while(i< (Lp.Len(stack) - 1)){
+        result[i] = stack[i]
+        i = i+1
+    }
+
+    return result
+}
