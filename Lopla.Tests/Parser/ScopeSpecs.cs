@@ -2,6 +2,7 @@
 using System.Linq;
 using Lopla.Tests.Logic;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Lopla.Tests.Parser
 {
@@ -71,7 +72,28 @@ Test.Write(b)
                 "2",
                 "4"
             });
+            scripts.Add(new List<object>
+            {
+                @"
+/* recurrent method*/
 
+function tt.ok(counter){
+    k=0
+    while(k < counter){
+        tt.ok(k)
+        k=k+1
+        Test.Write(k)
+    }
+    Test.Write(""----"")
+}
+
+tt.ok(3)
+
+",
+                "1",
+                "2",
+                "3"
+            });
 
             return scripts.Select(e => e.ToArray());
         }
@@ -81,6 +103,10 @@ Test.Write(b)
         public void Scopes(string script, params string[] args)
         {
             EvaluateCode(script, args);
+        }
+
+        public ScopeSpecs(ITestOutputHelper logger) : base(logger)
+        {
         }
     }
 }

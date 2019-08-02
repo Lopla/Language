@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Lopla.Tests.Logic;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Lopla.Tests.Parser
 {
@@ -138,6 +139,10 @@ if ((a==3) && (b == -1) )
         public void AllowsToSpecifyAndExpression(string script, params string[] args)
         {
             EvaluateCode(script, args);
+        }
+
+        public IfSpecs(ITestOutputHelper logger) : base(logger)
+        {
         }
     }
 }

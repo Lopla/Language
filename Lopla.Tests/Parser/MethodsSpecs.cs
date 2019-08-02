@@ -2,6 +2,7 @@
 using System.Linq;
 using Lopla.Tests.Logic;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Lopla.Tests.Parser
 {
@@ -122,6 +123,10 @@ Test.Write(TestScript.Show(3))
         public void ReturnFromWhileIsPossible(string script, params string[] args)
         {
             EvaluateCode(script, args);
+        }
+
+        public MethodsSpecs(ITestOutputHelper logger) : base(logger)
+        {
         }
     }
 }

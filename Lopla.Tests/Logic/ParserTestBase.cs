@@ -6,11 +6,20 @@ using Lopla.Language.Processing;
 using Lopla.Language.Providers;
 using Lopla.Tests.Logic.Mocks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Lopla.Tests.Logic
 {
     public abstract class ParserTestBase
     {
+        private ITestOutputHelper logger;
+
+        protected ParserTestBase(ITestOutputHelper logger)
+        {
+            this.logger = logger;
+        }
+
+
         protected void EvaluateCode(string script, params string[] args)
         {
             var consoleText = new List<string>();
@@ -19,7 +28,7 @@ namespace Lopla.Tests.Logic
                 "test",
                 new List<ILibrary>
             {
-                new Test(consoleText)
+                new Test(consoleText, logger)
             })
             {
                 Files = new List<Script>

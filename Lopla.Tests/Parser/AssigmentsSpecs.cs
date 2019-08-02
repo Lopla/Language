@@ -1,5 +1,6 @@
 ﻿using Lopla.Tests.Logic;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Lopla.Tests.Parser
 {
@@ -85,6 +86,10 @@ Test.Write(a[10])
         public void AssignsValueToATable(string script, params string[] args)
         {
             EvaluateCode(script, args);
+        }
+
+        public AssigmentsSpecs(ITestOutputHelper logger) : base(logger)
+        {
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Lopla.Tests.Logic;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Lopla.Tests.Parser
 {
@@ -12,6 +13,10 @@ Test.Write(a)
         public void MultiplicationOverAdd(string script, params string[] args)
         {
             EvaluateCode(script, args);
+        }
+
+        public OrderOfCalcualtions(ITestOutputHelper logger) : base(logger)
+        {
         }
     }
 }
