@@ -26,7 +26,7 @@ namespace Lopla.Tests
 
         [InlineData(12, 12, OperatorType.Add, 24)]
         [InlineData(12, 12, OperatorType.Multiply, 144)]
-        [InlineData(12, 12, OperatorType.Substract, 0)]
+        [InlineData(12, 12, OperatorType.Subtract, 0)]
         [InlineData(24, 12, OperatorType.Divide, 2)]
         [InlineData(12, 12, OperatorType.Equals, 1)]
         [InlineData(12, 4, OperatorType.GreaterThen, 1)]

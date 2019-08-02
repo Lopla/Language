@@ -16,7 +16,7 @@ namespace Lopla.Language.Compiler.Mnemonics
         public static Dictionary<string, OperatorType> Operators = new Dictionary<string, OperatorType>()
         {
             {"+", OperatorType.Add },
-            {"-", OperatorType.Substract },
+            {"-", OperatorType.Subtract },
             {"/", OperatorType.Divide },
             {"*", OperatorType.Multiply },
 
@@ -140,7 +140,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             {
                 return new Result(new Number(leftInt.Value + rightInt.Value));
             }
-            else if (kind == OperatorType.Substract)
+            else if (kind == OperatorType.Subtract)
             {
                 return new Result(new Number(leftInt.Value - rightInt.Value));
             }

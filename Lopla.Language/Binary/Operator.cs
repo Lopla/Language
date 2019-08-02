@@ -5,7 +5,7 @@
         Equals,
         NotEquals,
         Add,
-        Substract,
+        Subtract,
         Divide,
         LessThen,
         GreaterThen,

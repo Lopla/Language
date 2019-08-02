@@ -41,8 +41,8 @@
             foreach (var library in libs) _runtime.Link(library);
             foreach (var binary in compileResult) 
             {
-                _runtime.Run(binary.Compilation);
-                if(_runtime.Errors.Count()> 0){
+                _runtime.Evaluate(binary.Compilation);
+                if(_runtime.Errors.Any()){
                     break;
                 }
             }

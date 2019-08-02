@@ -21,7 +21,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public override Result Execute(Runtime runtime)
         {
-            return runtime.EvaluateCodeBlock(Lines);
+            return runtime.EvaluateBlock(Lines);
         }
 
         public override string ToString()

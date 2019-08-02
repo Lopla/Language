@@ -28,7 +28,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             while (WhileCondition(runtime.EvaluateCodeBlock(LogicalExpression), runtime))
             {
                 result = runtime.EvaluateCodeBlock(CodeBlock);
-                if (runtime.ProcessingStpped())
+                if (runtime.ProcessingStopped())
                 {
                     break;
                 }

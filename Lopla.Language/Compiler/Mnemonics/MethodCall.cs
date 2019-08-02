@@ -64,7 +64,7 @@ namespace Lopla.Language.Compiler.Mnemonics
                     runtime.AddError(new RuntimeError($"Too much results or incorrect result {Pointer}", this));
             }
 
-            return runtime.EvaluateFunction(Pointer, methodParamters);
+            return runtime.EvaluateMethodCall(Pointer, methodParamters);
         }
     }
 }

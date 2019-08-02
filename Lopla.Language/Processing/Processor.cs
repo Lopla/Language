@@ -84,6 +84,20 @@ namespace Lopla.Language.Processing
             return r;
         }
 
+        public Result Evaluate(Compilation binary, Runtime runtime)
+        {
+            try
+            {
+                return Evaluate(binary.Mnemonics);
+            }
+            catch (Exception exception)
+            {
+                runtime.AddError(new RuntimeError(exception.Message));
+            }
+
+            return new Result();
+        }
+
         public Result EvaluateFunctionInScope(List<Mnemonic> mCode,
             Dictionary<string, Result> args,
             MethodPointer pointer)
@@ -92,7 +106,7 @@ namespace Lopla.Language.Processing
                 return new Result();
 
             //// local function context
-            //// orevents leak of variables in global scope 
+            //// prevents leak of variables in global scope 
             _stack.StartScope($"{pointer.NameSpace}.{pointer.Name}");
 
             foreach (var result in args) _runtime.SetVariable(result.Key, result.Value, true);

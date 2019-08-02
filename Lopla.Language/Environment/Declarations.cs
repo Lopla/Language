@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
 using Lopla.Language.Processing;
@@ -47,8 +46,7 @@ namespace Lopla.Language.Environment
                 if (functionRefernece.ArgumentList?.Count != functionParamters?.Count)
                 {
                     runtime.AddError(new RuntimeError(
-                        $"Invalid number of paramters passed to function {p.NameSpace}.{p.Name}. Expected {functionRefernece.ArgumentList?.Count} provided {functionParamters?.Count}",
-                        null));
+                        $"Invalid number of paramters passed to function {p.NameSpace}.{p.Name}. Expected {functionRefernece.ArgumentList?.Count} provided {functionParamters?.Count}"));
                 }
                 else
                 {
@@ -58,7 +56,7 @@ namespace Lopla.Language.Environment
             }
             else
             {
-                runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}", null));
+                runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}"));
             }
 
             return null;
@@ -69,7 +67,7 @@ namespace Lopla.Language.Environment
             var mName = p.NameSpace + "." + p.Name;
             if (_procedures.ContainsKey(mName))
                 return _procedures[mName].GlobalScopeName;
-            runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}", null));
+            runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}"));
 
             return null;
         }
@@ -79,7 +77,7 @@ namespace Lopla.Language.Environment
             var mName = p.NameSpace + "." + p.Name;
             if (_procedures.ContainsKey(mName))
                 return _procedures[mName].Code;
-            runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}", null));
+            runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}"));
 
             return null;
         }
@@ -87,9 +85,7 @@ namespace Lopla.Language.Environment
         public IEnumerable<KeyValuePair<string, List<string>>> GetMethods()
         {
             foreach (var procedure in _procedures)
-            {
                 yield return new KeyValuePair<string, List<string>>($"{procedure.Key}", procedure.Value.ArgumentList);
-            }
         }
     }
 }
