@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lopla.Language.Interfaces;
 
@@ -14,15 +15,19 @@ namespace Lopla.Language.Environment
             _errorHandler = errorHandler;
         }
 
-        public void Add(string name)
+        public GlobalScope Add(string name)
         {
-            _globalScopes.Add(name, new GlobalScope(_errorHandler, name));
+            var newScope = new GlobalScope(_errorHandler, name);
+            _globalScopes.Add(name, newScope);
+
+            return newScope;
         }
 
-        public void CreateFunctionScope(string name, string derivedScope)
+        public GlobalScope CreateFunctionScope(GlobalScope scope)
         {
-            var newScope = _globalScopes[name].DeriveFunctionScope(derivedScope);
-            _globalScopes.Add(derivedScope, newScope);
+            var newScope = scope.DeriveFunctionScope();
+            _globalScopes.Add(Guid.NewGuid().ToString(), newScope);
+            return newScope;
         }
 
         public GlobalScope Get(string stackName)

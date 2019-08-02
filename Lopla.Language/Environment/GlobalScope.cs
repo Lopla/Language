@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
@@ -78,9 +80,9 @@ namespace Lopla.Language.Environment
             return val;
         }
 
-        public GlobalScope DeriveFunctionScope(string scopName)
+        public GlobalScope DeriveFunctionScope()
         {
-            var s = new GlobalScope(_errorHandler, scopName);
+            var s = new GlobalScope(_errorHandler, Guid.NewGuid().ToString());
             s.ScopesStack.Push(this.GetBoottomScope());
             return s;
         }

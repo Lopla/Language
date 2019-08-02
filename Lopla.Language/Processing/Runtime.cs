@@ -71,8 +71,7 @@ namespace Lopla.Language.Processing
 
         private GlobalScope AddRootScope(string name)
         {
-            _scopes.Add(name);
-            return _scopes.Get(name);
+            return _scopes.Add(name);
         }
         #endregion
 
@@ -96,13 +95,12 @@ namespace Lopla.Language.Processing
         public Result EvaluateMethodCall(MethodPointer pointer, List<Result> methodParameters)
         {
             var args = _declarations.GetArguments(pointer, methodParameters, this);
-            var stackName = _declarations.GetScope(pointer, this);
-            var derivedScopeName = stackName + Guid.NewGuid();
-            _scopes.CreateFunctionScope(stackName, derivedScopeName);
+            var stack= _declarations.GetScope(pointer, this);
+            var derivedScope = _scopes.CreateFunctionScope(stack);
             
             var code = _declarations.GetCode(pointer, this);
 
-            _processors.Begin(_scopes.Get(derivedScopeName));
+            _processors.Begin(derivedScope);
             var result = _processors.Get().EvaluateFunctionInScope(code, args, pointer);
             _processors.End();
 
@@ -142,8 +140,8 @@ namespace Lopla.Language.Processing
 
         public void Register(MethodPointer methodName, Method body)
         {
-            var name = _processors.Get().RootStackName();
-            _declarations.Register(methodName, body, this, name);
+            var stack = _processors.Get().RootStack();
+            _declarations.Register(methodName, body, this, Guid.NewGuid().ToString(), stack);
         }
 
         public void Link(ILibrary library)

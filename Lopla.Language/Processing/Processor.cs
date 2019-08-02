@@ -126,5 +126,10 @@ namespace Lopla.Language.Processing
         {
             return _requestForStop;
         }
+
+        public GlobalScope RootStack()
+        {
+            return _stack;
+        }
     }
 }

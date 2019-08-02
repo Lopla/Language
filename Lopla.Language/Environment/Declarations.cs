@@ -21,12 +21,13 @@ namespace Lopla.Language.Environment
             return args;
         }
 
-        public void Register(MethodPointer name, Method method, Runtime runtime, string processingStackName)
+        public void Register(MethodPointer name, Method method, Runtime runtime, string processingStackName, GlobalScope scope)
         {
             var methodName = $"{name.NameSpace}.{name.Name}";
             if (!_procedures.ContainsKey(methodName))
             {
                 method.GlobalScopeName = processingStackName;
+                method.RootScope = scope;
                 _procedures.Add(methodName, method);
             }
             else
@@ -62,11 +63,12 @@ namespace Lopla.Language.Environment
             return null;
         }
 
-        public string GetScope(MethodPointer p, Runtime runtime)
+        public GlobalScope GetScope(MethodPointer p, Runtime runtime)
         {
             var mName = p.NameSpace + "." + p.Name;
             if (_procedures.ContainsKey(mName))
-                return _procedures[mName].GlobalScopeName;
+                return _procedures[mName].RootScope;
+
             runtime.AddError(new RuntimeError($"Method not found {p.NameSpace}.{p.Name}"));
 
             return null;

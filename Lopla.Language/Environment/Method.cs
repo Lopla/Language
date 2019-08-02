@@ -18,5 +18,7 @@ namespace Lopla.Language.Environment
         public List<string> ArgumentList { get; set; }
         
         public string GlobalScopeName { get; set; }
+
+        public GlobalScope RootScope { get; set; }
     }
 }

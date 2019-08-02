@@ -9,10 +9,6 @@ namespace Lopla.Language.Processing
         private readonly Stack<Processor> _processors = new Stack<Processor>();
         private Runtime _runtime;
 
-        public Processors()
-        {
-        }
-
         public virtual void Init(Runtime runtime)
         {
             _runtime = runtime;
