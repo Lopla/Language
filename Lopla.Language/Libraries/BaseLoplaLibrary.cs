@@ -21,7 +21,7 @@ namespace Lopla.Language.Libraries
             return _methods;
         }
 
-        public virtual string Name => GetType().FullName;
+        public virtual string Name => GetType().Name;
 
         public virtual Result Call(DoHandler action, Mnemonic context, Runtime runtime)
         {
