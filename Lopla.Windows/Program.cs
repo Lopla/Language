@@ -1,16 +1,23 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Lopla.Windows
 {
     internal static class Program
     {
+        [DllImport("kernel32.dll")]
+        static extern bool AttachConsole(int dwProcessId);
+        private const int ATTACH_PARENT_PROCESS = -1;
+
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main(string[] args)
-        {
+        { 
+            AttachConsole(ATTACH_PARENT_PROCESS);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             

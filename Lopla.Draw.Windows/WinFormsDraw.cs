@@ -19,6 +19,8 @@ namespace Lopla.Draw.Windows
             _form = form;
         }
 
+        public override string Name => "Draw";
+
         public override Result Call(DoHandler action, Mnemonic context, Runtime runtime)
         {
             if (!_visible)

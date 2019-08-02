@@ -21,7 +21,7 @@ namespace Lopla.Language.Libraries
             return _methods;
         }
 
-        public string Name => GetType().FullName;
+        public virtual string Name => GetType().FullName;
 
         public virtual Result Call(DoHandler action, Mnemonic context, Runtime runtime)
         {
@@ -44,7 +44,7 @@ namespace Lopla.Language.Libraries
             _methods.Add(new KeyValuePair<MethodPointer, Method>(new MethodPointer
             {
                 Name = methodName,
-                NameSpace = GetType().Name
+                NameSpace = this.Name
             }, m));
         }
         
