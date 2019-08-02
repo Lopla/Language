@@ -54,6 +54,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             var incomingParamters = Arguments.Args.ToList();
             var methodParamters = new List<Result>();
 
+            
             foreach (var argument in incomingParamters)
             {
                 var result = runtime.EvaluateCodeBlock(argument);

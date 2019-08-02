@@ -7,7 +7,7 @@ namespace Lopla.Language.Environment
     public class GlobalScopes
     {
         private readonly IErrorHandler _errorHandler;
-        private readonly Dictionary<string, GlobalScope> _stacks = new Dictionary<string, GlobalScope>();
+        private readonly Dictionary<string, GlobalScope> _globalScopes = new Dictionary<string, GlobalScope>();
 
         public GlobalScopes(IErrorHandler errorHandler)
         {
@@ -16,23 +16,23 @@ namespace Lopla.Language.Environment
 
         public void Add(string name)
         {
-            _stacks.Add(name, new GlobalScope(_errorHandler, name));
+            _globalScopes.Add(name, new GlobalScope(_errorHandler, name));
         }
 
-        public void AddDerivedScope(string name, string derivedScope)
+        public void CreateFunctionScope(string name, string derivedScope)
         {
-            var newScope = _stacks[name].DeriveFunctionScope(derivedScope);
-            _stacks.Add(derivedScope, newScope);
+            var newScope = _globalScopes[name].DeriveFunctionScope(derivedScope);
+            _globalScopes.Add(derivedScope, newScope);
         }
 
         public GlobalScope Get(string stackName)
         {
-            return _stacks[stackName];
+            return _globalScopes[stackName];
         }
 
         public IEnumerable<GlobalScope> GetAll()
         {
-            return this._stacks.Select(e=>e.Value);
+            return this._globalScopes.Select(e=>e.Value);
         }
     }
 }

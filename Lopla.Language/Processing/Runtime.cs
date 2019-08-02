@@ -13,15 +13,14 @@ namespace Lopla.Language.Processing
         private readonly List<Error> _errors;
         private readonly Declarations _pro = new Declarations();
         private readonly Processors _processors;
-        public readonly GlobalScopes StackWrapper;
-        private string _currentStack;
+        private readonly GlobalScopes _scopes;
 
         public Runtime(Processors processors)
         {
             _processors = processors;
             _processors.Init(this);
             _errors = new List<Error>();
-            StackWrapper = new GlobalScopes(this);
+            _scopes = new GlobalScopes(this);
         }
 
         public IEnumerable<Error> Errors => _errors;
@@ -43,9 +42,8 @@ namespace Lopla.Language.Processing
 
         private GlobalScope AddRootScope(string name)
         {
-            StackWrapper.Add(name);
-            _currentStack = name;
-            return StackWrapper.Get(name);
+            _scopes.Add(name);
+            return _scopes.Get(name);
         }
 
         public Result EvaluateCodeBlock(Mnemonic mnemonic)
@@ -53,15 +51,18 @@ namespace Lopla.Language.Processing
             return _processors.Get().Evaluate(mnemonic);
         }
 
-        public Result EvaluateFunction(MethodPointer pointer, List<Result> methodParamters)
+        public Result EvaluateFunction(MethodPointer pointer, List<Result> methodParameters)
         {
-            var args = _pro.GetArguments(pointer, methodParamters, this);
+            var args = _pro.GetArguments(pointer, methodParameters, this);
             var stackName = _pro.GetScope(pointer, this);
+            var derivedScopeName = stackName + Guid.NewGuid().ToString();
+            this._scopes.CreateFunctionScope(stackName, derivedScopeName);
+
             if (!string.IsNullOrWhiteSpace(stackName))
             {
                 var code = _pro.GetCode(pointer, this);
 
-                _processors.Begin(StackWrapper.Get(stackName));
+                _processors.Begin(_scopes.Get(derivedScopeName));
                 var result = _processors.Get().EvaluateFunctionInScope(code, args, pointer);
                 _processors.End();
 
@@ -103,11 +104,8 @@ namespace Lopla.Language.Processing
         public void Register(MethodPointer methodName, Method body)
         {
             var mName = $"{methodName.NameSpace}.{methodName.Name}";
-            //var name = _processors.Get().RootStackName();
-            var stackName = _currentStack;
-            _pro.Register(methodName, body, this, mName);
-            
-            this.StackWrapper.AddDerivedScope(stackName, mName);
+            var name = _processors.Get().RootStackName();
+            _pro.Register(methodName, body, this, name);
         }
 
         public void FunctionReturn(Result result)

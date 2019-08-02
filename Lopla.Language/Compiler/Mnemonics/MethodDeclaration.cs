@@ -1,14 +1,13 @@
-﻿using Lopla.Language.Environment;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Hime.Redist;
+using Lopla.Language.Binary;
+using Lopla.Language.Environment;
+using Lopla.Language.Interfaces;
+using Lopla.Language.Processing;
 
 namespace Lopla.Language.Compiler.Mnemonics
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Binary;
-    using Hime.Redist;
-    using Interfaces;
-    using Processing;
-
     public class MethodDeclaration : Mnemonic
     {
         public Method Code;
@@ -40,7 +39,7 @@ namespace Lopla.Language.Compiler.Mnemonics
                 Code = new List<Mnemonic>
                 {
                     code
-                }
+                },
             };
         }
 

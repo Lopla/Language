@@ -78,13 +78,12 @@ Test.Write(b)
 /* recurrent method*/
 
 function tt.ok(counter){
-    k=0
-    while(k < counter){
+    k=counter
+    while(k > 0){
+        k=k-1
         tt.ok(k)
-        k=k+1
         Test.Write(k)
     }
-    Test.Write(""----"")
 }
 
 tt.ok(3)
