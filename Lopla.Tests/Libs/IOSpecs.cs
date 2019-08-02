@@ -8,7 +8,6 @@
 
     public class IOSpecs
     {
-        [Fact]
         public void Aaaaa()
         {
             var sut = new IO();

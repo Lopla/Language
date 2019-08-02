@@ -107,7 +107,7 @@ namespace Lopla.Language.Processing
 
             //// local function context
             //// prevents leak of variables in global scope 
-            _stack.StartScope($"{pointer.NameSpace}.{pointer.Name}");
+            _stack.StartScope($"{pointer.NameSpace}.{pointer.Name}.{Guid.NewGuid()}");
 
             foreach (var result in args) _runtime.SetVariable(result.Key, result.Value, true);
 

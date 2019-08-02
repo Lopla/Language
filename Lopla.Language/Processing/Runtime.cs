@@ -99,19 +99,14 @@ namespace Lopla.Language.Processing
             var stackName = _declarations.GetScope(pointer, this);
             var derivedScopeName = stackName + Guid.NewGuid();
             _scopes.CreateFunctionScope(stackName, derivedScopeName);
+            
+            var code = _declarations.GetCode(pointer, this);
 
-            if (!string.IsNullOrWhiteSpace(stackName))
-            {
-                var code = _declarations.GetCode(pointer, this);
+            _processors.Begin(_scopes.Get(derivedScopeName));
+            var result = _processors.Get().EvaluateFunctionInScope(code, args, pointer);
+            _processors.End();
 
-                _processors.Begin(_scopes.Get(derivedScopeName));
-                var result = _processors.Get().EvaluateFunctionInScope(code, args, pointer);
-                _processors.End();
-
-                return result;
-            }
-
-            return new Result();
+            return result;
         }
 
         public Result EvaluateBlock(List<Mnemonic> argumentsArgs)
