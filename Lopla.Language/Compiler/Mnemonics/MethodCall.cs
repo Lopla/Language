@@ -49,7 +49,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public MethodPointer Pointer { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var incomingParamters = Arguments.Args.ToList();
             var methodParamters = new List<Result>();

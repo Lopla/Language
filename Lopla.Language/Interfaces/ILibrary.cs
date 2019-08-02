@@ -10,6 +10,6 @@ namespace Lopla.Language.Interfaces
     {
         string Name { get; }
         IEnumerable<KeyValuePair<MethodPointer, Method>> Methods();
-        Result Call(DoHandler action, Mnemonic context, Runtime runtime);
+        Result Call(DoHandler action, Mnemonic context, IRuntime runtime);
     }
 }

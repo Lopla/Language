@@ -21,7 +21,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public Mnemonic BlockOfCode { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var ifcheck = runtime.EvaluateCodeBlock(Condition);
 

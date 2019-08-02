@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using Lopla.Draw.SkiaLayer;
 using Lopla.Language.Binary;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using Lopla.Libs.Interfaces;
@@ -21,7 +22,7 @@ namespace Lopla.Draw.Windows
 
         public override string Name => "Draw";
 
-        public override Result Call(DoHandler action, Mnemonic context, Runtime runtime)
+        public override Result Call(DoHandler action, Mnemonic context, IRuntime runtime)
         {
             if (!_visible)
             {

@@ -19,7 +19,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public List<Mnemonic> Lines { get; } = new List<Mnemonic>();
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             return runtime.EvaluateBlock(Lines);
         }

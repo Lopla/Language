@@ -18,8 +18,7 @@ namespace Lopla.Tests.Logic
         {
             this.logger = logger;
         }
-
-
+        
         protected void EvaluateCode(string script, params string[] args)
         {
             var consoleText = new List<string>();

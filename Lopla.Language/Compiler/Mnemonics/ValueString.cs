@@ -1,4 +1,6 @@
-﻿namespace Lopla.Language.Compiler.Mnemonics
+﻿using Lopla.Language.Interfaces;
+
+namespace Lopla.Language.Compiler.Mnemonics
 {
     using Binary;
     using Hime.Redist;
@@ -21,7 +23,7 @@
             Value = value;
         }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             return new Result(Value);
         }

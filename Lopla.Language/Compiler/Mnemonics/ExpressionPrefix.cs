@@ -25,7 +25,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public Mnemonic MultByMinus1 { get; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             if (this.MultByMinus1 == null)
             {

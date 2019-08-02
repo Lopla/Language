@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Lopla.Language.Interfaces;
 
 namespace Lopla.Libs
 {
@@ -23,7 +24,7 @@ namespace Lopla.Libs
             Add("LoadBinaryFile", LoadBinaryFile, "fileName");
         }
 
-        private Result LoadBinaryFile(Mnemonic expression, Runtime runtime)
+        private Result LoadBinaryFile(Mnemonic expression, IRuntime runtime)
         {
             var fileName = runtime.GetVariable("fileName")?.Get(runtime) as String;
 
@@ -45,7 +46,7 @@ namespace Lopla.Libs
             return new Result(new LoplaList());
         }
 
-        public Result WriteLine(Mnemonic expression, Runtime runtime)
+        public Result WriteLine(Mnemonic expression, IRuntime runtime)
         {
             var arg = runtime.GetVariable("text");
             if (arg.Get(runtime) is String line) Console.WriteLine(_prefix + line.Value);
@@ -56,7 +57,7 @@ namespace Lopla.Libs
             return new Result();
         }
 
-        public Result Write(Mnemonic expression, Runtime runtime)
+        public Result Write(Mnemonic expression, IRuntime runtime)
         {
             var arg = runtime.GetVariable("text");
             if (arg.Get(runtime) is String line) Console.Write(_prefix + line.Value);
@@ -67,7 +68,7 @@ namespace Lopla.Libs
             return new Result();
         }
 
-        private Result Read(Mnemonic expression, Runtime runtime)
+        private Result Read(Mnemonic expression, IRuntime runtime)
         {
             Console.Write(_prefix);
             var data = Console.ReadLine();

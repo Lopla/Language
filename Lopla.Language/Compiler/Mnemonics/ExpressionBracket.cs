@@ -20,7 +20,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public Mnemonic SubExpresion { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var left = runtime.EvaluateCodeBlock(SubExpresion);
 

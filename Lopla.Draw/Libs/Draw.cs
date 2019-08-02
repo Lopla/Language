@@ -3,6 +3,7 @@ using System.Linq;
 using Lopla.Draw.Messages;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using Lopla.Libs.Interfaces;
@@ -60,7 +61,7 @@ namespace Lopla.Draw.Libs
             Add("WaitForEvent", WaitForEvent);
         }
 
-        private Result Animation(Mnemonic expression, Runtime runtime)
+        private Result Animation(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
@@ -82,7 +83,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result GetCanvasSize(Mnemonic expression, Runtime runtime)
+        private Result GetCanvasSize(Mnemonic expression, IRuntime runtime)
         {
             var c = _renderingEngine.LoplaRequestsHandler.GetCanvasSize();
             return new Result(new LoplaList(
@@ -91,7 +92,7 @@ namespace Lopla.Draw.Libs
             ));
         }
 
-        private Result WaitForEvent(Mnemonic expression, Runtime runtime)
+        private Result WaitForEvent(Mnemonic expression, IRuntime runtime)
         {
             var m = _uiEventsProvider.WaitForMessage();
             if (m == null)
@@ -124,7 +125,7 @@ namespace Lopla.Draw.Libs
             }
         }
 
-        private Result GetTextInfo(Mnemonic expression, Runtime runtime)
+        private Result GetTextInfo(Mnemonic expression, IRuntime runtime)
         {
             var pp = new PaintProvider();
             var dev = pp.GetPaintDevice();
@@ -139,7 +140,7 @@ namespace Lopla.Draw.Libs
             );
         }
 
-        private Result GetTextSize(Mnemonic expression, Runtime runtime)
+        private Result GetTextSize(Mnemonic expression, IRuntime runtime)
         {
             var pp = new PaintProvider();
             var path = pp.GetPaintDevice().GetTextPath(GetArgument<String>("text", runtime).Value, 0, 0);
@@ -150,7 +151,7 @@ namespace Lopla.Draw.Libs
                 new Result(new Number(Convert.ToInt32(bound.Height)))));
         }
 
-        private Result Text(Mnemonic expression, Runtime runtime)
+        private Result Text(Mnemonic expression, IRuntime runtime)
         {
             var text = "";
             var textArgument = runtime.GetVariable("text").Get(runtime);
@@ -181,7 +182,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result SetCanvas(Mnemonic expression, Runtime runtime)
+        private Result SetCanvas(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("a").Get(runtime) is Number x1 &&
                 runtime.GetVariable("b").Get(runtime) is Number y1)
@@ -197,14 +198,14 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result Flush(Mnemonic expression, Runtime runtime)
+        private Result Flush(Mnemonic expression, IRuntime runtime)
         {
             _renderingEngine.Send(new Flush());
 
             return new Result();
         }
         
-        private Result Image(Mnemonic expression, Runtime runtime)
+        private Result Image(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
@@ -230,7 +231,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result Box(Mnemonic expression, Runtime runtime)
+        private Result Box(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("a").Get(runtime) is Number x1 &&
                 runtime.GetVariable("b").Get(runtime) is Number y1 &&
@@ -255,7 +256,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result SetColor(Mnemonic expression, Runtime runtime)
+        private Result SetColor(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("r").Get(runtime) is Number r &&
                 runtime.GetVariable("g").Get(runtime) is Number g &&
@@ -276,7 +277,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result Line(Mnemonic expression, Runtime runtime)
+        private Result Line(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("a").Get(runtime) is Number x1 &&
                 runtime.GetVariable("b").Get(runtime) is Number y1 &&
@@ -301,7 +302,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result Write(Mnemonic expression, Runtime runtime)
+        private Result Write(Mnemonic expression, IRuntime runtime)
         {
             var text = "";
 
@@ -324,7 +325,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result Log(Mnemonic expression, Runtime runtime)
+        private Result Log(Mnemonic expression, IRuntime runtime)
         {
             var text = "";
             if (runtime.GetVariable("s").Get(runtime) is String s) text = s.Value;
@@ -337,7 +338,7 @@ namespace Lopla.Draw.Libs
             return new Result();
         }
 
-        private Result Clear(Mnemonic expression, Runtime runtime)
+        private Result Clear(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("r").Get(runtime) is Number r &&
                 runtime.GetVariable("g").Get(runtime) is Number g &&

@@ -24,7 +24,7 @@
 
         public Mnemonic ReturnExpression { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var result = runtime.EvaluateCodeBlock(ReturnExpression);
 

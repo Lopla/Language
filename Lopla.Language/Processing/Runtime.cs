@@ -7,10 +7,10 @@ using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Processing
 {
-    public class Runtime : IErrorHandler
+    internal class Runtime : IRuntime
     {
-        private readonly List<Error> _errors;
         private readonly Declarations _declarations = new Declarations();
+        private readonly List<Error> _errors;
         private readonly Processors _processors;
         private readonly GlobalScopes _scopes;
 
@@ -21,24 +21,6 @@ namespace Lopla.Language.Processing
             _errors = new List<Error>();
             _scopes = new GlobalScopes(this);
         }
-
-        #region Error handler
-        public IEnumerable<Error> Errors => _errors;
-
-        public void AddError(Error e)
-        {
-            _errors.Add(e);
-            if (e is RuntimeError) Stop();
-        }
-
-        public void AddError(RuntimeError e)
-        {
-            var stackName = $"{_processors?.Get()?.RootStackName()}";
-            e.Text = $"{stackName}\t{e.Text}";
-
-            AddError((Error) e);
-        }
-        #endregion
 
         public void Evaluate(Compilation binary)
         {
@@ -57,7 +39,28 @@ namespace Lopla.Language.Processing
             return _processors.Get().IsStpped();
         }
 
+        #region Error handler
+
+        public IEnumerable<Error> Errors => _errors;
+
+        public void AddError(Error e)
+        {
+            _errors.Add(e);
+            if (e is RuntimeError) Stop();
+        }
+
+        public void AddError(RuntimeError e)
+        {
+            var stackName = $"{_processors?.Get()?.RootStackName()}";
+            e.Text = $"{stackName}\t{e.Text}";
+
+            AddError((Error) e);
+        }
+
+        #endregion
+
         #region scope managment
+
         public void StartRootScope(Compilation binary)
         {
             var stack = AddRootScope($"{binary.Name}");
@@ -73,6 +76,7 @@ namespace Lopla.Language.Processing
         {
             return _scopes.Add(name);
         }
+
         #endregion
 
         #region Mnemonics
@@ -95,9 +99,9 @@ namespace Lopla.Language.Processing
         public Result EvaluateMethodCall(MethodPointer pointer, List<Result> methodParameters)
         {
             var args = _declarations.GetArguments(pointer, methodParameters, this);
-            var stack= _declarations.GetScope(pointer, this);
+            var stack = _declarations.GetScope(pointer, this);
             var derivedScope = _scopes.CreateFunctionScope(stack);
-            
+
             var code = _declarations.GetCode(pointer, this);
 
             _processors.Begin(derivedScope);
@@ -122,9 +126,11 @@ namespace Lopla.Language.Processing
         {
             return _declarations.GetMethods();
         }
+
         #endregion
 
         #region memory access
+
         public Result GetVariable(string name)
         {
             return _processors.Get().GetVariable(name, this);
@@ -134,6 +140,7 @@ namespace Lopla.Language.Processing
         {
             _processors.Get().SetVariable(variableName, functionParamter, coverUpVariable);
         }
+
         #endregion
 
         #region declaration and linking
@@ -158,6 +165,5 @@ namespace Lopla.Language.Processing
         }
 
         #endregion
-
     }
 }

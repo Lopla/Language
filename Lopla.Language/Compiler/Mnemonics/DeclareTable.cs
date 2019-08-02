@@ -29,7 +29,7 @@
 
         public List<Mnemonic> Values { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var result = new LoplaList();
             var k = 0;

@@ -1,4 +1,5 @@
 ﻿using Lopla.Language.Environment;
+using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Processing
 {
@@ -7,9 +8,9 @@ namespace Lopla.Language.Processing
     public class Processors
     {
         private readonly Stack<Processor> _processors = new Stack<Processor>();
-        private Runtime _runtime;
+        private IRuntime _runtime;
 
-        public virtual void Init(Runtime runtime)
+        public virtual void Init(IRuntime runtime)
         {
             _runtime = runtime;
         }

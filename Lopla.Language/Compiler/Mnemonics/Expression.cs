@@ -39,13 +39,13 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public Mnemonic SubExpression { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             return runtime.EvaluateCodeBlock(this.SubExpression);
         }
 
         public static Result ArgumentCalcualte(Mnemonic ctx, Result left, Result right,
-            OperatorType kind, Runtime runtime)
+            OperatorType kind, IRuntime runtime)
         {
             if (left.HasResult() && right.HasResult())
             {
@@ -125,7 +125,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             return new Result();
         }
 
-        public static Result ArgumentCalculate(Number leftInt, Number rightInt, OperatorType kind, Runtime runtime, Mnemonic ctx)
+        public static Result ArgumentCalculate(Number leftInt, Number rightInt, OperatorType kind, IRuntime runtime, Mnemonic ctx)
         {
             if (new[] { OperatorType.Equals, OperatorType.GreaterThen,
                             OperatorType.GreaterThenOrEqual,

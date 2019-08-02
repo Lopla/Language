@@ -21,7 +21,7 @@ namespace Lopla.Language.Compiler.Mnemonics
 
         public Mnemonic LogicalExpression { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             Result result = null;
 
@@ -37,7 +37,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             return result;
         }
 
-        private bool WhileCondition(Result result, Runtime runtime)
+        private bool WhileCondition(Result result, IRuntime runtime)
         {
             if (result.HasResult() &&
                 result.Get(runtime) is Number resultInt)

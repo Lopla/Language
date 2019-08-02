@@ -63,7 +63,7 @@ namespace Lopla.Language.Environment
                 }, functionParamter);
         }
 
-        public Result GetVariable(string name, Runtime runtime)
+        public Result GetVariable(string name, IRuntime runtime)
         {
             Result val = null;
             foreach (var scope in ScopesStack)
@@ -85,6 +85,11 @@ namespace Lopla.Language.Environment
             var s = new GlobalScope(_errorHandler, Guid.NewGuid().ToString());
             s.ScopesStack.Push(this.GetBoottomScope());
             return s;
+        }
+
+        public override string ToString()
+        {
+            return $"{string.Join(" ", this.ScopesStack?.Select(s=>s?.ToString()))}";
         }
     }
 }

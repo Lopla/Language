@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 
 namespace Lopla.Language.Environment
@@ -21,7 +22,7 @@ namespace Lopla.Language.Environment
             return args;
         }
 
-        public void Register(MethodPointer name, Method method, Runtime runtime, string processingStackName, GlobalScope scope)
+        public void Register(MethodPointer name, Method method, IRuntime runtime, string processingStackName, GlobalScope scope)
         {
             var methodName = $"{name.NameSpace}.{name.Name}";
             if (!_procedures.ContainsKey(methodName))
@@ -36,7 +37,7 @@ namespace Lopla.Language.Environment
             }
         }
 
-        public Dictionary<string, Result> GetArguments(MethodPointer p, List<Result> functionParamters, Runtime runtime)
+        public Dictionary<string, Result> GetArguments(MethodPointer p, List<Result> functionParamters, IRuntime runtime)
         {
             var mName = p.NameSpace + "." + p.Name;
             if (_procedures.ContainsKey(mName))
@@ -63,7 +64,7 @@ namespace Lopla.Language.Environment
             return null;
         }
 
-        public GlobalScope GetScope(MethodPointer p, Runtime runtime)
+        public GlobalScope GetScope(MethodPointer p, IRuntime runtime)
         {
             var mName = p.NameSpace + "." + p.Name;
             if (_procedures.ContainsKey(mName))
@@ -74,7 +75,7 @@ namespace Lopla.Language.Environment
             return null;
         }
 
-        public List<Mnemonic> GetCode(MethodPointer p, Runtime runtime)
+        public List<Mnemonic> GetCode(MethodPointer p, IRuntime runtime)
         {
             var mName = p.NameSpace + "." + p.Name;
             if (_procedures.ContainsKey(mName))

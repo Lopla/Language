@@ -9,7 +9,7 @@ using Lopla.Language.Processing;
 
 namespace Lopla.Language.Libraries
 {
-    public delegate Result DoHandler(Mnemonic expression, Runtime runtime);
+    public delegate Result DoHandler(Mnemonic expression, IRuntime runtime);
 
     public abstract class BaseLoplaLibrary : ILibrary
     {
@@ -23,7 +23,7 @@ namespace Lopla.Language.Libraries
 
         public virtual string Name => GetType().Name;
 
-        public virtual Result Call(DoHandler action, Mnemonic context, Runtime runtime)
+        public virtual Result Call(DoHandler action, Mnemonic context, IRuntime runtime)
         {
             return action(context, runtime);
         }
@@ -48,7 +48,7 @@ namespace Lopla.Language.Libraries
             }, m));
         }
         
-        protected T GetArgument<T>(string label, Runtime runtime)
+        protected T GetArgument<T>(string label, IRuntime runtime)
             where T : class, IValue
         {
             if (runtime.GetVariable(label).Get(runtime) is T result)

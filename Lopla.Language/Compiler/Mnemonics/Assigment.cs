@@ -44,7 +44,7 @@
 
         public Mnemonic RightSide { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var rightResult = runtime.EvaluateCodeBlock(RightSide);
             if (LeftSide is VariableName vn)

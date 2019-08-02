@@ -1,4 +1,5 @@
 ﻿using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 
 namespace Lopla.Language.Binary
@@ -19,7 +20,7 @@ namespace Lopla.Language.Binary
             _result = value?.Clone();
         }
 
-        public IValue Get(Runtime runtime)
+        public IValue Get(IRuntime runtime)
         {
             if (_result != null)
                 return _result.Clone();

@@ -18,7 +18,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             _action = action;
         }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             Result result = null;
             try

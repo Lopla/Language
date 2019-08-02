@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using Lopla.Language.Binary;
 using Lopla.Language.Environment;
 using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Processing
 {
     public class Processor
     {
-        private readonly Runtime _runtime;
+        private readonly IRuntime _runtime;
         private readonly GlobalScope _stack;
         private bool _requestForStop;
 
-        public Processor(Runtime runtime, GlobalScope stack)
+        public Processor(IRuntime runtime, GlobalScope stack)
         {
             _runtime = runtime;
             _stack = stack;
         }
 
-        public Result GetVariable(string name, Runtime runtime)
+        public Result GetVariable(string name, IRuntime runtime)
         {
             return _stack.GetVariable(name, runtime);
         }
@@ -52,7 +53,7 @@ namespace Lopla.Language.Processing
             return result;
         }
 
-        public virtual Result OnMnemonicExecute(Mnemonic mnemonic, Runtime runtime)
+        public virtual Result OnMnemonicExecute(Mnemonic mnemonic, IRuntime runtime)
         {
             return mnemonic.Execute(runtime);
         }
@@ -84,7 +85,7 @@ namespace Lopla.Language.Processing
             return r;
         }
 
-        public Result Evaluate(Compilation binary, Runtime runtime)
+        public Result Evaluate(Compilation binary, IRuntime runtime)
         {
             try
             {

@@ -43,7 +43,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             }
         }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var left = runtime.EvaluateCodeBlock(Arguments.Args[0]);
             if (Arguments.Args.Count > 1)

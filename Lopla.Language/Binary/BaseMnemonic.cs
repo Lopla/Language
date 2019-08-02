@@ -1,4 +1,6 @@
-﻿namespace Lopla.Language.Binary
+﻿using Lopla.Language.Interfaces;
+
+namespace Lopla.Language.Binary
 {
     using Hime.Redist;
     using Processing;
@@ -25,7 +27,7 @@
         public string Symbol { get; }
         public int? Line { get; }
         public int? Column { get; }
-        public abstract Result Execute(Runtime runtime);
+        public abstract Result Execute(IRuntime runtime);
 
         public override string ToString()
         {

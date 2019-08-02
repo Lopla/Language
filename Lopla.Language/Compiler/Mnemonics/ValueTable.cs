@@ -29,7 +29,7 @@
 
         public Mnemonic ElementPositionInTable { get; set; }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             var value = runtime.GetVariable(TablePointer.Name);
             if (value != null && value.HasResult())

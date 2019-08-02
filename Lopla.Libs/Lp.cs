@@ -1,5 +1,6 @@
 ﻿using System;
 using Lopla.Language.Binary;
+using Lopla.Language.Interfaces;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using String = Lopla.Language.Binary.String;
@@ -29,7 +30,7 @@ namespace Lopla.Libs
             Add("FunctionInfo", FunctionInfo, "functionName");
         }
 
-        private Result VarType(Mnemonic expression, Runtime runtime)
+        private Result VarType(Mnemonic expression, IRuntime runtime)
         {
             var variableResult = runtime.GetVariable("variable");
 
@@ -46,7 +47,7 @@ namespace Lopla.Libs
         }
 
 
-        private Result FunctionInfo(Mnemonic expression, Runtime runtime)
+        private Result FunctionInfo(Mnemonic expression, IRuntime runtime)
         {
             var functionInformation = new LoplaList();
             var functionName = GetArgument<String>("functionName", runtime);
@@ -62,13 +63,13 @@ namespace Lopla.Libs
         /// <param name="expression"></param>
         /// <param name="runtime"></param>
         /// <returns></returns>
-        private Result Ticks(Mnemonic expression, Runtime runtime)
+        private Result Ticks(Mnemonic expression, IRuntime runtime)
         {
             var now = DateTime.Now.Ticks;
             return new Result(new Number(now));
         }
 
-        private Result Functions(Mnemonic expression, Runtime runtime)
+        private Result Functions(Mnemonic expression, IRuntime runtime)
         {
             var listOfLibs = new LoplaList();
             foreach (var registeredMethod in runtime.GetRegisteredMethods())
@@ -82,7 +83,7 @@ namespace Lopla.Libs
             return new Result(listOfLibs);
         }
 
-        private Result Args(Mnemonic expression, Runtime runtime)
+        private Result Args(Mnemonic expression, IRuntime runtime)
         {
             var ll = new LoplaList();
             if (args != null)
@@ -92,13 +93,13 @@ namespace Lopla.Libs
             return new Result(ll);
         }
 
-        private Result Floor(Mnemonic expression, Runtime runtime)
+        private Result Floor(Mnemonic expression, IRuntime runtime)
         {
             var n = GetArgument<Number>("number", runtime);
             return new Result(new Number(Math.Floor(n.Value)));
         }
 
-        private Result Len(Mnemonic expression, Runtime runtime)
+        private Result Len(Mnemonic expression, IRuntime runtime)
         {
             var a = runtime.GetVariable("array").Get(runtime);
             if (a is String arg2)

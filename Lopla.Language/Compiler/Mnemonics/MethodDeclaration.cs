@@ -43,7 +43,7 @@ namespace Lopla.Language.Compiler.Mnemonics
             };
         }
 
-        public override Result Execute(Runtime runtime)
+        public override Result Execute(IRuntime runtime)
         {
             runtime.Register(Pointer, Code);
 
