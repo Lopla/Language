@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Lopla.Language.Binary;
-using Lopla.Language.Compiler.Mnemonics;
-using Lopla.Language.Environment;
-using Lopla.Language.Errors;
-using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
-
-namespace Lopla.Language.Libraries
+﻿namespace Lopla.Language.Libraries
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Binary;
+    using Compiler.Mnemonics;
+    using Environment;
+    using Errors;
+    using Interfaces;
+
     public delegate Result DoHandler(Mnemonic expression, IRuntime runtime);
 
     public abstract class BaseLoplaLibrary : ILibrary
@@ -28,6 +27,15 @@ namespace Lopla.Language.Libraries
             return action(context, runtime);
         }
 
+        protected Result CallFunction(string nameSpace, string function, IRuntime runtime, params IValue[] arguments)
+        {
+            return runtime.EvaluateMethodCall(new MethodPointer
+            {
+                NameSpace = nameSpace,
+                Name = function,
+            }, new List<Result>(arguments.Select(d => new Result(d))));
+        }
+
         protected void Add(string methodName, DoHandler action, params string[] arguments)
         {
             var m = new Method
@@ -44,10 +52,10 @@ namespace Lopla.Language.Libraries
             _methods.Add(new KeyValuePair<MethodPointer, Method>(new MethodPointer
             {
                 Name = methodName,
-                NameSpace = this.Name
+                NameSpace = Name
             }, m));
         }
-        
+
         protected T GetArgument<T>(string label, IRuntime runtime)
             where T : class, IValue
         {
