@@ -65,7 +65,7 @@ namespace Lopla.Draw.Windows.Controls
                 {
                     if (result.HasErrors)
                     {
-                        new LoplaErrors(result.ToString()).Show();
+                        new LoplaErrors(result.ToString()).ShowDialog();
                     }
                 }
                 else
