@@ -10,6 +10,8 @@ using Lopla.Starting;
 
 namespace Lopla.Draw.Windows.Controls
 {
+    using System;
+
     public delegate void LoplaDoneHandler(object sender, System.EventArgs args);
 
     public partial class LoplaControl : UserControl
@@ -59,14 +61,21 @@ namespace Lopla.Draw.Windows.Controls
             {
                 var result = p.Run(_project);
 
-                if (result.HasErrors)
-                    MessageBox.Show(
-                        result.ToString(), "Lopla", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                if (this?.ParentForm?.Visible == true)
+                {
+                    if (result.HasErrors)
+                        MessageBox.Show(
+                            result.ToString(), "Lopla", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                }
+                else
+                {
+                    Console.WriteLine(result.ToString());
+                }
             }
-
-            
         }
+
+        
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

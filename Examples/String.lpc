@@ -1,4 +1,8 @@
-function Test.ToString(in){
+function String.ToString(in){
+	if(in == 0){
+		return "0"
+	}
+
 	r =""
 	cell = in - Lp.Floor(in)
 
@@ -24,6 +28,7 @@ function Test.ToString(in){
 		r[Lp.Len(r)]= in + 48
 	}
 
+	
 	if(cell > 0)
 	{
 		r=r+"."

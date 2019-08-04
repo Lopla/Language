@@ -26,7 +26,15 @@ namespace Lopla.Draw.Windows
         {
             if (!_visible)
             {
-                _form.Invoke((MethodInvoker)(() => { _form.Visible = true; }) );
+                if (_form.InvokeRequired)
+                {
+                    _form.Invoke((MethodInvoker) (() => { _form.Visible = true; }));
+                }
+                else
+                {
+                    _form.Visible = true;
+                }
+
                 _visible = true;
             }
 
