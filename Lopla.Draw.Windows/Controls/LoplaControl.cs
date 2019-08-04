@@ -64,9 +64,9 @@ namespace Lopla.Draw.Windows.Controls
                 if (this?.ParentForm?.Visible == true)
                 {
                     if (result.HasErrors)
-                        MessageBox.Show(
-                            result.ToString(), "Lopla", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                    {
+                        new LoplaErrors(result.ToString()).Show();
+                    }
                 }
                 else
                 {

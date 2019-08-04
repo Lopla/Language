@@ -64,6 +64,12 @@
     <Compile Include="Controls\LoplaControl.Designer.cs">
       <DependentUpon>LoplaControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LoplaErrors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\LoplaErrors.Designer.cs">
+      <DependentUpon>LoplaErrors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\LoplaRequests.cs" />
     <Compile Include="Logic\WindowsDesktopEvents.cs" />
@@ -93,6 +99,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\LoplaControl.resx">
       <DependentUpon>LoplaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LoplaErrors.resx">
+      <DependentUpon>LoplaErrors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

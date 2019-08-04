@@ -1,5 +1,6 @@
 ﻿namespace Lopla.Draw.Windows.Logic
 {
+    using System.Windows.Forms;
     using Draw;
     using Messages;
     using SkiaSharp.Views.Desktop;
@@ -30,7 +31,14 @@
 
         public void SetCanvasSize(decimal sizeX, decimal sizeY)
         {
-            _skiaControl.SetBounds(0, 0, (int)sizeX, (int)sizeY);
+            if (_skiaControl.InvokeRequired)
+            {
+                _skiaControl.Invoke((MethodInvoker) (() => { _skiaControl.SetBounds(0, 0, (int) sizeX, (int) sizeY); }));
+            }
+            else
+            {
+                _skiaControl.SetBounds(0, 0, (int)sizeX, (int)sizeY);
+            }
         }
     }
 }

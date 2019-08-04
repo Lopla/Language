@@ -20,8 +20,7 @@
 
         public void SetupCanvas(int x, int y)
         {
-            lock (_canvas)
-            {
+            
                 var newBitMap = new SKBitmap(x, y);
 
                 if (_bitMap != null)
@@ -40,7 +39,7 @@
 
                 _bitMap = newBitMap;
                 _canvas = new SKCanvas(_bitMap);
-            }
+            
         }
 
         public ILoplaRequests LoplaRequestsHandler { get; }
@@ -57,18 +56,15 @@
 
         public void Send(ILoplaMessage instruction)
         {
-            lock (_canvas)
-            {
                 _renderer.LoplaPainter(_canvas, instruction);
-            }
+            
         }
 
         public void Render(SKCanvas canvas)
         {
-            lock (_canvas)
-            {
-                canvas.DrawBitmap(_bitMap, 0, 0);
-            }
+            
+            canvas?.DrawBitmap(_bitMap, 0, 0);
+            
         }
     }
 }
