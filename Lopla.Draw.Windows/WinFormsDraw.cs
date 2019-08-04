@@ -1,14 +1,14 @@
-﻿using System.Windows.Forms;
-using Lopla.Draw.SkiaLayer;
-using Lopla.Language.Binary;
-using Lopla.Language.Interfaces;
-using Lopla.Language.Libraries;
-using Lopla.Language.Processing;
-using Lopla.Libs.Interfaces;
-
-namespace Lopla.Draw.Windows
+﻿namespace Lopla.Draw.Windows
 {
-    public class WinFormsDraw : Draw.Libs.Draw
+    using System.Windows.Forms;
+    using Language.Binary;
+    using Language.Interfaces;
+    using Language.Libraries;
+    using Libs;
+    using Lopla.Libs.Interfaces;
+    using SkiaLayer;
+
+    public class WinFormsDraw : Draw
     {
         private static bool _visible;
         private readonly Form _form;
@@ -27,13 +27,9 @@ namespace Lopla.Draw.Windows
             if (!_visible)
             {
                 if (_form.InvokeRequired)
-                {
                     _form.Invoke((MethodInvoker) (() => { _form.Visible = true; }));
-                }
                 else
-                {
                     _form.Visible = true;
-                }
 
                 _visible = true;
             }

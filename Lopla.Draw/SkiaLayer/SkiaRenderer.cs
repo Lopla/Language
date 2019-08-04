@@ -7,15 +7,15 @@
 
     public class SkiaRenderer
     {
-        private readonly ILoplaRequests _provider;
+        private readonly ILoplaRequestsHandler _provider;
         private readonly PaintProvider _paintProvider = new PaintProvider();
         private int _logTextPosition;
         private SKPaint _paintDevice;
         private int _writeTextPosition;
 
-        public SkiaRenderer(ILoplaRequests provider)
+        public SkiaRenderer(ILoplaRequestsHandler loplaGuiEventsHandler)
         {
-            _provider = provider;
+            _provider = loplaGuiEventsHandler;
             _paintDevice = _paintProvider.GetPaintDevice();
         }
 

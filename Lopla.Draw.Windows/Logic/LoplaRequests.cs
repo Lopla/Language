@@ -5,7 +5,7 @@
     using Messages;
     using SkiaSharp.Views.Desktop;
 
-    public class LoplaRequests : ILoplaRequests
+    public class LoplaRequests : ILoplaRequestsHandler
     {
         private readonly SKControl _skiaControl;
 

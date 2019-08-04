@@ -10,7 +10,7 @@
         private SKBitmap _bitMap;
         private SKCanvas _canvas = new SKCanvas(new SKBitmap());
 
-        public SkiaDrawLoplaEngine(ILoplaRequests loplaResRequestsHandler)
+        public SkiaDrawLoplaEngine(ILoplaRequestsHandler loplaResRequestsHandler)
         {
             LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
@@ -18,7 +18,7 @@
             SetupCanvas(256, 256);
         }
 
-        public ILoplaRequests LoplaRequestsHandler { get; }
+        public ILoplaRequestsHandler LoplaRequestsHandler { get; }
 
         public void Dispose()
         {

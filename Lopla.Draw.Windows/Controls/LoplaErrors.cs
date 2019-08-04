@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Lopla.Draw.Windows.Controls
+﻿namespace Lopla.Draw.Windows.Controls
 {
-    using Language.Interfaces;
+    using System;
+    using System.Windows.Forms;
 
     public partial class LoplaErrors : Form
     {
@@ -24,12 +15,12 @@ namespace Lopla.Draw.Windows.Controls
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void LoplaErrors_Load(object sender, EventArgs e)
         {
-            this.textBox1.Text = _errors;
+            textBox1.Text = _errors;
         }
     }
 }

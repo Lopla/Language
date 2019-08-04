@@ -81,5 +81,10 @@ namespace Lopla.Draw.Windows.Controls
         {
             this.OnLoplaDone?.Invoke(sender, e);
         }
+
+        private void LoplaControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

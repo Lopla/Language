@@ -56,6 +56,7 @@
             this.Controls.Add(this.skControl1);
             this.Name = "LoplaControl";
             this.Size = new System.Drawing.Size(320, 240);
+            this.Load += new System.EventHandler(this.LoplaControl_Load);
             this.ResumeLayout(false);
 
         }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Linq;
-using Lopla.Draw.Messages;
-using Lopla.Language.Binary;
-using Lopla.Language.Errors;
-using Lopla.Language.Interfaces;
-using Lopla.Language.Libraries;
-using Lopla.Language.Processing;
-using Lopla.Libs.Interfaces;
-using SkiaSharp;
-using String = Lopla.Language.Binary.String;
-
-namespace Lopla.Draw.Libs
+﻿namespace Lopla.Draw.Libs
 {
+    using System;
+    using System.Linq;
+    using Language.Binary;
+    using Language.Errors;
+    using Language.Interfaces;
+    using Language.Libraries;
+    using Lopla.Libs.Interfaces;
+    using Messages;
     using SkiaLayer;
+    using String = Language.Binary.String;
 
     public class Draw : BaseLoplaLibrary
     {
@@ -20,17 +17,19 @@ namespace Lopla.Draw.Libs
         private readonly ISender _uiEventsProvider;
 
         /// <summary>
-        /// Draw library for lopla
+        ///     Draw library for lopla
         /// </summary>
         /// <param name="drawEngine">target draw engine</param>
-        /// <param name="uiEventsProvider">used by one function .: WaitForEvent
-        /// if something is send to that queue it will be passed to user
-        /// otherwise it's not used by any purpose
-        /// ui events for the system incl: click, SetCanvas, keypress</param>
+        /// <param name="uiEventsProvider">
+        ///     used by one function .: WaitForEvent
+        ///     if something is send to that queue it will be passed to user
+        ///     otherwise it's not used by any purpose
+        ///     ui events for the system incl: click, SetCanvas, keypress
+        /// </param>
         public Draw(
             SkiaDrawLoplaEngine drawEngine,
             ISender uiEventsProvider = null
-            )
+        )
         {
             _renderingEngine = drawEngine;
             _uiEventsProvider = uiEventsProvider;
@@ -43,7 +42,7 @@ namespace Lopla.Draw.Libs
             Add("Line", Line, "a", "b", "c", "d");
 
             Add("Image", Image, "x", "y", "arrayOfBinaryData");
-            
+
             Add("Animation", Animation, "x", "y", "animatedGif");
 
             Add("Flush", Flush);
@@ -69,7 +68,7 @@ namespace Lopla.Draw.Libs
             {
                 var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
 
-                _renderingEngine.Send(new Animation()
+                _renderingEngine.Send(new Animation
                 {
                     BinaryImage = binaryData,
                     Position = new Point
@@ -204,14 +203,14 @@ namespace Lopla.Draw.Libs
 
             return new Result();
         }
-        
+
         private Result Image(Mnemonic expression, IRuntime runtime)
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
                 runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage)
             {
-                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n=>n.ValueAsByte).ToArray();
+                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
 
                 _renderingEngine.Send(new Image
                 {
@@ -227,7 +226,7 @@ namespace Lopla.Draw.Libs
             {
                 runtime.AddError(new RuntimeError("Incorrect parameters provided."));
             }
-            
+
             return new Result();
         }
 

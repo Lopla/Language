@@ -7,13 +7,13 @@
 
     public class WindowsDesktopEvents
     {
-        private readonly LoplaGuiEventProcessor _processor;
+        private readonly LoplaGuiEventProcessor _eventsConsumer;
 
         public WindowsDesktopEvents(
             SKControl skiaControl,
-            LoplaGuiEventProcessor processor)
+            LoplaGuiEventProcessor eventsConsumer)
         {
-            _processor = processor;
+            _eventsConsumer = eventsConsumer;
 
             skiaControl.Click += C_Click;
             skiaControl.KeyUp += C_KeyUp;
@@ -23,25 +23,25 @@
 
         private void C_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            _processor.Render(e.Surface.Canvas);
+            _eventsConsumer.Render(e.Surface.Canvas);
         }
 
         private void C_SizeChanged(object sender, EventArgs e)
         {
             if (sender is SKControl skc)
             {
-                _processor.SizeChanged(skc.Width, skc.Height);
+                _eventsConsumer.SizeChanged(skc.Width, skc.Height);
             }
         }
 
         private void C_KeyUp(object sender, KeyEventArgs e)
         {
-            _processor.Keyboard(e.KeyValue);
+            _eventsConsumer.Keyboard(e.KeyValue);
         }
 
         private void C_Click(object sender, EventArgs e)
         {
-            if (e is MouseEventArgs mea) _processor.Click(mea.X, mea.Y);
+            if (e is MouseEventArgs mea) _eventsConsumer.Click(mea.X, mea.Y);
         }
     }
 }

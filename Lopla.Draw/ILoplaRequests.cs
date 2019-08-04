@@ -2,7 +2,7 @@
 {
     using Messages;
 
-    public interface ILoplaRequests
+    public interface ILoplaRequestsHandler
     {
         Point GetCanvasSize();
 

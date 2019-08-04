@@ -1,6 +1,5 @@
 ﻿namespace Lopla.Language.Processing
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Compiler;
@@ -21,31 +20,27 @@
                 return result;
             }
 
-            return this.Start(processors, project.Libs(), compileResult);
+            return Start(processors, project.Libs(), compileResult);
         }
 
         public ParseCompileAndRunErrors Start(
-            Processors processors, 
+            Processors processors,
             IEnumerable<ILibrary> libs,
             List<ParseAndCompileResult> compileResult)
         {
             var result = new ParseAndCompileResult();
-            if (processors == null)
-            {
-                processors = new Processors();
-            }
+            if (processors == null) processors = new Processors();
 
             _runtime = new Runtime(processors);
 
             //// link
             foreach (var library in libs) _runtime.Link(library);
-            foreach (var binary in compileResult) 
+            foreach (var binary in compileResult)
             {
                 _runtime.Evaluate(binary.Compilation);
-                if(_runtime.Errors.Any()){
-                    break;
-                }
+                if (_runtime.Errors.Any()) break;
             }
+
             foreach (var runtimeError in _runtime.Errors) result.Errors.Add(runtimeError);
 
             return result;
