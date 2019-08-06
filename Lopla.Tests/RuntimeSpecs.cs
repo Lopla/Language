@@ -242,5 +242,6 @@ namespace Lopla.Tests
             Assert.NotEmpty(methods.ToList());
             sut.StartRootScope(compilation);
         }
+
     }
 }

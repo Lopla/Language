@@ -17,6 +17,12 @@ namespace Lopla.Language.Compiler.Mnemonics
             BlockOfCode = runtime.Get(blockOfLopla);
         }
 
+        public If(Mnemonic condition, Mnemonic blockOfCode) : base(null)
+        {
+            this.Condition = condition;
+            this.BlockOfCode = blockOfCode;
+        }
+
         public Mnemonic Condition { get; set; }
 
         public Mnemonic BlockOfCode { get; set; }

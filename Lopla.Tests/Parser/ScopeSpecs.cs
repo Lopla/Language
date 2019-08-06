@@ -77,22 +77,20 @@ Test.Write(b)
                 @"
 /* recurrent method*/
 
-function tt.ok(k){
-    Test.Write(""OK START"")
-    Test.Write(k)
-    Test.Write(""-------"")
-    while(k > 1){
+function tt.ok(k, level){
+    result=""""
+    while(k > 0){
+        /*(tt.ok(k, level+1)*/
+        result = result + Test.ToString(k)
         k= k - 1
-        Test.Write(k)
-        tt.ok(k)
     }
-    Test.Write(""OK END"")
+    Test.Write(result)
 }
 
-tt.ok(5)
+tt.ok(5, 0)
 
 ",
-                "1",
+                "54321",
                 "2",
                 "3"
             });

@@ -36,6 +36,10 @@ namespace Lopla.Language.Compiler.Mnemonics
         {
             this.SubExpression = runtime.Get(node.Value.Children[0]);
         }
+        public Expression(Mnemonic expression) : base(null)
+        {
+            this.SubExpression = expression;
+        }
 
         public Mnemonic SubExpression { get; set; }
 

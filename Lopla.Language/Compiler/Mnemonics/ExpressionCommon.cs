@@ -1,20 +1,15 @@
-﻿using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
+﻿using Hime.Redist;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Compiler.Mnemonics
 {
-    using Binary;
-    using Errors;
-    using Hime.Redist;
-
     public class ExpressionCommon : Mnemonic
     {
-
-        public Arguments Arguments { get; }
-
         public ExpressionCommon(ASTNode? node, IMnemonicsCompiler runtime) : base(node)
         {
-            Arguments=new Arguments();
+            Arguments = new Arguments();
 
             if (node?.Children.Count == 3)
             {
@@ -37,11 +32,13 @@ namespace Lopla.Language.Compiler.Mnemonics
                 Arguments.Args.Add(o);
                 Arguments.Args.Add(rightExpression);
             }
-            else if(node?.Children.Count == 1)
+            else if (node?.Children.Count == 1)
             {
-                this.Arguments.Args.Add(runtime.Get(node.Value.Children[0]));
+                Arguments.Args.Add(runtime.Get(node.Value.Children[0]));
             }
         }
+
+        public Arguments Arguments { get; }
 
         public override Result Execute(IRuntime runtime)
         {
@@ -50,7 +47,7 @@ namespace Lopla.Language.Compiler.Mnemonics
                 if (Arguments.Args[1] is Operator op)
                 {
                     var right = runtime.EvaluateCodeBlock(Arguments.Args[2]);
-                    return  Expression.ArgumentCalcualte(this, left, right, op.Kind, runtime);
+                    return Expression.ArgumentCalcualte(this, left, right, op.Kind, runtime);
                 }
                 else
                 {

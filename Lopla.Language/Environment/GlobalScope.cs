@@ -18,6 +18,17 @@ namespace Lopla.Language.Environment
             _errorHandler = errorHandler;
             this.StartScope($"{fileName}");
         }
+        
+        /// <summary>
+        /// Used to create derived scope (with access to all root variables)
+        /// </summary>
+        /// <param name="errorHandler"></param>
+        /// <param name="rootScope"></param>
+        protected GlobalScope(IErrorHandler errorHandler, GlobalScope rootScope)
+        {
+            _errorHandler = errorHandler;
+            this.ScopesStack.Push(rootScope.GetBoottomScope());
+        }
 
         private Stack<Scope> ScopesStack { get; } = new Stack<Scope>();
 
@@ -26,14 +37,14 @@ namespace Lopla.Language.Environment
             ScopesStack.Pop();
         }
 
-        public void StartScope(string name)
+        public void StartScope(string name = null) 
         {
             if (ScopesStack.Count > 1000)
                 _errorHandler.AddError(new RuntimeError("Stack overflow", null));
             else
                 ScopesStack.Push(new Scope
                 {
-                    Name = name
+                    Name = name ?? Guid.NewGuid().ToString()
                 });
         }
 
@@ -42,6 +53,14 @@ namespace Lopla.Language.Environment
             return ScopesStack.ToArray().Last();
         }
 
+        /// <summary>
+        /// Allows to setup variable
+        /// </summary>
+        /// <param name="variableName">variable name</param>
+        /// <param name="functionParamter">value</param>
+        /// <param name="coverUpVariable">if true then this variable will cover the one in upper scope (useful when setting up arguments for
+        /// setting up function arguments in method scope)
+        /// </param>
         public void SetVariable(string variableName, Result functionParamter, bool coverUpVariable)
         {
             if (!coverUpVariable)
@@ -55,7 +74,8 @@ namespace Lopla.Language.Environment
                     }
                 }
 
-            ScopesStack.Peek()
+            ScopesStack
+                .Peek()
                 .Mem
                 .Set(new VariablePointer
                 {
@@ -82,14 +102,14 @@ namespace Lopla.Language.Environment
 
         public GlobalScope DeriveFunctionScope()
         {
-            var s = new GlobalScope(_errorHandler, Guid.NewGuid().ToString());
-            s.ScopesStack.Push(this.GetBoottomScope());
-            return s;
+            var gs = new GlobalScope(_errorHandler, this);
+            gs.StartScope();
+            return gs;
         }
 
         public override string ToString()
         {
-            return $"{string.Join(" ", this.ScopesStack?.Select(s=>s?.ToString()))}";
+            return $"#{this.ScopesStack.Count} lst: {string.Join(" ", this.ScopesStack?.Select(s=>s?.ToString()))}";
         }
     }
 }

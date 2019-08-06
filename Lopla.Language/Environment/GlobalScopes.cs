@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Environment
@@ -29,6 +27,5 @@ namespace Lopla.Language.Environment
             _globalScopes.Add(newScope);
             return newScope;
         }
-        
     }
 }
