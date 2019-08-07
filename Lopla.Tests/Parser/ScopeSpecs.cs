@@ -75,26 +75,46 @@ Test.Write(b)
             scripts.Add(new List<object>
             {
                 @"
-/* recurrent method*/
 
-function tt.ok(k, level){
+function tt.ok(k, result){
     result=""""
-    while(k > 0){
-        /*(tt.ok(k, level+1)*/
-        result = result + Test.ToString(k)
-        k= k - 1
+    m = 0
+    while(m < k){
+        m = m + 1
+        result = result + ""*""
     }
-    Test.Write(result)
+    return result
 }
 
-tt.ok(5, 0)
+r = tt.ok(5, "" - "")
+Test.Write(r)
 
 ",
-                "54321",
-                "2",
-                "3"
+                "*****"
             });
+            scripts.Add(new List<object>
+            {
+                @"
 
+function TT.Mul(a, b){
+    r = 0
+    if(b == 0){
+        return 0
+    }
+    if(b > 0)
+    {
+        r = TT.Mul(a, b-1) + a
+    }
+
+    return r
+}
+
+r = TT.Mul(4,5)
+Test.Write(r)
+
+",
+                "20"
+            });
             return scripts.Select(e => e.ToArray());
         }
 

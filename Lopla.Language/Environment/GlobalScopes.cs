@@ -24,7 +24,6 @@ namespace Lopla.Language.Environment
         public GlobalScope CreateFunctionScope(GlobalScope scope)
         {
             var newScope = scope.DeriveFunctionScope();
-            _globalScopes.Add(newScope);
             return newScope;
         }
     }

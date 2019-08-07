@@ -100,6 +100,7 @@ namespace Lopla.Language.Processing
         {
             var args = _declarations.GetArguments(pointer, methodParameters, this);
             var stack = _declarations.GetScope(pointer, this);
+            
             var derivedScope = _scopes.CreateFunctionScope(stack);
 
             var code = _declarations.GetCode(pointer, this);
