@@ -1,0 +1,65 @@
+{
+    "name": "lopla",
+    "displayName": "Lopla",
+    "description": "Lopla language definition for VS Code",
+    "version": "0.0.1",
+    "publisher": "galcorp",
+    "engines": {
+        "vscode": "^1.31.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:lopla"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.lopla",
+                "title": "Lopla language extenstion"
+            }
+        ],
+        "languages": [
+            {
+                "id": "lopla",
+                "aliases": [
+                    "Lopla",
+                    "lopla"
+                ],
+                "extensions": [
+                    ".lpc"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "lopla",
+                "scopeName": "source.lopla",
+                "path": "./syntaxes/lopla.tmLanguage.json"
+            }
+        ]
+    },
+    "main": "./out/extension.js",
+    "capabilities" : {
+        "hoverProvider" : "true",
+        "completionProvider" : {
+            "resolveProvider": "true",
+            "triggerCharacters": [ "." ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^3.3.1",
+        "vscode": "^1.1.28",
+        "tslint": "^5.12.1",
+        "@types/node": "^10.12.21",
+        "@types/mocha": "^2.2.42"
+    }
+}
