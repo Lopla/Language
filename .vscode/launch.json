@@ -23,6 +23,15 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
-        }
-    ,]
+        },
+        {
+            "name": "VSC extenstion",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}/Lopla.VSCode/lopla-plugin"
+            ]
+       }
+    ]
 }
