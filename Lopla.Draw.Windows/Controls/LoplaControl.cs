@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using Lopla.Draw.SkiaLayer;
 using Lopla.Draw.Windows.Logic;
@@ -49,7 +50,7 @@ namespace Lopla.Draw.Windows.Controls
             _project = new MainHandler(new List<ILibrary>
             {
                 new WinFormsDraw(this.ParentForm, _engine, _uiEventsProvider.UiEvents),
-                new Lp(),
+                new Lp(code?.ToList().Skip(1).ToArray()),
                 new IO()
             }).GetProject(code);
         }

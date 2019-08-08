@@ -39,6 +39,16 @@
                 "panel": "shared"
             },
             "problemMatcher":[],
-        }
+        },
+        {
+            "label": "publish-loplad",
+            "command": "Copy-Item",
+            "type": "shell",
+            "args": [
+                "${workspaceFolder}/Lopla.Windows/bin/Debug/*",
+                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplad"
+            ],
+            "problemMatcher": [],
+        },
     ]
 }

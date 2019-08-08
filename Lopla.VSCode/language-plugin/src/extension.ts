@@ -14,11 +14,11 @@ function pupulateFunctionArgs(){
 }
 
 function getAvailbleFunctions(){
-  var loplaToolPath = path.resolve(__dirname, '../resources/loplac-win-x64');
-  var loplaTool = path.resolve(__filename, loplaToolPath, "loplac.exe");
+  var loplaToolPath = path.resolve(__dirname, '../resources/loplad');
+  var loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
   var loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
 
-  execFile.execFile(loplaTool, [loplaScripsPath], {}, (error, stdout, stderr) => {
+  execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
     var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)")
     
     if(stdout){
