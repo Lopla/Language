@@ -42,11 +42,6 @@ namespace Lopla.Windows
             {
                 this.ExitThread();
             }
-
-            void form1_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
-            {
-                this.ExitThread();
-            }
         }
     }
 }

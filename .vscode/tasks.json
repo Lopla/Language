@@ -2,14 +2,43 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build-tests",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
                 "${workspaceFolder}/Lopla.Tests/Lopla.Tests.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "build-loplad",
+            "command": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/msbuild.exe",
+            "type": "process",
+            "args": [
+                "-m",
+                "${workspaceFolder}/Language.sln"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "run-loplad",
+            "type": "shell",
+            "command": "${workspaceFolder}/Lopla.Windows/bin/Debug/loplad.exe",
+            "args": [
+                "${workspaceFolder}/Examples"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "echo": true,
+                "clear": true,
+                "showReuseMessage": true,
+                "panel": "shared"
+            },
+            "problemMatcher":[],
         }
     ]
 }
