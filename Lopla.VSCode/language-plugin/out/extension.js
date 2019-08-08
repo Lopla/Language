@@ -19,6 +19,7 @@ function getAvailbleFunctions() {
     execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
         var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)");
         if (stdout) {
+            console.log(stdout);
             var lines = stdout.split("\n");
             lines.forEach(function (line) {
                 let t = line.trim();
