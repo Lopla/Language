@@ -41,14 +41,16 @@
             "problemMatcher":[],
         },
         {
-            "label": "publish-loplad",
+            "label": "copy-loplad-to-plugin",
             "command": "Copy-Item",
             "type": "shell",
             "args": [
+                "-Recurse",
+                "-force",
                 "${workspaceFolder}/Lopla.Windows/bin/Debug/*",
                 "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplad"
             ],
             "problemMatcher": [],
-        },
+        }
     ]
 }
