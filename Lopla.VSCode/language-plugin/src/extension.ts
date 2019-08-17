@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as execFile from 'child_process';
 
+let runTaskProvider: vscode.Disposable | undefined;
+
 let LoplaSchema = {};
 let LoplaKeywords = ['function', 'while', 'if', 'return'];
 
@@ -105,31 +107,13 @@ export function activate(context: vscode.ExtensionContext) {
             return suggestions;
           }
         }
-
         
         return null;
-        
       }
     }, ".")
   );
-    
-  // context.subscriptions.push(
-  //   vscode.languages.registerCompletionItemProvider('lopla', {
-  //     provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
 
-  //       var fCompleteationitem = new vscode.CompletionItem('function', vscode.CompletionItemKind.Keyword);
-  //       fCompleteationitem.detail= 'Label for function';
-  //       fCompleteationitem.documentation = new vscode.MarkdownString("## DOCS");
-
-  //       return [
-  //         fCompleteationitem,
-  //         new vscode.CompletionItem('if', vscode.CompletionItemKind.Keyword),
-  //         new vscode.CompletionItem('while', vscode.CompletionItemKind.Keyword),
-  //         new vscode.CompletionItem('return', vscode.CompletionItemKind.Module)];
-  //     }
-  //   })
-  // );
-  
+  runTaskProvider = vscode.tasks.registerTaskProvider(runTaskProvider.RakeType, new RakeTaskProvider(workspaceRoot));
 }
 
 export function deactivate() {

@@ -42,6 +42,21 @@
                 "scopeName": "source.lopla",
                 "path": "./syntaxes/lopla.tmLanguage.json"
             }
+        ],
+        "taskDefinitions": [
+            {
+                "type": "lopla",
+                "required": [
+                    "task"
+                ],
+                "properties": {
+                    "task":
+                    {
+                        "type":"string",
+                        "description": "what to do"
+                    }
+                }
+            }
         ]
     },
     "main": "./out/extension.js",
