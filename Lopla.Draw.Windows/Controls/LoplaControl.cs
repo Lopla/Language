@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using Lopla.Draw.SkiaLayer;
 using Lopla.Draw.Windows.Logic;
@@ -11,23 +13,22 @@ using Lopla.Starting;
 
 namespace Lopla.Draw.Windows.Controls
 {
-    using System;
-
-    public delegate void LoplaDoneHandler(object sender, System.EventArgs args);
+    public delegate void LoplaDoneHandler(object sender, EventArgs args);
 
     public partial class LoplaControl : UserControl
     {
         private SkiaDrawLoplaEngine _engine;
         private IProject _project;
         private LoplaGuiEventProcessor _uiEventsProvider;
-
-        public event LoplaDoneHandler OnLoplaDone;
+        private Thread t;
 
         public LoplaControl()
         {
             InitializeComponent();
             if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) SetupLopla();
         }
+
+        public event LoplaDoneHandler OnLoplaDone;
 
         private void SetupLopla()
         {
@@ -42,20 +43,11 @@ namespace Lopla.Draw.Windows.Controls
 
         public void Run()
         {
-            backgroundWorker1.RunWorkerAsync();
+            t = new Thread(startWokrer);
+            t.Start();
         }
 
-        public void Project(string[] code)
-        {
-            _project = new MainHandler(new List<ILibrary>
-            {
-                new WinFormsDraw(this.ParentForm, _engine, _uiEventsProvider.UiEvents),
-                new Lp(code?.ToList().Skip(1).ToArray()),
-                new IO()
-            }).GetProject(code);
-        }
-
-        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void startWokrer()
         {
             var p = new Runner();
             if (_project != null)
@@ -64,28 +56,47 @@ namespace Lopla.Draw.Windows.Controls
 
                 if (this?.ParentForm?.Visible == true)
                 {
-                    if (result.HasErrors)
-                    {
-                        new LoplaErrors(result.ToString()).ShowDialog();
-                    }
+                    if (result.HasErrors) new LoplaErrors(result.ToString()).ShowDialog();
                 }
                 else
                 {
                     Console.WriteLine(result.ToString());
                 }
             }
+
+            
+            OnLoplaDone?.Invoke(this, new EventArgs());
+
         }
 
-        
+        public void Project(string[] code)
+        {
+            _project = new MainHandler(new List<ILibrary>
+            {
+                new WinFormsDraw(ParentForm, _engine, _uiEventsProvider.UiEvents),
+                new Lp(code?.ToList().Skip(1).ToArray()),
+                new IO()
+            }).GetProject(code);
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+        }
+
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.OnLoplaDone?.Invoke(sender, e);
         }
 
         private void LoplaControl_Load(object sender, EventArgs e)
         {
+        }
 
+        public void Stop()
+        {
+            this.t.Abort();
+
+            OnLoplaDone?.Invoke(this, new EventArgs());
         }
     }
 }

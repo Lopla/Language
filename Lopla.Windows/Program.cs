@@ -20,7 +20,6 @@ namespace Lopla.Windows
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
             Application.Run(new HiddenContext(args));
         }
 
@@ -32,7 +31,7 @@ namespace Lopla.Windows
             public HiddenContext(string[] args)
             {
                 LoplaForm form1 = new LoplaForm(args);
-                form1.Visible = false;
+                form1.Visible = true;
                 form1.FormClosing += new FormClosingEventHandler(form1_FormClosing);
 
                 form1.Run();

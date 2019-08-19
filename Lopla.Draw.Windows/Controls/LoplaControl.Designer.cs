@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.skControl1 = new SkiaSharp.Views.Desktop.SKControl();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // skControl1
@@ -43,11 +42,6 @@
             this.skControl1.Size = new System.Drawing.Size(320, 240);
             this.skControl1.TabIndex = 0;
             this.skControl1.Text = "skControl1";
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker1_RunWorkerCompleted);
             // 
             // LoplaControl
             // 
@@ -64,6 +58,5 @@
         #endregion
 
         private SkiaSharp.Views.Desktop.SKControl skControl1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

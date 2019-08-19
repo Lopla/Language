@@ -51,6 +51,7 @@
             this.Controls.Add(this.lopla1);
             this.Name = "LoplaForm";
             this.Text = "Lopla";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoplaForm_FormClosed);
             this.ResumeLayout(false);
 
         }

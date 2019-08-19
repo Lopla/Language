@@ -27,5 +27,10 @@ namespace Lopla.Windows
         {
             Application.Exit();
         }
+
+        private void LoplaForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lopla1.Stop();
+        }
     }
 }
