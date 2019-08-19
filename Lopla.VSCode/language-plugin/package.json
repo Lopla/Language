@@ -19,8 +19,8 @@
     "contributes": {
         "commands": [
             {
-                "command": "extension.lopla",
-                "title": "Lopla language extenstion"
+                "command": "extension.lopla.run",
+                "title": "Run lopla code"
             }
         ],
         "languages": [

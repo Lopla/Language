@@ -6,18 +6,20 @@ let runTaskProvider: vscode.Disposable | undefined;
 
 let LoplaSchema = {};
 let LoplaKeywords = ['function', 'while', 'if', 'return'];
+let myStatusBarItem: vscode.StatusBarItem;
+
+const loplaToolPath = path.resolve(__dirname, '../resources/loplad');
+const loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
 
 function pupulateFunctionArgs(){
   for (const key of Object.keys(LoplaSchema)) {
     for (const methods of Object.keys(LoplaSchema[key])) {
-      console.log(key+"."+methods)
+      //console.log(key+"."+methods)
     }
   }
 }
 
 function getAvailbleFunctions(){
-  var loplaToolPath = path.resolve(__dirname, '../resources/loplad');
-  var loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
   var loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
 
   execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
@@ -49,8 +51,18 @@ export function activate(context: vscode.ExtensionContext) {
   getAvailbleFunctions();
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('extension.lopla', () => {
-      vscode.window.showInformationMessage('Lopla extension loaded');
+    vscode.commands.registerCommand('extension.lopla.run', () => {
+      var currentlyOpenTabfilePath = vscode.window.activeTextEditor.document.fileName;
+      var currentlyOpenTabfileName = path.dirname(currentlyOpenTabfilePath);
+
+      execFile.execFile(loplaTool, [currentlyOpenTabfileName], {}, (error, stdout, stderr) => {
+        if(error || stderr){
+          var e = error || stderr;
+          vscode.window.showErrorMessage(e.toString());
+        }
+        
+        console.log(error, stdout, stderr);
+      });
     })
   );
 
@@ -111,6 +123,18 @@ export function activate(context: vscode.ExtensionContext) {
     }, ".")
   );
 
+
+  /*
+  status bar 
+  */
+ 
+  const myCommandId = 'extension.lopla.run';
+  myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+  myStatusBarItem.command = myCommandId;
+  myStatusBarItem.text = `Run lopla`;
+  myStatusBarItem.color = vscode.ThemeColor.name;
+  myStatusBarItem.show();
+	context.subscriptions.push(myStatusBarItem);
 }
 
 export function deactivate() {
