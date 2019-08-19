@@ -1,6 +1,6 @@
 # lopla README
 
-Plugin for handling lopla language grammar within vs code ide. http://lopla.info
+Plugin for handling lopla language grammar within vs code ide. This plugin is designed to suppoert developer with working on lpc files. http://lopla.info 
 
 ## Features
 
@@ -13,3 +13,6 @@ Plugin for handling lopla language grammar within vs code ide. http://lopla.info
 
 Initial release of lopla langugae plugin
 
+### 0.0.2
+
+Added `Run lopla` button on lpc scripts
