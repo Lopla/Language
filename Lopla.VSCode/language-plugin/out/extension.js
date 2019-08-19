@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const path = require("path");
 const execFile = require("child_process");
+let runTaskProvider;
 let LoplaSchema = {};
 let LoplaKeywords = ['function', 'while', 'if', 'return'];
 function pupulateFunctionArgs() {
@@ -19,7 +20,6 @@ function getAvailbleFunctions() {
     execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
         var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)");
         if (stdout) {
-            console.log(stdout);
             var lines = stdout.split("\n");
             lines.forEach(function (line) {
                 let t = line.trim();
@@ -80,20 +80,6 @@ function activate(context) {
             return null;
         }
     }, "."));
-    // context.subscriptions.push(
-    //   vscode.languages.registerCompletionItemProvider('lopla', {
-    //     provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-    //       var fCompleteationitem = new vscode.CompletionItem('function', vscode.CompletionItemKind.Keyword);
-    //       fCompleteationitem.detail= 'Label for function';
-    //       fCompleteationitem.documentation = new vscode.MarkdownString("## DOCS");
-    //       return [
-    //         fCompleteationitem,
-    //         new vscode.CompletionItem('if', vscode.CompletionItemKind.Keyword),
-    //         new vscode.CompletionItem('while', vscode.CompletionItemKind.Keyword),
-    //         new vscode.CompletionItem('return', vscode.CompletionItemKind.Module)];
-    //     }
-    //   })
-    // );
 }
 exports.activate = activate;
 function deactivate() {

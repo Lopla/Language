@@ -24,8 +24,6 @@ function getAvailbleFunctions(){
     var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)")
     
     if(stdout){
-      console.log(stdout);
-      
       var lines = stdout.split("\n");
       lines.forEach(function(line){
         let t = line.trim();
@@ -113,7 +111,6 @@ export function activate(context: vscode.ExtensionContext) {
     }, ".")
   );
 
-  runTaskProvider = vscode.tasks.registerTaskProvider(runTaskProvider.RakeType, new RakeTaskProvider(workspaceRoot));
 }
 
 export function deactivate() {
