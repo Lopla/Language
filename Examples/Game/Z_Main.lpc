@@ -4,6 +4,7 @@ PoorForm.Init()
 args = Lp.Args()
 
 allowAddNew = "0"
+
 if(Lp.Len(args) > 0){
 	allowAddNew = args[0]
 }

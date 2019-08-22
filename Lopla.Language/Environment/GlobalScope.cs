@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
 
 namespace Lopla.Language.Environment
 {
     public class GlobalScope
     {
         private readonly IErrorHandler _errorHandler;
+        public string FileName { get; }
 
         public GlobalScope(IErrorHandler errorHandler, string fileName)
         {
             _errorHandler = errorHandler;
-            this.StartScope($"{fileName}");
+            FileName = fileName;
+            StartScope($"{fileName}");
         }
-        
+
         /// <summary>
-        /// Used to create derived scope (with access to all root variables)
+        ///     Used to create derived scope (with access to all root variables)
         /// </summary>
         /// <param name="errorHandler"></param>
         /// <param name="rootScope"></param>
         protected GlobalScope(IErrorHandler errorHandler, GlobalScope rootScope)
         {
             _errorHandler = errorHandler;
-            this.ScopesStack.Push(rootScope.GetBoottomScope());
+            ScopesStack.Push(rootScope.GetBoottomScope());
         }
 
         private Stack<Scope> ScopesStack { get; } = new Stack<Scope>();
@@ -37,10 +37,10 @@ namespace Lopla.Language.Environment
             ScopesStack.Pop();
         }
 
-        public void StartScope(string name = null) 
+        public void StartScope(string name = null)
         {
             if (ScopesStack.Count > 1000)
-                _errorHandler.AddError(new RuntimeError("Stack overflow", null));
+                _errorHandler.AddError(new RuntimeError("Stack overflow"));
             else
                 ScopesStack.Push(new Scope
                 {
@@ -54,12 +54,13 @@ namespace Lopla.Language.Environment
         }
 
         /// <summary>
-        /// Allows to setup variable
+        ///     Allows to setup variable
         /// </summary>
         /// <param name="variableName">variable name</param>
         /// <param name="functionParamter">value</param>
-        /// <param name="coverUpVariable">if true then this variable will cover the one in upper scope (useful when setting up arguments for
-        /// setting up function arguments in method scope)
+        /// <param name="coverUpVariable">
+        ///     if true then this variable will cover the one in upper scope (useful when setting up arguments for
+        ///     setting up function arguments in method scope)
         /// </param>
         public void SetVariable(string variableName, Result functionParamter, bool coverUpVariable)
         {
@@ -95,7 +96,7 @@ namespace Lopla.Language.Environment
                 if (val != null) break;
             }
 
-            if (val == null) runtime.AddError(new RuntimeError($"Value not defined {name}.", null));
+            if (val == null) runtime.AddError(new RuntimeError($"Value not defined {name}."));
 
             return val;
         }
@@ -109,7 +110,7 @@ namespace Lopla.Language.Environment
 
         public override string ToString()
         {
-            return $"#{this.ScopesStack.Count} lst: {string.Join(" ", this.ScopesStack?.Select(s=>s?.ToString()))}";
+            return $"#{ScopesStack.Count} lst: {string.Join(" ", ScopesStack?.Select(s => s?.ToString()))}";
         }
     }
 }

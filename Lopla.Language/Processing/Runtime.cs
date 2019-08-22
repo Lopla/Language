@@ -63,7 +63,7 @@ namespace Lopla.Language.Processing
 
         public void StartRootScope(Compilation binary)
         {
-            var stack = AddRootScope($"{binary.Name}");
+            var stack = AddOrGetRootScope($"{binary.Name}");
             _processors.Begin(stack);
         }
 
@@ -72,9 +72,9 @@ namespace Lopla.Language.Processing
             _processors.End();
         }
 
-        private GlobalScope AddRootScope(string name)
+        private GlobalScope AddOrGetRootScope(string name)
         {
-            return _scopes.Add(name);
+            return _scopes.AddOrGetRootScope(name);
         }
 
         #endregion
@@ -156,7 +156,7 @@ namespace Lopla.Language.Processing
         {
             var scopeName = "library-" + library.Name;
             //// add scopes for libraries
-            var global = AddRootScope(scopeName);
+            var global = AddOrGetRootScope(scopeName);
             _processors.Begin(global);
 
             foreach (var keyValuePair in library.Methods())

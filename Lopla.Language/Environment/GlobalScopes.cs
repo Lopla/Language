@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Lopla.Language.Interfaces;
 
 namespace Lopla.Language.Environment
@@ -13,8 +14,14 @@ namespace Lopla.Language.Environment
             _errorHandler = errorHandler;
         }
 
-        public GlobalScope Add(string name)
+        public GlobalScope AddOrGetRootScope(string name)
         {
+            var existing = _globalScopes.FirstOrDefault(g => g.FileName == name);
+            if (existing != null)
+            {
+                return existing;
+            }
+
             var newScope = new GlobalScope(_errorHandler, name);
             _globalScopes.Add(newScope);
 
