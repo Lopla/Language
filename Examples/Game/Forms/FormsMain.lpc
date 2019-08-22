@@ -1,0 +1,16 @@
+﻿closeButton = -1
+loginButton = -1
+frm = -1
+
+function FormsMain.Setup(){
+	frm = PoorForm.New("Lopla")
+	closeButton = PoorForm.AddButton(frm, "Close")
+}
+
+function FormsMain.HandleClick(id){
+	if((frm > -1) && (id != -1)){
+		if(id == closeButton){
+			Platform.Quit()
+		}
+	}
+}

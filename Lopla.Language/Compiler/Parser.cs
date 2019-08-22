@@ -11,7 +11,7 @@
     {
         public ParseAndCompileResult ParseAndCompile(Script script)
         {
-            var processignResult = new ParseAndCompileResult();
+            var processingResult = new ParseAndCompileResult();
             if (!string.IsNullOrWhiteSpace(script.Content))
             {
                 var lexer = new LoplaLexer(script.Content);
@@ -32,21 +32,21 @@
                             new string(' ', e.Position.Column) + "^" + Environment.NewLine +
                             new string(' ', e.Position.Column) + "| " + error +
                             (utname != null ? $" (Unexpected token was: {utname})" : ""));
-                }).ToList().ForEach(e => { processignResult.Errors.Add(e); });
+                }).ToList().ForEach(e => { processingResult.Errors.Add(e); });
 
                 //// no errors, then try to compile
-                if (!processignResult.HasErrors)
+                if (!processingResult.HasErrors)
                 {
                     var compilate = new Compiler().Compile(parseResult.Root, script.Name);
 
                     if (compilate.Errors.Any())
-                        processignResult.Errors.AddRange(compilate.Errors);
+                        processingResult.Errors.AddRange(compilate.Errors);
                     else
-                        processignResult.Compilation = compilate.Compilate;
+                        processingResult.Compilation = compilate.Compilate;
                 }
             }
 
-            return processignResult;
+            return processingResult;
         }
 
         private void Show(ASTNode resultRoot, string sep = "")

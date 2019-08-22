@@ -4,7 +4,6 @@ using Hime.Redist;
 using Lopla.Language.Binary;
 using Lopla.Language.Environment;
 using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
 
 namespace Lopla.Language.Compiler.Mnemonics
 {
@@ -39,7 +38,7 @@ namespace Lopla.Language.Compiler.Mnemonics
                 Code = new List<Mnemonic>
                 {
                     code
-                },
+                }
             };
         }
 

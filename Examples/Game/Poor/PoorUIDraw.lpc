@@ -1,0 +1,155 @@
+﻿
+function PoorUI.PutText(posx, posy, label){
+	pos1 = Setup.Position(posx, posy)
+	Draw.Text(pos1[0], pos1[1] , label)
+}
+
+
+/*
+ * draw text control
+ */
+function PoorUIDraw.DrawText(btn){
+	label= btn[6]
+	posx= btn[1]
+	posy= btn[2]
+	PoorUI.UseColor(1)
+
+	PoorUI.PutText(posx, posy , label)
+}
+
+/*
+ * draw frame
+ */
+function PoorUIDraw.DrawFrame(btn){
+	posx= btn[1]
+	posy= btn[2]
+	w = btn[3]
+	h = btn[4]
+	t = btn[6]
+
+	i=0
+	spacer=""
+	skip = ((w - 2 - Lp.Len(t))/2)
+	while(i < skip) {
+		spacer = spacer + "─"
+		i=i + 1
+	}
+	while(i < (Lp.Len(t) + skip) ) {
+		spacer = spacer + " "
+		i=i + 1
+	}
+	while(i < w - 2 ) {
+		spacer = spacer + "─"
+		i=i + 1
+	}
+
+	bspacer=""
+	i=0
+	while(i < w - 2 ) {
+		bspacer = bspacer + "─"
+		i=i + 1
+	}
+
+	/* empty rect */
+	PoorUI.UseColor(4)
+	posa=Setup.Position(posx, posy-1)
+	posb=Setup.Position(posx+w, posy +h)
+	Draw.Box(posa[0], posa[1], posb[0], posb[1])
+	
+	/* header */
+	PoorUI.UseColor(2)
+	PoorUI.PutText(posx, posy,   "┌" + spacer   +"┐")
+	PoorUI.PutText(posx + skip+1, posy,   t)
+
+	/* content */
+	i=0
+	while(i < h-1){
+		PoorUI.UseColor(2)
+		PoorUI.PutText(posx, posy + i + 1, "│")
+		PoorUI.UseColor(1)
+		PoorUI.PutText( (posx + w -1), posy + i + 1, "│")
+		i = i + 1
+	}
+	
+	/* bottom */
+	PoorUI.UseColor(2)
+	PoorUI.PutText(posx, posy + h, "└" )
+	
+	PoorUI.UseColor(3)
+	PoorUI.PutText(posx, posy + h, " " + bspacer +"┘")
+}
+
+/*
+ * draw button control 
+ */
+function PoorUIDraw.DrawTextBox(tbx, textBoxSelected){
+	text= tbx[6]
+
+	posx= tbx[1]
+	posy= tbx[2]
+	w = tbx[3]
+	h = tbx[4]
+
+	placoholder = " "
+
+	selected = 0
+	if( textBoxSelected > 0 ) {
+		if(tbx[5] == textBoxSelected){
+			selected = 1
+			placoholder = "_"
+		}
+	}
+
+	spacer = ""
+	i=0
+	while(i < w) {
+		spacer = spacer + "─"
+		
+		if(Lp.Len(text) <= i){
+
+			text = text + placoholder
+		}
+		i=i + 1
+	}
+
+	PoorUI.UseColor(1)
+	if(selected){
+		PoorUI.UseColor(2)
+	}
+	PoorUI.PutText(posx, posy,   "┌" + spacer +"┐")
+	PoorUI.PutText(posx, posy+1, "│" )
+	PoorUI.PutText(posx, posy+2, "└" )
+	
+	PoorUI.UseColor(1)
+	PoorUI.PutText(posx+1, posy+1, text + "│")
+	if(selected){
+		PoorUI.UseColor(3)
+	}
+	PoorUI.PutText(posx, posy+2, " " + spacer +"┘")
+
+}
+
+/*
+ * draw button control 
+ */
+function PoorUIDraw.DrawButton(btn){
+	label= btn[6]
+	posx= btn[1]
+	posy= btn[2]
+
+	spacer = ""
+	i=0
+	while(i < Lp.Len(label)) {
+		spacer = spacer + "─"
+		i=i + 1
+	}
+
+	PoorUI.UseColor(2)
+	PoorUI.PutText(posx, posy,   "┌" + spacer +"┐")
+	PoorUI.PutText(posx, posy+1, "│" )
+	PoorUI.PutText(posx, posy+2, "└" )
+	PoorUI.UseColor(1)
+	PoorUI.PutText(posx, posy+1, " " + label +"│")
+	PoorUI.UseColor(3)
+	PoorUI.PutText(posx, posy+2, " " + spacer +"┘")
+}

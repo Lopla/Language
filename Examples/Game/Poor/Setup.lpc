@@ -1,0 +1,41 @@
+﻿screenWidth = 80
+screenHeight = 25
+charWidth	= 8
+charHeight	= 8
+
+/* calculate size of single character */
+function Setup.SetMultiplayer(){
+	bounds = Draw.GetTextInfo()
+	charWidth = bounds[0] 
+	charHeight = bounds[1]
+	return [charWidth, charHeight]
+}
+
+/* initilize presenetation on this device */
+function Setup.Platform(dynamicSize){
+	Setup.SetMultiplayer()
+	p = Setup.Position(screenWidth, screenHeight)
+	if(dynamicSize == 0){
+		Draw.SetCanvas( p[0], p[1] )
+	}
+	if(dynamicSize == 1){
+		c = Draw.GetCanvasSize()
+	}
+}
+
+/* get position of char in absolut pixel value */
+function Setup.Position(posx, posy){
+	return [charWidth*posx, (charHeight*posy) + charHeight]
+}
+
+/* make charcater black */
+function Setup.Blackout(a,b){
+	Draw.Box(a*charWidth, b*charHeight, (a+1)*charWidth, (b+1)*charHeight)
+}
+
+/* get position from pixel to chars 
+   usefull to map mouse clicks
+*/
+function Setup.GetPos(posx, posy){
+	return [Lp.Floor(posx / charWidth),  Lp.Floor(posy / charHeight)]
+}

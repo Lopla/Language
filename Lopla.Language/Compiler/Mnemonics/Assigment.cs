@@ -1,11 +1,10 @@
-﻿namespace Lopla.Language.Compiler.Mnemonics
-{
-    using Binary;
-    using Errors;
-    using Hime.Redist;
-    using Interfaces;
-    using Processing;
+﻿using Hime.Redist;
+using Lopla.Language.Binary;
+using Lopla.Language.Errors;
+using Lopla.Language.Interfaces;
 
+namespace Lopla.Language.Compiler.Mnemonics
+{
     public class Assigment : Mnemonic
     {
         public Assigment(ASTNode? node, IMnemonicsCompiler runtime) : base(node)
@@ -19,7 +18,7 @@
                 LeftSide = new ValueTable(varValueTable, runtime);
             else
                 runtime.AddError(new CompilationError(
-                    $"Failed to find variable name in left side of assigment."));
+                    "Failed to find variable name in left side of assigment."));
 
             var expression =
                 runtime.Get(node.Value.Children[2]);
@@ -29,11 +28,10 @@
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="node"></param>
-        /// <param name="leftSide">can be one of <see cref="VariableName"/> or <see cref="ValueTable"/></param>
-        /// <param name="rightSide">usually some <see cref="Mnemonic"/></param>
+        /// <param name="leftSide">can be one of <see cref="VariableName" /> or <see cref="ValueTable" /></param>
+        /// <param name="rightSide">usually some <see cref="Mnemonic" /></param>
         public Assigment(ASTNode? node, IArgument leftSide, Mnemonic rightSide) : base(node)
         {
             LeftSide = leftSide;

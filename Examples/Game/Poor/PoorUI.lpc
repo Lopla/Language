@@ -1,0 +1,321 @@
+﻿/*
+ * background,
+ * main color
+ * bright border color
+ * dark border color
+ * panel color
+ */
+palette=[ [149,149,149], [0,0,0], [255,255,255], [0,0,0], [149,149,149]  ]
+
+/* format of data in this table:
+   type: button, text, textbox, frame
+   x,y
+   w,h
+   id,
+   extras:
+        button 
+			6 - [label]
+		textbox 
+			6 - [text]
+ */
+controls = []
+
+/*
+ * currently selectected textbox
+*/
+textBoxSelected = -1
+
+/*
+ * remove all controls
+ */
+function PoorUI.Reset(){
+	controls = []
+}
+
+/*
+ * use color from palette
+ */
+function PoorUI.UseColor(number){
+	c = palette[number]
+	Draw.SetColor(c[0], c[1], c[2])
+}
+
+/*
+ * clear using bg color
+ */
+function PoorUI.Clear(){
+	c = palette[0]
+	Draw.Clear(c[0],c[1],c[2])
+}
+
+/*
+ * map x and y from gui
+ * to char position
+ */
+function PoorUI.GetPosUnderPixel(x, y){
+	return Setup.GetPos(x, y)
+}
+
+/*
+ * find currenlty used max ui id
+ */
+function PoorUI.MaxId(){
+	maxId = 1
+	i=0
+	while(i < Lp.Len(controls)) {
+		control = controls[i]
+		if(maxId <= control[5]){
+			maxId = control[5]
+		}
+		i=i+1
+	}
+	return maxId
+}
+
+function PoorUI.TrimLast(txt){
+	i=0
+	r=""
+	len = Lp.Len(txt) - 1
+	while( i < len ){
+		r[i]=txt[i]
+		i=i+1
+	}
+	return r
+}
+
+function PoorUI.HandleChar(text){
+	if(textBoxSelected > 0){
+		i=0
+		while(i < Lp.Len(controls)) {
+			control = controls[i]
+			if(textBoxSelected == control[5]){
+				t = control[6]
+
+				if(text == 8){
+					t = PoorUI.TrimLast(t)
+				}
+				
+				if(text != 8){
+					/* add char*/
+					idx=Lp.Len(t)
+					t[idx] = text
+				}
+
+				control[6] = t
+				controls[i]= control
+
+				/* end the loop */
+				i = Lp.Len(controls) + 1
+
+			}
+			i=i+1
+		}
+	}
+}
+
+/*
+ * draw all the ui componenet
+ */
+function PoorUI.Draw(){
+	i = 0
+	while(i < Lp.Len(controls)){
+		c = controls[i] 
+		if(c[0] == "button"){
+			PoorUIDraw.DrawButton(controls[i])
+		}
+		if(c[0] == "text"){
+			PoorUIDraw.DrawText(controls[i])
+		}
+		if(c[0] == "textbox"){
+			PoorUIDraw.DrawTextBox(controls[i], textBoxSelected)
+		}
+		if(c[0] == "frame"){
+			PoorUIDraw.DrawFrame(controls[i])
+		}
+		i = i + 1
+	}
+}
+
+/*
+ * find if there is a control under button
+ */
+function PoorUI.IsSmth(posx, posy){
+	r = -1
+	i = Lp.Len(controls) - 1
+
+	while(i >= 0){
+		c = controls[i]
+
+		if( (c[1] <= posx) && ( posx < (c[1] + c[3]) ) && (c[2] <= posy) && ( posy < (c[2] + c[4]) ) ){
+			r = c[5]
+			return r
+		}
+		i = i - 1
+	}
+
+	return r
+}
+
+function PoorUI.AddFrame(posx, posy, w, h, text){
+	return PoorUI.AddControl(["frame", posx, posy, w, h, -1, text])
+}
+
+function PoorUI.AddText(posx, posy, label){
+	return PoorUI.AddControl(["text",posx, posy, Lp.Len(label), 1, -1, label])
+}
+
+function PoorUI.AddTextBox(posx, posy, w, h){
+	return PoorUI.AddControl(["textbox",posx, posy, w+2, h+2, -1, ""])
+}
+
+function PoorUI.AddButton(posx, posy, label){
+	return PoorUI.AddControl(["button",posx, posy, Lp.Len(label) + 2 , 3, -1, label])
+}
+
+function PoorUI.AddRow(posx, posy, controls){
+	row = ["row", 0, 0, 0, 0, -1, []]
+
+	i = 0
+	rowControls = []
+	x = posx + 1
+	while(i < Lp.Len(controls)){
+		c = controls[i]
+		id = -1
+		if(c[0] == "button"){
+			id = PoorUI.AddButton(x, posy, c[1])
+			x = x + Lp.Len(c[1]) + 2
+		}
+		if(c[0] == "text"){
+			id = PoorUI.AddText(x, posy+1, c[1])
+			x = x + Lp.Len(c[1]) 
+		}
+		rowControls[i] = id
+
+		i=i+1
+	}
+	row[6] = rowControls  /* all control id's */
+	row[7] = controls /* store definition info */
+
+	return PoorUI.AddControl(row)
+}
+
+function PoorUI.AddControl(control){
+	maxId = PoorUI.MaxId() + 1
+	newbuttonidx = Lp.Len(controls)
+	
+	control[5] = maxId 
+	controls[newbuttonidx] = control
+	
+	return maxId
+}
+
+function PoorUI.Remove(id){
+	toRemove = List.New()
+	toRemove = List.Add(toRemove, id)
+	ctrl = PoorUI.GetControl(id)
+	if(ctrl[0] == "row"){
+		i=0
+		cctrl = ctrl[6]
+
+		while(i < Lp.Len(cctrl)){
+			toRemove = List.Add(toRemove, cctrl[i])
+			i=i+1
+		}
+	}
+
+	table = []
+	i = 0
+	nid = 0 
+	while(i < Lp.Len(controls) ){
+		c = controls[i]
+		if( List.Contains(toRemove, c[5]) == 0){
+			table[nid] = c
+			nid = nid + 1
+		}
+
+		if(c[5] == id && c[5]==textBoxSelected){
+			textBoxSelected = -1
+		}
+
+		i = i + 1
+	}
+	controls = table
+}
+
+function PoorUI.GetControl(id){
+	i=0
+	r=[]
+	while(i < Lp.Len(controls) ){
+		c = controls[i]
+
+		if( c[5] == id ){
+			r = c
+		}
+
+		i=i+1
+	}
+	return r
+}
+
+function PoorUI.UpdateText(id, text){
+	PoorUI.UpdateProperty(id, 6, text)
+}
+
+function PoorUI.UpdateSize(id, w, h){
+	PoorUI.UpdateProperty(id, 3, w)
+	PoorUI.UpdateProperty(id, 4, h)
+}
+
+function PoorUI.UpdatePos(id, x, y){
+	PoorUI.UpdateProperty(id, 1, x)
+	PoorUI.UpdateProperty(id, 2, y)
+}
+
+function PoorUI.UpdateProperty(id, num, value){
+	i=0
+	while(i < Lp.Len(controls)) {
+		control = controls[i]
+
+		if(id == control[5]){
+			control[num] = value
+			controls[i]= control
+			i = Lp.Len(controls)+1
+		}
+		i=i+1
+	}
+}
+
+/*
+ * wait for some event
+ * return id of control
+ * return 0 if no control clicked
+ */
+function PoorUI.HandleEvent(e){
+	id = -1
+	if(e[0] == "Click"){
+		pos = Setup.GetPos(e[1], e[2])
+		id = PoorUI.IsSmth(pos[0], pos[1])
+		if(id>-1){
+			selectedC = PoorUI.GetControl(id)
+			if(selectedC[0]=="textbox"){
+				textBoxSelected = id
+			}
+		}
+		if(id<0){
+			textBoxSelected = -1
+		}
+	}
+	if(e[0] == "Key"){
+		if( textBoxSelected >= 0 ){
+			c = e[1]
+			PoorUI.HandleChar(c)
+		}
+	}
+
+	return id
+}
+
+function PoorUI.WaitForEvent(){
+	e = Draw.WaitForEvent()
+	return PoorUI.HandleEvent(e)
+}

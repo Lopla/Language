@@ -1,0 +1,15 @@
+﻿frm  = -1
+textLabel = -1
+
+function FormsProgress.Setup(){
+	frm = PoorForm.New("Status")
+	textLabel = PoorForm.AddText(frm, "")
+}
+
+function FormsProgress.Update(text){
+	if(textLabel > -1){
+		IO.WriteLine(text)
+		PoorUI.UpdateText(textLabel, text)
+		PoorForm.Flush()
+	}
+}

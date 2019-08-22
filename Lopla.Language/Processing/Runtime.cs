@@ -166,5 +166,12 @@ namespace Lopla.Language.Processing
         }
 
         #endregion
+
+        public void EvaluateFunctionDeclatrations(Compilation binary)
+        {
+            StartRootScope(binary);
+            _processors.Get().EvaluateMethodRegistrations(binary, this);
+            EndRootScope();
+        }
     }
 }

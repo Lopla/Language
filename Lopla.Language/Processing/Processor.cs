@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Lopla.Language.Binary;
+using Lopla.Language.Compiler.Mnemonics;
 using Lopla.Language.Environment;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
@@ -68,6 +70,8 @@ namespace Lopla.Language.Processing
             {
                 if (_requestForStop)
                     break;
+
+
                 result = _runtime.EvaluateCodeBlock(mExpression);
             }
 
@@ -89,7 +93,8 @@ namespace Lopla.Language.Processing
         {
             try
             {
-                return Evaluate(binary.Mnemonics);
+                return Evaluate(binary.Mnemonics.Where(m => ! (m is MethodDeclaration ||
+                                                            m is Assigment)).ToList());
             }
             catch (Exception exception)
             {
@@ -97,6 +102,21 @@ namespace Lopla.Language.Processing
             }
 
             return new Result();
+        }
+
+        public void EvaluateMethodRegistrations(Compilation binary, IRuntime runtime)
+        {
+            try
+            {
+                Evaluate(
+                    binary.Mnemonics.Where(m => m is MethodDeclaration ||
+                                                m is Assigment)
+                        .ToList());
+            }
+            catch (Exception exception)
+            {
+                runtime.AddError(new RuntimeError(exception.Message));
+            }
         }
 
         public Result EvaluateFunctionInScope(List<Mnemonic> mCode,

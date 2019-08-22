@@ -1,0 +1,5 @@
+﻿function PoorUIRow.New(def){
+	row = ["row", 0, 0, 0, 0, 1]
+
+	return idx
+}

@@ -1,3 +1,0 @@
-function Main.Loop(){
-    IO.WriteLine("Ech")
-}

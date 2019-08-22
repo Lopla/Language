@@ -1,0 +1,90 @@
+﻿appsgrid = []
+frm  = -1
+localAddButton = -1
+addNewButton = "0"
+
+function FormsLocal.Setup(){
+	frm = PoorForm.New("Local projects")
+	FormsLocal.Reload()
+}
+
+function FormsLocal.Reload(){
+	PoorForm.Clear(frm)
+
+	loggedIn = Appstore.IsLoggedIn()
+
+	listOfApps = Projects.List()
+	i = 0
+	posy = 0
+	while(i < Lp.Len(listOfApps) ){
+		p = listOfApps[i]
+
+		gridRow = []
+		gridRow[0] = p[1] /* full project nane */
+		gridRow[0] = p[0] /* short project nane */
+
+		upBtn = ["text", ""]
+		if((loggedIn==1) && (addNewButton=="1")){
+			upBtn = ["button", "Upload"]
+		}
+		gridRow[1] = PoorForm.AddRow(frm, [   ["button","X"], upBtn, ["button",p[0]] ])
+		
+		row = PoorUI.GetControl(gridRow[1])
+		gridRow[2] = row[6]
+
+		appsgrid[i] = gridRow
+
+		i=i+1
+	}
+	
+	if(addNewButton == "1"){
+		localAddButton = PoorForm.AddButton(frm, "Add new")
+	}
+}
+
+function FormsLocal.Init(a){
+	addNewButton=a
+}
+
+function FormsLocal.Upload(a){
+	FormsProgress.Update("Uploading: "+a)
+	Platform.Upload(Appstore.Get(),a,0)
+	FormsProgress.Update("Upload done. UI Refreshing.")
+	FormsRemote.Refresh()
+	FormsProgress.Update("")
+}
+
+function FormsLocal.HandleClick(id){
+	
+	if(frm > -1 ){
+		if(id == localAddButton){
+			FormsAddNew.Setup()
+		}
+		
+		i=0
+		while(i<Lp.Len(appsgrid)){
+			k=0
+			r = appsgrid[i]
+			c = r[2]
+			while(k < Lp.Len(c)){
+
+				if(c[k] == id){
+					if( k == 0){
+						Projects.Remove(r[0])
+						FormsLocal.Reload()
+					}
+					if( k == 1){
+						if(addNewButton=="1"){
+							FormsLocal.Upload(r[0])
+						}
+					}
+					if( k == 2){
+						Projects.Run(r[0])
+					}
+				}
+				k=k+1
+			}
+			i=i+1
+		}
+	}
+}

@@ -35,6 +35,15 @@
 
             //// link
             foreach (var library in libs) _runtime.Link(library);
+
+            //// compile all methods across all files
+            foreach (var binary in compileResult)
+            {
+                _runtime.EvaluateFunctionDeclatrations(binary.Compilation);
+                if (_runtime.Errors.Any()) break;
+            }
+
+            //// start code processing
             foreach (var binary in compileResult)
             {
                 _runtime.Evaluate(binary.Compilation);

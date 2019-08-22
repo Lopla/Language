@@ -1,0 +1,43 @@
+﻿frm  = -1
+textLabel = []
+
+function FormsStats.Setup(){
+	frm = PoorForm.New("Stats")
+	textLabel[0] = PoorForm.AddText(frm, "")
+	textLabel[1] = PoorForm.AddText(frm, "")
+	textLabel[2] = PoorForm.AddText(frm, "")
+	textLabel[3] = PoorForm.AddText(frm, "")
+	textLabel[4] = PoorForm.AddText(frm, "")
+	textLabel[5] = PoorForm.AddText(frm, "")
+	textLabel[6] = PoorForm.AddText(frm, "")
+	textLabel[7] = PoorForm.AddText(frm, "")
+	textLabel[8] = PoorForm.AddText(frm, "")
+}
+
+function FormsStats.UpdateText(idx, text){
+	PoorUI.UpdateText(textLabel[idx], text)
+}
+
+function FormsStats.Update(e){
+	if(frm > -1){
+		cs = Draw.GetCanvasSize()
+		FormsStats.UpdateText(0, "Canvas")
+		FormsStats.UpdateText(1, cs[0])
+		FormsStats.UpdateText(2, cs[1])	
+
+		FormsStats.UpdateText(3, "Event: "+e[0])
+
+		if(e[0]=="Click"){
+			FormsStats.UpdateText(4, e[1])
+			FormsStats.UpdateText(5, e[2])
+			
+		}
+
+		f = Setup.SetMultiplayer()
+		FormsStats.UpdateText(6, f[0])
+		FormsStats.UpdateText(7, f[1])
+
+		c = Draw.GetTextSize("1234567890")
+		FormsStats.UpdateText(8, c[0])
+	}
+}

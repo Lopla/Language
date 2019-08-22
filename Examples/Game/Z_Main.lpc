@@ -1,0 +1,40 @@
+﻿Setup.Platform(1)
+PoorForm.Init()
+
+args = Lp.Args()
+
+allowAddNew = "0"
+if(Lp.Len(args) > 0){
+	allowAddNew = args[0]
+}
+
+PoorForm.Flush()
+
+function Platform.Quit(){
+	mainQuitFlag  = 0
+}
+
+mainQuitFlag = 1
+while(mainQuitFlag > 0){
+
+	e = Draw.WaitForEvent()
+
+	id =  PoorForm.HandleEvent(e)
+	
+	if(id!=-1){
+		FormsMain.HandleClick(id)
+		
+	}
+
+	FormsStats.Update(e)
+
+	PoorForm.Flush()
+
+	if(e[0]=="Click"){
+		Draw.SetColor(255,0,0)
+		p = Setup.Position(e[1], e[2])
+		Setup.Blackout(p[0], p[1])
+	}
+
+	Draw.Flush()
+}

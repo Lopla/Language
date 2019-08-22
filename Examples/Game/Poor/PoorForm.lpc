@@ -1,0 +1,180 @@
+﻿screenWidth=0
+screenHeight=0
+cScreenWidth=0
+cSreenHeight=0
+
+forms = IdList.New()
+
+function PoorForm.New(text){	
+	form = []
+	form[0] = PoorUI.AddFrame(0, 0, 0, 0, text)
+
+	idx = IdList.MaxId(forms) + 1
+	forms = IdList.Upsert(forms, idx, form)
+
+	PoorForm.RecalcaulteForms()
+	PoorForm.Flush()
+	return idx
+}
+
+/* removes all elements from form */
+function PoorForm.Clear(idx){
+	form = IdList.Get(forms, idx)
+
+	/* skip 1st element */
+	i=1 
+
+	/* remove all other elements from UI */
+	while(i < Lp.Len(form)){
+		PoorUI.Remove(form[i])
+		i=i+1
+	}
+
+	newForm = [form[0]]
+	forms = IdList.Upsert(forms, idx, newForm)
+}
+
+/* removes all elements from form and destorys the form */
+function PoorForm.Kill(idx){
+	PoorForm.Clear(idx)
+	form = IdList.Get(forms, idx)
+	PoorUI.Remove(form[0])
+	forms = IdList.Remove(forms, idx)
+}
+
+function PoorForm.ResizeForm(f, formStartingPos){
+	posy = formStartingPos 
+	
+	PoorUI.UpdatePos(f[0], 1, posy)
+	posy = posy + 1
+
+	i = 0
+	while(i < Lp.Len(f)){
+		c = PoorUI.GetControl(f[i])
+
+		t = c[0]
+		if(t == "textbox"){
+			PoorUI.UpdatePos(f[i], 2, posy)
+			PoorUI.UpdateProperty(f[i], 3, cScreenWidth - 5)
+			posy = posy + 3
+		}
+		if(t == "text"){
+			PoorUI.UpdatePos(f[i], 2, posy)
+			posy = posy + 1
+		}
+		if(t == "button"){
+			PoorUI.UpdatePos(f[i], 2, posy)
+			posy = posy + 3
+		}
+		if(t == "row"){
+			k=0
+			subcontrols = c[6]
+			subdefs = c[7]
+			while(k < Lp.Len(subcontrols)){
+				offset = 0 
+				sd= subdefs[k]
+				if(sd[0] == "text"){
+					offset = 1
+				}
+
+				PoorUI.UpdateProperty(subcontrols[k], 2, posy + offset)
+				k=k+1
+			}
+			posy = posy + 3
+		}
+		i = i + 1
+	}
+	
+	PoorUI.UpdateSize(f[0], cScreenWidth -2 , posy - formStartingPos )
+}
+
+function PoorForm.RecalcaulteForms(){
+	i = 0
+	formStartingPos = 0
+	while(i < Lp.Len(forms)){
+		frmItem = forms[i]
+		
+		PoorForm.ResizeForm(frmItem[1], formStartingPos)
+		
+		/* get form size after resize*/
+		f = frmItem[1]
+		frm = PoorUI.GetControl(f[0])
+		formStartingPos = formStartingPos + frm[4]
+		formStartingPos = formStartingPos + 1
+
+		i = i + 1
+	}
+
+	/* resize screen if needed */
+	if(formStartingPos > cSreenHeight){
+		pos = Setup.Position(cScreenWidth, formStartingPos)
+		Draw.SetCanvas(screenWidth, pos[1])
+	}
+}
+
+function PoorForm.Recalcaulte(x, y){
+	screenWidth = x
+	screenHeight = y
+
+	c = Setup.GetPos(x,y)
+	cScreenWidth = c[0]
+	cScreenHeight = c[1]
+
+	PoorForm.RecalcaulteForms()
+}
+
+function PoorForm.HandleEvent(e){
+	id = PoorUI.HandleEvent(e)
+
+	if(e[0] == "SetCanvas"){
+		PoorForm.Recalcaulte(e[1], e[2])
+	}
+	return id
+}
+
+function PoorForm.WaitForEvent(){
+	e = Draw.WaitForEvent()
+
+	return PoorForm.HandleEvent(e)
+}
+
+function PoorForm.Init(){
+	c = Draw.GetCanvasSize()
+	PoorForm.Recalcaulte(c[0], c[1])
+}
+
+function PoorForm.Flush(){
+	PoorUI.Clear()
+	PoorUI.Draw()
+	Draw.Flush()
+}
+
+function PoorForm.AddRow(frm, controls){
+	return PoorForm.AddControl(frm, PoorUI.AddRow(1, 0, controls))
+}
+
+function PoorForm.AddText(frm, label){
+	return PoorForm.AddControl(frm, PoorUI.AddText(0, 0, label))
+}
+
+function PoorForm.AddTextBox(frm, h){
+	return PoorForm.AddControl(frm, PoorUI.AddTextBox(0, 0, 0, h))
+}
+
+function PoorForm.AddButton(frm, label){
+	PoorForm.AddControl(frm, PoorUI.AddButton(0, 0, label))
+}
+
+function PoorForm.AddControl(idx, ctrlId){
+	f = IdList.Get(forms, idx)
+	
+	last = Lp.Len(f)
+	f[last] = ctrlId
+
+	forms = IdList.Upsert(forms, idx, f)
+
+	PoorForm.RecalcaulteForms()
+
+	return ctrlId
+}
+

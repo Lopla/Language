@@ -1,0 +1,41 @@
+﻿textIdNewName = -1
+frm = -1
+okButtonId = -1
+cancelButtonId = -1
+
+function FormsAddNew.Setup(){
+	if(frm == -1){
+		frm = PoorForm.New("New project name")
+
+		textIdNewName   = PoorForm.AddTextBox(frm, 3)
+	
+		rowId = PoorForm.AddRow(frm, [  ["button","OK"] , ["button","Cancel"] ])
+		buttons = PoorUI.GetControl(rowId)
+		listOfbuttons = buttons[6]
+		okButtonId = listOfbuttons[0]
+		cancelButtonId = listOfbuttons[1]
+	}
+}
+
+function FormsAddNew.HandleClick(id){
+	
+	if( (frm!=-1) && (id!=-1) ){
+		if(id == okButtonId){
+			c = PoorUI.GetControl(textIdNewName)
+			text = c[6]
+			Projects.New(text)
+
+			PoorForm.Kill(frm)
+			frm=-1
+			okButtonId=-1
+			cancelButtonId=-1
+			FormsLocal.Reload()
+
+			PoorForm.Flush()
+		}
+		if(id == cancelButtonId){
+			PoorForm.Kill(frm)
+			frm=-1
+		}
+	}
+}
