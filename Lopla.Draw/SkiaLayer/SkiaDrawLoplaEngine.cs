@@ -33,7 +33,12 @@
         {
             lock (this)
             {
-
+                if (
+                    _bitMap != null &&
+                    (x < _bitMap.Width || y < _bitMap.Height))
+                {
+                    return;
+                }
 
                 var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
 
@@ -41,7 +46,7 @@
                 {
                     using (var c = new SKCanvas(newBitMap))
                     {
-                        c.Clear();
+                        c.Clear(SKColor.Empty);
                         c.DrawBitmap(
                             _bitMap, new SKRect(0, 0,
                                 _bitMap.Width, _bitMap.Height));
@@ -55,7 +60,7 @@
 
                 _bitMap = newBitMap;
                 _canvas = new SKCanvas(_bitMap);
-                _canvas.Clear(SKColor.Empty);
+
             }
         }
 

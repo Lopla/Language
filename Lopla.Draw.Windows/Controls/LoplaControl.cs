@@ -20,7 +20,7 @@ namespace Lopla.Draw.Windows.Controls
         private SkiaDrawLoplaEngine _engine;
         private IProject _project;
         private LoplaGuiEventProcessor _uiEventsProvider;
-        private Thread t;
+        private Thread _loplaThread;
 
         public LoplaControl()
         {
@@ -43,8 +43,8 @@ namespace Lopla.Draw.Windows.Controls
 
         public void Run()
         {
-            t = new Thread(startWokrer);
-            t.Start();
+            _loplaThread = new Thread(startWokrer);
+            _loplaThread.Start();
         }
 
         private void startWokrer()
@@ -64,9 +64,8 @@ namespace Lopla.Draw.Windows.Controls
                 }
             }
 
-            
-            OnLoplaDone?.Invoke(this, new EventArgs());
 
+            OnLoplaDone?.Invoke(this, new EventArgs());
         }
 
         public void Project(string[] code)
@@ -94,7 +93,7 @@ namespace Lopla.Draw.Windows.Controls
 
         public void Stop()
         {
-            this.t.Abort();
+            _loplaThread.Abort();
 
             OnLoplaDone?.Invoke(this, new EventArgs());
         }
