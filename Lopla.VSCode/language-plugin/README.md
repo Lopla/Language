@@ -16,3 +16,7 @@ Initial release of lopla langugae plugin
 ### 0.0.2
 
 Added `Run lopla` button on lpc scripts
+
+### 0.0.3
+
+Bug fixes on a lopla runner

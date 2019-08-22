@@ -43,6 +43,7 @@
         {
             "label": "copy-loplad-to-plugin",
             "command": "Copy-Item",
+            "dependsOn": ["build-loplad"],
             "type": "shell",
             "args": [
                 "-Recurse",
