@@ -31,14 +31,14 @@
 
         public void SetCanvasSize(decimal sizeX, decimal sizeY)
         {
-            if (_skiaControl.InvokeRequired)
-            {
-                _skiaControl.Invoke((MethodInvoker) (() => { _skiaControl.SetBounds(0, 0, (int) sizeX, (int) sizeY); }));
-            }
-            else
-            {
-                _skiaControl.SetBounds(0, 0, (int)sizeX, (int)sizeY);
-            }
+            //if (_skiaControl.InvokeRequired)
+            //{
+            //    _skiaControl.Invoke((MethodInvoker) (() => { _skiaControl.SetBounds(0, 0, (int) sizeX, (int) sizeY); }));
+            //}
+            //else
+            //{
+            //    _skiaControl.SetBounds(0, 0, (int)sizeX, (int)sizeY);
+            //}
         }
     }
 }

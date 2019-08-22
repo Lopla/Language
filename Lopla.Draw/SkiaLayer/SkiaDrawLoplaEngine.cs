@@ -22,11 +22,8 @@
 
         public void Dispose()
         {
-            lock (_canvas)
-            {
-                _bitMap?.Dispose();
-                _canvas?.Dispose();
-            }
+            _bitMap?.Dispose();
+            _canvas?.Dispose();
         }
 
         public void SetupCanvas(int x, int y)
