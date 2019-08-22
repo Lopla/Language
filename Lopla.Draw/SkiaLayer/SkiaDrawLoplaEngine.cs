@@ -8,14 +8,14 @@
     {
         private readonly SkiaRenderer _renderer;
         private SKBitmap _bitMap;
-        private SKCanvas _canvas = new SKCanvas(new SKBitmap());
+        private SKCanvas _canvas = null;
 
         public SkiaDrawLoplaEngine(ILoplaRequestsHandler loplaResRequestsHandler)
         {
             LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
-            SetupCanvas(256, 256);
+            SetupCanvas(32, 32);
         }
 
         public ILoplaRequestsHandler LoplaRequestsHandler { get; }
@@ -31,14 +31,16 @@
 
         public void SetupCanvas(int x, int y)
         {
-            var newBitMap = new SKBitmap(x, y);
+            var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
 
             if (_bitMap != null)
             {
                 using (var c = new SKCanvas(newBitMap))
                 {
                     c.Clear();
-                    c.DrawBitmap(_bitMap, new SKRect(0, 0, _bitMap.Width, _bitMap.Height));
+                    c.DrawBitmap(
+                        _bitMap, new SKRect(0, 0, 
+                        _bitMap.Width, _bitMap.Height));
                 }
             }
 
@@ -47,6 +49,7 @@
 
             _bitMap = newBitMap;
             _canvas = new SKCanvas(_bitMap);
+            _canvas.Clear(SKColor.Empty);
         }
 
         public void Send(ILoplaMessage instruction)

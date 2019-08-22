@@ -33,12 +33,10 @@
             // 
             // lopla1
             // 
-            this.lopla1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lopla1.Location = new System.Drawing.Point(38, 31);
+            this.lopla1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lopla1.Location = new System.Drawing.Point(0, 0);
             this.lopla1.Name = "lopla1";
-            this.lopla1.Size = new System.Drawing.Size(1124, 376);
+            this.lopla1.Size = new System.Drawing.Size(689, 337);
             this.lopla1.TabIndex = 1;
             this.lopla1.OnLoplaDone += new Lopla.Draw.Windows.Controls.LoplaDoneHandler(this.Lopla1_OnLoplaDone);
             // 
@@ -47,7 +45,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(1196, 444);
+            this.ClientSize = new System.Drawing.Size(689, 337);
             this.Controls.Add(this.lopla1);
             this.Name = "LoplaForm";
             this.Text = "Lopla";

@@ -14,7 +14,7 @@
                 TextSize = 16,
 
                 /// if antialias is enabled then it's nicer
-                IsAntialias = true,
+                IsAntialias = false,
                 IsStroke = false,
                 Typeface = GetFiraMono()
             };
