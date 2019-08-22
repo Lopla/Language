@@ -59,6 +59,15 @@
             "script": "watch",
             "path": "Lopla.VSCode/language-plugin/",
             "problemMatcher": []
+        },
+        {
+            "label":"package-extension",
+            "type": "shell",
+            "options":{
+                "cwd": "Lopla.VSCode/language-plugin/"
+            },
+            "command":"vsce package",
+            "problemMatcher": []
         }
     ]
 }
