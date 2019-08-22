@@ -1,0 +1,73 @@
+/*
+0: draw a line segment ending in a leaf
+1: draw a line segment
+[: push position and angle, turn left 45 degrees
+]: pop position and angle, turn right 45 degrees
+*/
+
+lineLength =5
+stack = Stack.New()
+
+function DrawFractal.SetLine(len){
+    lineLength = len
+}
+
+function DrawFractal.Turn(pos, deg){
+    x1 = 0
+    y1 = -lineLength
+
+    c = Math.Cos(deg)
+    s = Math.Sin(deg)
+
+    x2 = (c * x1) - (s * y1)
+    y2 = (s * x1) + (c * y1)
+
+    result = [ pos[0] + x2, pos[1]+y2, pos[2]  ]
+
+    return result
+}
+
+function DrawFractal.Change(pos, deg){
+    pos[2] = pos[2] + deg
+    return pos
+}
+
+function DrawFractal.Line(pos){
+    de = DrawFractal.Turn(pos, pos[2])
+    Draw.Line(pos[0], pos[1], de[0], de[1])
+    return de
+}
+
+function DrawFractal.Symbol(n, pos){
+    map = "01[]"
+    if(n == map[0]){
+        pos = DrawFractal.Line(pos)
+    }
+    if(n == map[1]){
+        pos = DrawFractal.Line(pos)
+    }
+    if(n == map[2]){
+        stack = Stack.Push(stack, pos)
+        pos = DrawFractal.Change(pos, -45)
+
+    }
+    if(n == map[3]){
+        pos = Stack.Get(stack)
+        stack = Stack.Pop(stack)
+        pos = DrawFractal.Change(pos, 45)
+    }
+    return pos
+}
+
+function DrawFractal.Draw(axiom){
+    
+    d = Lp.Len(axiom)
+    i=0
+    pos = [400, 50, 180]
+    while(i < d){
+        pos = DrawFractal.Symbol(axiom[i], pos)
+        Draw.Flush()
+        i=i+1
+    }    
+}
+

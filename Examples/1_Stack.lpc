@@ -21,4 +21,3 @@ function Stack.Pop(stack){
 
     return result
 }
-

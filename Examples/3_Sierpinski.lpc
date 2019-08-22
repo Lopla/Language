@@ -1,0 +1,28 @@
+function Sierpinski.Symbol(n, pos){
+    map = "FG+-"
+    if(n == map[0]){
+        pos = DrawFractal.Line(pos)
+    }
+    if(n == map[1]){
+        pos = DrawFractal.Line(pos)
+    }
+    if(n == map[2]){
+        pos = DrawFractal.Change(pos, -120)
+
+    }
+    if(n == map[3]){
+        pos = DrawFractal.Change(pos, 120)
+    }
+    return pos
+}
+
+function Sierpinski.Draw(axiom){
+    d = Lp.Len(axiom)
+    i=0
+    pos = [40, 50, 90]
+    while(i < d){
+        pos = Sierpinski.Symbol(axiom[i], pos)
+        Draw.Flush()
+        i=i+1
+    }    
+}

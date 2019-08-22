@@ -125,13 +125,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 
   /*
+  
   status bar 
   */
- 
+  
   const myCommandId = 'extension.lopla.run';
   myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
   myStatusBarItem.command = myCommandId;
-  myStatusBarItem.text = `Run lopla`;
+  myStatusBarItem.text = `Lopla`;
   myStatusBarItem.color = vscode.ThemeColor.name;
   myStatusBarItem.show();
 	context.subscriptions.push(myStatusBarItem);

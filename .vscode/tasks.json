@@ -38,7 +38,7 @@
                 "showReuseMessage": true,
                 "panel": "shared"
             },
-            "problemMatcher":[],
+            "problemMatcher": []
         },
         {
             "label": "copy-loplad-to-plugin",
@@ -50,7 +50,14 @@
                 "${workspaceFolder}/Lopla.Windows/bin/Debug/*",
                 "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplad"
             ],
-            "problemMatcher": [],
+            "problemMatcher": []
+        },
+        {
+            "label":"debug-extension",
+            "type": "npm",
+            "script": "watch",
+            "path": "Lopla.VSCode/language-plugin/",
+            "problemMatcher": []
         }
     ]
 }

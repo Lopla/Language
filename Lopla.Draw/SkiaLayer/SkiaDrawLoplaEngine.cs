@@ -31,30 +31,40 @@
 
         public void SetupCanvas(int x, int y)
         {
-            var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
-
-            if (_bitMap != null)
+            lock (this)
             {
-                using (var c = new SKCanvas(newBitMap))
+
+
+                var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
+
+                if (_bitMap != null)
                 {
-                    c.Clear();
-                    c.DrawBitmap(
-                        _bitMap, new SKRect(0, 0, 
-                        _bitMap.Width, _bitMap.Height));
+                    using (var c = new SKCanvas(newBitMap))
+                    {
+                        c.Clear();
+                        c.DrawBitmap(
+                            _bitMap, new SKRect(0, 0,
+                                _bitMap.Width, _bitMap.Height));
+                    }
                 }
+
+                _bitMap?.Dispose();
+                _bitMap = null;
+                _canvas?.Dispose();
+                _canvas = null;
+
+                _bitMap = newBitMap;
+                _canvas = new SKCanvas(_bitMap);
+                _canvas.Clear(SKColor.Empty);
             }
-
-            _bitMap?.Dispose();
-            _canvas?.Dispose();
-
-            _bitMap = newBitMap;
-            _canvas = new SKCanvas(_bitMap);
-            _canvas.Clear(SKColor.Empty);
         }
 
-        public void Send(ILoplaMessage instruction)
+        public void Perform(ILoplaMessage instruction)
         {
-            _renderer.LoplaPainter(_canvas, instruction);
+            lock (this)
+            {
+                _renderer.LoplaPainter(_canvas, instruction);
+            }
         }
 
         public void Render(SKCanvas canvas)

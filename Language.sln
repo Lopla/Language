@@ -30,10 +30,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{6A21
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{7817AEE8-E07E-41DC-A7E7-D5CA067D6D6F}"
 	ProjectSection(SolutionItems) = preProject
-		Examples\Math.lpc = Examples\Math.lpc
-		Examples\Stack.lpc = Examples\Stack.lpc
-		Examples\String.lpc = Examples\String.lpc
-		Examples\Test.lpc = Examples\Test.lpc
+		Examples\1_Stack.lpc = Examples\1_Stack.lpc
+		Examples\2_Math.lpc = Examples\2_Math.lpc
+		Examples\3_Sierpinski.lpc = Examples\3_Sierpinski.lpc
+		Examples\4_Perf.lpc = Examples\4_Perf.lpc
+		Examples\A.lpc = Examples\A.lpc
+		Examples\Anim.lpc = Examples\Anim.lpc
+		Examples\DrawFractal.lpc = Examples\DrawFractal.lpc
+		Examples\Events.lpc = Examples\Events.lpc
+		Examples\L.lpc = Examples\L.lpc
+		Examples\Main.lpc = Examples\Main.lpc
 	EndProjectSection
 EndProject
 Global

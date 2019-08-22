@@ -1,11 +1,11 @@
-# lopla README
+# Lopla visual studio code plugin
 
-Plugin for handling lopla language grammar within vs code ide. This plugin is designed to suppoert developer with working on lpc files. http://lopla.info 
+Plugin for writing lopla code in visual studio code. Current information about lopla language can be found here: http://lopla.info 
 
 ## Features
 
-* Supports keywords highlight.
-* Checks for availble library functions within base language scope (using intellisense ctrl+space)
+* Keywords highlight. (if, while, function, return)
+* Code completation for lopla functions. (namespaces: IO, Lp, Draw) with `ctrl + space` 
 
 ## Release Notes
 

@@ -68,7 +68,7 @@
             {
                 var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
 
-                _renderingEngine.Send(new Animation
+                _renderingEngine.Perform(new Animation
                 {
                     BinaryImage = binaryData,
                     Position = new Point
@@ -168,7 +168,7 @@
                 return new Result();
             }
 
-            _renderingEngine.Send(new Text
+            _renderingEngine.Perform(new Text
             {
                 Label = text,
                 Position = new Point
@@ -185,7 +185,7 @@
         {
             if (runtime.GetVariable("a").Get(runtime) is Number x1 &&
                 runtime.GetVariable("b").Get(runtime) is Number y1)
-                _renderingEngine.Send(new SetCanvas
+                _renderingEngine.Perform(new SetCanvas
                 {
                     Size = new Point
                     {
@@ -199,7 +199,7 @@
 
         private Result Flush(Mnemonic expression, IRuntime runtime)
         {
-            _renderingEngine.Send(new Flush());
+            _renderingEngine.Perform(new Flush());
 
             return new Result();
         }
@@ -212,7 +212,7 @@
             {
                 var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
 
-                _renderingEngine.Send(new Image
+                _renderingEngine.Perform(new Image
                 {
                     BinaryImage = binaryData,
                     Position = new Point
@@ -236,7 +236,7 @@
                 runtime.GetVariable("b").Get(runtime) is Number y1 &&
                 runtime.GetVariable("c").Get(runtime) is Number x2 &&
                 runtime.GetVariable("d").Get(runtime) is Number y2)
-                _renderingEngine.Send(new Box
+                _renderingEngine.Perform(new Box
                 {
                     Start = new Point
                     {
@@ -260,7 +260,7 @@
             if (runtime.GetVariable("r").Get(runtime) is Number r &&
                 runtime.GetVariable("g").Get(runtime) is Number g &&
                 runtime.GetVariable("b").Get(runtime) is Number b)
-                _renderingEngine.Send(new SetColor
+                _renderingEngine.Perform(new SetColor
                 {
                     Color =
                         new Color
@@ -282,7 +282,7 @@
                 runtime.GetVariable("b").Get(runtime) is Number y1 &&
                 runtime.GetVariable("c").Get(runtime) is Number x2 &&
                 runtime.GetVariable("d").Get(runtime) is Number y2)
-                _renderingEngine.Send(new Line
+                _renderingEngine.Perform(new Line
                 {
                     Start = new Point
                     {
@@ -315,7 +315,7 @@
             else
                 runtime.AddError(new RuntimeError($"Type {textArgument} not supproted.", expression));
 
-            _renderingEngine.Send(new Write
+            _renderingEngine.Perform(new Write
             {
                 Align = (Aligmnent) alingment.Value,
                 Text = text,
@@ -330,7 +330,7 @@
             if (runtime.GetVariable("s").Get(runtime) is String s) text = s.Value;
             if (runtime.GetVariable("s").Get(runtime) is Number i) text = i.Value.ToString();
             if (runtime.GetVariable("s").Get(runtime) is LoplaList l) text = $"array [{l.Length}]";
-            _renderingEngine.Send(new Log
+            _renderingEngine.Perform(new Log
             {
                 Text = text
             });
@@ -342,7 +342,7 @@
             if (runtime.GetVariable("r").Get(runtime) is Number r &&
                 runtime.GetVariable("g").Get(runtime) is Number g &&
                 runtime.GetVariable("b").Get(runtime) is Number b)
-                _renderingEngine.Send(new Clear
+                _renderingEngine.Perform(new Clear
                 {
                     Color = new Color
                     {

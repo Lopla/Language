@@ -1,0 +1,33 @@
+lastCall = 0
+function Perf.Start(){
+    lastCall=Lp.Ticks()
+}
+
+function Perf.Stop(){
+    ticksElapsed = Lp.Ticks()
+
+    duration =ticksElapsed - lastCall 
+    seconds = (duration) /   10000000 
+    Perf.Show()
+}
+
+function Perf.Show(){
+    Draw.SetColor(255,255,255)
+
+    ticksElapsed = Lp.Ticks()
+    duration = ticksElapsed - lastCall 
+    seconds = (duration) /   10000000 
+    
+    Draw.SetColor(0,0,0)
+    Draw.Box(0,0, 100, 30)
+    Draw.SetColor(255,255,255)
+    Draw.Text(10,10, seconds)
+}
+
+function Perf.Main(){
+    while(1){
+        Perf.Show()
+        Draw.WaitForEvent()
+    }
+
+}

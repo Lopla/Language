@@ -1,0 +1,21 @@
+function Events.showAll(a){
+    i = Lp.Len(a)
+    s=""""
+    while(i > 0){
+        s = s + a[i]
+        i=i-1
+    }
+    return s
+}
+
+function Events.Main(){
+    Draw.Clear(150,150,150)
+    Draw.Flush()
+
+    while (1)
+    {
+        e = Draw.WaitForEvent()
+        Draw.Log(e[0])
+        Draw.Flush()
+    }
+}

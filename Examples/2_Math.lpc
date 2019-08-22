@@ -73,3 +73,4 @@ function Math.Cos(deg){
     return Math.SinRadians(x)
     
 }
+

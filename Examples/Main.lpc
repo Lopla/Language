@@ -1,0 +1,39 @@
+
+function Main.Log(line){
+    Draw.Log(line)
+    Draw.Flush()
+}
+
+
+function Main.Fractal(){
+    Main.Log("L-system")
+    
+    axiom = "0"
+    rules = [ ["1", "11"], ["0", "1[0]0"] ]
+
+    axiom = L.Do(axiom, rules, 4)
+    Main.Log(axiom)
+
+    DrawFractal.Draw(axiom)
+}
+
+function Main.Sierpinski(){
+
+    while(1){
+        Main.Log("Sierpiński")
+        axiom = "F-G-G"
+        rules = [ ["F", "F-G+F+G-F"], ["G", "GG"] ]
+
+        axiom = L.Do(axiom, rules, 5)
+        Main.Log(axiom)
+
+        DrawFractal.SetLine(8)
+        Sierpinski.Draw(axiom)
+        Draw.WaitForEvent()
+    }
+}
+
+Draw.Clear(1, 255, 255)
+
+Anim.Main()
+

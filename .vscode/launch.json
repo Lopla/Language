@@ -26,6 +26,8 @@
             "name": "VSC extenstion",
             "type": "extensionHost",
             "request": "launch",
+            //"preLaunchTask": "debug-extension",
+            
             "runtimeExecutable": "${execPath}",
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}/Lopla.VSCode/language-plugin"
