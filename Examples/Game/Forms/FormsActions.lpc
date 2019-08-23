@@ -4,12 +4,26 @@ buttonRocks = -1
 buttonDrones = -1
 
 function FormsActions.Setup(){
-	frm = PoorForm.New("")
-    buttonsRow = PoorForm.AddRow(frm, [ ["button","Rocks"], ["button","Drones"] ])
-    /* buttonRocks = buttonsRow[0]
-    buttonDrones = buttonsRow[1] */
+	frm = PoorForm.New(Player.Name())
+    FormsActions.Reload()
 }
 
+function FormsActions.Reload(){
+    PoorForm.Clear(frm)
+
+    /* 
+    IO.WriteLine("Player: "+ Player.Name())
+    IO.Write("  Ships: ")
+    IO.WriteLine(Lp.Len(Player.Ships())) 
+    */
+
+	buttonsRow = PoorForm.AddRow(frm, [ ["button","Rocks"], ["button","Drones"] ])
+    /* 
+        buttonRocks = buttonsRow[0]
+        buttonDrones = buttonsRow[1] 
+    */
+
+}
 function FormsActions.HandleClick(id){
 
 }

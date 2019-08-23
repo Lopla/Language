@@ -1,9 +1,25 @@
 players=[]
+currentPlayer = 0
+
 /*
         name
         ships[]
-    */
+*/
 function Player.New(){
-    return [Generator.Name(), [ Ship.New() ]]
+    return [ Generator.Name(), [ Ship.New(),Ship.New() ] ]
 }
 
+function Player.Add(){
+    players[Lp.Len(players)] = Player.New()
+}
+
+function Player.Name(){
+    b = players[currentPlayer]
+    
+    return b[0]
+}
+
+function Player.Ships(){
+    a = players[currentPlayer]
+    return a[1]
+}
