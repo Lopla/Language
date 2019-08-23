@@ -1,5 +1,6 @@
 nameSyl = ["mon", "fay", "shi", "zag", "blarg", "rash", "izen"]
 lastSyl = ["malo", "zak", "abo", "wonk"]
+
 function Generator.Name(){
     return Generator.FirstName()+" "+Generator.LastName()
 }

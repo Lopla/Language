@@ -5,9 +5,9 @@ Setup.Platform(0)
 PoorForm.Init()
 
 
-FormsMain.Setup()
 FormsActions.Setup()
 FormsStats.Setup()
+FormsMain.Setup()
 
 PoorForm.Flush()
 
@@ -17,8 +17,9 @@ function Main.Quit(){
 
 
 function Main.Loop(){
+	Player.New()
 
-	while(quitFlag == 1){
+	while(quitFlag == 0){
 
 		e = Draw.WaitForEvent()
 
@@ -26,7 +27,7 @@ function Main.Loop(){
 
 		if(id!=-1){
 			FormsMain.HandleClick(id)
-			FormActions.HandleClick(id)
+			FormsActions.HandleClick(id)
 		}
 
 		FormsStats.Update(e)
@@ -37,6 +38,6 @@ function Main.Loop(){
 
 }
 
-IO.WriteLine(Generator.Name())
+/* IO.WriteLine(Generator.Name()) */
 
-/* Main.Loop() */
+Main.Loop()

@@ -1,4 +1,9 @@
-function Player.Ships()
-{
-    return []
+players=[]
+/*
+        name
+        ships[]
+    */
+function Player.New(){
+    return [Generator.Name(), [ Ship.New() ]]
 }
+

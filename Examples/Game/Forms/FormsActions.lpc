@@ -1,8 +1,13 @@
 frm = -1
+buttonsRow = []
+buttonRocks = -1
+buttonDrones = -1
 
 function FormsActions.Setup(){
 	frm = PoorForm.New("")
-    row = PoorForm.AddRow(frm, [   ["button","X"], ["button","1212"] ])
+    buttonsRow = PoorForm.AddRow(frm, [ ["button","Rocks"], ["button","Drones"] ])
+    /* buttonRocks = buttonsRow[0]
+    buttonDrones = buttonsRow[1] */
 }
 
 function FormsActions.HandleClick(id){

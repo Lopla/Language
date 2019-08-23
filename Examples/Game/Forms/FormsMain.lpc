@@ -10,7 +10,7 @@ function FormsMain.Setup(){
 function FormsMain.HandleClick(id){
 	if((frm > -1) && (id != -1)){
 		if(id == closeButton){
-			Platform.Quit()
+			Main.Quit()
 		}
 	}
 }

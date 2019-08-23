@@ -1,9 +1,7 @@
 /*
     name
-    cargo (tons)
-    range (ly)
+        [cargo (tons), range (ly)]
 */
-
 function Ship.New(){
-    return ["New", 10, 10]
+    return [Generator.FirstName(), [10,10] ]
 }
