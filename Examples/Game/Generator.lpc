@@ -1,0 +1,25 @@
+nameSyl = ["mon", "fay", "shi", "zag", "blarg", "rash", "izen"]
+lastSyl = ["malo", "zak", "abo", "wonk"]
+function Generator.Name(){
+    return Generator.FirstName()+" "+Generator.LastName()
+}
+
+function Generator.FirstName(){
+    name = ""
+    howManySylab = Math.RandomRangeI(2,4)
+    while(howManySylab>0){
+        howManySylab = howManySylab -1
+        name = name + Math.RandomArray(nameSyl)
+    }
+    return name
+}
+
+function Generator.LastName(){
+    name = ""
+    howManySylab = Math.RandomRangeI(1,3)
+    while(howManySylab>0){
+        howManySylab = howManySylab -1
+        name = name + Math.RandomArray(lastSyl)
+    }
+    return name
+}

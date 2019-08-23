@@ -1,0 +1,9 @@
+/*
+    name
+    cargo (tons)
+    range (ly)
+*/
+
+function Ship.New(){
+    return ["New", 10, 10]
+}

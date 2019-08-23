@@ -46,8 +46,12 @@ function activate(context) {
             if (error || stderr) {
                 var e = error || stderr;
                 vscode.window.showErrorMessage(e.toString());
+                console.error(e);
             }
-            console.log(error, stdout, stderr);
+            if(stdout){
+                vscode.window.showInformationMessage(stdout);
+                console.log(e);
+            }
         });
     }));
     var loplaDocumentScheme = { scheme: 'file', language: 'lopla' };

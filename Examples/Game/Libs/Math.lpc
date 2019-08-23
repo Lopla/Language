@@ -74,3 +74,15 @@ function Math.Cos(deg){
     
 }
 
+function Math.RandomRangeI(a, b){
+    c = Math.RandomI(b-a) + a
+    return c
+}
+
+function Math.RandomI(a){
+    return Lp.Floor( Lp.Random() * a ) 
+}
+
+function Math.RandomArray(arr){
+    return arr[Math.RandomI(Lp.Len(arr))]
+}

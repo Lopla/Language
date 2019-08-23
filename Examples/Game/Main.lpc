@@ -23,7 +23,7 @@ function Main.Loop(){
 		e = Draw.WaitForEvent()
 
 		id =  PoorForm.HandleEvent(e)
-		
+
 		if(id!=-1){
 			FormsMain.HandleClick(id)
 			FormActions.HandleClick(id)
@@ -37,4 +37,6 @@ function Main.Loop(){
 
 }
 
-Main.Loop()
+IO.WriteLine(Generator.Name())
+
+/* Main.Loop() */

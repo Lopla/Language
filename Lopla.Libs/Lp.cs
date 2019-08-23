@@ -9,17 +9,19 @@ namespace Lopla.Libs
 {
     public class Lp : BaseLoplaLibrary
     {
+        private Random randomMachine = new Random();
         private readonly string[] args;
 
         public Lp(params string[] args)
         {
             this.args = args;
             //// math
-            Add("Len", Len, "array");
             Add("Floor", Floor, "number");
             Add("Ticks", Ticks);
+            Add("Random", Random);
 
             //// types
+            Add("Len", Len, "array");
             Add("VarType", VarType, "variable");
 
             //// os
@@ -67,6 +69,12 @@ namespace Lopla.Libs
         {
             var now = DateTime.Now.Ticks;
             return new Result(new Number(now));
+        }
+
+        private Result Random(Mnemonic expression, IRuntime runtime)
+        {
+            var a = randomMachine.NextDouble();
+            return new Result(new Number((decimal)a));
         }
 
         private Result Functions(Mnemonic expression, IRuntime runtime)
