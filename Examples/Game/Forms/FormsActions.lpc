@@ -1,0 +1,11 @@
+frm = -1
+
+function FormsActions.Setup(){
+	frm = PoorForm.New("")
+    row = PoorForm.AddRow(frm, [   ["button","X"], ["button","1212"] ])
+
+}
+
+function FormsActions.HandleClick(id){
+
+}
