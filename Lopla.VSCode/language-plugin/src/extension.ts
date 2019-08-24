@@ -73,16 +73,14 @@ export function activate(context: vscode.ExtensionContext) {
   let workspaceRoot = vscode.workspace.rootPath;
   const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider(workspaceRoot));
   
-  /*
-  status bar 
-  */
-  const myCommandId = 'extension.lopla.run';
-  loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-  loplaStatusBarItem.command = myCommandId;
-  loplaStatusBarItem.text = `Lopla`;
-  loplaStatusBarItem.color = vscode.ThemeColor.name;
-  loplaStatusBarItem.show();
-	context.subscriptions.push(loplaStatusBarItem);
+  
+  // const myCommandId = 'extension.lopla.run';
+  // loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+  // loplaStatusBarItem.command = myCommandId;
+  // loplaStatusBarItem.text = `Lopla`;
+  // loplaStatusBarItem.color = vscode.ThemeColor.name;
+  // loplaStatusBarItem.show();
+	// context.subscriptions.push(loplaStatusBarItem);
 }
 
 export function deactivate() {

@@ -3,6 +3,8 @@ translationsEn[0] = ["player", "Player"]
 
 translationsPl = []
 translationsPl[0] = ["player", "Gracz"]
+translationsPl[1] = ["close", "Zamknij"]
+translationsPl[2] = ["drones", "Drony"]
 
 translations = translationsPl 
 

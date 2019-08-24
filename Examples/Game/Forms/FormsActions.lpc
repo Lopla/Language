@@ -15,20 +15,20 @@ function FormsActions.Reload(){
     
     shipsC = Lp.Len(Player.Ships())
     if(shipsC > 0){
-        uiRow[Lp.Len(uiRow)] = ["button",I18N.T("Drones")]
+        uiRow[Lp.Len(uiRow)] = ["button",I18N.T("drones")]
     }
     if(shipsC == 0)
     {
-        uiRow[Lp.Len(uiRow)] = ["text",I18N.T("Drones")]
+        uiRow[Lp.Len(uiRow)] = ["text",I18N.T("drones")]
     }
 
     rocksC = Lp.Len(Player.Rocks())
     if(rocksC > 0){
-        uiRow[Lp.Len(uiRow)] = ["button",I18N.T("Rocks")]
+        uiRow[Lp.Len(uiRow)] = ["button",I18N.T("rocks")]
     }
     if(rocksC == 0)
     {
-        uiRow[Lp.Len(uiRow)] = ["text",I18N.T("Rocks")]
+        uiRow[Lp.Len(uiRow)] = ["text",I18N.T("rocks")]
     }
 
 	buttonsRow = PoorForm.AddRow(frm, uiRow)
@@ -45,11 +45,6 @@ function FormsActions.Reload(){
     buttonDrones = buttonDrones[0]
     
     IO.WriteLine(buttonDrones)
-    
-    /* 
-        buttonRocks = buttonsRow[0]
-        buttonDrones = buttonsRow[1] 
-    */
 }
 
 function FormsActions.HandleClick(id){

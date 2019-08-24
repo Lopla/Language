@@ -29,9 +29,11 @@ export class LoplaTaskProvider implements vscode.TaskProvider{
         if(def && def.folder){
             startingFolder = def.folder.toString();
         }
-        console.log(loplaTool, startingFolder);
+        
         return new vscode.Task(definition, TaskScope.Workspace,  "run", "lopla", 
-            new vscode.ShellExecution(loplaTool, [startingFolder] ));
+                new vscode.ProcessExecution(
+                    loplaTool, 
+                    [startingFolder]));
     }
     
     resolveTask(_task: vscode.Task, token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task> {        
