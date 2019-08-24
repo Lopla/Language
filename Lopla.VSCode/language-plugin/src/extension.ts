@@ -70,7 +70,8 @@ export function activate(context: vscode.ExtensionContext) {
     }, ".")    
   );
 
-  const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider());
+  let workspaceRoot = vscode.workspace.rootPath;
+  const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider(workspaceRoot));
   
   /*
   status bar 

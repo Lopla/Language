@@ -6,3 +6,4 @@
 function Ship.New(){
     return [Generator.FirstName(), "scout", 10 ]
 }
+

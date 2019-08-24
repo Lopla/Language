@@ -48,7 +48,8 @@ function activate(context) {
             return null;
         }
     }, "."));
-    const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider());
+    let workspaceRoot = vscode.workspace.rootPath;
+    const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider(workspaceRoot));
     /*
     status bar
     */

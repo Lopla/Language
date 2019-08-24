@@ -1,38 +1,37 @@
 import * as vscode from 'vscode';
+import { TaskScope, TaskDefinition } from 'vscode';
+import { loplaTool } from './intelisense';
 
-
+import * as path from 'path';
 
 export class LoplaTaskProvider implements vscode.TaskProvider{
     private tasks: vscode.Task[] | undefined;
-
-    provideTasks(token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task[]> {
-        if(this.tasks == undefined)
-        {
-            this.tasks = []; 
-            this.tasks.push(this.getTask());
-        }
-
-        return this.tasks;
-    }      
-
-    getTask(): vscode.Task {
-        const definition: LoplaTaskDefinition = <any>null;
-        return new vscode.Task(definition, definition.task, 'lopla', new vscode.ShellExecution(`lopla ${definition.task}`));
+    constructor(private _workspaceRoot: string) {
+		
     }
     
-    resolveTask(_task: vscode.Task, token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task> {
-        const task = _task.definition.task;
-		// A Rake task consists of a task and an optional file as specified in RakeTaskDefinition
-		// Make sure that this looks like a Rake task by checking that there is a task.
-		if (task) {
-			// resolveTask requires that the same definition object be used.
-			const definition: LoplaTaskDefinition = <any>_task.definition;
-			return new vscode.Task(definition, definition.task, 'lopla', new vscode.ShellExecution(`lopla ${definition.task}`));
-		}
-		return undefined;
+    provideTasks(token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task[]> {
+        // if(this.tasks == undefined)
+        // {
+        //     this.tasks = []; 
+        //     let def = {}
+        //     this.tasks.push(this.getTask({}));
+        // }
+
+        return undefined;
+    }      
+
+    getTask(definition: TaskDefinition): vscode.Task {
+        return new vscode.Task(definition, TaskScope.Workspace,  "run", "lopla", 
+            new vscode.ShellExecution(loplaTool,{
+                shellArgs:[ this._workspaceRoot ]
+            }));
+    }
+    
+    resolveTask(_task: vscode.Task, token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task> {        
+        return this.getTask(_task.definition);
     }
 }
-
 
 interface LoplaTaskDefinition extends vscode.TaskDefinition {
 }

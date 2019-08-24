@@ -4,7 +4,7 @@ const vscode = require("vscode");
 const path = require("path");
 const execFile = require("child_process");
 const loplaToolPath = path.resolve(__dirname, '../resources/loplad');
-const loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
+exports.loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
 exports.LoplaSchema = {};
 exports.LoplaKeywords = ['function', 'while', 'if', 'return'];
 function pupulateFunctionArgs() {
@@ -16,7 +16,7 @@ function pupulateFunctionArgs() {
 }
 function getAvailbleFunctions() {
     var loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
-    execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
+    execFile.execFile(exports.loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
         var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)");
         if (stdout) {
             var lines = stdout.split("\n");
@@ -39,7 +39,7 @@ exports.getAvailbleFunctions = getAvailbleFunctions;
 function run() {
     var currentlyOpenTabfilePath = vscode.window.activeTextEditor.document.fileName;
     var currentlyOpenTabfileName = path.dirname(currentlyOpenTabfilePath);
-    execFile.execFile(loplaTool, [currentlyOpenTabfileName], {}, (error, stdout, stderr) => {
+    execFile.execFile(exports.loplaTool, [currentlyOpenTabfileName], {}, (error, stdout, stderr) => {
         if (error || stderr) {
             var e = error || stderr;
             vscode.window.showErrorMessage(e.toString());

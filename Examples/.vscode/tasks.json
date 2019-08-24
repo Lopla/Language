@@ -5,10 +5,7 @@
     "tasks": [
         {
             "label": "run game",
-            "type": "lopla",
-            "options": {
-                "cwd": "${workspaceFolder}/Game"
-            }
+            "type": "lopla"
         }
     ]
 }

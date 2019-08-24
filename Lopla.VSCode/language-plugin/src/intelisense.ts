@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as execFile from 'child_process';
 
 const loplaToolPath = path.resolve(__dirname, '../resources/loplad');
-const loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
+export const loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
 
 export let LoplaSchema = {};
 export let LoplaKeywords = ['function', 'while', 'if', 'return'];

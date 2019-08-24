@@ -1,28 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
+const vscode_1 = require("vscode");
+const intelisense_1 = require("./intelisense");
 class LoplaTaskProvider {
-    provideTasks(token) {
-        if (this.tasks == undefined) {
-            this.tasks = [];
-            this.tasks.push(this.getTask());
-        }
-        return this.tasks;
+    constructor(_workspaceRoot) {
+        this._workspaceRoot = _workspaceRoot;
     }
-    getTask() {
-        const definition = null;
-        return new vscode.Task(definition, definition.task, 'lopla', new vscode.ShellExecution(`lopla ${definition.task}`));
+    provideTasks(token) {
+        // if(this.tasks == undefined)
+        // {
+        //     this.tasks = []; 
+        //     let def = {}
+        //     this.tasks.push(this.getTask({}));
+        // }
+        return undefined;
+    }
+    getTask(definition) {
+        return new vscode.Task(definition, vscode_1.TaskScope.Workspace, "run", "lopla", new vscode.ShellExecution(intelisense_1.loplaTool, {
+            shellArgs: [this._workspaceRoot]
+        }));
     }
     resolveTask(_task, token) {
-        const task = _task.definition.task;
-        // A Rake task consists of a task and an optional file as specified in RakeTaskDefinition
-        // Make sure that this looks like a Rake task by checking that there is a task.
-        if (task) {
-            // resolveTask requires that the same definition object be used.
-            const definition = _task.definition;
-            return new vscode.Task(definition, definition.task, 'lopla', new vscode.ShellExecution(`lopla ${definition.task}`));
-        }
-        return undefined;
+        return this.getTask(_task.definition);
     }
 }
 exports.LoplaTaskProvider = LoplaTaskProvider;
