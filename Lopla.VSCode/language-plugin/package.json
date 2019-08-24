@@ -45,17 +45,7 @@
         ],
         "taskDefinitions": [
             {
-                "type": "lopla",
-                "required": [
-                    "task"
-                ],
-                "properties": {
-                    "task":
-                    {
-                        "type":"string",
-                        "description": "what to do"
-                    }
-                }
+                "type": "lopla"                
             }
         ]
     },
