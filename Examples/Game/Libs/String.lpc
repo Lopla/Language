@@ -1,4 +1,8 @@
 function String.NToString(in){
+	if(in == 0){
+		return "0"
+	}
+	
 	r =""
 	cell = in - Lp.Floor(in)
 
@@ -45,18 +49,22 @@ function String.Get(a){
     type = Lp.VarType(a)
     if(type == "LoplaList"){
         i=0
-        r=r+"[ "
+		r="[ "
         while(i<Lp.Len(a)){
-            r=r+ String.Get(a[i]) +" "
+			if(Lp.Len(r) > 2){
+				r=r+", "
+			}
+			d=a[i]
+            r= r + String.Get(d)
             i=i+1
         }
-        r=r+" ] "
+        r=r+" ]"
     }
     if(type == "Number"){
-        r=String.NToString(a)
+        r=""+String.NToString(a)
     }
     if(type == "String"){
-        r=a
+        r="'"+a+"'"
     }
 
     return r

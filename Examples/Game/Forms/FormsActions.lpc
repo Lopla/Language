@@ -11,23 +11,41 @@ function FormsActions.Setup(){
 function FormsActions.Reload(){
     PoorForm.Clear(frm)
 
-    /* 
-    IO.WriteLine("Player: "+ Player.Name())
-    IO.Write("  Ships: ")
-    IO.WriteLine(Lp.Len(Player.Ships())) 
-    */
-
     uiRow = []
     
-    if(Lp.Len(Player.Ships()) > 0){
+    shipsC = Lp.Len(Player.Ships())
+    if(shipsC > 0){
         uiRow[Lp.Len(uiRow)] = ["button",I18N.T("Drones")]
+    }
+    if(shipsC == 0)
+    {
+        uiRow[Lp.Len(uiRow)] = ["text",I18N.T("Drones")]
+    }
+
+    rocksC = Lp.Len(Player.Rocks())
+    if(rocksC > 0){
+        uiRow[Lp.Len(uiRow)] = ["button",I18N.T("Rocks")]
+    }
+    if(rocksC == 0)
+    {
+        uiRow[Lp.Len(uiRow)] = ["text",I18N.T("Rocks")]
     }
 
 	buttonsRow = PoorForm.AddRow(frm, uiRow)
     c = PoorUI.GetControl(buttonsRow)
-    a = String.Get(c)
+    
+    /* 
+    id's starts at 6 
+    a = String.Get(c) 
     IO.Write(a)
+    */
+    
 
+    buttonDrones = c[6]
+    buttonDrones = buttonDrones[0]
+    
+    IO.WriteLine(buttonDrones)
+    
     /* 
         buttonRocks = buttonsRow[0]
         buttonDrones = buttonsRow[1] 

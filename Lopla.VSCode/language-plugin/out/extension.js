@@ -46,11 +46,11 @@ function activate(context) {
             if (error || stderr) {
                 var e = error || stderr;
                 vscode.window.showErrorMessage(e.toString());
-                console.error(e);
+                console.log(error, stderr);
             }
             if(stdout){
                 vscode.window.showInformationMessage(stdout);
-                console.log(e);
+                console.log(stdout);
             }
         });
     }));
