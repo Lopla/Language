@@ -16,7 +16,7 @@ function pupulateFunctionArgs(){
     }
   }
   
-  export   function getAvailbleFunctions(){
+export   function getAvailbleFunctions(){
     var loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
   
     execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {

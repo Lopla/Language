@@ -1,9 +1,8 @@
 import * as vscode from 'vscode';
 import { getAvailbleFunctions, LoplaSchema, LoplaKeywords } from './intelisense';
+import { LoplaTaskProvider } from './task';
 
-let runTaskProvider: vscode.Disposable | undefined;
-
-let myStatusBarItem: vscode.StatusBarItem;
+let loplaStatusBarItem: vscode.StatusBarItem;
 
 export function activate(context: vscode.ExtensionContext) {
   getAvailbleFunctions();
@@ -68,24 +67,21 @@ export function activate(context: vscode.ExtensionContext) {
         
         return null;
       }
-    }, ".")
-
-    
+    }, ".")    
   );
 
-
-  /*
+  const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider());
   
+  /*
   status bar 
   */
-  
   const myCommandId = 'extension.lopla.run';
-  myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-  myStatusBarItem.command = myCommandId;
-  myStatusBarItem.text = `Lopla`;
-  myStatusBarItem.color = vscode.ThemeColor.name;
-  myStatusBarItem.show();
-	context.subscriptions.push(myStatusBarItem);
+  loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+  loplaStatusBarItem.command = myCommandId;
+  loplaStatusBarItem.text = `Lopla`;
+  loplaStatusBarItem.color = vscode.ThemeColor.name;
+  loplaStatusBarItem.show();
+	context.subscriptions.push(loplaStatusBarItem);
 }
 
 export function deactivate() {

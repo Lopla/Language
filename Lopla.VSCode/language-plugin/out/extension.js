@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const intelisense_1 = require("./intelisense");
-let runTaskProvider;
-let myStatusBarItem;
+const task_1 = require("./task");
+let loplaStatusBarItem;
 function activate(context) {
     intelisense_1.getAvailbleFunctions();
     context.subscriptions.push(vscode.commands.registerCommand('extension.lopla.run', () => {
@@ -48,17 +48,17 @@ function activate(context) {
             return null;
         }
     }, "."));
+    const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider());
     /*
-    
     status bar
     */
     const myCommandId = 'extension.lopla.run';
-    myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-    myStatusBarItem.command = myCommandId;
-    myStatusBarItem.text = `Lopla`;
-    myStatusBarItem.color = vscode.ThemeColor.name;
-    myStatusBarItem.show();
-    context.subscriptions.push(myStatusBarItem);
+    loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+    loplaStatusBarItem.command = myCommandId;
+    loplaStatusBarItem.text = `Lopla`;
+    loplaStatusBarItem.color = vscode.ThemeColor.name;
+    loplaStatusBarItem.show();
+    context.subscriptions.push(loplaStatusBarItem);
 }
 exports.activate = activate;
 function deactivate() {
