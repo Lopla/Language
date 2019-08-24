@@ -1,0 +1,19 @@
+translationsEn = []
+translationsEn[0] = ["player", "Player"]
+
+translationsPl = []
+translationsPl[0] = ["player", "Gracz"]
+
+translations = translationsPl 
+
+function I18N.T(t){
+    i = Lp.Len(translations)
+    while(i > 0){
+        i=i-1
+        r = translations[i]
+        if(r[0] == t){
+            return r[1]
+        }
+    }
+    return "["+t+"]"
+}

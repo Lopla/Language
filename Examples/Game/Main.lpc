@@ -7,7 +7,7 @@ PoorForm.Init()
 Player.Add()
 
 FormsActions.Setup()
-FormsStats.Setup()
+/* FormsStats.Setup() */
 FormsMain.Setup()
 
 PoorForm.Flush()
@@ -29,12 +29,11 @@ function Main.Loop(){
 			FormsActions.HandleClick(id)
 		}
 
-		FormsStats.Update(e)
+		/* FormsStats.Update(e) */
 
 		PoorForm.Flush()
 		Draw.Flush()
 	}
-
 }
 
 /* IO.WriteLine(Generator.Name()) */

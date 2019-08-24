@@ -3,8 +3,8 @@ loginButton = -1
 frm = -1
 
 function FormsMain.Setup(){
-	frm = PoorForm.New("Lopla")
-	closeButton = PoorForm.AddButton(frm, "Close")
+	frm = PoorForm.New("")
+	closeButton = PoorForm.AddButton(frm, I18N.T("close"))
 }
 
 function FormsMain.HandleClick(id){

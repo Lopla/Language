@@ -1,7 +1,8 @@
 /*
     name
-        [cargo (tons), range (ly)]
+    type (scout)
+    range (ly) / per turn
 */
 function Ship.New(){
-    return [Generator.FirstName(), [10,10] ]
+    return [Generator.FirstName(), "scout", 10 ]
 }

@@ -4,7 +4,7 @@ buttonRocks = -1
 buttonDrones = -1
 
 function FormsActions.Setup(){
-	frm = PoorForm.New(Player.Name())
+	frm = PoorForm.New(I18N.T("player")+": "+Player.Name())
     FormsActions.Reload()
 }
 
@@ -17,13 +17,23 @@ function FormsActions.Reload(){
     IO.WriteLine(Lp.Len(Player.Ships())) 
     */
 
-	buttonsRow = PoorForm.AddRow(frm, [ ["button","Rocks"], ["button","Drones"] ])
+    uiRow = []
+    
+    if(Lp.Len(Player.Ships()) > 0){
+        uiRow[Lp.Len(uiRow)] = ["button",I18N.T("Drones")]
+    }
+
+	buttonsRow = PoorForm.AddRow(frm, uiRow)
+    c = PoorUI.GetControl(buttonsRow)
+    a = String.Get(c)
+    IO.Write(a)
+
     /* 
         buttonRocks = buttonsRow[0]
         buttonDrones = buttonsRow[1] 
     */
-
 }
+
 function FormsActions.HandleClick(id){
 
 }

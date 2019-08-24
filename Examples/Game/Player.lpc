@@ -2,8 +2,8 @@ players=[]
 currentPlayer = 0
 
 /*
-        name
-        ships[]
+    name
+    ships[]
 */
 function Player.New(){
     return [ Generator.Name(), [ Ship.New(),Ship.New() ] ]
