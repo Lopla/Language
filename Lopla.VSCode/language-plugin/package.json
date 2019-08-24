@@ -45,7 +45,13 @@
         ],
         "taskDefinitions": [
             {
-                "type": "lopla"                
+                "type": "lopla",
+                "properties": {
+                    "folder":{
+                        "type":"string",
+                        "description": "Root folder for application to be started"
+                    }
+                }              
             }
         ]
     },

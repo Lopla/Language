@@ -5,7 +5,9 @@
     "tasks": [
         {
             "label": "run game",
-            "type": "lopla"
+            "type": "lopla",
+            "folder": "Game",
+            "problemMatcher":[]
         }
     ]
 }

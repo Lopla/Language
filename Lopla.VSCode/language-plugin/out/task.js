@@ -17,9 +17,13 @@ class LoplaTaskProvider {
         return undefined;
     }
     getTask(definition) {
-        return new vscode.Task(definition, vscode_1.TaskScope.Workspace, "run", "lopla", new vscode.ShellExecution(intelisense_1.loplaTool, {
-            shellArgs: [this._workspaceRoot]
-        }));
+        const def = definition;
+        let startingFolder = this._workspaceRoot;
+        if (def && def.folder) {
+            startingFolder = def.folder.toString();
+        }
+        console.log(intelisense_1.loplaTool, startingFolder);
+        return new vscode.Task(definition, vscode_1.TaskScope.Workspace, "run", "lopla", new vscode.ShellExecution(intelisense_1.loplaTool, [startingFolder]));
     }
     resolveTask(_task, token) {
         return this.getTask(_task.definition);

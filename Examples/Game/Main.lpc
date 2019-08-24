@@ -36,5 +36,5 @@ function Main.Loop(){
 	}
 }
 
-/* IO.WriteLine(Generator.Name()) */
+IO.WriteLine(Generator.Name())
 Main.Loop()

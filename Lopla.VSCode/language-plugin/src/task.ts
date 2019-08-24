@@ -3,6 +3,7 @@ import { TaskScope, TaskDefinition } from 'vscode';
 import { loplaTool } from './intelisense';
 
 import * as path from 'path';
+import { deflate } from 'zlib';
 
 export class LoplaTaskProvider implements vscode.TaskProvider{
     private tasks: vscode.Task[] | undefined;
@@ -22,10 +23,15 @@ export class LoplaTaskProvider implements vscode.TaskProvider{
     }      
 
     getTask(definition: TaskDefinition): vscode.Task {
+        const def: LoplaTaskDefinition = <any>definition;
+
+        let startingFolder:string = this._workspaceRoot;
+        if(def && def.folder){
+            startingFolder = def.folder.toString();
+        }
+        console.log(loplaTool, startingFolder);
         return new vscode.Task(definition, TaskScope.Workspace,  "run", "lopla", 
-            new vscode.ShellExecution(loplaTool,{
-                shellArgs:[ this._workspaceRoot ]
-            }));
+            new vscode.ShellExecution(loplaTool, [startingFolder] ));
     }
     
     resolveTask(_task: vscode.Task, token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task> {        
@@ -34,4 +40,5 @@ export class LoplaTaskProvider implements vscode.TaskProvider{
 }
 
 interface LoplaTaskDefinition extends vscode.TaskDefinition {
+    folder?: String;
 }
