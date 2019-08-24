@@ -12,14 +12,14 @@ export class LoplaTaskProvider implements vscode.TaskProvider{
     }
     
     provideTasks(token?: vscode.CancellationToken): vscode.ProviderResult<vscode.Task[]> {
-        // if(this.tasks == undefined)
-        // {
-        //     this.tasks = []; 
-        //     let def = {}
-        //     this.tasks.push(this.getTask({}));
-        // }
+        let tasks: vscode.Task[] = [];
 
-        return undefined;
+        let d: TaskDefinition={
+            type:"lopla"
+        };
+        tasks.push(this.getTask(d));
+
+        return tasks;
     }      
 
     getTask(definition: TaskDefinition): vscode.Task {
@@ -31,7 +31,7 @@ export class LoplaTaskProvider implements vscode.TaskProvider{
         }
         
         return new vscode.Task(definition, TaskScope.Workspace,  "run", "lopla", 
-                new vscode.ProcessExecution(
+                new vscode.ShellExecution(
                     loplaTool, 
                     [startingFolder]));
     }

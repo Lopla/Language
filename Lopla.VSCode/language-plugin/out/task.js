@@ -8,13 +8,12 @@ class LoplaTaskProvider {
         this._workspaceRoot = _workspaceRoot;
     }
     provideTasks(token) {
-        // if(this.tasks == undefined)
-        // {
-        //     this.tasks = []; 
-        //     let def = {}
-        //     this.tasks.push(this.getTask({}));
-        // }
-        return undefined;
+        let tasks = [];
+        let d = {
+            type: "lopla"
+        };
+        tasks.push(this.getTask(d));
+        return tasks;
     }
     getTask(definition) {
         const def = definition;
@@ -22,7 +21,7 @@ class LoplaTaskProvider {
         if (def && def.folder) {
             startingFolder = def.folder.toString();
         }
-        return new vscode.Task(definition, vscode_1.TaskScope.Workspace, "run", "lopla", new vscode.ProcessExecution(intelisense_1.loplaTool, [startingFolder]));
+        return new vscode.Task(definition, vscode_1.TaskScope.Workspace, "run", "lopla", new vscode.ShellExecution(intelisense_1.loplaTool, [startingFolder]));
     }
     resolveTask(_task, token) {
         return this.getTask(_task.definition);

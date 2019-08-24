@@ -4,16 +4,10 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Game",
             "type": "lopla",
             "folder": "Game",
-            "problemMatcher":[]
-        },
-        {
-            "label": "Tests",
-            "type": "lopla",
-            "folder": "Tests",
-            "problemMatcher":[]
+            "label": "Game",
+            "problemMatcher": []
         }
     ]
 }
