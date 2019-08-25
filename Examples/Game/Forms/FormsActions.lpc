@@ -40,13 +40,20 @@ function FormsActions.Reload(){
     IO.Write(a)
     */
     
-
     buttonDrones = c[6]
     buttonDrones = buttonDrones[0]
     
-    IO.WriteLine(buttonDrones)
+    buttonRocks = c[6]
+    buttonRocks = buttonRocks[1]
+
 }
 
 function FormsActions.HandleClick(id){
+    if(id == buttonRocks){
+    }
 
+    if(id == buttonDrones){
+        /* show drones menu */
+        FormsDrones.Setup()
+    }
 }

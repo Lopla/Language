@@ -1,0 +1,27 @@
+frm = -1
+
+function FormsDrones.Setup(){
+    if(frm == -1){
+        frm = PoorForm.New(I18N.T("drones"))
+        FormsActions.Reload()
+    }
+    if(frm != -1){
+        FormsDrones.Reload()
+    }
+}
+
+function FormsDrones.Reload(){
+    PoorForm.Clear(frm)
+
+    ships = Player.Ships()
+    i = 0 
+    while(i < Lp.Len(ships)){
+        s=ships[i]
+        PoorForm.AddText(frm, s[0])
+        i=i+1
+    }
+}
+
+function FormsDrones.HandleClick(id){
+}
+

@@ -7,8 +7,8 @@ PoorForm.Init()
 Player.Add()
 
 FormsActions.Setup()
-/* FormsStats.Setup() */
 FormsMain.Setup()
+/* FormsStats.Setup() */
 
 PoorForm.Flush()
 
@@ -27,6 +27,7 @@ function Main.Loop(){
 		if(id!=-1){
 			FormsMain.HandleClick(id)
 			FormsActions.HandleClick(id)
+			FormsDrones.HandleClick(id)
 		}
 
 		/* FormsStats.Update(e) */
@@ -36,7 +37,4 @@ function Main.Loop(){
 	}
 }
 
-IO.WriteLine("hmmm")
-
 Main.Loop()
-
