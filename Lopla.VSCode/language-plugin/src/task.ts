@@ -19,6 +19,7 @@ export class LoplaTaskProvider implements vscode.TaskProvider{
         return tasks;
     }      
 
+    
     getTask(definition: TaskDefinition): vscode.Task {
         const def: LoplaTaskDefinition = <any>definition;
 

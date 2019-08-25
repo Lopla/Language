@@ -6,7 +6,7 @@
 */
 
 lineLength =5
-stack = Stack.New()
+stack = []
 
 function DrawFractal.SetLine(len){
     lineLength = len

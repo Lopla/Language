@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Lopla.Windows
@@ -32,7 +33,7 @@ namespace Lopla.Windows
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HiddenContext(args));
 
-            System.Console.ReadLine();
+            SpinWait.SpinUntil(() => false);
         }
 
         /// <summary>

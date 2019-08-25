@@ -28,7 +28,7 @@
             "type": "shell",
             "command": "${workspaceFolder}/Lopla.Windows/bin/Debug/loplad.exe",
             "args": [
-                "${workspaceFolder}/Examples"
+                "${workspaceFolder}/Examples/Tests"
             ],
             "group": "none",
             "presentation": {

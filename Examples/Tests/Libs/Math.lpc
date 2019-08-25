@@ -1,0 +1,88 @@
+function Math.Pi(){
+    return 3.141592653589793238462643
+}
+
+function Math.Radians(degrees){
+    return degrees * Math.Pi() / 180
+}
+
+function Math.Pow(value, power){
+
+    result = 1
+    while(power > 0){
+        result = result * value
+        power = power - 1
+    }
+    return result
+}
+
+function Math.Factorial(number){
+    values = [1,1,2,6,24,120,720,5040,40320,362880,3628800,39916800,479001600,6227020800,87178291200,1307674368000,20922789888000,355687428096000]
+    if(Lp.Len(values )> number){
+        return values[number]
+    }
+    r = number
+    while(number > 1)
+    {
+        number = number - 1
+        r = number * r
+    }    
+    return r
+}
+
+/*
+ * https://www.homeschoolmath.net/teaching/sine_calculator.php
+ */
+function Math.Sin(deg){
+    /* it works only between -180 and +180
+       to smooth the diagram some 
+    */
+    while(deg > 180)
+    {
+        deg = deg - 360
+    }
+    while(deg < -180)
+    {
+        deg = deg + 360
+    }
+    
+    x = Math.Radians(deg)
+
+    return Math.SinRadians(x)
+}
+
+function Math.SinRadians(x){
+    sin = x - (Math.Pow(x,3) / Math.Factorial(3)) + (Math.Pow(x,5) / Math.Factorial(5)) - (Math.Pow(x,7) / Math.Factorial(7)) + (Math.Pow(x,9) / Math.Factorial(9))
+
+    return sin
+}
+
+function Math.Cos(deg){
+    while(deg > 270)
+    {
+        deg = deg - 360
+    }
+
+    
+    while(deg < -90)
+    {
+        deg = deg + 360
+    }
+    
+    x = (Math.Pi() / 2) - Math.Radians(deg)
+    return Math.SinRadians(x)
+    
+}
+
+function Math.RandomRangeI(a, b){
+    c = Math.RandomI(b-a) + a
+    return c
+}
+
+function Math.RandomI(a){
+    return Lp.Floor( Lp.Random() * a ) 
+}
+
+function Math.RandomArray(arr){
+    return arr[Math.RandomI(Lp.Len(arr))]
+}
