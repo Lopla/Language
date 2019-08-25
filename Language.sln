@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{78
 		Examples\Main.lpc = Examples\Main.lpc
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lopla.WinConsole", "Lopla.WinConsole\Lopla.WinConsole.csproj", "{FCF5A0EB-FF53-40DC-8E24-834C08614245}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,12 @@ Global
 		{25408658-E8DD-454D-A55F-3BCB1AD14205}.Release|Any CPU.Build.0 = Release|Any CPU
 		{25408658-E8DD-454D-A55F-3BCB1AD14205}.win-x64|Any CPU.ActiveCfg = Release|Any CPU
 		{25408658-E8DD-454D-A55F-3BCB1AD14205}.win-x64|Any CPU.Build.0 = Release|Any CPU
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245}.win-x64|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245}.win-x64|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +114,7 @@ Global
 		{054B2B06-AABC-4496-BC03-5ECB84C96CB8} = {5BD72867-8FEC-4FAD-B297-757A2B9527AD}
 		{36D9A8AF-40A1-48F5-9B67-C67A99B7FBD0} = {6A2160A3-D6EC-4AAC-BAC6-208A390192D2}
 		{25408658-E8DD-454D-A55F-3BCB1AD14205} = {5BD72867-8FEC-4FAD-B297-757A2B9527AD}
+		{FCF5A0EB-FF53-40DC-8E24-834C08614245} = {5BD72867-8FEC-4FAD-B297-757A2B9527AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F0FC0A2-DAC7-4A8E-ABDD-5D865875ED9E}

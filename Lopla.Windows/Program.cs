@@ -1,58 +1,91 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
+using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32.SafeHandles;
 
 namespace Lopla.Windows
 {
-    internal static class Program
+    public static class Program
     {
-        [DllImport("kernel32.dll")]
-        static extern bool AttachConsole(int dwProcessId);
-        
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool FreeConsole();
+        private const int ATTACH_PARENT_PROCESS = -1;
+
+        private const int STD_OUTPUT_HANDLE = -11;
+        private const int STD_ERROR_HANDLE = -12;
+        private const int STD_INPUT_HANDLE = -10;
 
         [DllImport("kernel32.dll")]
-        static extern IntPtr GetConsoleWindow();
-        
+        private static extern bool AttachConsole(int dwProcessId);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool FreeConsole();
+
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetConsoleWindow();
+
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern int AllocConsole();
 
-        private const int ATTACH_PARENT_PROCESS = -1;
+        [DllImport("kernel32.dll",
+            EntryPoint = "GetStdHandle",
+            SetLastError = true,
+            CharSet = CharSet.Auto,
+            CallingConvention = CallingConvention.StdCall)]
+        private static extern IntPtr GetStdHandle(int nStdHandle);
 
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        private static void Main(string[] args)
-        { 
-            AttachConsole(ATTACH_PARENT_PROCESS);
-            
+        public static void Main(string[] args)
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HiddenContext(args));
+        }
 
-            SpinWait.SpinUntil(() => false);
+        private static void StealOut()
+        {
+            var stdHandle = GetStdHandle(STD_OUTPUT_HANDLE); // must be error dunno why
+            var safeFileHandle = new SafeFileHandle(stdHandle, true);
+            var fileStream = new FileStream(safeFileHandle, FileAccess.Write);
+            var encoding = Encoding.ASCII;
+            var standardOutput = new StreamWriter(fileStream, encoding);
+            standardOutput.AutoFlush = true;
+            Console.SetOut(standardOutput);
+        }
+
+        private static void StealIn()
+        {
+            var stdHandle = GetStdHandle(STD_INPUT_HANDLE); // must be error dunno why
+            var safeFileHandle = new SafeFileHandle(stdHandle, true);
+            var fileStream = new FileStream(safeFileHandle, FileAccess.Read);
+            var encoding = Encoding.ASCII;
+            var standardOutput = new StreamReader
+                (fileStream, encoding);
+
+            Console.SetIn(standardOutput);
         }
 
         /// <summary>
-        /// https://social.msdn.microsoft.com/Forums/windows/en-US/dece45c8-9076-497e-9414-8cd9b34f572f/how-to-start-a-form-in-hidden-mode?forum=winforms&prof=required
+        ///     https://social.msdn.microsoft.com/Forums/windows/en-US/dece45c8-9076-497e-9414-8cd9b34f572f/how-to-start-a-form-in-hidden-mode?forum=winforms
+        ///     &prof=required
         /// </summary>
-        class HiddenContext : ApplicationContext
+        private class HiddenContext : ApplicationContext
         {
             public HiddenContext(string[] args)
             {
-                LoplaForm form1 = new LoplaForm(args);
+                var form1 = new LoplaForm(args);
                 form1.Visible = true;
-                form1.FormClosing += new FormClosingEventHandler(form1_FormClosing);
+                form1.FormClosing += form1_FormClosing;
 
                 form1.Run();
             }
 
             private void form1_FormClosing(object sender, FormClosingEventArgs e)
             {
-                this.ExitThread();  
+                ExitThread();
             }
         }
     }
