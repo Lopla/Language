@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const path = require("path");
 const execFile = require("child_process");
-const loplaToolPath = path.resolve(__dirname, '../resources/loplad');
-exports.loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
+const loplaToolPath = path.resolve(__dirname, '../resources/loplac');
+exports.loplaTool = path.resolve(__filename, loplaToolPath, "loplac.exe");
 exports.LoplaSchema = {};
 exports.LoplaKeywords = ['function', 'while', 'if', 'return'];
 function pupulateFunctionArgs() {

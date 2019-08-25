@@ -7,7 +7,7 @@
     <ProjectGuid>{FCF5A0EB-FF53-40DC-8E24-834C08614245}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Lopla.WinConsole</RootNamespace>
-    <AssemblyName>loplac</AssemblyName>
+    <AssemblyName>LoplaC</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
