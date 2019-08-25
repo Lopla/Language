@@ -2,9 +2,6 @@ import * as vscode from 'vscode';
 import { TaskScope, TaskDefinition } from 'vscode';
 import { loplaTool } from './intelisense';
 
-import * as path from 'path';
-import { deflate } from 'zlib';
-
 export class LoplaTaskProvider implements vscode.TaskProvider{
     private tasks: vscode.Task[] | undefined;
     constructor(private _workspaceRoot: string) {

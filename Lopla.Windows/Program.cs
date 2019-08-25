@@ -8,6 +8,16 @@ namespace Lopla.Windows
     {
         [DllImport("kernel32.dll")]
         static extern bool AttachConsole(int dwProcessId);
+        
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool FreeConsole();
+
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+        
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern int AllocConsole();
+
         private const int ATTACH_PARENT_PROCESS = -1;
 
         /// <summary>
@@ -17,10 +27,12 @@ namespace Lopla.Windows
         private static void Main(string[] args)
         { 
             AttachConsole(ATTACH_PARENT_PROCESS);
-
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HiddenContext(args));
+
+            System.Console.ReadLine();
         }
 
         /// <summary>
@@ -39,7 +51,7 @@ namespace Lopla.Windows
 
             private void form1_FormClosing(object sender, FormClosingEventArgs e)
             {
-                this.ExitThread();
+                this.ExitThread();  
             }
         }
     }
