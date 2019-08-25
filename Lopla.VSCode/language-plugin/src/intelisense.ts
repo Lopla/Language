@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as execFile from 'child_process';
 
-const loplaToolPath = path.resolve(__dirname, '../resources/loplad');
-export const loplaTool = path.resolve(__filename, loplaToolPath, "loplad.exe");
+const loplaToolPath = path.resolve(__dirname, '../resources/loplac');
+export const loplaTool = path.resolve(__filename, loplaToolPath, "loplac.exe");
 
 export let LoplaSchema = {};
 export let LoplaKeywords = ['function', 'while', 'if', 'return'];

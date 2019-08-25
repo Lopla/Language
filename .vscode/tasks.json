@@ -26,7 +26,7 @@
         {
             "label": "run-loplad",
             "type": "shell",
-            "command": "${workspaceFolder}/Lopla.Windows/bin/Debug/loplad.exe",
+            "command": "${workspaceFolder}/Lopla.WinConsole/bin/Debug/loplac.exe",
             "args": [
                 "${workspaceFolder}/Examples/Tests"
             ],
@@ -48,8 +48,8 @@
             "args": [
                 "-Recurse",
                 "-force",
-                "${workspaceFolder}/Lopla.Windows/bin/Debug/*",
-                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplad"
+                "${workspaceFolder}/Lopla.WinConsole/bin/Debug/*",
+                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplac"
             ],
             "problemMatcher": []
         },
