@@ -1,0 +1,18 @@
+frm = -1
+
+function FormsDronesScout.Setup(){
+    if(frm == -1){
+        frm = PoorForm.New("")
+    }
+    if(frm != -1){
+        FormsDronesScout.Reload()
+    }
+}
+
+function FormsDronesScout.Reload(){
+    PoorForm.Clear(frm)
+}
+
+function FormsDronesScout.HandleClick(id){
+}
+

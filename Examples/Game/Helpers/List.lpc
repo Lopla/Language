@@ -13,6 +13,17 @@ function List.Contains(list, id){
 	return 0
 }
 
+function List.Pos(list, id){
+	i=0
+	while(i < Lp.Len(list)){
+		if(list[i] == id){
+			return i
+		}
+		i=i+1
+	}
+	return -1
+}
+
 function List.Add(list, id){
 	list[Lp.Len(list)] = id
 	return list

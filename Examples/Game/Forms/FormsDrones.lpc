@@ -1,4 +1,7 @@
 frm = -1
+dronesList = []
+drones = []
+selectedDrone = -1
 
 function FormsDrones.Setup(){
     if(frm == -1){
@@ -13,15 +16,24 @@ function FormsDrones.Setup(){
 function FormsDrones.Reload(){
     PoorForm.Clear(frm)
 
-    ships = Player.Ships()
+    drones = Player.Ships()
     i = 0 
-    while(i < Lp.Len(ships)){
-        s=ships[i]
-        PoorForm.AddText(frm, s[0])
+    while(i < Lp.Len(drones)){
+        s=drones[i]
+        dronesList[Lp.Len(dronesList)] = PoorForm.AddText(frm, s[0])
         i=i+1
+    }
+
+    if(selectedDrone> -1){
+        PoorForm.AddText(frm, String.Get(drones[selectedDrone]))
     }
 }
 
 function FormsDrones.HandleClick(id){
+    pos = List.Pos(dronesList, id)
+    if(pos!=-1){
+        selectedDrone = pos
+        FormsDrones.Reload()
+    }
 }
 
