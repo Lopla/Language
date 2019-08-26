@@ -5,6 +5,9 @@ function FormsDronesScout.Setup(ship){
     if(frm == -1){
         frm = PoorForm.New(ship[0])
     }
+
+    PoorForm.SetLabel(frm, ship[0])
+
     drone = ship
     FormsDronesScout.Reload()
 }

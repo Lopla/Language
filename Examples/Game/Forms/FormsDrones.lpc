@@ -15,7 +15,6 @@ function FormsDrones.Setup(){
 
 function FormsDrones.Reload(){
     PoorForm.Clear(frm)
-
     drones = Player.Ships()
     i = 0 
     while(i < Lp.Len(drones)){

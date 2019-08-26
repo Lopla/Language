@@ -165,6 +165,11 @@ function PoorForm.AddButton(frm, label){
 	PoorForm.AddControl(frm, PoorUI.AddButton(0, 0, label))
 }
 
+function PoorForm.SetLabel(frm, label){
+	c = IdList.Get(forms, frm)
+	PoorUI.UpdateText(c[0], label)
+}
+
 function PoorForm.AddControl(idx, ctrlId){
 	f = IdList.Get(forms, idx)
 	
