@@ -1,5 +1,6 @@
 frm = -1
 drone = []
+expButton = -1
 
 function FormsDronesScout.Setup(ship){
     if(frm == -1){
@@ -16,6 +17,8 @@ function FormsDronesScout.Reload(){
     PoorForm.Clear(frm)
     PoorForm.AddText(frm, I18N.T("name") + ": " + drone[0]+" ("+I18N.T("scout")+")")
     PoorForm.AddText(frm, I18N.T("range") + ": " + String.Get(drone[2])+I18N.T("ly"))
+
+    expButton = PoorForm.AddButton(frm, I18N.T("explore"))
 }
 
 function FormsDronesScout.HandleClick(id){
