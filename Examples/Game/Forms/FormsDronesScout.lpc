@@ -1,18 +1,19 @@
 frm = -1
+drone = []
 
-function FormsDronesScout.Setup(){
+function FormsDronesScout.Setup(ship){
     if(frm == -1){
-        frm = PoorForm.New("")
+        frm = PoorForm.New(ship[0])
     }
-    if(frm != -1){
-        FormsDronesScout.Reload()
-    }
+    drone = ship
+    FormsDronesScout.Reload()
 }
 
 function FormsDronesScout.Reload(){
     PoorForm.Clear(frm)
+    PoorForm.AddText(frm, I18N.T("name") + ": " + drone[0]+" ("+I18N.T("scout")+")")
+    PoorForm.AddText(frm, I18N.T("range") + ": " + String.Get(drone[2])+I18N.T("ly"))
 }
 
 function FormsDronesScout.HandleClick(id){
 }
-

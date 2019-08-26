@@ -6,6 +6,10 @@ translationsPl[0] = ["player", "Gracz"]
 translationsPl[1] = ["close", "Zamknij"]
 translationsPl[2] = ["drones", "Drony"]
 translationsPl[3] = ["rocks", "Meteoryty"]
+translationsPl[4] = ["range", "Zakres"]
+translationsPl[5] = ["ly", "lat św."]
+translationsPl[6] = ["name", "Nazwa"]
+translationsPl[7] = ["scout", "Skaut"]
 
 translations = translationsPl 
 

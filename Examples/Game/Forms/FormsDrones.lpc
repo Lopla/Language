@@ -24,16 +24,13 @@ function FormsDrones.Reload(){
         i=i+1
     }
 
-    if(selectedDrone> -1){
-        PoorForm.AddText(frm, String.Get(drones[selectedDrone]))
-    }
 }
 
 function FormsDrones.HandleClick(id){
     pos = List.Pos(dronesList, id)
     if(pos!=-1){
         selectedDrone = pos
-        FormsDrones.Reload()
+        FormsDronesScout.Setup(drones[pos])
     }
 }
 
