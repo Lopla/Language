@@ -62,3 +62,9 @@ function IdList.MaxId(list){
 	}
 	return maxId
 }
+
+function IdList.Insert(list, obj){
+	maxId = IdList.MaxId(list) + 1
+	list[Lp.Len(list)] = [maxId, obj]
+	return [list, maxId]
+}

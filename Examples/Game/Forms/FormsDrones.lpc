@@ -18,7 +18,7 @@ function FormsDrones.Reload(){
     drones = Player.Ships()
     i = 0 
     while(i < Lp.Len(drones)){
-        s=drones[i]
+        s = Ship.Get(drones[i])
         dronesList[Lp.Len(dronesList)] = PoorForm.AddText(frm, s[0])
         i=i+1
     }
@@ -29,7 +29,7 @@ function FormsDrones.HandleClick(id){
     pos = List.Pos(dronesList, id)
     if(pos!=-1){
         selectedDrone = pos
-        FormsDronesScout.Setup(drones[pos])
+        FormsDronesScout.Setup( drones[pos])
     }
 }
 

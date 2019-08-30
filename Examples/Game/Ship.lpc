@@ -1,9 +1,27 @@
+orderExplore = 1
+ships = []
+
 /*
     name
     type (scout)
     range (ly) / per turn
 */
 function Ship.New(){
-    return [Generator.FirstName(), "scout", 10 ]
+    ship = [Generator.FirstName(), "scout", 10 ]
+    
+    r = IdList.Insert(ships, ship)
+    ships = r[0]
+    return r[1]
 }
 
+function Ship.OrderExploreId(){
+    return orderExplore
+}
+
+function Ship.SetOrder(ship, i){
+    return ship
+}
+
+function Ship.Get(id){
+    return IdList.Get(ships, id)
+}

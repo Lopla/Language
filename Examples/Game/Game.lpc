@@ -1,0 +1,9 @@
+currentPlayer = 0
+
+function Game.CurrentPlayer(){
+    return currentPlayer 
+}
+
+function Game.ShipSetOrder(){
+    
+}

@@ -1,15 +1,18 @@
 frm = -1
 drone = []
+droneId = -1
 expButton = -1
 
 function FormsDronesScout.Setup(ship){
+    drone = Ship.Get(ship)
+    droneId = ship
+    
     if(frm == -1){
-        frm = PoorForm.New(ship[0])
+        frm = PoorForm.New(drone[0])
     }
 
-    PoorForm.SetLabel(frm, ship[0])
+    PoorForm.SetLabel(frm, drone[0])
 
-    drone = ship
     FormsDronesScout.Reload()
 }
 
@@ -22,4 +25,7 @@ function FormsDronesScout.Reload(){
 }
 
 function FormsDronesScout.HandleClick(id){
+    if(id == expButton){
+        Ship.SetOrder(Ship.OrderExplore())
+    }
 }

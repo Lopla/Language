@@ -1,12 +1,12 @@
 players=[]
-currentPlayer = 0
 
 /*
     name
     ships[]
 */
 function Player.New(){
-    return [ Generator.Name(), [ Ship.New(),Ship.New() ], [] ]
+    p = [ Generator.Name(), [ Ship.New(), Ship.New() ], [] ]
+    return p
 }
 
 function Player.Add(){
@@ -14,17 +14,21 @@ function Player.Add(){
 }
 
 function Player.Name(){
-    b = players[currentPlayer]
+    b = players[Game.CurrentPlayer()]
     
     return b[0]
 }
 
 function Player.Ships(){
-    a = players[currentPlayer]
+    a = players[Game.CurrentPlayer()]
     return a[1]
 }
 
 function Player.Rocks(){
-    a = players[currentPlayer]
+    a = players[Game.CurrentPlayer()]
     return a[2]
+}
+
+function Player.Get(number){
+    return players[number]
 }
