@@ -10,10 +10,12 @@ namespace Lopla.Windows
     {
         private readonly string[] _args;
 
-        public LoplaForm(string[] args)
+        public LoplaForm(string[] args, bool parentConsoleAvailble)
         {
             _args = args;
             InitializeComponent();
+
+            this.lopla1.ParentConsole = parentConsoleAvailble;
         }
 
         public void Run()

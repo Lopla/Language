@@ -21,6 +21,7 @@ namespace Lopla.Draw.Windows.Controls
         private IProject _project;
         private LoplaGuiEventProcessor _uiEventsProvider;
         private Thread _loplaThread;
+        public bool ParentConsole = false;
 
         public LoplaControl()
         {
@@ -54,7 +55,7 @@ namespace Lopla.Draw.Windows.Controls
             {
                 var result = p.Run(_project);
 
-                if (this?.ParentForm?.Visible == true)
+                if (this?.ParentForm?.Visible == true && this.ParentConsole == false)
                 {
                     if (result.HasErrors) new LoplaErrors(result.ToString()).ShowDialog();
                 }

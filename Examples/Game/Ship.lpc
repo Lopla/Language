@@ -1,5 +1,6 @@
 orderExplore = 1
 ships = []
+orders = []
 
 /*
     name
@@ -18,7 +19,8 @@ function Ship.OrderExploreId(){
     return orderExplore
 }
 
-function Ship.SetOrder(ship, i){
+function Ship.SetOrder(ship, order){
+    orders = IdList.Upsert(orders, ship, order)
     return ship
 }
 

@@ -15,6 +15,8 @@ namespace Lopla.Windows
         private const int STD_ERROR_HANDLE = -12;
         private const int STD_INPUT_HANDLE = -10;
 
+        public static bool ParentConsoleAvailble;
+
         [DllImport("kernel32.dll")]
         private static extern bool AttachConsole(int dwProcessId);
 
@@ -40,6 +42,10 @@ namespace Lopla.Windows
         [STAThread]
         public static void Main(string[] args)
         {
+            if(AttachConsole(ATTACH_PARENT_PROCESS)){
+                ParentConsoleAvailble = true;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HiddenContext(args));
@@ -47,7 +53,7 @@ namespace Lopla.Windows
 
         private static void StealOut()
         {
-            var stdHandle = GetStdHandle(STD_OUTPUT_HANDLE); // must be error dunno why
+            var stdHandle = GetStdHandle(STD_OUTPUT_HANDLE); 
             var safeFileHandle = new SafeFileHandle(stdHandle, true);
             var fileStream = new FileStream(safeFileHandle, FileAccess.Write);
             var encoding = Encoding.ASCII;
@@ -58,7 +64,7 @@ namespace Lopla.Windows
 
         private static void StealIn()
         {
-            var stdHandle = GetStdHandle(STD_INPUT_HANDLE); // must be error dunno why
+            var stdHandle = GetStdHandle(STD_INPUT_HANDLE); 
             var safeFileHandle = new SafeFileHandle(stdHandle, true);
             var fileStream = new FileStream(safeFileHandle, FileAccess.Read);
             var encoding = Encoding.ASCII;
@@ -76,7 +82,7 @@ namespace Lopla.Windows
         {
             public HiddenContext(string[] args)
             {
-                var form1 = new LoplaForm(args);
+                var form1 = new LoplaForm(args, Program.ParentConsoleAvailble);
                 form1.Visible = true;
                 form1.FormClosing += form1_FormClosing;
 

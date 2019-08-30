@@ -28,9 +28,10 @@
                     var error = $"{script.Name}:{e.Position.Line}[{e.Position.Column}] {e.Message}.";
                     return
                         new ParseError(
-                            line +
-                            new string(' ', e.Position.Column) + "^" + Environment.NewLine +
-                            new string(' ', e.Position.Column) + "| " + error +
+                            //line +
+                            // new string(' ', e.Position.Column) + "^" + Environment.NewLine +
+                            // new string(' ', e.Position.Column) + "| " + 
+                            error +
                             (utname != null ? $" (Unexpected token was: {utname})" : ""));
                 }).ToList().ForEach(e => { processingResult.Errors.Add(e); });
 

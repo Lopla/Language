@@ -22,7 +22,6 @@ function FormsDrones.Reload(){
         dronesList[Lp.Len(dronesList)] = PoorForm.AddText(frm, s[0])
         i=i+1
     }
-
 }
 
 function FormsDrones.HandleClick(id){
@@ -32,4 +31,3 @@ function FormsDrones.HandleClick(id){
         FormsDronesScout.Setup( drones[pos])
     }
 }
-
