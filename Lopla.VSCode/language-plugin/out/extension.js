@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const intelisense_1 = require("./intelisense");
 const task_1 = require("./task");
+const libsCompletetionProvider_1 = require("./libsCompletetionProvider");
 let loplaStatusBarItem;
 function activate(context) {
     intelisense_1.getAvailbleFunctions();
@@ -29,25 +30,7 @@ function activate(context) {
             return suggestions;
         }
     }));
-    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, {
-        provideCompletionItems(document, position) {
-            let p = position.translate(0, -position.character);
-            let line = document.getText(new vscode.Range(p, position));
-            for (const key of Object.keys(intelisense_1.LoplaSchema)) {
-                let rs = '\\b' + key + '\\.';
-                let r = new RegExp(rs);
-                if (line && r.test(line)) {
-                    var suggestions = [];
-                    var methods = Object.keys(intelisense_1.LoplaSchema[key]);
-                    methods.forEach(element => {
-                        suggestions.push(new vscode.CompletionItem(element, vscode.CompletionItemKind.Function));
-                    });
-                    return suggestions;
-                }
-            }
-            return null;
-        }
-    }, "."));
+    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, new libsCompletetionProvider_1.LibsCompletetionProvider(), "."));
     let workspaceRoot = vscode.workspace.rootPath;
     const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider(workspaceRoot));
     // const myCommandId = 'extension.lopla.run';

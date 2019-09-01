@@ -26,6 +26,6 @@ function FormsDronesScout.Reload(){
 
 function FormsDronesScout.HandleClick(id){
     if(id == expButton){
-        Ship.SetOrder(Ship.OrderExplore())
+        Ship.SetOrder(Ship.OrderExplore(droneId))
     }
 }

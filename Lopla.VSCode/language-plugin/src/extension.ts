@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { getAvailbleFunctions, LoplaSchema, LoplaKeywords } from './intelisense';
 import { LoplaTaskProvider } from './task';
+import { LibsCompletetionProvider } from './libsCompletetionProvider';
 
 let loplaStatusBarItem: vscode.StatusBarItem;
 
@@ -43,31 +44,8 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, {
-      provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-        
-        let p = position.translate(0, -position.character);
-        let line = document.getText(new vscode.Range(p, position));
-
-        for (const key of Object.keys(LoplaSchema)) {
-          let rs = '\\b' + key +'\\.';
-          let r= new RegExp(rs);
-          
-          if(line && r.test(line)){
-            var suggestions = [];
-            
-            var methods = Object.keys(LoplaSchema[key]);
-            methods.forEach(element => {
-              suggestions.push(new vscode.CompletionItem(element, vscode.CompletionItemKind.Function));
-            })
-
-            return suggestions;
-          }
-        }
-        
-        return null;
-      }
-    }, ".")    
+    vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, 
+      new LibsCompletetionProvider(), ".")    
   );
 
   let workspaceRoot = vscode.workspace.rootPath;
