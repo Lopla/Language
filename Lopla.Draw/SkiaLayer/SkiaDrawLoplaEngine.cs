@@ -15,7 +15,7 @@
             LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
-            SetupCanvas(32, 32);
+            SetupCanvas(64, 64);
         }
 
         public ILoplaRequestsHandler LoplaRequestsHandler { get; }

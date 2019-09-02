@@ -9,6 +9,7 @@ using Lopla.Draw.Windows.Logic;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 using Lopla.Libs;
+using Lopla.Libs.Interfaces;
 using Lopla.Starting;
 
 namespace Lopla.Draw.Windows.Controls
@@ -44,11 +45,11 @@ namespace Lopla.Draw.Windows.Controls
 
         public void Run()
         {
-            _loplaThread = new Thread(startWokrer);
+            _loplaThread = new Thread(StartWorker);
             _loplaThread.Start();
         }
 
-        private void startWokrer()
+        private void StartWorker()
         {
             var p = new Runner();
             if (_project != null)
@@ -78,6 +79,13 @@ namespace Lopla.Draw.Windows.Controls
                 new IO()
             }).GetProject(code);
         }
+
+        public void Project(IProject project)
+        {
+            this._project = project;
+        }
+
+        public ISender UiEvents => this._uiEventsProvider.UiEvents;
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
