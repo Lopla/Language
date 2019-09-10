@@ -1,7 +1,7 @@
-﻿namespace Lopla.Draw
-{
-    using Messages;
+﻿using Lopla.Draw.Messages;
 
+namespace Lopla.Draw
+{
     public interface ILoplaRequestsHandler
     {
         Point GetCanvasSize();

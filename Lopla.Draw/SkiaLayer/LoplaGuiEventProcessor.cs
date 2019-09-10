@@ -8,9 +8,9 @@
 
     public class LoplaGuiEventProcessor
     {
-        private readonly SkiaDrawLoplaEngine _engine;
+        private readonly ISkiaDrawLoplaEngine _engine;
 
-        public LoplaGuiEventProcessor(SkiaDrawLoplaEngine engine)
+        public LoplaGuiEventProcessor(ISkiaDrawLoplaEngine engine)
         {
             UiEvents = new LockingBus();
             _engine = engine;

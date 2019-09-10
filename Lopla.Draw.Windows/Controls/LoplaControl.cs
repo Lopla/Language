@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Lopla.Draw.SkiaLayer;
+using Lopla.Draw.UWP;
 using Lopla.Draw.Windows.Logic;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
 using Lopla.Libs;
 using Lopla.Libs.Interfaces;
 using Lopla.Starting;
+using LoplaGuiEventProcessor = Lopla.Draw.SkiaLayer.LoplaGuiEventProcessor;
 
 namespace Lopla.Draw.Windows.Controls
 {
@@ -18,11 +19,11 @@ namespace Lopla.Draw.Windows.Controls
 
     public partial class LoplaControl : UserControl
     {
-        private SkiaDrawLoplaEngine _engine;
         private IProject _project;
         private LoplaGuiEventProcessor _uiEventsProvider;
         private Thread _loplaThread;
         public bool ParentConsole = false;
+        public ISkiaDrawLoplaEngine Engine;
 
         public LoplaControl()
         {
@@ -36,8 +37,8 @@ namespace Lopla.Draw.Windows.Controls
         {
             var drawCtx = new LoplaRequests(skControl1);
 
-            _engine = new SkiaDrawLoplaEngine(drawCtx);
-            _uiEventsProvider = new LoplaGuiEventProcessor(_engine);
+            Engine =  new SkiaDrawLoplaEngine(drawCtx);
+            _uiEventsProvider = new LoplaGuiEventProcessor(Engine);
 
             var windowsDesktopEvents =
                 new WindowsDesktopEvents(skControl1, _uiEventsProvider);
@@ -74,7 +75,7 @@ namespace Lopla.Draw.Windows.Controls
         {
             _project = new MainHandler(new List<ILibrary>
             {
-                new WinFormsDraw(ParentForm, _engine, _uiEventsProvider.UiEvents),
+                new WinFormsDraw(ParentForm, Engine, _uiEventsProvider.UiEvents),
                 new Lp(code?.ToList().Skip(1).ToArray()),
                 new IO()
             }).GetProject(code);

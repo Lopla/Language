@@ -13,7 +13,7 @@
 
     public class Draw : BaseLoplaLibrary
     {
-        private readonly SkiaDrawLoplaEngine _renderingEngine;
+        private readonly ISkiaDrawLoplaEngine _renderingEngine;
         private readonly ISender _uiEventsProvider;
 
         /// <summary>
@@ -27,7 +27,7 @@
         ///     ui events for the system incl: click, SetCanvas, keypress
         /// </param>
         public Draw(
-            SkiaDrawLoplaEngine drawEngine,
+            ISkiaDrawLoplaEngine drawEngine,
             ISender uiEventsProvider = null
         )
         {

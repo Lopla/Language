@@ -1,4 +1,6 @@
-﻿namespace Lopla.Draw.Windows
+﻿using Lopla.Draw.UWP;
+
+namespace Lopla.Draw.Windows
 {
     using System.Windows.Forms;
     using Language.Binary;
@@ -13,7 +15,7 @@
         private static bool _visible;
         private readonly Form _form;
 
-        public WinFormsDraw(Form form, SkiaDrawLoplaEngine drawEngine, ISender uiEventsProvider = null) : base(
+        public WinFormsDraw(Form form, ISkiaDrawLoplaEngine drawEngine, ISender uiEventsProvider = null) : base(
             drawEngine,
             uiEventsProvider)
         {

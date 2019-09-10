@@ -34,6 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hime.Redist, Version=3.4.0.0, Culture=neutral, PublicKeyToken=984dd3a5d55ca89c, processorArchitecture=MSIL">
+      <HintPath>..\..\Lopla\packages\Hime.Redist.3.4.0\lib\net20\Hime.Redist.dll</HintPath>
+    </Reference>
+    <Reference Include="Lopla.Draw, Version=0.0.19.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Lopla\packages\Lopla.Draw.0.0.19-alpha\lib\netstandard2.0\Lopla.Draw.dll</HintPath>
+    </Reference>
+    <Reference Include="Lopla.Language, Version=0.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Lopla\packages\Lopla.Language.0.0.20-alpha\lib\netstandard2.0\Lopla.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="Lopla.Libs, Version=0.0.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Lopla\packages\Lopla.Libs.0.0.12-alpha\lib\netstandard2.0\Lopla.Libs.dll</HintPath>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.68.0\lib\net45\SkiaSharp.dll</HintPath>
     </Reference>
@@ -76,18 +88,6 @@
     <Compile Include="WinFormsDraw.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj">
-      <Project>{73062adc-b413-4aa8-86fb-e80f9002e17b}</Project>
-      <Name>Lopla.Draw</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lopla.Language\Lopla.Language.csproj">
-      <Project>{8cdacb72-b741-4d78-9236-c44351c41cf8}</Project>
-      <Name>Lopla.Language</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj">
-      <Project>{4a156e9c-f40b-49c4-a4c2-ef62459c788f}</Project>
-      <Name>Lopla.Libs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj">
       <Project>{25408658-E8DD-454D-A55F-3BCB1AD14205}</Project>
       <Name>Lopla.Starting</Name>

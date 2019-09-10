@@ -1,10 +1,9 @@
 ﻿namespace Lopla.Draw.SkiaLayer
 {
-    using System;
     using Lopla.Libs.Interfaces;
     using SkiaSharp;
 
-    public class SkiaDrawLoplaEngine : IDisposable
+    public class SkiaDrawLoplaEngine : ISkiaDrawLoplaEngine
     {
         private readonly SkiaRenderer _renderer;
         private SKBitmap _bitMap;
@@ -28,16 +27,17 @@
 
         public void SetupCanvas(int x, int y)
         {
+            if (
+                _bitMap != null &&
+                (x < _bitMap.Width || y < _bitMap.Height))
+            {
+                return;
+            }
+
+            SKBitmap newBitMap;
             lock (this)
             {
-                if (
-                    _bitMap != null &&
-                    (x < _bitMap.Width || y < _bitMap.Height))
-                {
-                    return;
-                }
-
-                var newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
+                newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
 
                 if (_bitMap != null)
                 {
@@ -50,23 +50,22 @@
                     }
                 }
 
-                _bitMap?.Dispose();
-                _bitMap = null;
-                _canvas?.Dispose();
-                _canvas = null;
-
-                _bitMap = newBitMap;
-                _canvas = new SKCanvas(_bitMap);
 
             }
+            _bitMap?.Dispose();
+            _bitMap = null;
+            _canvas?.Dispose();
+            _canvas = null;
+
+            _bitMap = newBitMap;
+            _canvas = new SKCanvas(_bitMap);
         }
 
         public void Perform(ILoplaMessage instruction)
         {
-            lock (this)
-            {
-                _renderer.LoplaPainter(_canvas, instruction);
-            }
+
+            _renderer.LoplaPainter(_canvas, instruction);
+
         }
 
         public void Render(SKCanvas canvas)
