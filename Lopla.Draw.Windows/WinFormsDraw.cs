@@ -1,6 +1,4 @@
-﻿using Lopla.Draw.UWP;
-
-namespace Lopla.Draw.Windows
+﻿namespace Lopla.Draw.Windows
 {
     using System.Windows.Forms;
     using Language.Binary;

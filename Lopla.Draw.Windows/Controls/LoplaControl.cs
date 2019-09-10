@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Lopla.Draw.UWP;
+using Lopla.Draw.SkiaLayer;
 using Lopla.Draw.Windows.Logic;
 using Lopla.Language.Interfaces;
 using Lopla.Language.Processing;
@@ -23,7 +23,7 @@ namespace Lopla.Draw.Windows.Controls
         private LoplaGuiEventProcessor _uiEventsProvider;
         private Thread _loplaThread;
         public bool ParentConsole = false;
-        public ISkiaDrawLoplaEngine Engine;
+        public ISkiaDrawLoplaEngine Engine { get; set; }
 
         public LoplaControl()
         {
