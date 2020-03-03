@@ -13,7 +13,7 @@
             "group": "build"
         },
         {
-            "label": "build-loplad",
+            "label": "build-loplac",
             "command": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/MSBuild/Current/Bin/msbuild.exe",
             "type": "process",
             "args": [
@@ -24,7 +24,7 @@
             "group": "build"
         },
         {
-            "label": "run-loplad",
+            "label": "run-loplac",
             "type": "shell",
             "command": "${workspaceFolder}/Lopla.WinConsole/bin/Debug/loplac.exe",
             "args": [
@@ -41,7 +41,8 @@
             "problemMatcher": []
         },
         {
-            "label": "copy-loplad-to-plugin",
+            "label": "copy-loplac-to-plugin",
+            "detail": "Copies loplac.exe to plugin folder, after that you can relase the plugin.`",
             "command": "Copy-Item",
             "dependsOn": ["build-loplad"],
             "type": "shell",
