@@ -2,7 +2,7 @@
     "name": "lopla",
     "displayName": "Lopla",
     "description": "Lopla language definition for VS Code",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "galcorp",
     "engines": {
         "vscode": "^1.31.0"
@@ -47,8 +47,8 @@
             {
                 "type": "lopla",
                 "properties": {
-                    "folder":{
-                        "type":"string",
+                    "folder": {
+                        "type": "string",
                         "description": "Root folder for application to be started"
                     }
                 }
@@ -56,11 +56,13 @@
         ]
     },
     "main": "./out/extension.js",
-    "capabilities" : {
-        "hoverProvider" : "true",
-        "completionProvider" : {
+    "capabilities": {
+        "hoverProvider": "true",
+        "completionProvider": {
             "resolveProvider": "true",
-            "triggerCharacters": [ "." ]
+            "triggerCharacters": [
+                "."
+            ]
         }
     },
     "scripts": {
