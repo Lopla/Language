@@ -1,0 +1,70 @@
+﻿function IdList.New(){
+	return []
+}
+
+function IdList.Upsert(list, id, element){
+	i=0
+	found = 0 
+	while(i < Lp.Len(list)){
+		lentry = list[i]
+		if(lentry[0] == id){
+			found = 1
+			lentry[1] = element
+			list[i] = lentry
+			i = Lp.Len(list)+1
+		}
+		i=i+1
+	}
+	if(found==0){
+		list[Lp.Len(list)] = [id, element]
+	}
+	return list
+}
+
+function IdList.Remove(list, id){
+	newList = []
+	i=0
+	while(i < Lp.Len(list)){
+		lentry = list[i]
+		if(lentry[0] != id){
+			newList[Lp.Len(newList)] = lentry
+		}
+		i=i+1
+	}
+
+	return newList
+}
+
+function IdList.Get(list, id){
+	newList = []
+	i=0
+	while(i < Lp.Len(list)){
+		lentry = list[i]
+		if(lentry[0] == id){
+			return lentry[1]
+		}
+		i=i+1
+	}
+
+	return newList
+}
+
+
+function IdList.MaxId(list){
+	maxId = 0
+	i=0
+	while(i < Lp.Len(list)) {
+		itm = list[i]
+		if(maxId <= itm[0]){
+			maxId = itm[0]
+		}
+		i=i+1
+	}
+	return maxId
+}
+
+function IdList.Insert(list, obj){
+	maxId = IdList.MaxId(list) + 1
+	list[Lp.Len(list)] = [maxId, obj]
+	return [list, maxId]
+}

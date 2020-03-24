@@ -111,7 +111,7 @@
     /// block '{' '}'
     block_of_lopla        ->  (NEW_LINE)!* '{'! NEW_LINE!
                               lopla_line*  
-                              '}'! NEW_LINE!;
+                              '}'! ;
 
     /// if
     if                    ->  IF '('! expression ')'! block_of_lopla;
@@ -128,9 +128,9 @@
 
     ///// --------------------------- FILE -----------------------------------
     lopla_oneliners-> (method_call^ | assigment^ | return^) NEW_LINE;
-    lopla_blocks   -> if^ | method^ | while^;
-    lopla_line     -> lopla_oneliners^  | lopla_blocks^ | emptyLine^;
-    lopla_root_line-> lopla_line^;
-    lopla          -> lopla_root_line* @OnLopla;    
+    lopla_blocks   -> (if^ | method^ | while^ ) NEW_LINE!;
+    lopla_line     -> lopla_oneliners^  | lopla_blocks^ | emptyLine^ ;
+    lopla_root_line-> lopla_line^ NEW_LINE!;
+    lopla          -> lopla_root_line* lopla_line? @OnLopla;    
   }
 }

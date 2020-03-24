@@ -1,0 +1,9 @@
+pos=[0,0]
+
+function Game.GetPos(){
+    return pos
+}
+
+function Game.SetPos(inpos){
+    pos = inpos
+}

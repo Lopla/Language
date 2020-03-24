@@ -1,0 +1,9 @@
+Paint.Init()
+Paint.Clear()
+Paint.BackGround()
+
+while(1){
+    e = Draw.WaitForEvent()
+    Events.Handle(e)
+
+}

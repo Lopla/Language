@@ -1,0 +1,28 @@
+background = [0,128,128]
+textColour = [0,0,0]
+textHeight = 0
+
+function Paint.Init(){
+    Draw.SetColor(textColour[0],textColour[1],textColour[2])
+    textHeight = Draw.GetTextInfo()
+    textHeight = textHeight[0] +  (textHeight[0]/2)
+}
+
+function Paint.Clear(){
+    Draw.Clear(background[0],background[1],background[2])
+}
+
+function Paint.BackGround(){
+    Draw.Text(0, textHeight, String.Get(Game.GetPos()))
+}
+
+
+function Paint.BackGround(){
+    Draw.Text(0, textHeight, String.Get(Game.GetPos()))
+}
+
+function Paint.Repaint(){
+    Paint.Clear()
+    Paint.BackGround()
+    Draw.Flush()
+}

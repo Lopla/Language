@@ -1,0 +1,10 @@
+function Events.Handle(e){
+    if(e[0]=="SetCanvas"){
+        Paint.Repaint()
+    }
+
+    if(e[0]=="Click"){
+        Draw.Log(String.Get(e))
+    }
+
+}

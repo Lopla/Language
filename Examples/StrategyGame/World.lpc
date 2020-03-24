@@ -1,0 +1,18 @@
+units=[]
+
+function World.NewPlayer(x, y){
+    return ["Player", 0, 0]
+}
+
+function World.Init(){
+    x = 0
+    y = 0
+    units = IdList.New()
+    units = IdList.Add(World.NewPlayer(x,y))
+    x = x+10
+    units = IdList.Add(World.NewPlayer(x,y))
+}
+
+function World.GetUnits(){
+    return untis
+}

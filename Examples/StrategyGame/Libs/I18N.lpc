@@ -1,0 +1,26 @@
+translationsEn = []
+translationsEn[0] = ["player", "Player"]
+
+translationsPl = []
+translationsPl[0] = ["player", "Gracz"]
+translationsPl[1] = ["close", "Zamknij"]
+translationsPl[2] = ["drones", "Drony"]
+translationsPl[3] = ["rocks", "Meteoryty"]
+translationsPl[4] = ["range", "Zasięg"]
+translationsPl[5] = ["ly", "lat św."]
+translationsPl[6] = ["name", "Nazwa"]
+translationsPl[7] = ["scout", "Skaut"]
+
+translations = translationsPl 
+
+function I18N.T(t){
+    i = Lp.Len(translations)
+    while(i > 0){
+        i=i-1
+        r = translations[i]
+        if(r[0] == t){
+            return r[1]
+        }
+    }
+    return "["+t+"]"
+}
