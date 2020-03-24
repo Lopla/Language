@@ -4,24 +4,18 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Lopla.Tests/bin/Debug/netcoreapp2.0/Lopla.Tests.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Lopla.Tests",
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
-        },
+       {
+           "name": "Lopla console",
+           "type": "coreclr",
+           "request": "launch",
+           "preLaunchTask": "build-loplac",
+           "program": "${workspaceFolder}/Lopla.Console/bin/Debug/netcoreapp2.2/LoplaC.dll",
+           "args": [ "${workspaceFolder}/Examples/P" ],
+           "cwd": "${workspaceFolder}/Lopla.Console",
+           "stopAtEntry": false,
+           "console": "externalTerminal",
+           
+       },
         {
             "name": "VSC extenstion",
             "type": "extensionHost",

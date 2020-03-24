@@ -139,13 +139,13 @@ namespace Lopla.Language.Grammar
 			/// </summary>
 			public const int VariableLoplaBlocks = 0x0034;
 			/// <summary>
+			/// The unique identifier for variable lopla_line_nl
+			/// </summary>
+			public const int VariableLoplaLineNl = 0x0035;
+			/// <summary>
 			/// The unique identifier for variable lopla_line
 			/// </summary>
-			public const int VariableLoplaLine = 0x0035;
-			/// <summary>
-			/// The unique identifier for variable lopla_root_line
-			/// </summary>
-			public const int VariableLoplaRootLine = 0x0036;
+			public const int VariableLoplaLine = 0x0036;
 			/// <summary>
 			/// The unique identifier for variable lopla
 			/// </summary>
@@ -188,8 +188,8 @@ namespace Lopla.Language.Grammar
 			new Symbol(0x0032, "return"), 
 			new Symbol(0x0033, "lopla_oneliners"), 
 			new Symbol(0x0034, "lopla_blocks"), 
-			new Symbol(0x0035, "lopla_line"), 
-			new Symbol(0x0036, "lopla_root_line"), 
+			new Symbol(0x0035, "lopla_line_nl"), 
+			new Symbol(0x0036, "lopla_line"), 
 			new Symbol(0x0037, "lopla"), 
 			new Symbol(0x0047, "__V71"), 
 			new Symbol(0x004A, "__V74"), 
@@ -317,8 +317,8 @@ namespace Lopla.Language.Grammar
 			public virtual void OnVariableReturn(ASTNode node) {}
 			public virtual void OnVariableLoplaOneliners(ASTNode node) {}
 			public virtual void OnVariableLoplaBlocks(ASTNode node) {}
+			public virtual void OnVariableLoplaLineNl(ASTNode node) {}
 			public virtual void OnVariableLoplaLine(ASTNode node) {}
-			public virtual void OnVariableLoplaRootLine(ASTNode node) {}
 			public virtual void OnVariableLopla(ASTNode node) {}
 		}
 
@@ -389,8 +389,8 @@ namespace Lopla.Language.Grammar
 				case 0x0032: visitor.OnVariableReturn(node); break;
 				case 0x0033: visitor.OnVariableLoplaOneliners(node); break;
 				case 0x0034: visitor.OnVariableLoplaBlocks(node); break;
-				case 0x0035: visitor.OnVariableLoplaLine(node); break;
-				case 0x0036: visitor.OnVariableLoplaRootLine(node); break;
+				case 0x0035: visitor.OnVariableLoplaLineNl(node); break;
+				case 0x0036: visitor.OnVariableLoplaLine(node); break;
 				case 0x0037: visitor.OnVariableLopla(node); break;
 			}
 		}

@@ -53,7 +53,6 @@
     method_name           -> LITERAL;
     namespace             -> LITERAL;
 
-
     /// ------------------------- VALUES ----------------------------------
 
     /// expressions
@@ -109,7 +108,7 @@
     /// ------------------------- DECLARATIONS ----------------------------------
 
     /// block '{' '}'
-    block_of_lopla        ->  (NEW_LINE)!* '{'! NEW_LINE!
+    block_of_lopla        ->  (NEW_LINE!*) '{'! NEW_LINE!
                               lopla_line*  
                               '}'! ;
 
@@ -127,10 +126,10 @@
     return                -> 'return' expression;
 
     ///// --------------------------- FILE -----------------------------------
-    lopla_oneliners-> (method_call^ | assigment^ | return^) NEW_LINE;
-    lopla_blocks   -> (if^ | method^ | while^ ) NEW_LINE!;
-    lopla_line     -> lopla_oneliners^  | lopla_blocks^ | emptyLine^ ;
-    lopla_root_line-> lopla_line^ NEW_LINE!;
-    lopla          -> lopla_root_line* lopla_line? @OnLopla;    
+    lopla_oneliners-> (method_call^ | assigment^ | return^) ;
+    lopla_blocks   -> (if^ | method^ | while^ ) ;
+    lopla_line_nl  -> lopla_oneliners^ | lopla_blocks^;
+    lopla_line     -> lopla_line_nl^ NEW_LINE! | emptyLine^ ;
+    lopla          -> (lopla_line* | lopla_line_nl?) @OnLopla;
   }
 }
