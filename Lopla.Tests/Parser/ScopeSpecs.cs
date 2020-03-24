@@ -56,20 +56,17 @@ Test.Write(b)
             {
                 @"a=1
 b=2
-Test.Write(b)
+b=4
 
+Test.Write(b)
 function tt.ok(ba){
     Test.Write(ba)
 }
-
 tt.ok(b)
-
-b=4
 Test.Write(b)
-
 ",
-                "2",
-                "2",
+                "4",
+                "4",
                 "4"
             });
             scripts.Add(new List<object>

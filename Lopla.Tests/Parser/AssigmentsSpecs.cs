@@ -33,7 +33,7 @@ Test.Write(a)
 b = 2
 a = b
 Test.Write(a)
-", "1", "2")]
+", "2", "2")]
         public void AssignsTwoVariables(string script, params string[] args)
         {
             EvaluateCode(script, args);
