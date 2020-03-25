@@ -8,7 +8,7 @@ namespace Lopla.Language.Environment
     {
         private readonly Dictionary<MemoryPointer, Result> _data = new Dictionary<MemoryPointer, Result>();
 
-        public void Set(VariablePointer pointer, Result value, bool overFlow = false)
+        public void Set(VariablePointer pointer, Result value)
         {
             var m = LocateByKey(pointer);
 
@@ -44,16 +44,6 @@ namespace Lopla.Language.Environment
         public override string ToString()
         {
             return $"{_data.Count}";
-        }
-    }
-
-    public class MemoryPointer
-    {
-        public string Name;
-
-        public override string ToString()
-        {
-            return $"{Name}";
         }
     }
 }

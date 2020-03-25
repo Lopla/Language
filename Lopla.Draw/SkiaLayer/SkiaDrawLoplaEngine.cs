@@ -63,14 +63,19 @@
 
         public void Perform(ILoplaMessage instruction)
         {
-
-            _renderer.LoplaPainter(_canvas, instruction);
+            lock (this)
+            {
+                _renderer.LoplaPainter(_canvas, instruction);
+            }
 
         }
 
         public void Render(SKCanvas canvas)
         {
-            canvas?.DrawBitmap(_bitMap, 0, 0);
+            lock (this)
+            {
+                canvas?.DrawBitmap(_bitMap, 0, 0);
+            }
         }
     }
 }
