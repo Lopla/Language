@@ -55,6 +55,8 @@
       <Project>{74be8b1f-da6e-48e8-b8ff-9c94ab38b804}</Project>
       <Name>Lopla.Windows</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
+    <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

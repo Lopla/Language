@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>Lopla.Draw.Windows</AssemblyName>
+    <RootNamespace>Lopla.Draw.Windows</RootNamespace>
+  </PropertyGroup>
+ 
+ 
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
+    <PackageReference Include="skiasharp.views" Version="1.68.1.1" />
+  </ItemGroup>
+
+
+</Project>
