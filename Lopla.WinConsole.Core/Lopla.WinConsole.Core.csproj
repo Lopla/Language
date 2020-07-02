@@ -3,7 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
     <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj" />
-    <ProjectReference Include="..\Lopla.Draw.Windows.Core\Lopla.Draw.Windows.csproj" />
+    <ProjectReference Include="..\Lopla.Draw.Windows.Core\Lopla.Draw.Windows.Core.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

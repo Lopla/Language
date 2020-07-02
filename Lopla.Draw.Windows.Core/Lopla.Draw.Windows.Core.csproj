@@ -2,10 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj" />
+    <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
+    <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
 
@@ -16,8 +17,9 @@
  
  
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
-    <PackageReference Include="skiasharp.views" Version="1.68.1.1" />
+    <PackageReference Include="SkiaSharp" Version="2.80.0-preview.33" />
+    <PackageReference Include="skiasharp.views" Version="2.80.0-preview.33" />
+    <PackageReference Include="SkiaSharp.Views.WindowsForms" Version="2.80.0-preview.33" />
   </ItemGroup>
 
 

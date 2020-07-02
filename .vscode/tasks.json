@@ -2,6 +2,34 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "build-loplac-core",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Lopla.WinConsole.Core"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "publish-loplac-core",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Lopla.WinConsole.Core",
+                "-r",
+                "win-x64",
+                "--self-contained",
+                "-o",
+                "${workspaceFolder}/build/loplac-core",
+                "/p:PublishSingleFile=true"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
             "label": "build-tests",
             "command": "dotnet",
             "type": "process",
@@ -55,7 +83,9 @@
             "label": "copy-loplac-to-plugin",
             "detail": "Copies loplac.exe to plugin folder, after that you can relase the plugin.`",
             "command": "Copy-Item",
-            "dependsOn": ["build-loplad"],
+            "dependsOn": [
+                "build-loplad"
+            ],
             "type": "shell",
             "args": [
                 "-Recurse",
@@ -66,19 +96,19 @@
             "problemMatcher": []
         },
         {
-            "label":"debug-extension",
+            "label": "debug-extension",
             "type": "npm",
             "script": "watch",
             "path": "Lopla.VSCode/language-plugin/",
             "problemMatcher": []
         },
         {
-            "label":"package-extension",
+            "label": "package-extension",
             "type": "shell",
-            "options":{
+            "options": {
                 "cwd": "Lopla.VSCode/language-plugin/"
             },
-            "command":"vsce package",
+            "command": "vsce package",
             "problemMatcher": []
         }
     ]
