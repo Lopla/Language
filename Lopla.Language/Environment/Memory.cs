@@ -6,7 +6,8 @@ namespace Lopla.Language.Environment
 {
     public class Memory
     {
-        private readonly Dictionary<MemoryPointer, Result> _data = new Dictionary<MemoryPointer, Result>();
+        private readonly Dictionary<MemoryPointer, Result> _data = 
+            new Dictionary<MemoryPointer, Result>();
 
         public void Set(VariablePointer pointer, Result value)
         {
