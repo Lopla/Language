@@ -1,0 +1,56 @@
+lud1 = []
+lud2 = []
+img = []
+
+pos=[-512,-512]
+lud1spr = 0
+
+function Main.Load(){
+    img = IO.LoadBinaryFile("C:\\work\\sandbox\\Language\\Examples\\City\\cover07_img25.png")
+    lud1[0] = IO.LoadBinaryFile("C:\\work\\sandbox\\Language\\Examples\\City\\chlopekL.png")
+    lud1[1] = IO.LoadBinaryFile("C:\\work\\sandbox\\Language\\Examples\\City\\chlopekP.png")
+}
+
+function Main.Draw(){
+    Draw.Image(pos[0],pos[1],img)
+    Draw.Image(256,256, lud1[lud1spr])
+    Draw.Flush()
+}
+
+function Main.City(){
+
+    Main.Draw()
+
+    work = 1
+    while(work == 1){
+        eve = Draw.WaitForEvent()
+        Draw.Log(String.Get(eve))
+        Draw.Flush()
+        if(eve[0] == "Key"){
+            if(eve[1] == 65){
+                pos[0]=pos[0]+8
+                lud1spr = 0
+                Main.Draw()
+            }
+            if(eve[1] == 68){
+                pos[0]=pos[0]-8
+                lud1spr= 1
+                Main.Draw()
+            }
+            if(eve[1] == 87){
+                pos[1]=pos[1]+8
+                lud1spr= 1
+                Main.Draw()
+            }
+            if(eve[1] == 83){
+                pos[1]=pos[1]-8
+                lud1spr= 1
+                Main.Draw()
+            }
+        }
+    }
+
+}
+
+Main.Load()
+Main.City()

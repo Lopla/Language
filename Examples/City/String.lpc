@@ -1,0 +1,71 @@
+function String.NToString(in){
+	if(in == 0){
+		return "0"
+	}
+	
+	r =""
+	cell = in - Lp.Floor(in)
+
+	while(in > 0){
+		a = in / 10
+		a = Lp.Floor(a) * 10
+		b = in - a
+		c = b + 48
+		r[Lp.Len(r)]= c
+		in = a /10
+	}	
+	
+	rever = ""
+	k=0
+	rL = Lp.Len(r)
+	while(k < rL){
+		rever[k] = r[rL -k-1]
+		k=k+1
+	}
+	r=rever
+
+	if (in >0){
+		r[Lp.Len(r)]= in + 48
+	}
+
+	if(cell > 0)
+	{
+		r=r+"."
+	}
+
+	while(cell < 1 && cell > 0){
+		a = cell * 10
+		b = Lp.Floor(a) 
+		c = b + 48
+		r[Lp.Len(r)]=c
+		cell = (cell * 10) - b
+	}
+
+	return r
+}
+
+function String.Get(a){
+    r=""
+    type = Lp.VarType(a)
+    if(type == "LoplaList"){
+        i=0
+		r="[ "
+        while(i<Lp.Len(a)){
+			if(Lp.Len(r) > 2){
+				r=r+", "
+			}
+			d=a[i]
+            r= r + String.Get(d)
+            i=i+1
+        }
+        r=r+" ]"
+    }
+    if(type == "Number"){
+        r=""+String.NToString(a)
+    }
+    if(type == "String"){
+        r="'"+a+"'"
+    }
+
+    return r
+}
