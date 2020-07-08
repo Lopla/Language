@@ -35,3 +35,7 @@ Plugin for writing lopla code in visual studio code. Current information about l
     ]
 ```
 - Removed old button on status bar
+
+### 0.0.6
+
+- Smaller footprint (lopla.exe in one file)

@@ -34,3 +34,5 @@ function Anim.Main(){
         Draw.Flush()
     }
 }
+
+Anim.Main()

@@ -35,5 +35,6 @@ function Main.Sierpinski(){
 
 Draw.Clear(1, 255, 255)
 
-Anim.Main()
-
+/*Anim.Main()
+*/
+Main.Sierpinski()
