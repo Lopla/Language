@@ -59,6 +59,7 @@
                 _bitMap = newBitMap;
                 
                 _canvas = new SKCanvas(_bitMap);
+ 
             }
         }
 
@@ -70,20 +71,21 @@
             }
         }
 
-        public void Render(SKCanvas canvas)
+        public void Render(SKCanvas targetCanvas)
         {
             lock (this)
             {
-                canvas?.DrawBitmap(_bitMap, 0, 0);
-
-                // canvas?.DrawRect(
-                //     new SKRect(0,0, _bitMap.Width, _bitMap.Height), new SKPaint(){
-                //     Color = new SKColor(128,0,0),
+                targetCanvas?.DrawBitmap(_bitMap, 0, 0);
+                
+                // canvas.DrawRect(_bitMap.Width - 100, 
+                // _bitMap.Height - 96, 100, 96, new SKPaint(){
+                //     Color = new SKColor(0,0,0)
                 // });
-
-                canvas?.DrawText($"{_bitMap.Width} {_bitMap.Height}", 0, 32, new SKPaint(){
-                    Color = new SKColor(255, 255, 255)
-                });
+                // canvas?.DrawText($"{_bitMap.Width} {_bitMap.Height}",
+                //      _bitMap.Width - 100, _bitMap.Height-48,
+                //     new SKPaint(){
+                //     Color = new SKColor(255, 255, 255)
+                // });
             }
         }
     }
