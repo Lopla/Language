@@ -11,10 +11,6 @@
     <FileVersion>0.0.20.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Fonts\FiraMono-Bold.otf" />
