@@ -5,20 +5,25 @@ import { outputWindow } from './extension';
 
 export const loplaToolPath = path.resolve(__dirname, '../resources/loplac');
 export const loplaTool = path.resolve(__filename, loplaToolPath, "loplac.exe");
+export const loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
 
 export let LoplaSchema = {};
 export let LoplaKeywords = ['function', 'while', 'if', 'return'];
+export let LoplaMethods = {};
 
 function pupulateFunctionArgs(){
     for (const key of Object.keys(LoplaSchema)) {
       for (const methods of Object.keys(LoplaSchema[key])) {
-        //console.log(key+"."+methods)
+        
+        var m = key+"."+methods;
+        execFile.execFile(loplaTool, [loplaScripsPath, "function", m], {}, (error, stdout, stderr) => {
+          LoplaMethods[m] = [stdout.split("\n")];
+        });
       }
     }
   }
   
 export   function getAvailbleFunctions(){
-    var loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
   
     execFile.execFile(loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
       var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)")

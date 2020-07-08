@@ -6,18 +6,22 @@ const execFile = require("child_process");
 const extension_1 = require("./extension");
 exports.loplaToolPath = path.resolve(__dirname, '../resources/loplac');
 exports.loplaTool = path.resolve(__filename, exports.loplaToolPath, "loplac.exe");
+exports.loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
 exports.LoplaSchema = {};
 exports.LoplaKeywords = ['function', 'while', 'if', 'return'];
+exports.LoplaMethods = {};
 function pupulateFunctionArgs() {
     for (const key of Object.keys(exports.LoplaSchema)) {
         for (const methods of Object.keys(exports.LoplaSchema[key])) {
-            //console.log(key+"."+methods)
+            var m = key + "." + methods;
+            execFile.execFile(exports.loplaTool, [exports.loplaScripsPath, "function", m], {}, (error, stdout, stderr) => {
+                exports.LoplaMethods[m] = [stdout.split("\n")];
+            });
         }
     }
 }
 function getAvailbleFunctions() {
-    var loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
-    execFile.execFile(exports.loplaTool, [loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
+    execFile.execFile(exports.loplaTool, [exports.loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
         var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)");
         if (stdout) {
             var lines = stdout.split("\n");
