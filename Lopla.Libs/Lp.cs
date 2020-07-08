@@ -4,6 +4,7 @@ using Lopla.Language.Interfaces;
 using Lopla.Language.Libraries;
 using Lopla.Language.Processing;
 using String = Lopla.Language.Binary.String;
+using System.Linq;
 
 namespace Lopla.Libs
 {
@@ -30,6 +31,7 @@ namespace Lopla.Libs
             //// diagnostics / debug
             Add("Functions", Functions);
             Add("FunctionInfo", FunctionInfo, "functionName");
+                
         }
 
         private Result VarType(Mnemonic expression, IRuntime runtime)
@@ -51,9 +53,24 @@ namespace Lopla.Libs
 
         private Result FunctionInfo(Mnemonic expression, IRuntime runtime)
         {
-            var functionInformation = new LoplaList();
             var functionName = GetArgument<String>("functionName", runtime);
-            functionInformation.Add(new Result(new String(functionName.Value)));
+            
+            var me = runtime
+                .GetRegisteredMethods()
+                .Where(m=>m.Key == functionName.Value)
+                .Select(m =>m.Value)
+                .FirstOrDefault();
+            
+            var functionInformation = new LoplaList();
+            
+            if(me!=null)
+            {
+                functionInformation.Add(new Result(new String(functionName.Value)));
+                foreach(var arg in me)
+                {
+                    functionInformation.Add(new Result(new String(arg)));
+                }
+            }
 
             return new Result(functionInformation);
         }

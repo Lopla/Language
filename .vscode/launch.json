@@ -11,8 +11,8 @@
             "preLaunchTask": "build-loplac-core",
             "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.0/Lopla.Console.dll",
             "args": [
-                //"${workspaceFolder}/Examples/Tests"
-                "${workspaceFolder}/Examples/City"
+                "${workspaceFolder}/Examples/Tests"
+                //"${workspaceFolder}/Examples/City"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

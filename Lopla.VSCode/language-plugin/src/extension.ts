@@ -9,7 +9,7 @@ import { run } from './intelisense';
 let loplaStatusBarItem: vscode.StatusBarItem;
 let loplaDocumentScheme = {scheme: 'file',language:'lopla'};
 
-export let outputWindow: any;
+export let outputWindow: OutputChannel;
 
 export function activate(context: vscode.ExtensionContext) {
   getAvailbleFunctions();

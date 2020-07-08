@@ -56,7 +56,10 @@ export function run(){
         vscode.window.showErrorMessage(e.toString());
       }
 
-      outputWindow.appendLine(stdout);
-      outputWindow.appendLine(stderr);
+      if(stdout)
+        outputWindow.appendLine(stdout);
+
+      if(stderr)
+        outputWindow.appendLine(stderr);
     });
 }

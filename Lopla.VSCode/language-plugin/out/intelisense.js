@@ -45,8 +45,10 @@ function run() {
             var e = error || stderr;
             vscode.window.showErrorMessage(e.toString());
         }
-        extension_1.outputWindow.appendLine(stdout);
-        extension_1.outputWindow.appendLine(stderr);
+        if (stdout)
+            extension_1.outputWindow.appendLine(stdout);
+        if (stderr)
+            extension_1.outputWindow.appendLine(stderr);
     });
 }
 exports.run = run;

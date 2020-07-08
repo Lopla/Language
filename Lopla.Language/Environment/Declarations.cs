@@ -88,7 +88,9 @@ namespace Lopla.Language.Environment
         public IEnumerable<KeyValuePair<string, List<string>>> GetMethods()
         {
             foreach (var procedure in _procedures)
-                yield return new KeyValuePair<string, List<string>>($"{procedure.Key}", procedure.Value.ArgumentList);
+                yield return 
+                    new KeyValuePair<string, List<string>>($"{procedure.Key}", 
+                    procedure.Value.ArgumentList);
         }
     }
 }
