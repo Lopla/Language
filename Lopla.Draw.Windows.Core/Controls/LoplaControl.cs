@@ -24,6 +24,7 @@ namespace Lopla.Draw.Windows.Controls
         private Thread _loplaThread;
         public bool ParentConsole = false;
         public ISkiaDrawLoplaEngine Engine { get; set; }
+        private Runner _runner;
 
         public LoplaControl()
         {
@@ -52,10 +53,10 @@ namespace Lopla.Draw.Windows.Controls
 
         private void StartWorker()
         {
-            var p = new Runner();
+            this._runner = new Runner();
             if (_project != null)
             {
-                var result = p.Run(_project);
+                var result = _runner.Run(_project);
 
                 if (this?.ParentForm?.Visible == true && this.ParentConsole == false)
                 {
@@ -103,8 +104,14 @@ namespace Lopla.Draw.Windows.Controls
 
         public void Stop()
         {
-            _loplaThread.Abort();
+            try{
+                _runner.Stop();
+                _loplaThread.Abort();
+                _uiEventsProvider.Stop();
+            }catch
+            {
 
+            }
             OnLoplaDone?.Invoke(this, new EventArgs());
         }
     }

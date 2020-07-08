@@ -2,6 +2,7 @@
 {
     using Language.Binary;
     using Lopla.Libs.Interfaces;
+    using Lopla.Libs.Messages;
     using Lopla.Libs.Messaging;
     using Messages;
     using SkiaSharp;
@@ -55,6 +56,10 @@
         public void Render(SKCanvas surfaceCanvas)
         {
             _engine.Render(surfaceCanvas);
+        }
+
+        public void Stop(){
+            this.UiEvents.Send(new ShutDownQueue());
         }
     }
 }

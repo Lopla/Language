@@ -14,7 +14,7 @@
             LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
-            SetupCanvas(64, 64);
+            SetupCanvas(1, 1);
         }
 
         public ILoplaRequestsHandler LoplaRequestsHandler { get; }
@@ -49,9 +49,8 @@
                                 _bitMap.Width, _bitMap.Height));
                     }
                 }
-
-
             }
+
             _bitMap?.Dispose();
             _bitMap = null;
             _canvas?.Dispose();
@@ -67,7 +66,6 @@
             {
                 _renderer.LoplaPainter(_canvas, instruction);
             }
-
         }
 
         public void Render(SKCanvas canvas)
@@ -75,6 +73,15 @@
             lock (this)
             {
                 canvas?.DrawBitmap(_bitMap, 0, 0);
+
+                // canvas?.DrawRect(
+                //     new SKRect(0,0, _bitMap.Width, _bitMap.Height), new SKPaint(){
+                //     Color = new SKColor(128,0,0),
+                    
+                // });
+                canvas?.DrawText($"{_bitMap.Width} {_bitMap.Height}", 0, 32, new SKPaint(){
+                    Color = new SKColor(255, 255, 255)
+                });
             }
         }
     }

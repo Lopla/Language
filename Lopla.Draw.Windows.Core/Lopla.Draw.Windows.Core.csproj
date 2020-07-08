@@ -12,7 +12,7 @@
 
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>Lopla.Draw.Windows</AssemblyName>
-    <RootNamespace>Lopla.Draw.Windows</RootNamespace>
+    <RootNamespace>Lopla.Draw.Windows.Core</RootNamespace>
   </PropertyGroup>
  
  

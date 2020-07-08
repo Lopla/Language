@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug lopla console core",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-loplac-core",
+            "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.0/Lopla.Console.dll",
+            "args": [
+                //"${workspaceFolder}/Examples/Tests"
+                "${workspaceFolder}/Examples/City"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
             "name": "Lopla win console",
             "type":"clr",
             "request": "launch",
