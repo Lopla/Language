@@ -28,8 +28,10 @@
         public void SetupCanvas(int x, int y)
         {
             if (
-                _bitMap != null &&
-                (x < _bitMap.Width || y < _bitMap.Height))
+                _bitMap != null 
+                && x == _bitMap.Width
+                && y == _bitMap.Height
+                )
             {
                 return;
             }
@@ -77,8 +79,8 @@
                 // canvas?.DrawRect(
                 //     new SKRect(0,0, _bitMap.Width, _bitMap.Height), new SKPaint(){
                 //     Color = new SKColor(128,0,0),
-                    
                 // });
+
                 canvas?.DrawText($"{_bitMap.Width} {_bitMap.Height}", 0, 32, new SKPaint(){
                     Color = new SKColor(255, 255, 255)
                 });
