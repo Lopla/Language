@@ -4,13 +4,18 @@ const vscode = require("vscode");
 const intelisense_1 = require("./intelisense");
 const task_1 = require("./task");
 const libsCompletetionProvider_1 = require("./libsCompletetionProvider");
+const intelisense_2 = require("./intelisense");
 let loplaStatusBarItem;
+let loplaDocumentScheme = { scheme: 'file', language: 'lopla' };
 function activate(context) {
     intelisense_1.getAvailbleFunctions();
     context.subscriptions.push(vscode.commands.registerCommand('extension.lopla.run', () => {
-        run();
+        // execFile.execFile(loplaTool, [""], {}, (error, stdout, stderr) => 
+        // {
+        //   console.log(stdout);
+        // })
+        intelisense_2.run();
     }));
-    var loplaDocumentScheme = { scheme: 'file', language: 'lopla' };
     context.subscriptions.push(vscode.languages.registerHoverProvider(loplaDocumentScheme, {
         provideHover(document, position, token) {
             return {

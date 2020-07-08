@@ -42,3 +42,4 @@ Main.Sierpinski()
 
 Anim.Main()
 
+Lp.Args(a)

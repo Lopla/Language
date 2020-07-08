@@ -1,20 +1,26 @@
 import * as vscode from 'vscode';
+import * as execFile from 'child_process';
 import { getAvailbleFunctions, LoplaSchema, LoplaKeywords } from './intelisense';
 import { LoplaTaskProvider } from './task';
 import { LibsCompletetionProvider } from './libsCompletetionProvider';
+import { loplaTool } from './intelisense';
+import { run } from './intelisense';
 
 let loplaStatusBarItem: vscode.StatusBarItem;
+let loplaDocumentScheme = {scheme: 'file',language:'lopla'};
 
 export function activate(context: vscode.ExtensionContext) {
   getAvailbleFunctions();
 
   context.subscriptions.push(
     vscode.commands.registerCommand('extension.lopla.run', () => {
-      run()
-    })
+          // execFile.execFile(loplaTool, [""], {}, (error, stdout, stderr) => 
+          // {
+          //   console.log(stdout);
+          // })
+          run();
+      })
   );
-
-  var loplaDocumentScheme = {scheme: 'file',language:'lopla'};
 
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(loplaDocumentScheme, {
@@ -50,7 +56,6 @@ export function activate(context: vscode.ExtensionContext) {
 
   let workspaceRoot = vscode.workspace.rootPath;
   const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider(workspaceRoot));
-  
   
   // const myCommandId = 'extension.lopla.run';
   // loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
