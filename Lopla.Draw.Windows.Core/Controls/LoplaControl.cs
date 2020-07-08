@@ -68,7 +68,6 @@ namespace Lopla.Draw.Windows.Controls
                 }
             }
 
-
             OnLoplaDone?.Invoke(this, new EventArgs());
         }
 

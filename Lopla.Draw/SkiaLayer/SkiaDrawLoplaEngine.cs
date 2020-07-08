@@ -51,15 +51,14 @@
                                 _bitMap.Width, _bitMap.Height));
                     }
                 }
+                _bitMap?.Dispose();
+                _bitMap = null;
+                _canvas?.Dispose();
+                _canvas = null;
+
+                _bitMap = newBitMap;
+                _canvas = new SKCanvas(_bitMap);
             }
-
-            _bitMap?.Dispose();
-            _bitMap = null;
-            _canvas?.Dispose();
-            _canvas = null;
-
-            _bitMap = newBitMap;
-            _canvas = new SKCanvas(_bitMap);
         }
 
         public void Perform(ILoplaMessage instruction)

@@ -42,7 +42,7 @@
         public void SizeChanged(int width, int height)
         {
             _engine.SetupCanvas(width, height);
-
+            
             UiEvents.Send(new SetCanvas
             {
                 Size = new Point
