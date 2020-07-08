@@ -38,8 +38,8 @@ Draw.Clear(1, 255, 255)
 /*
 Main.Sierpinski()
 
+Anim.Main()
 */
 
-Anim.Main()
 
 Lp.Args(a)

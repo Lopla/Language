@@ -10,10 +10,6 @@ let loplaDocumentScheme = { scheme: 'file', language: 'lopla' };
 function activate(context) {
     intelisense_1.getAvailbleFunctions();
     context.subscriptions.push(vscode.commands.registerCommand('extension.lopla.run', () => {
-        // execFile.execFile(loplaTool, [""], {}, (error, stdout, stderr) => 
-        // {
-        //   console.log(stdout);
-        // })
         intelisense_2.run();
     }));
     context.subscriptions.push(vscode.languages.registerHoverProvider(loplaDocumentScheme, {
@@ -38,6 +34,7 @@ function activate(context) {
     context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, new libsCompletetionProvider_1.LibsCompletetionProvider(), "."));
     let workspaceRoot = vscode.workspace.rootPath;
     const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider(workspaceRoot));
+    exports.outputWindow = vscode.window.createOutputChannel("Lopla");
     // const myCommandId = 'extension.lopla.run';
     // loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
     // loplaStatusBarItem.command = myCommandId;

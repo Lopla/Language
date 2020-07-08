@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const path = require("path");
 const execFile = require("child_process");
-const loplaToolPath = path.resolve(__dirname, '../resources/loplac');
-exports.loplaTool = path.resolve(__filename, loplaToolPath, "loplac.exe");
+const extension_1 = require("./extension");
+exports.loplaToolPath = path.resolve(__dirname, '../resources/loplac');
+exports.loplaTool = path.resolve(__filename, exports.loplaToolPath, "loplac.exe");
 exports.LoplaSchema = {};
 exports.LoplaKeywords = ['function', 'while', 'if', 'return'];
 function pupulateFunctionArgs() {
@@ -44,7 +45,8 @@ function run() {
             var e = error || stderr;
             vscode.window.showErrorMessage(e.toString());
         }
-        console.log(error, stdout, stderr);
+        extension_1.outputWindow.appendLine(stdout);
+        extension_1.outputWindow.appendLine(stderr);
     });
 }
 exports.run = run;

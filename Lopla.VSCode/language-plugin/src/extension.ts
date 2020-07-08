@@ -9,15 +9,13 @@ import { run } from './intelisense';
 let loplaStatusBarItem: vscode.StatusBarItem;
 let loplaDocumentScheme = {scheme: 'file',language:'lopla'};
 
+export let outputWindow: any;
+
 export function activate(context: vscode.ExtensionContext) {
   getAvailbleFunctions();
 
   context.subscriptions.push(
     vscode.commands.registerCommand('extension.lopla.run', () => {
-          // execFile.execFile(loplaTool, [""], {}, (error, stdout, stderr) => 
-          // {
-          //   console.log(stdout);
-          // })
           run();
       })
   );
@@ -57,6 +55,8 @@ export function activate(context: vscode.ExtensionContext) {
   let workspaceRoot = vscode.workspace.rootPath;
   const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider(workspaceRoot));
   
+  outputWindow = vscode.window.createOutputChannel("Lopla");
+
   // const myCommandId = 'extension.lopla.run';
   // loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
   // loplaStatusBarItem.command = myCommandId;

@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as execFile from 'child_process';
+import { outputWindow } from './extension';
 
-const loplaToolPath = path.resolve(__dirname, '../resources/loplac');
+export const loplaToolPath = path.resolve(__dirname, '../resources/loplac');
 export const loplaTool = path.resolve(__filename, loplaToolPath, "loplac.exe");
 
 export let LoplaSchema = {};
@@ -54,7 +55,8 @@ export function run(){
         var e = error || stderr;
         vscode.window.showErrorMessage(e.toString());
       }
-      
-      console.log(error, stdout, stderr);
+
+      outputWindow.appendLine(stdout);
+      outputWindow.appendLine(stderr);
     });
 }
