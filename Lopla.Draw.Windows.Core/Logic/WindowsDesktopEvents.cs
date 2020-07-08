@@ -28,10 +28,18 @@
 
         private void C_SizeChanged(object sender, EventArgs e)
         {
-            if (sender is SKControl skc)
-            {
-                _eventsConsumer.SizeChanged(skc.Width, skc.Height);
+            if(sender is Control c){
+                var size = c?.FindForm()?.ClientSize;
+                if(size!=null)
+                {
+                    _eventsConsumer.SizeChanged(size.Value.Width, size.Value.Height);
+                }
             }
+
+            // if (sender is SKControl skc)
+            // {
+            //     _eventsConsumer.SizeChanged(skc.Width, skc.Height);
+            // }
         }
 
         private void C_KeyUp(object sender, KeyEventArgs e)

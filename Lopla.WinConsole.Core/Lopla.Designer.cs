@@ -36,7 +36,7 @@
             this.lopla1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lopla1.Location = new System.Drawing.Point(0, 0);
             this.lopla1.Name = "lopla1";
-            this.lopla1.Size = new System.Drawing.Size(689, 337);
+            this.lopla1.Size = new System.Drawing.Size(320, 240);
             this.lopla1.TabIndex = 1;
             this.lopla1.OnLoplaDone += new Lopla.Draw.Windows.Controls.LoplaDoneHandler(this.Lopla1_OnLoplaDone);
             // 

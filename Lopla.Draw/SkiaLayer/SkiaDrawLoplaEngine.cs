@@ -57,6 +57,7 @@
                 _canvas = null;
 
                 _bitMap = newBitMap;
+                
                 _canvas = new SKCanvas(_bitMap);
             }
         }
