@@ -35,6 +35,7 @@ function Main.Sierpinski(){
 
 Draw.Clear(1, 255, 255)
 
+<<<<<<< HEAD
 /*
 Main.Sierpinski()
 
@@ -44,3 +45,7 @@ Anim.Main()
 Main.Sierpinski()
 
 Lp.FunctionInfo("Draw.Line")
+=======
+Anim.Main()
+
+>>>>>>> 6d160ce6751457fd6d4a70d2eec890698381cbc4

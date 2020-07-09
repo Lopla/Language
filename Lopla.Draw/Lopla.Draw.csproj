@@ -9,6 +9,14 @@
     <RepositoryUrl>https://github.com/Lopla/Language</RepositoryUrl>
     <AssemblyVersion>0.0.20.0</AssemblyVersion>
     <FileVersion>0.0.20.0</FileVersion>
+<<<<<<< HEAD
+=======
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+>>>>>>> 6d160ce6751457fd6d4a70d2eec890698381cbc4
   </PropertyGroup>
 
 
