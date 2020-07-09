@@ -41,5 +41,6 @@ Main.Sierpinski()
 Anim.Main()
 */
 
+Main.Sierpinski()
 
 Lp.FunctionInfo("Draw.Line")
