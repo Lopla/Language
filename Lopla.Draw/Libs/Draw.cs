@@ -1,7 +1,9 @@
 ﻿namespace Lopla.Draw.Libs
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using Language.Binary;
     using Language.Errors;
     using Language.Interfaces;
@@ -58,6 +60,43 @@
             Add("SetCanvas", SetCanvas, "a", "b");
 
             Add("WaitForEvent", WaitForEvent);
+
+            Add("AddTimer", AddTimer, "interval");
+        }
+
+        private static Dictionary<int, Thread> timerPool = new Dictionary<int, Thread>();
+
+        private Result AddTimer(Mnemonic expression, IRuntime runtime)
+        {
+            if (runtime.GetVariable("interval").Get(runtime) is Number interval)
+            {
+                var id =  timerPool.Keys.Count > 0 ? 
+                    timerPool.Keys.Max() + 1
+                    : 0;
+
+                timerPool.Add(id, new Thread(() =>
+                {
+                    while (true)
+                    {
+                        Thread.Sleep(interval.ValueAsInt);
+
+                        _uiEventsProvider.Send(new TimerElapsed()
+                        {
+                            Id = id
+                        });
+                    };
+                }));
+
+                timerPool[id].Start();
+
+                return new Result(new Number(id));
+
+            }
+            else
+            {
+                runtime.AddError(new RuntimeError("No interval provided", expression));
+                return new Result();
+            }
         }
 
         private Result Animation(Mnemonic expression, IRuntime runtime)
@@ -110,7 +149,7 @@
                     return new Result(new LoplaList(
                         new Result(new String(name)),
                         new Result(k.Char),
-                        new Result(new Number( k.Down ? 1 : 0) ))
+                        new Result(new Number(k.Down ? 1 : 0)))
                     );
                 case SetCanvas sc:
                     return new Result(new LoplaList(
@@ -134,8 +173,8 @@
             var size = dev.MeasureText("!");
 
             return new Result(new LoplaList(
-                    new Result(new Number((decimal) size)),
-                    new Result(new Number((decimal) dev.TextSize))
+                    new Result(new Number((decimal)size)),
+                    new Result(new Number((decimal)dev.TextSize))
                 )
             );
         }
@@ -318,7 +357,7 @@
 
             _renderingEngine.Perform(new Write
             {
-                Align = (Aligmnent) alingment.Value,
+                Align = (Aligmnent)alingment.Value,
                 Text = text,
                 Offset = offset.Value
             });
