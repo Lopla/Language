@@ -14,10 +14,10 @@ function pupulateFunctionArgs() {
     for (const key of Object.keys(exports.LoplaSchema)) {
         for (const methods of Object.keys(exports.LoplaSchema[key])) {
             var m = key + "." + methods;
-            execFile.execFile(exports.loplaTool, [exports.loplaScripsPath, "function", m], {}, (error, stdout, stderr) => {
-                var rows = stdout.split("\n");
-                exports.LoplaMethods[rows[0]] = rows;
-            });
+            var fileRun = execFile.execFileSync(exports.loplaTool, [exports.loplaScripsPath, "function", m]);
+            var rows = fileRun.toString().split("\n");
+            exports.LoplaMethods[rows[0]] = rows;
+            break;
         }
     }
 }

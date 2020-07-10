@@ -12,14 +12,17 @@ export let LoplaKeywords = ['function', 'while', 'if', 'return'];
 export let LoplaMethods = {};
 
 function pupulateFunctionArgs(){
+  
     for (const key of Object.keys(LoplaSchema)) {
       for (const methods of Object.keys(LoplaSchema[key])) {
         
         var m = key+"."+methods;
-        execFile.execFile(loplaTool, [loplaScripsPath, "function", m], {}, (error, stdout, stderr) => {
-          var rows = stdout.split("\n");
-          LoplaMethods[rows[0]] = rows;
-        });
+        var fileRun = execFile.execFileSync(loplaTool, [loplaScripsPath, "function", m]);
+        
+        var rows = fileRun.toString().split("\n");
+        LoplaMethods[rows[0]] = rows;
+        
+        break;
       }
     }
   }

@@ -8,7 +8,7 @@ class FunctionCompletetionProvider {
         let line = document.getText(new vscode.Range(p, position));
         console.log(intelisense_1.LoplaMethods);
         for (const key of Object.keys(intelisense_1.LoplaMethods)) {
-            let rs = key + '\\(';
+            let rs = key + '[(]';
             let r = new RegExp(rs, "g");
             if (line && r.test(line)) {
                 console.log(line);
@@ -18,6 +18,9 @@ class FunctionCompletetionProvider {
                     suggestions.push(new vscode.CompletionItem(element, vscode.CompletionItemKind.TypeParameter));
                 });
                 return suggestions;
+            }
+            else {
+                console.log("Nope: ", rs, line);
             }
         }
         return null;

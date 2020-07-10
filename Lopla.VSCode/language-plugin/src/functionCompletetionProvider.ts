@@ -14,7 +14,7 @@ export class FunctionCompletetionProvider implements CompletionItemProvider{
         console.log(LoplaMethods);
 
         for (const key of Object.keys(LoplaMethods)) {
-          let rs =  key +'\\(';
+          let rs =  key +'[(]';
           let r= new RegExp(rs, "g");
           
           if( line && r.test(line)){
@@ -28,6 +28,8 @@ export class FunctionCompletetionProvider implements CompletionItemProvider{
             })
 
             return suggestions;
+          }else{
+            console.log("Nope: ", rs, line);
           }
         }
         
