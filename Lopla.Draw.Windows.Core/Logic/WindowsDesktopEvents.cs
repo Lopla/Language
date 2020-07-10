@@ -17,8 +17,14 @@
 
             skiaControl.Click += C_Click;
             skiaControl.KeyUp += C_KeyUp;
+            skiaControl.KeyDown += C_KeyDown;
             skiaControl.SizeChanged += C_SizeChanged;
             skiaControl.PaintSurface += C_PaintSurface;
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            _eventsConsumer.Keyboard(e.KeyValue, true);
         }
 
         private void C_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -44,7 +50,7 @@
 
         private void C_KeyUp(object sender, KeyEventArgs e)
         {
-            _eventsConsumer.Keyboard(e.KeyValue);
+            _eventsConsumer.Keyboard(e.KeyValue, false);
         }
 
         private void C_Click(object sender, EventArgs e)

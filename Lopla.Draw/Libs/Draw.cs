@@ -109,7 +109,8 @@
                 case Key k:
                     return new Result(new LoplaList(
                         new Result(new String(name)),
-                        new Result(k.Char))
+                        new Result(k.Char),
+                        new Result(new Number( k.Down ? 1 : 0) ))
                     );
                 case SetCanvas sc:
                     return new Result(new LoplaList(

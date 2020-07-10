@@ -6,5 +6,7 @@
     public class Key : ILoplaMessage
     {
         public Number Char;
+
+        public bool Down { get;  set; }
     }
 }

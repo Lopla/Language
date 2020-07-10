@@ -31,11 +31,12 @@
             });
         }
 
-        public void Keyboard(int eKeyValue)
+        public void Keyboard(int eKeyValue, bool keyDown)
         {
             UiEvents.Send(new Key
             {
-                Char = new Number(eKeyValue)
+                Char = new Number(eKeyValue),
+                Down = keyDown
             });
         }
 
