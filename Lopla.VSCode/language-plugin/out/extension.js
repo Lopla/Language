@@ -5,6 +5,7 @@ const intelisense_1 = require("./intelisense");
 const task_1 = require("./task");
 const libsCompletetionProvider_1 = require("./libsCompletetionProvider");
 const intelisense_2 = require("./intelisense");
+const functionCompletetionProvider_1 = require("./functionCompletetionProvider");
 let loplaStatusBarItem;
 let loplaDocumentScheme = { scheme: 'file', language: 'lopla' };
 function activate(context) {
@@ -32,6 +33,7 @@ function activate(context) {
         }
     }));
     context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, new libsCompletetionProvider_1.LibsCompletetionProvider(), "."));
+    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, new functionCompletetionProvider_1.FunctionCompletetionProvider()));
     let workspaceRoot = vscode.workspace.rootPath;
     const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider(workspaceRoot));
     exports.outputWindow = vscode.window.createOutputChannel("Lopla");

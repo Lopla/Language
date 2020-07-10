@@ -5,6 +5,8 @@ import { LoplaTaskProvider } from './task';
 import { LibsCompletetionProvider } from './libsCompletetionProvider';
 import { loplaTool } from './intelisense';
 import { run } from './intelisense';
+import { OutputChannel } from 'vscode';
+import { FunctionCompletetionProvider } from './functionCompletetionProvider';
 
 let loplaStatusBarItem: vscode.StatusBarItem;
 let loplaDocumentScheme = {scheme: 'file',language:'lopla'};
@@ -52,6 +54,11 @@ export function activate(context: vscode.ExtensionContext) {
       new LibsCompletetionProvider(), ".")    
   );
 
+  context.subscriptions.push(
+    vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, 
+      new FunctionCompletetionProvider())    
+  );
+  
   let workspaceRoot = vscode.workspace.rootPath;
   const taskProvider = vscode.tasks.registerTaskProvider("lopla", new LoplaTaskProvider(workspaceRoot));
   

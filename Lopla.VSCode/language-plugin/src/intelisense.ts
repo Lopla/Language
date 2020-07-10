@@ -17,7 +17,8 @@ function pupulateFunctionArgs(){
         
         var m = key+"."+methods;
         execFile.execFile(loplaTool, [loplaScripsPath, "function", m], {}, (error, stdout, stderr) => {
-          LoplaMethods[m] = [stdout.split("\n")];
+          var rows = stdout.split("\n");
+          LoplaMethods[rows[0]] = rows;
         });
       }
     }
