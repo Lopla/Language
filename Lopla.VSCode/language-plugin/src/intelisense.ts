@@ -20,9 +20,16 @@ function pupulateFunctionArgs(){
         var fileRun = execFile.execFileSync(loplaTool, [loplaScripsPath, "function", m]);
         
         var rows = fileRun.toString().split("\n");
-        LoplaMethods[rows[0]] = rows;
-        
-        break;
+        LoplaMethods[m] = [];
+
+        if(rows){
+          for(var k=1;k<rows.length;k++)
+          {
+            var p = rows[k].trim();
+            if(p)
+              LoplaMethods[m].push(p);
+          }
+        }
       }
     }
   }

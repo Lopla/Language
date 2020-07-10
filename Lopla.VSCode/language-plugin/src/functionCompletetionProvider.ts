@@ -1,44 +1,41 @@
 import * as vscode from 'vscode';
-import { CompletionItemProvider } from "vscode";
 import { LoplaMethods } from "./intelisense";
+import { SignatureHelp, SignatureInformation } from 'vscode';
 
-export class FunctionCompletetionProvider implements CompletionItemProvider{
-    provideCompletionItems(document: import("vscode").TextDocument, 
-    position: import("vscode").Position, 
-    token: import("vscode").CancellationToken, 
-    context: import("vscode").CompletionContext): import("vscode").ProviderResult<import("vscode").CompletionItem[] | import("vscode").CompletionList> {
-        
-        let p = position.translate(0, -position.character);
-        let line = document.getText(new vscode.Range(p, position));
-
-        console.log(LoplaMethods);
-
-        for (const key of Object.keys(LoplaMethods)) {
-          let rs =  key +'[(]';
-          let r= new RegExp(rs, "g");
-          
-          if( line && r.test(line)){
-            console.log(line);
-            var suggestions = [];
-            
-            var methods = Object.keys(LoplaMethods[key]);
-            methods.forEach(element => {
-              suggestions.push(
-                new vscode.CompletionItem(element, vscode.CompletionItemKind.TypeParameter));
-            })
-
-            return suggestions;
-          }else{
-            console.log("Nope: ", rs, line);
-          }
-        }
-        
-        return null;
-    }
+export class FunctionCompletetionProvider implements vscode.SignatureHelpProvider{
     
-    resolveCompletionItem?(item: import("vscode").CompletionItem, token: import("vscode").CancellationToken): import("vscode").ProviderResult<import("vscode").CompletionItem> {
-        throw new Error("Method not implemented.");
-    }
+    provideSignatureHelp(document: vscode.TextDocument, position: vscode.Position, 
+      token: vscode.CancellationToken, context: vscode.SignatureHelpContext): 
+      vscode.ProviderResult<vscode.SignatureHelp> 
+    {
+      var result:SignatureHelp = new SignatureHelp();
+      
+      let p = position.translate(0, -position.character);
+      let line = document.getText(new vscode.Range(p, position));
 
+      for (var key of Object.keys(LoplaMethods)) {
+        let rs =  (key).replace(".", "[.]").toString();
+        let r= new RegExp(rs);
+        
+        if( line && r.test(line)){
+
+          var mdString = "";
+          var methods = Object.values(LoplaMethods[key]);
+          methods.forEach(element => {
+            
+            mdString = mdString + "* "+element.toString().trim()+"\n";
+          });
+
+          var signature = new SignatureInformation(key, new vscode.MarkdownString(mdString));
+
+          result.signatures.push(signature);
+
+          
+          return result;
+        }
+      }
+      
+      return result;
+  }
 
 }

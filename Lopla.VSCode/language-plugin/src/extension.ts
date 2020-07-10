@@ -55,8 +55,8 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, 
-      new FunctionCompletetionProvider())    
+    vscode.languages.registerSignatureHelpProvider(loplaDocumentScheme, 
+      new FunctionCompletetionProvider(), "(")    
   );
   
   let workspaceRoot = vscode.workspace.rootPath;

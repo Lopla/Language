@@ -33,7 +33,7 @@ function activate(context) {
         }
     }));
     context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, new libsCompletetionProvider_1.LibsCompletetionProvider(), "."));
-    context.subscriptions.push(vscode.languages.registerCompletionItemProvider(loplaDocumentScheme, new functionCompletetionProvider_1.FunctionCompletetionProvider()));
+    context.subscriptions.push(vscode.languages.registerSignatureHelpProvider(loplaDocumentScheme, new functionCompletetionProvider_1.FunctionCompletetionProvider(), "("));
     let workspaceRoot = vscode.workspace.rootPath;
     const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider(workspaceRoot));
     exports.outputWindow = vscode.window.createOutputChannel("Lopla");
