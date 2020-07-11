@@ -76,16 +76,6 @@
             lock (this)
             {
                 targetCanvas?.DrawBitmap(_bitMap, 0, 0);
-                
-                // canvas.DrawRect(_bitMap.Width - 100, 
-                // _bitMap.Height - 96, 100, 96, new SKPaint(){
-                //     Color = new SKColor(0,0,0)
-                // });
-                // canvas?.DrawText($"{_bitMap.Width} {_bitMap.Height}",
-                //      _bitMap.Width - 100, _bitMap.Height-48,
-                //     new SKPaint(){
-                //     Color = new SKColor(255, 255, 255)
-                // });
             }
         }
     }
