@@ -17,13 +17,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lopla.Language\Lopla.Language.csproj" />
-    <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj" />
-    <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <ProjectReference Include="..\Lopla.Language\Lopla.Language.csproj" />
+    <ProjectReference Include="..\Lopla.Libs\Lopla.Libs.csproj" />
+    <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
   </ItemGroup>
 
 </Project>
