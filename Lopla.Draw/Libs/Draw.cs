@@ -268,7 +268,7 @@
             _renderingEngine.Perform(new Text
             {
                 Label = text,
-                Position = new Point
+                Position = new Point    
                 {
                     X = GetArgument<Number>("posx", runtime).Value,
                     Y = GetArgument<Number>("posy", runtime).Value
