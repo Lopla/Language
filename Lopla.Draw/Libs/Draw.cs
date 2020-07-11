@@ -11,6 +11,7 @@
     using Lopla.Libs.Interfaces;
     using Messages;
     using SkiaLayer;
+    using SkiaSharp;
     using String = Language.Binary.String;
 
     public class Draw : BaseLoplaLibrary
@@ -44,6 +45,8 @@
             Add("Line", Line, "a", "b", "c", "d");
 
             Add("Image", Image, "x", "y", "arrayOfBinaryData");
+            Add("GetImageSize", GetImageSize, "arrayOfBinaryData");
+            Add("GetImagePart", GetImagePart, "arrayOfBinaryData", "left", "top", "right", "bottom");
 
             Add("Animation", Animation, "x", "y", "animatedGif");
 
@@ -62,6 +65,60 @@
             Add("WaitForEvent", WaitForEvent);
 
             Add("AddTimer", AddTimer, "interval");
+        }
+
+        private Result GetImagePart(Mnemonic expression, IRuntime runtime)
+        {
+            if(
+                runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage
+                && runtime.GetVariable("left").Get(runtime) is Number a
+                && runtime.GetVariable("top").Get(runtime) is Number b
+                && runtime.GetVariable("right").Get(runtime) is Number c
+                && runtime.GetVariable("bottom").Get(runtime) is Number d
+            )
+            {
+                var binaryData = arrayImage
+                    .Select(e => e.Get(runtime) as Number)
+                    .Select(n => n.ValueAsByte)
+                    .ToArray();
+                var resourceBitmap = SKBitmap.Decode(binaryData);
+
+                var bmp = new SKBitmap();
+                resourceBitmap.ExtractSubset(bmp, 
+                    new SKRectI(a.ValueAsInt, b.ValueAsInt, c.ValueAsInt, d.ValueAsInt));
+
+                SKDynamicMemoryWStream ms =new SKDynamicMemoryWStream();
+                bmp.Encode(ms, SKEncodedImageFormat.Png, 100);
+                var data = ms.CopyToData();
+
+                LoplaList loplaList = new LoplaList();
+                
+                foreach(var dbyte in data.ToArray())
+                {
+                    loplaList.Add(new Result(new Number(dbyte)));
+                }
+
+                return new Result(loplaList);
+            }
+
+            return new Result();
+        }
+
+        private Result GetImageSize(Mnemonic expression, IRuntime runtime)
+        {
+            //arrayOfBinaryData
+            if(runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage){
+                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
+                var resourceBitmap = SKBitmap.Decode(binaryData);
+
+                return new Result(new LoplaList(){
+                    new Result(new Number(resourceBitmap.Height)),
+                    new Result(new Number(resourceBitmap.Width))
+                });
+            }
+            else{
+                return new Result();
+            }
         }
 
         private static Dictionary<int, Thread> timerPool = new Dictionary<int, Thread>();

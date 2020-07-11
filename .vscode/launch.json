@@ -5,35 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug lopla console core",
+            "name": "Lopla Windowed",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-loplac-core",
             "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.0/Lopla.Console.dll",
             "args": [
-                "${workspaceFolder}/Examples/Tests"
-                //"${workspaceFolder}/Examples/City"
+                //"${workspaceFolder}/Examples/Tests"
+                "C:/Users/pgale/OneDrive/Sandbox/City"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
         },
         {
-            "name": "Lopla win console",
-            "type":"clr",
-            "request": "launch",
-            "preLaunchTask": "build-loplac",
-            "program": "loplac.exe",
-            "args": [
-                "${workspaceFolder}/Examples/Tests"
-            ],
-            "console": "internalConsole",
-            "cwd": "${workspaceFolder}/Lopla.WinConsole/bin/Debug/",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": "Lopla console",
+            "name": "Lopla text console",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-loplac",
