@@ -12,5 +12,6 @@ namespace Lopla.Language.Interfaces
         void Set(int idx, Result newValue);
 
         Result Get(int idx);
+        int Length();
     }
 }

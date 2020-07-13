@@ -50,6 +50,11 @@
             return new Result(new Number(c));
         }
 
+        public int Length()
+        {
+            return this.Value.Length;
+        }
+
         public override string ToString()
         {
             return Value;

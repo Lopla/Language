@@ -46,6 +46,11 @@ namespace Lopla.Language.Binary
             return new Result();
         }
 
+        int ILoplaIndexedValue.Length()
+        {
+            return this._values.Count;
+        }
+
         public void Set(int i, Result evaluate)
         {
             while (_values.Count < i + 1)

@@ -126,10 +126,14 @@ namespace Lopla.Libs
 
         private Result Len(Mnemonic expression, IRuntime runtime)
         {
-            var a = runtime.GetVariable("array").Get(runtime);
-            if (a is String arg2)
-                return new Result(new Number(arg2.Value.Length));
-            if (a is LoplaList lp) return new Result(new Number(lp.Length));
+            var a = runtime.GetReference("array");
+
+            if (a is ILoplaIndexedValue array)
+            {
+                var length = array.Length();
+                return new Result(new Number(length));
+            }
+            
             return new Result();
         }
     }
