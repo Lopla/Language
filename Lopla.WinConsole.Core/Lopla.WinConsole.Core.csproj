@@ -8,12 +8,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
 
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>Lopla.Console</AssemblyName>
-    <RootNamespace>WindowsFormsApp1</RootNamespace>
+    <RootNamespace>Lopla.Console</RootNamespace>
   </PropertyGroup>
  
 

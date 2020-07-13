@@ -6,10 +6,10 @@ namespace Lopla.Language.Environment
 {
     public class Memory
     {
-        private readonly Dictionary<MemoryPointer, Result> _data = 
-            new Dictionary<MemoryPointer, Result>();
+        private readonly Dictionary<MemoryPointer, IValue> _data = 
+            new Dictionary<MemoryPointer, IValue>();
 
-        public void Set(VariablePointer pointer, Result value)
+        public void Set(VariablePointer pointer, IValue value)
         {
             var m = LocateByKey(pointer);
 
@@ -25,7 +25,7 @@ namespace Lopla.Language.Environment
             _data[m] = value;
         }
 
-        public Result Get(VariablePointer pointer)
+        public IValue Get(VariablePointer pointer)
         {
             var d = LocateByKey(pointer);
 

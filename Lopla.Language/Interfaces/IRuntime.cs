@@ -20,8 +20,9 @@ namespace Lopla.Language.Interfaces
         void FunctionReturn(Result result);
         IEnumerable<KeyValuePair<string, List<string>>> GetRegisteredMethods();
         Result GetVariable(string name);
-        void SetVariable(string variableName, Result functionParamter, bool coverUpVariable = false);
+        void SetVariable(string variableName, IValue functionParamter, bool coverUpVariable = false);
         void Register(MethodPointer methodName, Method body);
         void Link(ILibrary library);
+        IValue GetReference(string tablePointerName);
     }
 }

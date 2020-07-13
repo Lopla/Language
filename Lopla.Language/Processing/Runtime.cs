@@ -106,7 +106,7 @@ namespace Lopla.Language.Processing
             var code = _declarations.GetCode(pointer, this);
 
             _processors.Begin(derivedScope);
-            var result = _processors.Get().EvaluateFunctionInScope(code, args, pointer);
+            var result = _processors.Get().EvaluateFunctionInScope(code, args, pointer,this);
             _processors.End();
 
             return result;
@@ -137,9 +137,14 @@ namespace Lopla.Language.Processing
             return _processors.Get().GetVariable(name, this);
         }
 
-        public void SetVariable(string variableName, Result functionParamter, bool coverUpVariable = false)
+        public void SetVariable(string variableName, IValue functionParamter, bool coverUpVariable = false)
         {
             _processors.Get().SetVariable(variableName, functionParamter, coverUpVariable);
+        }
+        
+        public IValue GetReference(string name)
+        {
+            return _processors.Get().GetReference(name, this);
         }
 
         #endregion

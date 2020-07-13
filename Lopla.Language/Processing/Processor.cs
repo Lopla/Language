@@ -26,7 +26,7 @@ namespace Lopla.Language.Processing
             return _stack.GetVariable(name, runtime);
         }
 
-        public void SetVariable(string variableName, Result functionParamter, bool coverUpVariable)
+        public void SetVariable(string variableName, IValue functionParamter, bool coverUpVariable)
         {
             _stack.SetVariable(variableName, functionParamter, coverUpVariable);
         }
@@ -121,7 +121,7 @@ namespace Lopla.Language.Processing
 
         public Result EvaluateFunctionInScope(List<Mnemonic> mCode,
             Dictionary<string, Result> args,
-            MethodPointer pointer)
+            MethodPointer pointer, Runtime runtime)
         {
             if (_requestForStop)
                 return new Result();
@@ -130,7 +130,8 @@ namespace Lopla.Language.Processing
             //// prevents leak of variables in global scope 
             _stack.StartScope($"{pointer.NameSpace}.{pointer.Name}.{Guid.NewGuid()}");
 
-            foreach (var result in args) _runtime.SetVariable(result.Key, result.Value, true);
+            foreach (var result in args) _runtime.SetVariable(result.Key, 
+                result.Value.Get(runtime), true);
 
             var r = Evaluate(mCode);
 
@@ -141,6 +142,11 @@ namespace Lopla.Language.Processing
         public string RootStackName()
         {
             return _stack.GetBoottomScope().Name;
+        }
+
+        internal IValue GetReference(string name, Runtime runtime)
+        {
+            return _stack.GetReference(name, runtime);
         }
 
         public bool IsStpped()

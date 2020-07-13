@@ -14,10 +14,10 @@ namespace Lopla.Tests
         public void RemebersTheVaraibleValueAfterModificationInSubScope()
         {
             var sut = new GlobalScope(null, "a");
-            sut.SetVariable("a", new Result(new String("bottom")), false);
+            sut.SetVariable("a", new String("bottom"), false);
             
             sut.StartScope();
-            sut.SetVariable("a", new Result(new String("derived")), true);
+            sut.SetVariable("a", new String("derived"), true);
             var innerAa = 
                 sut
                 .GetVariable("a", new Runtime(new Processors())).Get(new Runtime(new Processors())) as String;
@@ -34,10 +34,10 @@ namespace Lopla.Tests
         {
             var sut = new GlobalScope(null, "root");
             
-            sut.SetVariable("a", new Result(new String("bottom")), false);
+            sut.SetVariable("a", new String("bottom"), false);
 
             var derived = sut.DeriveFunctionScope();
-            derived.SetVariable("a", new Result(new String("derived")), true);
+            derived.SetVariable("a", new String("derived"), true);
             var innerAa = derived.GetVariable("a", new Runtime(new Processors())).Get(new Runtime(new Processors())) as String;
             Assert.Equal("derived", innerAa.Value);
             

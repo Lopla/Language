@@ -35,11 +35,11 @@ namespace Lopla.Language.Binary
             return ll;
         }
 
-        public Result Get(Number idx)
+        public Result Get(int idx)
         {
-            if (_values.Count > idx.Value)
+            if (_values.Count > idx)
             {
-                var r = _values[idx.ValueAsInt].Clone();
+                var r = _values[idx].Clone();
                 return r;
             }
 

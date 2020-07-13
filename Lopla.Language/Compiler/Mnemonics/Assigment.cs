@@ -47,20 +47,20 @@ namespace Lopla.Language.Compiler.Mnemonics
             var rightResult = runtime.EvaluateCodeBlock(RightSide);
             if (LeftSide is VariableName vn)
             {
-                runtime.SetVariable(vn.Pointer.Name, rightResult);
+                runtime.SetVariable(vn.Pointer.Name, rightResult.Get(runtime));
             }
             else if (LeftSide is ValueTable vt)
             {
-                var leftSideIndexedType = runtime.GetVariable(vt.TablePointer.Name);
+                var leftSideIndexedType = runtime.GetReference(vt.TablePointer.Name);
                 if (leftSideIndexedType != null)
                 {
-                    var value = leftSideIndexedType.Get(runtime);
+                    var value = leftSideIndexedType;
                     if (value is ILoplaIndexedValue)
                     {
                         var loplaList = value as ILoplaIndexedValue;
                         var idx = runtime.EvaluateCodeBlock(vt.ElementPositionInTable).Get(runtime) as Number;
                         loplaList.Set(idx.ValueAsInt, rightResult);
-                        runtime.SetVariable(vt.TablePointer.Name, new Result(loplaList));
+                        runtime.SetVariable(vt.TablePointer.Name, loplaList);
                     }
                     else
                     {

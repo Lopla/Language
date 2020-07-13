@@ -12,7 +12,8 @@
             "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.0/Lopla.Console.dll",
             "args": [
                 //"${workspaceFolder}/Examples/Tests"
-                "C:/Users/pgale/OneDrive/Sandbox/City"
+                //"C:/Users/pgale/OneDrive/Sandbox/City"
+                "C:/Users/paga.TF/OneDrive/Sandbox/City"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

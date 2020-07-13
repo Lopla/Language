@@ -4,6 +4,7 @@ using System.Linq;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
+using Lopla.Language.Processing;
 
 namespace Lopla.Language.Environment
 {
@@ -62,7 +63,7 @@ namespace Lopla.Language.Environment
         ///     if true then this variable will cover the one in upper scope (useful when setting up arguments for
         ///     setting up function arguments in method scope)
         /// </param>
-        public void SetVariable(string variableName, Result functionParamter, bool coverUpVariable)
+        public void SetVariable(string variableName, IValue newValue, bool coverUpVariable)
         {
             if (!coverUpVariable)
                 foreach (var scope in ScopesStack)
@@ -70,7 +71,7 @@ namespace Lopla.Language.Environment
                     var val = scope.Mem.Get(new VariablePointer {Name = variableName});
                     if (val != null)
                     {
-                        scope.Mem.Set(new VariablePointer {Name = variableName}, functionParamter);
+                        scope.Mem.Set(new VariablePointer {Name = variableName}, newValue);
                         return;
                     }
                 }
@@ -81,24 +82,13 @@ namespace Lopla.Language.Environment
                 .Set(new VariablePointer
                 {
                     Name = variableName
-                }, functionParamter);
+                }, newValue);
         }
 
         public Result GetVariable(string name, IRuntime runtime)
         {
-            Result val = null;
-            foreach (var scope in ScopesStack)
-            {
-                val = scope.Mem.Get(new VariablePointer
-                {
-                    Name = name
-                });
-                if (val != null) break;
-            }
-
-            if (val == null) runtime.AddError(new RuntimeError($"Value not defined {name}."));
-
-            return val;
+            
+            return new Result(this.GetReference(name, runtime));
         }
 
         public GlobalScope DeriveFunctionScope()
@@ -111,6 +101,22 @@ namespace Lopla.Language.Environment
         public override string ToString()
         {
             return $"#{ScopesStack.Count} lst: {string.Join(" ", ScopesStack?.Select(s => s?.ToString()))}";
+        }
+
+        public IValue GetReference(string name, IRuntime runtime)
+        {
+            IValue val = null;
+            foreach (var scope in ScopesStack)
+            {
+                val = scope.Mem.Get(new VariablePointer
+                {
+                    Name = name
+                });
+                if (val != null) break;
+            }
+
+            if (val == null) runtime.AddError(new RuntimeError($"Value not defined {name}."));
+            return val;
         }
     }
 }

@@ -44,6 +44,12 @@
             }
         }
 
+        public Result Get(int idx)
+        {
+            var c = (int) Value[idx];
+            return new Result(new Number(c));
+        }
+
         public override string ToString()
         {
             return Value;

@@ -30,7 +30,7 @@ namespace Lopla.Draw.Windows.Controls
         {
             InitializeComponent();
 
-            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) SetupLopla();
+            //if (LicenseManager.UsageMode != LicenseUsageMode.Designtime) SetupLopla();
         }
 
         public event LoplaDoneHandler OnLoplaDone;

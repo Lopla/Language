@@ -31,22 +31,23 @@
 
         public override Result Execute(IRuntime runtime)
         {
-            var value = runtime.GetVariable(TablePointer.Name);
-            if (value != null && value.HasResult())
+            var value = runtime.GetReference(TablePointer.Name);
+
+            if (value != null)
             {
-                var variable = value.Get(runtime);
                 var idx = runtime.EvaluateCodeBlock(ElementPositionInTable).Get(runtime) as Number;
-
-                if (variable is LoplaList tableInstance) return tableInstance.Get(idx);
-
-                if (variable is String variableString)
+                
+                if (value is ILoplaIndexedValue tableInstance) 
+                    return tableInstance.Get(idx.ValueAsInt);
+                else
                 {
-                    var c = (int) variableString.Value[idx.ValueAsInt];
-                    return new Result(new Number(c));
+                    runtime.AddError(new RuntimeError($"Value {TablePointer.Name} is not an array", this));
                 }
             }
-
-            runtime.AddError(new RuntimeError($"Value not defined {TablePointer.Name}", this));
+            else
+            {
+                runtime.AddError(new RuntimeError($"Value not defined {TablePointer.Name}", this));
+            }
             return new Result();
         }
     }
