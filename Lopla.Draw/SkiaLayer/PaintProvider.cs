@@ -7,7 +7,7 @@
     {
         private static SKTypeface _fontFiraMono;
 
-        public SKPaint GetPaintDevice(SKTypefaceStyle typeFaceStyle = SKTypefaceStyle.Normal)
+        public SKPaint GetPaintDevice()
         {
             var paintDevice = new SKPaint
             {
@@ -22,9 +22,9 @@
             return paintDevice;
         }
 
-        public static SKTypeface GetCourier(SKTypefaceStyle typeFaceStyle = SKTypefaceStyle.Normal)
+        public static SKTypeface GetCourier()
         {
-            return  SKTypeface.FromFamilyName("Courier New", typeFaceStyle);
+            return  SKTypeface.FromFamilyName("Courier New", SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
         }
 
         public static SKTypeface GetFiraMono()

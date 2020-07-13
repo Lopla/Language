@@ -88,7 +88,8 @@
                     new SKRectI(a.ValueAsInt, b.ValueAsInt, c.ValueAsInt, d.ValueAsInt));
 
                 SKDynamicMemoryWStream ms =new SKDynamicMemoryWStream();
-                bmp.Encode(ms, SKEncodedImageFormat.Png, 100);
+                SKPixmap.Encode(ms, bmp.PeekPixels(), SKEncodedImageFormat.Png, 100);
+                
                 var data = ms.CopyToData();
 
                 LoplaList loplaList = new LoplaList();
