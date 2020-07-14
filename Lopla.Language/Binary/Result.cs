@@ -1,6 +1,5 @@
 ﻿using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
-using Lopla.Language.Processing;
 
 namespace Lopla.Language.Binary
 {
