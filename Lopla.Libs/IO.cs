@@ -32,18 +32,23 @@ namespace Lopla.Libs
             {
                 using (var stream = new BinaryReader(new FileStream(fileName.Value, FileMode.Open, FileAccess.Read)))
                 {
-                    LoplaList loplaList = new LoplaList();
+                    
                     var data = stream.ReadBytes((int)stream.BaseStream.Length);
-                    foreach(var d in data)
-                    {
-                        loplaList.Add(new Number(d));
-                    }
 
-                    return new Result(loplaList);
+                    var base64Binary = Convert.ToBase64String(data);
+
+                    //LoplaList loplaList = new LoplaList();
+                    //foreach(var d in data)
+                    //{
+                    //    loplaList.Add(new Number(d));
+                    //}
+
+                    //return new Result(loplaList);
+                    return new Result(new String(base64Binary));
                 }
             }
 
-            return new Result(new LoplaList());
+            return new Result();
         }
 
         public Result WriteLine(Mnemonic expression, IRuntime runtime)

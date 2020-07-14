@@ -70,17 +70,20 @@
         private Result GetImagePart(Mnemonic expression, IRuntime runtime)
         {
             if(
-                runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage
+                runtime.GetVariable("arrayOfBinaryData").Get(runtime) is String arrayImage
                 && runtime.GetVariable("left").Get(runtime) is Number a
                 && runtime.GetVariable("top").Get(runtime) is Number b
                 && runtime.GetVariable("right").Get(runtime) is Number c
                 && runtime.GetVariable("bottom").Get(runtime) is Number d
             )
             {
-                var binaryData = arrayImage
-                    .Select(e => e as Number)
-                    .Select(n => n.ValueAsByte)
-                    .ToArray();
+                var binaryData =
+                    Convert.FromBase64String(arrayImage.Value);
+                    
+                    //arrayImage
+                    //.Select(e => e as Number)
+                    //.Select(n => n.ValueAsByte)
+                    //.ToArray();
                 var resourceBitmap = SKBitmap.Decode(binaryData);
 
                 var bmp = new SKBitmap();
@@ -92,14 +95,16 @@
                 
                 var data = ms.CopyToData();
 
-                LoplaList loplaList = new LoplaList();
+                var subimage = Convert.ToBase64String(data.ToArray());
+                //LoplaList loplaList = new LoplaList();
                 
-                foreach(var dbyte in data.ToArray())
-                {
-                    loplaList.Add(new Number(dbyte));
-                }
+                //foreach(var dbyte in data.ToArray())
+                //{
+                //    loplaList.Add(new Number(dbyte));
+                //}
 
-                return new Result(loplaList);
+                //return new Result(loplaList);
+                return new Result(new String(subimage));
             }
 
             return new Result();
@@ -108,10 +113,14 @@
         private Result GetImageSize(Mnemonic expression, IRuntime runtime)
         {
             //arrayOfBinaryData
-            if(runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage){
-                var binaryData = arrayImage
-                    .Select(e => e as Number)
-                    .Select(n => n.ValueAsByte).ToArray();
+            if(runtime.GetVariable("arrayOfBinaryData").Get(runtime) is String arrayImage){
+                //var binaryData = arrayImage
+                //    .Select(e => e as Number)
+                //    .Select(n => n.ValueAsByte).ToArray();
+                
+                var binaryData =
+                    Convert.FromBase64String(arrayImage.Value);
+
                 var resourceBitmap = SKBitmap.Decode(binaryData);
 
                 return new Result(new LoplaList(){
@@ -189,7 +198,7 @@
                 new Number(c.Y)
             ));
         }
-
+        
         private Result WaitForEvent(Mnemonic expression, IRuntime runtime)
         {
             var m = _uiEventsProvider.WaitForMessage();
@@ -308,12 +317,15 @@
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
-                runtime.GetReference("arrayOfBinaryData") is LoplaList arrayImage)
-            {
-                var binaryData = 
-                    arrayImage
-                        .Select(e => e as Number)
-                        .Select(n => n.ValueAsByte).ToArray();
+                runtime.GetReference("arrayOfBinaryData") is String arrayImage)
+            { 
+                var binaryData =
+                    Convert.FromBase64String(arrayImage.Value);
+
+                //var binaryData = 
+                //    arrayImage
+                //        .Select(e => e as Number)
+                //        .Select(n => n.ValueAsByte).ToArray();
 
                 _renderingEngine.Perform(new Image
                 {

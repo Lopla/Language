@@ -35,10 +35,27 @@
 
             if (value != null)
             {
-                var idx = runtime.EvaluateCodeBlock(ElementPositionInTable).Get(runtime) as Number;
                 
-                if (value is ILoplaIndexedValue tableInstance) 
-                    return new Result(tableInstance.Get(idx.ValueAsInt));
+
+                if (value is ILoplaIndexedValue tableInstance)
+                {
+                    if (runtime.EvaluateCodeBlock(ElementPositionInTable).Get(runtime) is Number idx)
+                    {
+                        var i = idx.ValueAsInt;
+                        if (i >= 0 && i < tableInstance.Length())
+                        {
+                            return new Result(tableInstance.Get(i));
+                        }
+                        else
+                        {
+                            runtime.AddError(new RuntimeError($"Index {i} was out of bounds for {TablePointer.Name}", this));
+                        }
+                    }
+                    else
+                    {
+                        runtime.AddError(new RuntimeError($"Index {TablePointer.Name} is not a number", this));
+                    }
+                }
                 else
                 {
                     runtime.AddError(new RuntimeError($"Value {TablePointer.Name} is not an array", this));
