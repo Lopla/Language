@@ -1,4 +1,5 @@
-﻿using Hime.Redist;
+﻿using System.Diagnostics;
+using Hime.Redist;
 using Lopla.Language.Binary;
 using Lopla.Language.Errors;
 using Lopla.Language.Interfaces;
@@ -41,7 +42,7 @@ namespace Lopla.Language.Compiler.Mnemonics
         public IArgument LeftSide { get; set; }
 
         public Mnemonic RightSide { get; set; }
-
+        
         public override Result Execute(IRuntime runtime)
         {
             var rightResult = runtime.EvaluateCodeBlock(RightSide);
