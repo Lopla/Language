@@ -1,8 +1,8 @@
-﻿namespace Lopla.Language.Interfaces
-{
-    using System.Collections.Generic;
-    using Compiler;
+﻿using System.Collections.Generic;
+using Lopla.Language.Compiler;
 
+namespace Lopla.Language.Interfaces
+{
     public interface IProject
     {
         string Name { get; }

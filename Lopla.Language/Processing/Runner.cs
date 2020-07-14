@@ -51,7 +51,7 @@
             }
 
             foreach (var runtimeError in _runtime.Errors) result.Errors.Add(runtimeError);
-
+            
             return result;
         }
 

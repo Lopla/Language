@@ -6,6 +6,7 @@ namespace Lopla.Windows
 {
     public static class Program
     {
+        // ReSharper disable once InconsistentNaming
         private const int ATTACH_PARENT_PROCESS = -1;
         public static bool ParentConsoleAvailble;
 

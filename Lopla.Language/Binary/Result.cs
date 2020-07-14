@@ -23,7 +23,7 @@ namespace Lopla.Language.Binary
         public IValue Get(IRuntime runtime)
         {
             if (_result != null)
-                return _result.Clone();
+                return _result;
             runtime.AddError(
                 new RuntimeError("Result not provided", null));
 

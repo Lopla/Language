@@ -14,7 +14,7 @@
     using SkiaSharp;
     using String = Language.Binary.String;
 
-    public class Draw : BaseLoplaLibrary
+    public class Draw : BaseLoplaLibrary , IDisposable
     {
         private readonly ISkiaDrawLoplaEngine _renderingEngine;
         private readonly ISender _uiEventsProvider;
@@ -458,6 +458,21 @@
                 runtime.AddError(new RuntimeError("Color to clear the background not provided."));
 
             return new Result();
+        }
+
+        public void Dispose()
+        {
+            foreach (var keyValuePair in timerPool)
+            {
+                try
+                {
+                    keyValuePair.Value?.Abort();
+                }
+                catch
+                {
+
+                }
+            }
         }
     }
 }

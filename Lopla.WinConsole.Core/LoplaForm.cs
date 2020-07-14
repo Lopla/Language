@@ -1,10 +1,8 @@
-﻿using Lopla.Starting;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Lopla.Windows
 {
-    using System;
-    using System.ComponentModel;
-    using System.Windows.Forms;
 
     public partial class LoplaForm : Form
     {
@@ -20,9 +18,7 @@ namespace Lopla.Windows
 
         public void Run()
         {
-            lopla1.Project(_args);
-
-            lopla1.Run();
+            lopla1.Run(_args);
         }
 
         private void Lopla1_OnLoplaDone(object sender, EventArgs args)

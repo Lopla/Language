@@ -6,7 +6,6 @@
     using Language.Libraries;
     using Libs;
     using Lopla.Libs.Interfaces;
-    using SkiaLayer;
 
     public class WinFormsDraw : Draw
     {
