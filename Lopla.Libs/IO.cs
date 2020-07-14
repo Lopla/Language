@@ -36,7 +36,7 @@ namespace Lopla.Libs
                     var data = stream.ReadBytes((int)stream.BaseStream.Length);
                     foreach(var d in data)
                     {
-                        loplaList.Add(new Result(new Number(d)));
+                        loplaList.Add(new Number(d));
                     }
 
                     return new Result(loplaList);

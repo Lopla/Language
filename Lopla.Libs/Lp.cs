@@ -65,10 +65,10 @@ namespace Lopla.Libs
             
             if(me!=null)
             {
-                functionInformation.Add(new Result(new String(functionName.Value)));
+                functionInformation.Add(new String(functionName.Value));
                 foreach(var arg in me)
                 {
-                    functionInformation.Add(new Result(new String(arg)));
+                    functionInformation.Add(new String(arg));
                 }
             }
 
@@ -100,9 +100,10 @@ namespace Lopla.Libs
             foreach (var registeredMethod in runtime.GetRegisteredMethods())
             {
                 var methodLine = new LoplaList();
-                methodLine.Add(new Result(new String(registeredMethod.Key)));
-                foreach (var argument in registeredMethod.Value) methodLine.Add(new Result(new String(argument)));
-                listOfLibs.Add(new Result(methodLine));
+                methodLine.Add(new String(registeredMethod.Key));
+                foreach (var argument in registeredMethod.Value) 
+                    methodLine.Add(new String(argument));
+                listOfLibs.Add(methodLine);
             }
 
             return new Result(listOfLibs);
@@ -113,7 +114,7 @@ namespace Lopla.Libs
             var ll = new LoplaList();
             if (args != null)
                 foreach (var a in args)
-                    ll.Add(new Result(new String(a)));
+                    ll.Add(new String(a));
 
             return new Result(ll);
         }

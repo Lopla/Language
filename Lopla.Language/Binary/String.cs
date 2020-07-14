@@ -26,13 +26,13 @@
             };
         }
 
-        public void Set(int idx, Result newValue)
+        public void Set(int idx, IValue newValue)
         {
             var stringAsList = Value.ToList();
             while (stringAsList.Count < idx + 1)
                 stringAsList.Add(' ');
 
-            var incomingValue = newValue.Get(null);
+            var incomingValue = newValue;
             if (incomingValue is Number)
             {
                 stringAsList[idx] = (char)(incomingValue as Number).Value;
@@ -40,14 +40,14 @@
             }
             else
             {
-                throw new Exception("Failed to set indexed value in string.");
+                throw new Exception($"Failed to set indexed value in string. (expected {nameof(Number)} but received {incomingValue?.GetType().Name})");
             }
         }
 
-        public Result Get(int idx)
+        public IValue Get(int idx)
         {
             var c = (int) Value[idx];
-            return new Result(new Number(c));
+            return new Number(c);
         }
 
         public int Length()

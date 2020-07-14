@@ -60,7 +60,7 @@ namespace Lopla.Language.Compiler.Mnemonics
                     {
                         var loplaList = value as ILoplaIndexedValue;
                         var idx = runtime.EvaluateCodeBlock(vt.ElementPositionInTable).Get(runtime) as Number;
-                        loplaList.Set(idx.ValueAsInt, rightResult);
+                        loplaList.Set(idx.ValueAsInt, rightResult.Get(runtime));
                         runtime.SetVariable(vt.TablePointer.Name, loplaList);
                     }
                     else

@@ -38,7 +38,7 @@
                 var idx = runtime.EvaluateCodeBlock(ElementPositionInTable).Get(runtime) as Number;
                 
                 if (value is ILoplaIndexedValue tableInstance) 
-                    return tableInstance.Get(idx.ValueAsInt);
+                    return new Result(tableInstance.Get(idx.ValueAsInt));
                 else
                 {
                     runtime.AddError(new RuntimeError($"Value {TablePointer.Name} is not an array", this));
