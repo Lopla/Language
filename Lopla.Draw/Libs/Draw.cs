@@ -78,7 +78,7 @@
             )
             {
                 var binaryData = arrayImage
-                    .Select(e => e.Get(runtime) as Number)
+                    .Select(e => e as Number)
                     .Select(n => n.ValueAsByte)
                     .ToArray();
                 var resourceBitmap = SKBitmap.Decode(binaryData);
@@ -96,7 +96,7 @@
                 
                 foreach(var dbyte in data.ToArray())
                 {
-                    loplaList.Add(new Result(new Number(dbyte)));
+                    loplaList.Add(new Number(dbyte));
                 }
 
                 return new Result(loplaList);
@@ -109,12 +109,14 @@
         {
             //arrayOfBinaryData
             if(runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage){
-                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
+                var binaryData = arrayImage
+                    .Select(e => e as Number)
+                    .Select(n => n.ValueAsByte).ToArray();
                 var resourceBitmap = SKBitmap.Decode(binaryData);
 
                 return new Result(new LoplaList(){
-                    new Result(new Number(resourceBitmap.Height)),
-                    new Result(new Number(resourceBitmap.Width))
+                    new Number(resourceBitmap.Height),
+                    new Number(resourceBitmap.Width)
                 });
             }
             else{
@@ -163,7 +165,7 @@
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
                 runtime.GetVariable("animatedGif").Get(runtime) is LoplaList arrayImage)
             {
-                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
+                var binaryData = arrayImage.Select(e => e as Number).Select(n => n.ValueAsByte).ToArray();
 
                 _renderingEngine.Perform(new Animation
                 {
@@ -183,8 +185,8 @@
         {
             var c = _renderingEngine.LoplaRequestsHandler.GetCanvasSize();
             return new Result(new LoplaList(
-                new Result(new Number(c.X)),
-                new Result(new Number(c.Y))
+                new Number(c.X),
+                new Number(c.Y)
             ));
         }
 
@@ -199,25 +201,25 @@
             {
                 case Click c:
                     return new Result(new LoplaList(
-                        new Result(new String(name)),
-                        new Result(new Number(c.Pos.X)),
-                        new Result(new Number(c.Pos.Y))
+                        new String(name),
+                        new Number(c.Pos.X),
+                        new Number(c.Pos.Y)
                     ));
                 case Key k:
                     return new Result(new LoplaList(
-                        new Result(new String(name)),
-                        new Result(k.Char),
-                        new Result(new Number(k.Down ? 1 : 0)))
+                        new String(name),
+                        k.Char,
+                        new Number(k.Down ? 1 : 0))
                     );
                 case SetCanvas sc:
                     return new Result(new LoplaList(
-                        new Result(new String(name)),
-                        new Result(new Number(sc.Size.X)),
-                        new Result(new Number(sc.Size.Y))
+                        new String(name),
+                        new Number(sc.Size.X),
+                        new Number(sc.Size.Y)
                     ));
                 default:
                     return new Result(new LoplaList(
-                        new Result(new String(name))
+                        new String(name)
                     ));
             }
         }
@@ -231,8 +233,8 @@
             var size = dev.MeasureText("!");
 
             return new Result(new LoplaList(
-                    new Result(new Number((decimal)size)),
-                    new Result(new Number((decimal)dev.TextSize))
+                    new Number((decimal)size),
+                    new Number((decimal)dev.TextSize)
                 )
             );
         }
@@ -244,8 +246,8 @@
             var bound = path.Bounds;
 
             return new Result(new LoplaList(
-                new Result(new Number(Convert.ToInt32(bound.Width))),
-                new Result(new Number(Convert.ToInt32(bound.Height)))));
+                new Number(Convert.ToInt32(bound.Width)),
+                new Number(Convert.ToInt32(bound.Height))));
         }
 
         private Result Text(Mnemonic expression, IRuntime runtime)
@@ -306,9 +308,12 @@
         {
             if (runtime.GetVariable("x").Get(runtime) is Number x1 &&
                 runtime.GetVariable("y").Get(runtime) is Number y1 &&
-                runtime.GetVariable("arrayOfBinaryData").Get(runtime) is LoplaList arrayImage)
+                runtime.GetReference("arrayOfBinaryData") is LoplaList arrayImage)
             {
-                var binaryData = arrayImage.Select(e => e.Get(runtime) as Number).Select(n => n.ValueAsByte).ToArray();
+                var binaryData = 
+                    arrayImage
+                        .Select(e => e as Number)
+                        .Select(n => n.ValueAsByte).ToArray();
 
                 _renderingEngine.Perform(new Image
                 {

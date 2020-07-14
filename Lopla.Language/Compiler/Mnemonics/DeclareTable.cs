@@ -35,7 +35,8 @@
             var k = 0;
             foreach (var baseMnemonic in Values)
             {
-                result.Set(k, runtime.EvaluateCodeBlock(baseMnemonic));
+                var resultData = runtime.EvaluateCodeBlock(baseMnemonic).Get(runtime);
+                result.Set(k, resultData);
                 k++;
             }
 

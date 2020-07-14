@@ -39,10 +39,5 @@ namespace Lopla.Language.Binary
         {
             return $"{_result}";
         }
-
-        public Result Clone()
-        {
-            return new Result(_result);
-        }
     }
 }
