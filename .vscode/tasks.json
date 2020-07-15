@@ -80,6 +80,24 @@
             "problemMatcher": []
         },
         {
+            "label": "run-loplac-window",
+            "type": "shell",
+            "command": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.1/lopla.console.exe",
+            "args": [
+                //"${workspaceFolder}/Examples/Tests"
+                "C:/Users/paga.TF/OneDrive/Sandbox/City"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "echo": true,
+                "clear": true,
+                "showReuseMessage": true,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "copy-loplac-to-plugin - legacy",
             "detail": "Copies loplac.exe to plugin folder, after that you can relase the plugin.`",
             "command": "Copy-Item",

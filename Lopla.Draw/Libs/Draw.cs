@@ -91,9 +91,7 @@
                     new SKRectI(a.ValueAsInt, b.ValueAsInt, c.ValueAsInt, d.ValueAsInt));
 
                 SKDynamicMemoryWStream ms =new SKDynamicMemoryWStream();
-                SKPixmap.Encode(ms, bmp.PeekPixels(), SKEncodedImageFormat.Png, 100);
-                
-                var data = ms.CopyToData();
+                var data = bmp.Encode(SKEncodedImageFormat.Png, 100);
 
                 var subimage = Convert.ToBase64String(data.ToArray());
                 //LoplaList loplaList = new LoplaList();
@@ -482,7 +480,7 @@
                 }
                 catch
                 {
-
+                    //ignored
                 }
             }
         }

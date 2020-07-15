@@ -193,8 +193,7 @@ namespace Lopla.Tests
 
         [Fact]
         public void ProtectsValuesInSubForMethodScopeBeforeRead()
-        {
-            var testValue = 1;
+        {            
             var compilation = new Compilation("A");
             var sut = new Runtime(new Processors());
             sut.StartRootScope(compilation);
