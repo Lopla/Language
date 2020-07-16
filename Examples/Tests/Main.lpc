@@ -20,6 +20,9 @@ function Main.Fractal(){
 function Main.Sierpinski(){
 
     while(1){
+        
+        Draw.Clear(1, 255, 255)
+
         Main.Log("Sierpiński")
         axiom = "F-G-G"
         rules = [ ["F", "F-G+F+G-F"], ["G", "GG"] ]
@@ -29,20 +32,12 @@ function Main.Sierpinski(){
 
         DrawFractal.SetLine(8)
         Sierpinski.Draw(axiom)
+
+        Draw.Flush()
+
         Draw.WaitForEvent()
     }
 }
 
 Draw.Clear(1, 255, 255)
-
-/*
 Main.Sierpinski()
-
-Anim.Main()
-*/
-
-Draw.AddTimer(1000)
-
-Main.Sierpinski()
-
-Lp.FunctionInfo("Draw.Line")

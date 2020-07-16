@@ -42,10 +42,9 @@
             // 
             // LoplaForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(689, 337);
+            this.ClientSize = new System.Drawing.Size(320, 240);
             this.Controls.Add(this.lopla1);
             this.Name = "LoplaForm";
             this.Text = "Lopla";

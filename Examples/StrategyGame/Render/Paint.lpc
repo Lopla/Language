@@ -16,11 +16,6 @@ function Paint.BackGround(){
     Draw.Text(0, textHeight, String.Get(Game.GetPos()))
 }
 
-
-function Paint.BackGround(){
-    Draw.Text(0, textHeight, String.Get(Game.GetPos()))
-}
-
 function Paint.Repaint(){
     Paint.Clear()
     Paint.BackGround()
