@@ -38,7 +38,7 @@ namespace Lopla.Language.Processing
         public void Stop()
         {
             foreach (var processor in _processors.ToArray())
-                processor.Stop();
+                processor?.Stop();
         }
     }
 }

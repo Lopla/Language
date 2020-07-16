@@ -39,5 +39,4 @@ function Main.Sierpinski(){
     }
 }
 
-Draw.Clear(1, 255, 255)
 Main.Sierpinski()

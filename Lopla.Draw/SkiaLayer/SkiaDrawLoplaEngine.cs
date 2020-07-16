@@ -1,4 +1,6 @@
-﻿namespace Lopla.Draw.SkiaLayer
+﻿using System.Threading;
+
+namespace Lopla.Draw.SkiaLayer
 {
     using Lopla.Libs.Interfaces;
     using SkiaSharp;
@@ -7,13 +9,14 @@
     {
         private readonly SkiaRenderer _renderer;
         private SKBitmap _bitMap;
-
+        
         public SkiaDrawLoplaEngine(ILoplaRequestsHandler loplaResRequestsHandler)
         {
             LoplaRequestsHandler = loplaResRequestsHandler;
             _renderer = new SkiaRenderer(loplaResRequestsHandler);
 
-            SetupCanvas(1, 1);
+            var csize = loplaResRequestsHandler.GetCanvasSize();
+            SetupCanvas((int)csize.X, (int)csize.Y);
         }
 
         public ILoplaRequestsHandler LoplaRequestsHandler { get; }
@@ -35,6 +38,7 @@
             }
 
             SKBitmap newBitMap;
+            
             lock (this)
             {
                 newBitMap = new SKBitmap(x, y, SKColorType.Argb4444, SKAlphaType.Premul);
@@ -62,7 +66,6 @@
                 {
                     _renderer.LoplaPainter(canvas, instruction);
                 }
-               
             }
         }
 

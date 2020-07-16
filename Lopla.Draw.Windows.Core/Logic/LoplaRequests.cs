@@ -18,8 +18,8 @@
         {
             var size = new Point
             {
-                X = (decimal) _skiaControl.CanvasSize.Width,
-                Y = (decimal) _skiaControl.CanvasSize.Height
+                X = (decimal) _skiaControl.Bounds.Width,
+                Y = (decimal) _skiaControl.Bounds.Height
             };
             return size;
         }

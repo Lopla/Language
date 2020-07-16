@@ -149,7 +149,7 @@ namespace Lopla.Language.Processing
             return _stack.GetReference(name, runtime);
         }
 
-        public bool IsStpped()
+        public bool IsStopped()
         {
             return _requestForStop;
         }

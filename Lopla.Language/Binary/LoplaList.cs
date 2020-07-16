@@ -50,7 +50,7 @@ namespace Lopla.Language.Binary
         public IValue Clone()
         {
             var ll = new LoplaList();
-            foreach (var result in _values) ll._values.Add(result.Clone());
+            foreach (var result in _values) ll._values.Add(result?.Clone());
             return ll;
         }
 

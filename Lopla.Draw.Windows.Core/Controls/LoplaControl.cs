@@ -40,10 +40,26 @@ namespace Lopla.Draw.Windows.Controls
             var drawCtx = new LoplaRequests(skControl1);
 
             Engine = new SkiaDrawLoplaEngine(drawCtx);
+            
             _uiEventsProvider = new LoplaGuiEventProcessor(Engine);
-
+            
             var windowsDesktopEvents =
                 new WindowsDesktopEvents(skControl1, _uiEventsProvider);
+
+        }
+        public void Run(string[] code)
+        {
+            _windowsDraw = new WinFormsDraw(ParentForm, Engine, _uiEventsProvider.UiEvents);
+
+            _project = new MainHandler(new List<ILibrary>
+            {
+                _windowsDraw,
+                new Lp(code?.ToList().Skip(1).ToArray()),
+                new IO()
+            }).GetProject(code);
+
+            _loplaThread = new Thread(StartWorker);
+            _loplaThread.Start();
         }
 
         private void StartWorker()
@@ -68,21 +84,7 @@ namespace Lopla.Draw.Windows.Controls
             OnLoplaDone?.Invoke(this, new EventArgs());
         }
 
-        public void Run(string[] code)
-        {
-            _windowsDraw = new WinFormsDraw(ParentForm, Engine, _uiEventsProvider.UiEvents);
-
-            _project = new MainHandler(new List<ILibrary>
-            {
-                _windowsDraw,
-                new Lp(code?.ToList().Skip(1).ToArray()),
-                new IO()
-            }).GetProject(code);
-
-            _loplaThread = new Thread(StartWorker);
-            _loplaThread.Start();
-        }
-
+       
         private void LoplaControl_Load(object sender, EventArgs e)
         {
         }
@@ -91,13 +93,12 @@ namespace Lopla.Draw.Windows.Controls
         {
             try
             {
-                _runner.Stop();
+                _uiEventsProvider.Stop();
             }
             catch
             {
                 // ignored
             }
-
             try
             {
                 _loplaThread.Abort();
@@ -106,10 +107,9 @@ namespace Lopla.Draw.Windows.Controls
             {
                 // ignored
             }
-
             try
             {
-                _uiEventsProvider.Stop();
+                _runner.Stop();
             }
             catch
             {

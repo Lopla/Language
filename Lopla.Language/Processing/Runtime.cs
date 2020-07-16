@@ -36,7 +36,7 @@ namespace Lopla.Language.Processing
 
         public bool ProcessingStopped()
         {
-            return _processors.Get().IsStpped();
+            return _processors.Get().IsStopped();
         }
 
         #region Error handler
