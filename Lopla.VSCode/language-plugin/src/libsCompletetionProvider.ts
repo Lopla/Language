@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
-import { CompletionItemProvider } from "vscode";
+import { CompletionItemProvider, CompletionItem, CancellationToken, ProviderResult, TextDocument, Position, CompletionContext, CompletionList } from "vscode";
 import { LoplaSchema } from "./intelisense";
 
 export class LibsCompletetionProvider implements CompletionItemProvider{
-    provideCompletionItems(document: import("vscode").TextDocument, position: import("vscode").Position, token: import("vscode").CancellationToken, context: import("vscode").CompletionContext): import("vscode").ProviderResult<import("vscode").CompletionItem[] | import("vscode").CompletionList> {
+    provideCompletionItems(document: TextDocument, position: Position, token: CancellationToken, context: CompletionContext): ProviderResult<CompletionItem[] | CompletionList> {
         
         let p = position.translate(0, -position.character);
         let line = document.getText(new vscode.Range(p, position));
@@ -27,7 +27,7 @@ export class LibsCompletetionProvider implements CompletionItemProvider{
         return null;
     }
     
-    resolveCompletionItem?(item: import("vscode").CompletionItem, token: import("vscode").CancellationToken): import("vscode").ProviderResult<import("vscode").CompletionItem> {
+    resolveCompletionItem?(item: CompletionItem, token: CancellationToken): ProviderResult<CompletionItem> {
         throw new Error("Method not implemented.");
     }
 

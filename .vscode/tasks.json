@@ -98,22 +98,6 @@
             "problemMatcher": []
         },
         {
-            "label": "copy-loplac-to-plugin - legacy",
-            "detail": "Copies loplac.exe to plugin folder, after that you can relase the plugin.`",
-            "command": "Copy-Item",
-            "dependsOn": [
-                "build-loplad"
-            ],
-            "type": "shell",
-            "args": [
-                "-Recurse",
-                "-force",
-                "${workspaceFolder}/Lopla.WinConsole/bin/Debug/*",
-                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplac"
-            ],
-            "problemMatcher": []
-        },
-        {
             "label": "copy-loplac-core-to-plugin",
             "detail": "Copies lopla.console.exe to plugin folder, after that you can relase the plugin.`",
             "command": "Copy-Item",
