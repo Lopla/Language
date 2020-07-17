@@ -85,7 +85,8 @@
             "command": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.1/lopla.console.exe",
             "args": [
                 //"${workspaceFolder}/Examples/Tests"
-                "C:/Users/paga.TF/OneDrive/Sandbox/City"
+                //"C:/Users/paga.TF/OneDrive/Sandbox/City"
+                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/scripts"
             ],
             "group": "none",
             "presentation": {

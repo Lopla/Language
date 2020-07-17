@@ -9,11 +9,12 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-loplac-core",
-            "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.0/Lopla.Console.dll",
+            "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.1/Lopla.Console.dll",
             "args": [
                 //"${workspaceFolder}/Examples/Tests"
                 //"C:/Users/pgale/OneDrive/Sandbox/City"
-                "C:/Users/paga.TF/OneDrive/Sandbox/City"
+                //"C:/Users/paga.TF/OneDrive/Sandbox/City"
+                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/scripts"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
