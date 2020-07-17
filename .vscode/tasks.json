@@ -100,14 +100,15 @@
         {
             "label": "copy-loplac-core-to-plugin",
             "detail": "Copies lopla.console.exe to plugin folder, after that you can relase the plugin.`",
-            "command": "Copy-Item",
+            "command": "powershell ",
             "dependsOn": [
                 "build-loplac-core"
             ],
             "type": "shell",
             "args": [
+                "Copy-Item",
+                "-Force",
                 "-Recurse",
-                "-force",
                 "${workspaceFolder}/build/loplac-core/Lopla.Console.exe",
                 "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/loplac/loplac.exe"
             ],
@@ -124,7 +125,7 @@
             "label": "package-extension",
             "type": "shell",
             "options": {
-                "cwd": "Lopla.VSCode/language-plugin/"
+                "cwd": "${workspaceFolder}/Lopla.VSCode/language-plugin/"
             },
             "command": "vsce package",
             "problemMatcher": []
