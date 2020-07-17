@@ -81,7 +81,7 @@ namespace Lopla.Draw.Windows.Controls
                 _windowsDraw.Dispose();
             }
 
-            OnLoplaDone?.Invoke(this, new EventArgs());
+            PostRun();
         }
 
        
@@ -89,8 +89,17 @@ namespace Lopla.Draw.Windows.Controls
         {
         }
 
-        public void Stop()
+        public void PostRun()
         {
+            try
+            {
+                _runner.Stop();
+            }
+            catch
+            {
+                //ignored
+            }
+
             try
             {
                 _uiEventsProvider.Stop();
@@ -99,24 +108,28 @@ namespace Lopla.Draw.Windows.Controls
             {
                 // ignored
             }
+        }
+
+        public void Stop()
+        {
+            PostRun();
+
             try
             {
-                _loplaThread.Abort();
+                var closed = _loplaThread.Join(5000);
+                if (closed == false)
+                {
+                    // SIGTERM
+                    _loplaThread.Interrupt();
+                }
             }
             catch
             {
-                // ignored
-            }
-            try
-            {
-                _runner.Stop();
-            }
-            catch
-            {
-                // ignored
+
             }
 
             OnLoplaDone?.Invoke(this, new EventArgs());
         }
+
     }
 }

@@ -45,6 +45,8 @@ namespace Lopla.Language.Processing
 
         public void AddError(Error e)
         {
+            if (this.ProcessingStopped())
+                return;
             _errors.Add(e);
             if (e is RuntimeError) Stop();
         }
