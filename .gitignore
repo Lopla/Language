@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 /build
 Lopla.VSCode/language-plugin/resources/loplac/loplac.exe
+Lopla.VSCode/language-plugin\builds
