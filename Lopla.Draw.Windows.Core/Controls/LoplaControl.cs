@@ -60,6 +60,7 @@ namespace Lopla.Draw.Windows.Controls
 
             _loplaThread = new Thread(StartWorker);
             _loplaThread.Start();
+
         }
 
         private void StartWorker()
@@ -82,6 +83,9 @@ namespace Lopla.Draw.Windows.Controls
             }
 
             PostRun();
+            
+            
+            OnLoplaDone?.Invoke(this, new EventArgs());
         }
 
        
@@ -116,7 +120,7 @@ namespace Lopla.Draw.Windows.Controls
 
             try
             {
-                var closed = _loplaThread.Join(5000);
+                var closed = _loplaThread.Join(1000);
                 if (closed == false)
                 {
                     // SIGTERM
