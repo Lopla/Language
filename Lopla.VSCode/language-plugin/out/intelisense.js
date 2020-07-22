@@ -14,7 +14,7 @@ function pupulateFunctionArgs() {
     for (const key of Object.keys(exports.LoplaSchema)) {
         for (const methods of Object.keys(exports.LoplaSchema[key])) {
             var m = key + "." + methods;
-            var fileRun = execFile.execFileSync(exports.loplaTool, [exports.loplaScripsPath, "function", m]);
+            var fileRun = execFile.execFileSync(exports.loplaTool, ["/nogui", exports.loplaScripsPath, "function", m]);
             var rows = fileRun.toString().split("\n");
             exports.LoplaMethods[m] = [];
             if (rows) {
@@ -28,7 +28,7 @@ function pupulateFunctionArgs() {
     }
 }
 function getAvailbleFunctions() {
-    execFile.execFile(exports.loplaTool, [exports.loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
+    execFile.execFile(exports.loplaTool, ["/nogui", exports.loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
         var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)");
         if (stdout) {
             var lines = stdout.split("\n");

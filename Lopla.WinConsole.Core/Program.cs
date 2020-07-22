@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Lopla.Language.Interfaces;
+using Lopla.Libs;
+using Lopla.Starting;
 
 namespace Lopla.Windows
 {
@@ -21,9 +26,24 @@ namespace Lopla.Windows
         {
             if (AttachConsole(ATTACH_PARENT_PROCESS)) ParentConsoleAvailble = true;
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HiddenContext(args));
+            if (args.Contains("/nogui"))
+            {
+                var mh = new MainHandler(new List<ILibrary>()
+                {
+                    new Draw.Libs.Draw(null, null),
+                    new IO(),
+                    new Lp()
+                });
+                var a = args.ToList();
+                a.Remove("/nogui");
+                mh.Main(a.ToArray());
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new HiddenContext(args));
+            }
         }
 
         /// <summary>
