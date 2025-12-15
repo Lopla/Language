@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-loplac-core",
-            "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/netcoreapp3.1/Lopla.Console.dll",
+            "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/net10.0-windows/Lopla.Console.dll",
             "args": [
                 //"${workspaceFolder}/Examples/Tests"
                 //"C:/Users/pgale/OneDrive/Sandbox/City"
@@ -25,7 +25,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-loplac",
-            "program": "${workspaceFolder}/Lopla.Console/bin/Debug/netcoreapp2.2/LoplaC.dll",
+            "program": "${workspaceFolder}/Lopla.Console/bin/Debug/net10.0/LoplaC.dll",
             "args": [
                 "${workspaceFolder}/Examples/Tests"
             ],
