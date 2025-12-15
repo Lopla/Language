@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Version>0.0.1-alpha</Version>
     <Description>Simple command line to start lopla</Description>
     <PackageProjectUrl>https://github.com/Lopla/Language</PackageProjectUrl>
