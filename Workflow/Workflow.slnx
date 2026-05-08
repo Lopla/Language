@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="Workflow.Android/Workflow.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="Workflow.Browser/Workflow.Browser.csproj" />
+  <Project Path="Workflow.Desktop/Workflow.Desktop.csproj" />
+  <Project Path="Workflow.iOS/Workflow.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="Workflow/Workflow.csproj" />
+</Solution>

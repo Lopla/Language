@@ -95,3 +95,5 @@ function b.test1(){
 
 # Comments
 All characters (multiline) between `/*` and `*/` are treated as comments.
+
+[grammar](..\Grammar\Lopla.gram)
