@@ -25,7 +25,7 @@ function Main.Sierpinski(){
 
         Main.Log("Sierpiński")
         axiom = "F-G-G"
-        rules = [ ["F", "F-G+F+G-F"], ["G", "GG"] ]
+        rules = [ ["F", "F-G+F+G-F"], ["G", "GGG"] ]
 
         axiom = L.Do(axiom, rules, 5)
         Main.Log(axiom)

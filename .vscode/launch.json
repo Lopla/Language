@@ -11,10 +11,11 @@
             "preLaunchTask": "build-loplac-core",
             "program": "${workspaceFolder}/Lopla.WinConsole.Core/bin/Debug/net10.0-windows/Lopla.Console.dll",
             "args": [
+                "${workspaceFolder}/Examples/StrategyGame"
                 //"${workspaceFolder}/Examples/Tests"
                 //"C:/Users/pgale/OneDrive/Sandbox/City"
                 //"C:/Users/paga.TF/OneDrive/Sandbox/City"
-                "${workspaceFolder}/Lopla.VSCode/language-plugin/resources/scripts"
+                //"${workspaceFolder}/Lopla.VSCode/language-plugin/resources/scripts"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

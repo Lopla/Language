@@ -331,3 +331,4 @@ ASALocalRun/
 /build
 Lopla.VSCode/language-plugin/resources/loplac/loplac.exe
 Lopla.VSCode/language-plugin\builds
+.csproj.lscache
