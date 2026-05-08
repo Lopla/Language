@@ -70,6 +70,7 @@ Compiler/
  ASTNodes.cs
  CompilationResult.cs
  Compiler.cs
+ LanguageService.cs
  Mnemonics/
   Assigment.cs
   Block.cs

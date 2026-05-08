@@ -32,8 +32,16 @@ namespace Lopla.Language.Compiler
         }
     }
 
+    public class ParseTreeNode
+    {
+        public string Symbol { get; set; }
+        public string Value { get; set; }
+        public List<ParseTreeNode> Children { get; } = new List<ParseTreeNode>();
+    }
+
     public class ParseAndCompileResult : ParseCompileAndRunErrors
     {
         public Compilation Compilation { get; set; }
+        public ParseTreeNode Root { get; set; }
     }
 }
