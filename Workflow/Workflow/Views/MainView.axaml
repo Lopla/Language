@@ -3,26 +3,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Workflow.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="Workflow.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Spacing="12">
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" FontSize="20" />
-    <Border Background="Black" CornerRadius="8" Padding="16" Margin="0,20,0,0" Height="120">
-      <TextBlock Text="{Binding ExampleFileName}" Foreground="White" FontSize="24" VerticalAlignment="Center" />
-    </Border>
-    <TextBlock Text="Parse status:" FontWeight="Bold" />
-    <TextBlock Text="{Binding ParseStatus}" />
-    <TextBlock Text="{Binding ErrorsText}" Foreground="Red" TextWrapping="Wrap" />
-    <TextBlock Text="Parse tree:" FontWeight="Bold" />
-    <ScrollViewer Height="240" VerticalScrollBarVisibility="Auto">
-      <TextBlock Text="{Binding ParseTree}" FontFamily="Consolas" TextWrapping="Wrap" />
-    </ScrollViewer>
-  </StackPanel>
+  <Grid Margin="20" ColumnDefinitions="220, *" RowDefinitions="Auto, 1*, Auto" ColumnSpacing="12" RowSpacing="12">
+    <TextBlock Grid.ColumnSpan="2" Text="{Binding Greeting}" HorizontalAlignment="Center" FontSize="20" />
+
+    <StackPanel Grid.Row="1" Spacing="12">
+      <TextBlock Text="Block palette" FontSize="18" FontWeight="Bold" />
+      <Border Background="#1A000000" CornerRadius="8" Padding="12" MinHeight="160">
+        <ItemsControl ItemsSource="{Binding PaletteItems}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:WorkflowPaletteItemViewModel">
+              <Border Background="#FF3B82F6" CornerRadius="8" Padding="10" Margin="0,0,0,12" Cursor="Hand"
+                      PointerPressed="PaletteItem_PointerPressed">
+                <StackPanel>
+                  <TextBlock Text="{Binding Title}" FontWeight="Bold" Foreground="White" />
+                  <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" />
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Border>
+
+      <TextBlock Text="Drop blocks on the canvas to create them." Foreground="#B0B0B0" FontSize="12" TextWrapping="Wrap" MaxWidth="200" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Grid.Column="1" Spacing="12">
+      <TextBlock Text="Workflow canvas" FontSize="18" FontWeight="Bold" />
+      <Border Background="#1A000000" CornerRadius="8" Padding="12" MinHeight="340" PointerReleased="WorkflowCanvas_PointerReleased">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+          <ItemsControl ItemsSource="{Binding WorkflowElements}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <Canvas Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:WorkflowElementViewModel">
+                <Border Background="#FF3B82F6" CornerRadius="8" Width="200" Height="120" Padding="12"
+                        Canvas.Left="{Binding Left}" Canvas.Top="{Binding Top}">
+                  <StackPanel Spacing="8">
+                    <TextBlock Text="{Binding Title}" FontWeight="Bold" Foreground="White" />
+                    <TextBlock Text="{Binding Description}" Foreground="White" TextWrapping="Wrap" />
+                  </StackPanel>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </Border>
+    </StackPanel>
+
+    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Spacing="12">
+      <Border Background="#1A000000" CornerRadius="8" Padding="12">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Parse status:" FontWeight="Bold" Foreground="White" />
+          <TextBlock Text="{Binding ParseStatus}" Foreground="White" />
+          <TextBlock Text="{Binding ErrorsText}" Foreground="OrangeRed" TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+      <Border Background="#1A000000" CornerRadius="8" Padding="12" MinHeight="220">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Parse tree:" FontWeight="Bold" Foreground="White" />
+          <ScrollViewer Height="180" VerticalScrollBarVisibility="Auto">
+            <TextBlock Text="{Binding ParseTree}" FontFamily="Consolas" TextWrapping="Wrap" Foreground="White" />
+          </ScrollViewer>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </Grid>
 </UserControl>

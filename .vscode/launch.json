@@ -43,6 +43,17 @@
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}/Lopla.VSCode/language-plugin"
             ]
+        },
+        {
+            "name": "Debug Workflow Desktop",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-workflow-desktop",
+            "program": "${workspaceFolder}/Workflow/Workflow.Desktop/bin/Debug/net10.0/Workflow.Desktop.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/Workflow/Workflow.Desktop",
+            "stopAtEntry": false,
+            "console": "internalConsole"
         }
     ]
 }

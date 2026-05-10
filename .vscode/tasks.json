@@ -63,6 +63,17 @@
             "group": "build"
         },
         {
+            "label": "build-workflow-desktop",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Workflow/Workflow.Desktop/Workflow.Desktop.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
             "label": "run-loplac",
             "type": "shell",
             "command": "${workspaceFolder}/Lopla.WinConsole/bin/Debug/loplac.exe",
