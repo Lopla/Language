@@ -23,8 +23,11 @@
                 "win-x64",
                 "--self-contained",
                 "-o",
-                "${workspaceFolder}/build/loplac-core",
-                "/p:PublishSingleFile=true"
+                "${workspaceFolder}/build/loplac-core", 
+                "/p:PublishSingleFile=true",
+                "/p:PublishSymbols=false",
+                "/p:IncludeNativeLibrariesForSelfContained=true",
+                "/p:PublishTrimmed=true"
             ],
             "problemMatcher": "$msCompile",
             "group": "build"
