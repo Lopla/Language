@@ -5,6 +5,11 @@
 
     public class PaintProvider
     {
+        public PaintProvider()
+        {
+            this.GetPaintDevice();
+        }
+
         private static SKTypeface _fontFiraMono;
 
         public SKTypeface TypeFace { get; private set; }

@@ -234,7 +234,6 @@
         private Result GetTextInfo(Mnemonic expression, IRuntime runtime)
         {
             var pp = new PaintProvider();
-    
 
             var size = 
                 pp.Font.MeasureText("!");

@@ -1,20 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Lopla.Console</AssemblyName>
+    <RootNamespace>Lopla.Console</RootNamespace>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Lopla.Starting\Lopla.Starting.csproj" />
     <ProjectReference Include="..\Lopla.Draw\Lopla.Draw.csproj" />
     <ProjectReference Include="..\Lopla.Draw.Windows.Core\Lopla.Draw.Windows.Core.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AssemblyName>Lopla.Console</AssemblyName>
-    <RootNamespace>Lopla.Console</RootNamespace>
-  </PropertyGroup>
- 
 
 </Project>
