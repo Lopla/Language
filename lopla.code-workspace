@@ -10,5 +10,7 @@
 			"path": "../LoplaLowCode"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"dotnet.preferCSharpExtension": true
+	}
 }
