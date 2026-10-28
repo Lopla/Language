@@ -1,0 +1,31 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <BuildType Name="win-x64" />
+  </Configurations>
+  <Project Path="Lopla.Console/Lopla.Console.csproj">
+    <BuildType Solution="Release|*" Project="win-x64" />
+  </Project>
+  <Project Path="Lopla.Draw.Windows.Core/Lopla.Draw.Windows.Core.csproj">
+    <BuildType Solution="win-x64|*" Project="Release" />
+  </Project>
+  <Project Path="Lopla.Draw/Lopla.Draw.csproj">
+    <BuildType Solution="win-x64|*" Project="Release" />
+  </Project>
+  <Project Path="Lopla.Language/Lopla.Language.csproj">
+    <BuildType Solution="win-x64|*" Project="Release" />
+  </Project>
+  <Project Path="Lopla.Libs/Lopla.Libs.csproj">
+    <BuildType Solution="win-x64|*" Project="Release" />
+  </Project>
+  <Project Path="Lopla.Starting/Lopla.Starting.csproj">
+    <BuildType Solution="win-x64|*" Project="Release" />
+  </Project>
+  <Project Path="Lopla.Tests/Lopla.Tests.csproj">
+    <BuildType Solution="win-x64|*" Project="Debug" />
+  </Project>
+  <Project Path="Lopla.WinConsole.Core/Lopla.WinConsole.Core.csproj">
+    <BuildType Solution="win-x64|*" Project="Release" />
+  </Project>
+</Solution>

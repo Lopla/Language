@@ -249,7 +249,11 @@
         private Result GetTextSize(Mnemonic expression, IRuntime runtime)
         {
             var pp = new PaintProvider();
-            var path = pp.GetPaintDevice().GetTextPath(GetArgument<String>("text", runtime).Value, 0, 0);
+            var path = pp
+                .Font
+                .GetTextPath(GetArgument<String>("text", runtime).Value, new SKPoint(0, 0));
+
+
             var bound = path.Bounds;
 
             return new Result(new LoplaList(
