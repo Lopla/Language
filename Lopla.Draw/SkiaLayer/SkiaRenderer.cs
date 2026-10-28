@@ -75,7 +75,10 @@
 
         private void Text(SKCanvas canvas, Text text)
         {
-            canvas.DrawText(text.Label, (float) text.Position.X, (float) text.Position.Y, _paintDevice);
+            canvas.DrawText(text.Label,             
+                (float) text.Position.X, (float) text.Position.Y, 
+                _paintProvider.Font,
+                _paintDevice);
         }
 
         public void TextReset()
@@ -87,15 +90,17 @@
         private void Write(SKCanvas canvas, Write text)
         {
             var paint = _paintDevice.Clone();
-            paint.TextAlign = (SKTextAlign) text.Align;
-            _writeTextPosition += (int) paint.TextSize;
+
+            _paintProvider.TextAlign = (SKTextAlign) text.Align;
+
+            _writeTextPosition += (int) _paintProvider.TextSize;
 
             var x = (float) text.Offset;
             if (text.Align == Aligmnent.Right)
                 x = canvas.LocalClipBounds.Width;
             else if (text.Align == Aligmnent.Center)
                 x = canvas.LocalClipBounds.Width / 2;
-            canvas.DrawText(text.Text, x, _writeTextPosition, paint);
+            canvas.DrawText(text.Text, x, _writeTextPosition, _paintProvider.Font, paint);
         }
         
         private void Animation(SKCanvas canvas, Animation img)
@@ -156,8 +161,8 @@
 
         private void Log(SKCanvas canvas, Log log1)
         {
-            _logTextPosition += (int) _paintDevice.TextSize;
-            canvas.DrawText(log1.Text, 0, _logTextPosition, _paintDevice);
+            _logTextPosition += (int) _paintProvider.TextSize;
+            canvas.DrawText(log1.Text, 0, _logTextPosition, _paintProvider.Font, _paintDevice);
         }
 
         public void Reset()

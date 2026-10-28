@@ -234,14 +234,14 @@
         private Result GetTextInfo(Mnemonic expression, IRuntime runtime)
         {
             var pp = new PaintProvider();
-            var dev = pp.GetPaintDevice();
-            var metrics = dev.FontMetrics;
+    
 
-            var size = dev.MeasureText("!");
+            var size = 
+                pp.Font.MeasureText("!");
 
             return new Result(new LoplaList(
                     new Number((decimal)size),
-                    new Number((decimal)dev.TextSize)
+                    new Number((decimal) pp.TextSize)
                 )
             );
         }
