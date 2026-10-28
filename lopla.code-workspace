@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "Lopla.VSCode\\language-plugin"
+		},
+		{
+			"path": "../LoplaLowCode"
+		}
+	],
+	"settings": {}
+}
