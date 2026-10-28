@@ -28,15 +28,18 @@ namespace Lopla.Windows
 
             if (args.Contains("/nogui"))
             {
+                var arguments = args.ToList();
+                arguments.Remove("/nogui");
+
+                var argsNoScriptName = arguments.Skip(1).ToList();
+
                 var mh = new MainHandler(new List<ILibrary>()
                 {
                     new Draw.Libs.Draw(null, null),
                     new IO(),
-                    new Lp()
+                    new Lp(argsNoScriptName.ToArray())
                 });
-                var a = args.ToList();
-                a.Remove("/nogui");
-                mh.Main(a.ToArray());
+                mh.Main(arguments.ToArray());
             }
             else
             {

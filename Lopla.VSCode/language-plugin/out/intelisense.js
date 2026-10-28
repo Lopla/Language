@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.run = exports.getAvailbleFunctions = exports.loplaToolExists = exports.loplaToolFile = exports.LoplaMethods = exports.LoplaKeywords = exports.LoplaSchema = exports.loplaScripsPath = exports.loplaTool = exports.loplaToolPath = void 0;
 const vscode = require("vscode");
 const path = require("path");
 const execFile = require("child_process");
 const extension_1 = require("./extension");
-exports.loplaToolPath = path.resolve(__dirname, '../resources/loplac');
-exports.loplaTool = path.resolve(__filename, exports.loplaToolPath, "loplac.exe");
+//E:\Work\Language\build\loplac-core\Lopla.Console.exe
+//export const loplaToolPath =    path.resolve(__dirname, '../resources/loplac');
+exports.loplaToolPath = path.resolve(__dirname, '../../../build/loplac-core');
+exports.loplaTool = path.resolve(__filename, exports.loplaToolPath, "Lopla.Console.exe");
 exports.loplaScripsPath = path.resolve(__dirname, '../resources/scripts');
 exports.LoplaSchema = {};
 exports.LoplaKeywords = ['function', 'while', 'if', 'return'];
@@ -27,6 +30,20 @@ function pupulateFunctionArgs() {
         }
     }
 }
+function loplaToolFile() {
+    return exports.loplaTool;
+}
+exports.loplaToolFile = loplaToolFile;
+function loplaToolExists() {
+    try {
+        execFile.execFileSync(exports.loplaTool, ["/nogui", exports.loplaScripsPath, "functions"]);
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+}
+exports.loplaToolExists = loplaToolExists;
 function getAvailbleFunctions() {
     execFile.execFile(exports.loplaTool, ["/nogui", exports.loplaScripsPath, "functions"], {}, (error, stdout, stderr) => {
         var r = new RegExp("([a-zA-Z]+)[.]([a-zA-Z]+)");

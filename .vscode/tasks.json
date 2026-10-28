@@ -27,7 +27,7 @@
                 "/p:PublishSingleFile=true",
                 "/p:PublishSymbols=false",
                 "/p:IncludeNativeLibrariesForSelfContained=true",
-                "/p:PublishTrimmed=true"
+                //"/p:PublishTrimmed=true"
             ],
             "problemMatcher": "$msCompile",
             "group": "build"

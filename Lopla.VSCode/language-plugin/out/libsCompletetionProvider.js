@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LibsCompletetionProvider = void 0;
 const vscode = require("vscode");
 const intelisense_1 = require("./intelisense");
 class LibsCompletetionProvider {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoplaTaskProvider = void 0;
 const vscode = require("vscode");
 const vscode_1 = require("vscode");
 const intelisense_1 = require("./intelisense");

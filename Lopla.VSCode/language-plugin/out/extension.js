@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.deactivate = exports.activate = exports.outputWindow = void 0;
 const vscode = require("vscode");
 const intelisense_1 = require("./intelisense");
 const task_1 = require("./task");
@@ -8,10 +9,26 @@ const intelisense_2 = require("./intelisense");
 const functionCompletetionProvider_1 = require("./functionCompletetionProvider");
 let loplaStatusBarItem;
 let loplaDocumentScheme = { scheme: 'file', language: 'lopla' };
+let pluginEnabled = false;
 function activate(context) {
+    // check if lplc consoel exists and if the file exist
+    if (!intelisense_1.loplaToolExists()) {
+        vscode.window.showErrorMessage("Lopla console not found.");
+    }
+    else {
+        pluginEnabled = true;
+    }
     intelisense_1.getAvailbleFunctions();
     context.subscriptions.push(vscode.commands.registerCommand('extension.lopla.run', () => {
         intelisense_2.run();
+    }));
+    context.subscriptions.push(vscode.commands.registerCommand('extension.lopla.diag', () => {
+        if (!pluginEnabled) {
+            vscode.window.showErrorMessage("Lopla console not found. " + intelisense_1.loplaToolFile());
+        }
+        else {
+            vscode.window.showInformationMessage("Lopla console is available.");
+        }
     }));
     context.subscriptions.push(vscode.languages.registerHoverProvider(loplaDocumentScheme, {
         provideHover(document, position, token) {
@@ -37,13 +54,12 @@ function activate(context) {
     let workspaceRoot = vscode.workspace.rootPath;
     const taskProvider = vscode.tasks.registerTaskProvider("lopla", new task_1.LoplaTaskProvider(workspaceRoot));
     exports.outputWindow = vscode.window.createOutputChannel("Lopla");
-    // const myCommandId = 'extension.lopla.run';
-    // loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-    // loplaStatusBarItem.command = myCommandId;
-    // loplaStatusBarItem.text = `Lopla`;
-    // loplaStatusBarItem.color = vscode.ThemeColor.name;
-    // loplaStatusBarItem.show();
-    // context.subscriptions.push(loplaStatusBarItem);
+    loplaStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
+    loplaStatusBarItem.command = 'extension.lopla.diag';
+    loplaStatusBarItem.text = `Lopla`;
+    loplaStatusBarItem.color = vscode.ThemeColor.name;
+    loplaStatusBarItem.show();
+    context.subscriptions.push(loplaStatusBarItem);
 }
 exports.activate = activate;
 function deactivate() {
