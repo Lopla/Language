@@ -64,7 +64,7 @@ namespace Lopla.Windows
                 form1.Run();
             }
 
-            private void form1_FormClosing(object sender, FormClosingEventArgs e)
+            private void form1_FormClosing(object? sender, FormClosingEventArgs e)
             {
                 ExitThread();
             }
