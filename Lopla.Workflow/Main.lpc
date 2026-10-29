@@ -1,0 +1,13 @@
+/* ui for edition of .lpc files as workflow */
+/* this will allow to start the process & debug */
+/* it should allow to add default references - te binary stuff */
+
+Paint.Init()
+Paint.Clear()
+Paint.BackGround()
+Paint.Repaint()
+
+while(1){
+    e = Draw.WaitForEvent()
+    Events.Handle(e)
+}
