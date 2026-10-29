@@ -7,7 +7,8 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Lopla.WinConsole.Core"
+                "${workspaceFolder}/Lopla.WinConsole.Core",
+                "--no-restore"
             ],
             "problemMatcher": "$msCompile",
             "group": "build"
